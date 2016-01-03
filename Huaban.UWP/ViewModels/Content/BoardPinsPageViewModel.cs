@@ -18,6 +18,7 @@ namespace Huaban.UWP.ViewModels
 	public class BoardPinsPageViewModel : HBViewModel
 	{
 
+
 		public BoardPinsPageViewModel(Context context)
 			: base(context)
 		{
