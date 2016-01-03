@@ -23,7 +23,7 @@ namespace Huaban.UWP.ViewModels
 		public Visibility LeftHeaderVisibility
 		{
 			get { return _LeftHeaderVisibility; }
-			private set { SetValue(ref _LeftHeaderVisibility, value); }
+			protected set { SetValue(ref _LeftHeaderVisibility, value); }
 		}
 		public User User
 		{

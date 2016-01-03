@@ -14,6 +14,7 @@ namespace Huaban.UWP.ViewModels
 	using Models;
 	using Controls;
 	using Base;
+	using Windows.Foundation;
 
 	public class BoardPinsPageViewModel : HBViewModel
 	{
@@ -24,6 +25,7 @@ namespace Huaban.UWP.ViewModels
 		{
 			PinListViewModel = new PinListViewModel(context, GetData);
 			Title = "画板";
+			LeftHeaderVisibility = Visibility.Collapsed;
 		}
 
 		#region Properties
@@ -87,7 +89,11 @@ namespace Huaban.UWP.ViewModels
 				await PinListViewModel.ClearAndReload();
 			}
 		}
-
+		public override Size ArrangeOverride(Size finalSize)
+		{
+			PinListViewModel.SetWidth(finalSize.Width);
+			return finalSize;
+		}
 		#endregion
 
 
