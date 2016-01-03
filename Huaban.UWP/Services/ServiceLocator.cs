@@ -1,0 +1,53 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.Practices.Unity;
+using Microsoft.Practices.ServiceLocation;
+
+namespace Huaban.UWP.Services
+{
+	public class ServiceLocator
+	{
+		public static ServiceLocator Current { get; private set; }
+
+		public IUnityContainer Container { set; get; }
+		private ServiceLocator()
+		{
+			this.Container = new UnityContainer();
+
+			//this.Container.RegisterInstance(API.Current());
+			//RegisterViewModels();
+		}
+		private void RegisterViewModels()
+		{
+
+		}
+		public static ServiceLocator BuildLocator(NavigationService ns = null)
+		{
+			if (Current != null)
+				return Current;
+
+			Current = new ServiceLocator();
+			//Current.Container.RegisterInstance(ns);
+			return Current;
+		}
+		public static void RegisterInstance<T>(T value)
+		{
+			Current.Container.RegisterInstance(value);
+		}
+		public static void RegisterType<T>()
+		{
+			Current.Container.RegisterType<T>();
+		}
+		public static T Resolve<T>()
+		{
+			return Current.Container.Resolve<T>();
+		}
+		public static object Resolve(Type type)
+		{
+			return Current.Container.Resolve(type);
+		}
+	}
+}

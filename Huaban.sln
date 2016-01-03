@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huaban.UWP", "Huaban.UWP\Huaban.UWP.csproj", "{A77FD625-12E9-467D-A49E-5916FD36DB1F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|ARM = Debug|ARM
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|ARM = Release|ARM
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|ARM.ActiveCfg = Debug|ARM
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|ARM.Build.0 = Debug|ARM
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|ARM.Deploy.0 = Debug|ARM
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|x64.ActiveCfg = Debug|x64
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|x64.Build.0 = Debug|x64
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|x64.Deploy.0 = Debug|x64
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|x86.ActiveCfg = Debug|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|x86.Build.0 = Debug|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Debug|x86.Deploy.0 = Debug|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|Any CPU.ActiveCfg = Release|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|ARM.ActiveCfg = Release|ARM
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|ARM.Build.0 = Release|ARM
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|ARM.Deploy.0 = Release|ARM
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x64.ActiveCfg = Release|x64
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x64.Build.0 = Release|x64
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x64.Deploy.0 = Release|x64
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.ActiveCfg = Release|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.Build.0 = Release|x86
+		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.Deploy.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

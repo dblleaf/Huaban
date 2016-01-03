@@ -1,0 +1,23 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Color x:Key="ThemeColor">#ffFFFFFF</Color>
+	<Color x:Key="HuabanColor">#d61718</Color>
+	<Color x:Key="SystemAccentColor">#d61718</Color>
+	<SolidColorBrush x:Key="ThemeColorBrush" Color="{StaticResource ThemeColor}"></SolidColorBrush>
+	<SolidColorBrush x:Key="HuabanColorBrush" Color="{StaticResource HuabanColor}"></SolidColorBrush>
+	<SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"></SolidColorBrush>
+	
+	<Style TargetType="PivotHeaderItem">
+		<Setter Property="FontSize" Value="16"/>
+	</Style>
+	<Style TargetType="ProgressRing">
+		<Setter Property="Width" Value="48"/>
+		<Setter Property="Height" Value="48"/>
+	</Style>
+	<Style TargetType="PivotItem">
+		<Setter Property="Padding" Value="0"></Setter>
+		<Setter Property="Margin" Value="0"></Setter>
+	</Style>
+	
+</ResourceDictionary>

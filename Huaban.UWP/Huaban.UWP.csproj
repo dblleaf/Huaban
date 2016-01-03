@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{A77FD625-12E9-467D-A49E-5916FD36DB1F}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Huaban.UWP</RootNamespace>
+    <AssemblyName>Huaban.UWP</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <PackageCertificateKeyFile>Huaban.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Api\API.cs" />
+    <Compile Include="Api\APIBase.cs" />
+    <Compile Include="Api\APIException.cs" />
+    <Compile Include="Api\BoardAPI.cs" />
+    <Compile Include="Api\CategoryAPI.cs" />
+    <Compile Include="Api\OAuthorAPI.cs" />
+    <Compile Include="Api\PinAPI.cs" />
+    <Compile Include="Api\UserAPI.cs" />
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Base\IncrementalLoadingList.cs" />
+    <Compile Include="Base\ObservableObject.cs" />
+    <Compile Include="Base\ViewModelBase.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\PinImageLoadCommand.cs" />
+    <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Controls\BoardGrid.xaml.cs">
+      <DependentUpon>BoardGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\BoardSelecter.xaml.cs">
+      <DependentUpon>BoardSelecter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CategorySelecter.xaml.cs">
+      <DependentUpon>CategorySelecter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ControlHelper.cs" />
+    <Compile Include="Controls\HBControl.cs" />
+    <Compile Include="Controls\HBGridPanel.cs" />
+    <Compile Include="Controls\HBWaterFullPanel.cs" />
+    <Compile Include="Controls\ImageGrid.xaml.cs">
+      <DependentUpon>ImageGrid.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\PageBase.cs" />
+    <Compile Include="Controls\TitleControl.xaml.cs">
+      <DependentUpon>TitleControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\OwnerVisiblityConverter.cs" />
+    <Compile Include="Converters\ImageBgConverter.cs" />
+    <Compile Include="Models\AuthToken.cs" />
+    <Compile Include="Models\Binding.cs" />
+    <Compile Include="Models\Bindings.cs" />
+    <Compile Include="Models\Board.cs" />
+    <Compile Include="Models\BoardCover.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Channel.cs" />
+    <Compile Include="Models\ChannelType.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Commodity.cs" />
+    <Compile Include="Models\Content.cs" />
+    <Compile Include="Models\Feed.cs" />
+    <Compile Include="Models\FindFriends.cs" />
+    <Compile Include="Base\Context.cs" />
+    <Compile Include="Models\ImageFile.cs" />
+    <Compile Include="Models\JsonExtension.cs" />
+    <Compile Include="Models\Message.cs" />
+    <Compile Include="Models\NavItemModel.cs" />
+    <Compile Include="Controls\HBFrame.cs" />
+    <Compile Include="Controls\HBNavigatingCancelEventArgs.cs" />
+    <Compile Include="Controls\HBNavigationEventArgs.cs" />
+    <Compile Include="Controls\HBPage.cs" />
+    <Compile Include="Converters\ColorConverter.cs" />
+    <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
+    <Compile Include="Converters\ReverseVisbilityConverter.cs" />
+    <Compile Include="Extensions\RegularExtension.cs" />
+    <Compile Include="Extensions\StringExtension.cs" />
+    <Compile Include="Helper\HtmlHelper.cs" />
+    <Compile Include="Helper\HttpHelper.cs" />
+    <Compile Include="Helper\SerializeHelper.cs" />
+    <Compile Include="Helper\StorageHelper.cs" />
+    <Compile Include="Models\Pin.cs" />
+    <Compile Include="Models\Profile.cs" />
+    <Compile Include="Models\Search.cs" />
+    <Compile Include="Models\ServerSetting.cs" />
+    <Compile Include="Models\SNSType.cs" />
+    <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="Models\Unread.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserInfo.cs" />
+    <Compile Include="Models\Weekly.cs" />
+    <Compile Include="Models\WeeklyBoard.cs" />
+    <Compile Include="Models\WeeklyDetail.cs" />
+    <Compile Include="Models\WeeklyHotBoardImg.cs" />
+    <Compile Include="Models\WeeklyTopicBoardImg.cs" />
+    <Compile Include="ViewModels\BoardListViewModel.cs" />
+    <Compile Include="ViewModels\Content\BoardPinsPageViewModel.cs" />
+    <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
+    <Compile Include="ViewModels\Content\PinDetailPageViewModel.cs" />
+    <Compile Include="ViewModels\Page\AboutPageViewModel.cs" />
+    <Compile Include="ViewModels\Page\MessagePageViewModel.cs" />
+    <Compile Include="ViewModels\Page\MyPageViewModel.cs" />
+    <Compile Include="ViewModels\Page\SettingPageViewModel.cs" />
+    <Compile Include="ViewModels\Page\FollowingPageViewModel.cs" />
+    <Compile Include="ViewModels\HBViewModel.cs" />
+    <Compile Include="ViewModels\PinListViewModel.cs" />
+    <Compile Include="Views\Content\BoardPinsPage.xaml.cs">
+      <DependentUpon>BoardPinsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\LoginDialog.xaml.cs">
+      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\PinDetailPage.xaml.cs">
+      <DependentUpon>PinDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\AboutPage.xaml.cs">
+      <DependentUpon>AboutPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\SettingPage.xaml.cs">
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\MessagePage.xaml.cs">
+      <DependentUpon>MessagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\MyPage.xaml.cs">
+      <DependentUpon>MyPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\FollowingPage.xaml.cs">
+      <DependentUpon>FollowingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Page\HomePageViewModel.cs" />
+    <Compile Include="ViewModels\Page\ShellPageViewModel.cs" />
+    <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\ServiceLocator.cs" />
+    <Compile Include="Views\Page\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Page\ShellPage.xaml.cs">
+      <DependentUpon>ShellPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+    <None Include="Huaban.UWP_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\HuabanLogo_singlecolor_styleB_color02.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\BoardGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\BoardSelecter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\CategorySelecter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ImageGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TitleControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Style.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Themes\Template.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Content\BoardPinsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\PinDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Page\AboutPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Page\SettingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Page\MessagePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Page\MyPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Page\FollowingPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Page\HomePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Page\ShellPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="BehaviorsXamlSDKManaged, Version=12.0">
+      <Name>Behaviors SDK %28XAML%29</Name>
+    </SDKReference>
+  </ItemGroup>
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
