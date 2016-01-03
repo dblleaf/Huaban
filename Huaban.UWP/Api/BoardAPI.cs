@@ -57,9 +57,23 @@ namespace Huaban.UWP.Api
 
 			string json = await Get(uri);
 			JObject obj = JObject.Parse(json);
-			return Pin.ParseList(obj["pins"] as JArray);
+			return Pin.ParseList(obj["pins"] as JArray, true);
 
 		}
 
+		public async Task<Board> GetPinsWithBoard(string boardID, long max = 0, int limit = 20)
+		{
+			string maxStr = "";
+			if (max > 0)
+				maxStr = "&max=" + max;
+			string uri = $"http://api.huaban.com/boards/{boardID}/?iiyjjrxz&limit={limit}{maxStr}&wfl=1";
+
+			string json = await Get(uri);
+			JObject obj = JObject.Parse(json);
+			var objBoard = obj["board"] as JObject;
+			var board = Board.Parse(obj["board"] as JObject);
+
+			return board;
+		}
 	}
 }

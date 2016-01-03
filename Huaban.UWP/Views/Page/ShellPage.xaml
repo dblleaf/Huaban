@@ -58,6 +58,6 @@
 				IsChecked="{Binding IsPaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
 				Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
 		</Grid>
-		<HB:HBFrame Background="{StaticResource ApplicationPageBackgroundThemeBrush}" x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
+		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
 	</Grid>
 </HB:HBPage>

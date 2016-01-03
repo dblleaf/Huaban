@@ -88,7 +88,7 @@ namespace Huaban.UWP.Controls
 				return;
 
 			CompositeTransform transform = page.RenderTransform as CompositeTransform;
-			if (transform.TranslateX > page.ActualWidth * 0.618)
+			if (transform.TranslateX > page.ActualWidth * 0.5)
 			{
 				if (CanGoBack)
 					GoBack();
