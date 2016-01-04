@@ -261,7 +261,7 @@ namespace Huaban.UWP.ViewModels
 					{
 						var list = Context.BoardList;
 						list.Add(board);
-						var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, "");
+						var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
 						board.pins.Add(pin);
 						board.cover = pin;
 						await new MessageDialog("采集成功").ShowAsync();

@@ -145,7 +145,7 @@
 				<AppBarButton Label="喜欢" Visibility="{Binding Path=Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Icon="{Binding Icon}" Command="{Binding LikeCommand}"></AppBarButton>
 				<AppBarButton Label="采集" Visibility="{Binding Path=Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Command="{Binding ShowSelectCommand}">
 					<AppBarButton.Icon>
-						<FontIcon Glyph=""></FontIcon>
+						<FontIcon Glyph=""></FontIcon>
 					</AppBarButton.Icon>
 				</AppBarButton>
 			</CommandBar>

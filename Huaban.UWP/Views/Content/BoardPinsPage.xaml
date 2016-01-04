@@ -14,6 +14,7 @@
 			<Grid.RowDefinitions>
 				<RowDefinition Height="48"/>
 				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<HB:TitleControl></HB:TitleControl>
 			<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
@@ -46,6 +47,13 @@
 					</Grid>
 				</HB:ImageGrid.Header>
 			</HB:ImageGrid>
+			<CommandBar Grid.Row="2">
+				<AppBarButton Label="关注" Command="{Binding LikeCommand}">
+					<AppBarButton.Icon>
+						<FontIcon Glyph=""></FontIcon>
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</CommandBar>
 		</Grid>
 		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
 	</Grid>
