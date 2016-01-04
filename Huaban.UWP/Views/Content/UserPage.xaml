@@ -9,14 +9,14 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:HB="using:Huaban.UWP.Controls"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="-1 0" Padding="1 0">
+	<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}" Margin="-1 0" Padding="1 0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
 		<Grid Background="{StaticResource SystemAccentColorBrush}">
-			<StackPanel Margin="0 12 0 48">
-				<Ellipse Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Center">
+			<StackPanel Margin="0 0 0 48">
+				<Ellipse Width="60" Height="60" Margin="0 -30 0 0" VerticalAlignment="Top" HorizontalAlignment="Center">
 					<Ellipse.Fill>
 						<ImageBrush ImageSource="{Binding User.avatar.Squara}"></ImageBrush>
 					</Ellipse.Fill>

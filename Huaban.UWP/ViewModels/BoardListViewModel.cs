@@ -29,6 +29,11 @@ namespace Huaban.UWP.ViewModels
 			{ SetValue(ref _BoardList, value); }
 		}
 
+		public int Count
+		{
+			get { return BoardList.Count; }
+		}
+
 		#endregion
 
 		#region Commands
@@ -61,6 +66,22 @@ namespace Huaban.UWP.ViewModels
 		{
 			BoardList.Clear();
 			await BoardList.LoadMoreItemsAsync(0);
+		}
+
+		public long GetMaxSeq()
+		{
+			long max = 0;
+			if (Count > 0)
+				max = Convert.ToInt64(BoardList[Count - 1].seq);
+			return max;
+		}
+
+		public long GetMaxID()
+		{
+			long max = 0;
+			if (Count > 0)
+				max = Convert.ToInt64(BoardList[Count - 1].board_id);
+			return max;
 		}
 
 		#endregion

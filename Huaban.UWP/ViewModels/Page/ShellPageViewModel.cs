@@ -38,6 +38,10 @@ namespace Huaban.UWP.ViewModels
 				new NavItemModel() { DestinationPage = "SettingPage", Label = "设置", Title="设置", Symbol = Symbol.Setting }
 			});
 
+		public User User
+		{
+			get { return Context.User; }
+		}
 		#endregion
 
 		#region Commands

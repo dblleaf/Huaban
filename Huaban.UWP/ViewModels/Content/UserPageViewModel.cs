@@ -103,8 +103,7 @@ namespace Huaban.UWP.ViewModels
 			List<Board> list = new List<Board>();
 			try
 			{
-				list = await Context.API.UserAPI.GetBoards(User?.user_id, 0);
-
+				list = await Context.API.UserAPI.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
 				return list;
 			}
 			catch (Exception ex)

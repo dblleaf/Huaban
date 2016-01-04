@@ -20,7 +20,7 @@ namespace Huaban.UWP.Api
 			return await Get("http://api.huaban.com/users/me", o => SerializeExtension.JsonDeserlialize<User>(o));
 		}
 		//某人的画板
-		public async Task<List<Board>> GetBoards(string userID, int max)
+		public async Task<List<Board>> GetBoards(string userID, long max)
 		{
 			string maxBoardID = "&max=" + max.ToString();
 			if (max <= 0)
