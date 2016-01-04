@@ -115,6 +115,11 @@ namespace Huaban.UWP.Controls
 			if (!CanGoBack)
 				return;
 			var page = PageStack[PageIndex];
+			var args = new HBNavigatingCancelEventArgs();
+			page.OnNavigatingFrom(args);
+			if (args.Cancel)
+				return;
+
 			page.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
 			PageStack.Remove(page);
 			FrameGrid.Children.Remove(page);

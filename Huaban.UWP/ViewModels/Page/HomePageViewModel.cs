@@ -154,6 +154,7 @@ namespace Huaban.UWP.ViewModels
 			}
 			return null;
 		}
+		
 
 		#endregion
 	}

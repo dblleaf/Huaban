@@ -322,7 +322,7 @@ namespace Huaban.UWP.ViewModels
 				await BoardListViewModel.ClearAndReload();
 			}
 		}
-
+		
 		#endregion
 	}
 }
