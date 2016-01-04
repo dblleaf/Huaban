@@ -14,7 +14,31 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<HB:TitleControl></HB:TitleControl>
-			<HB:ImageGrid Grid.Row="1" DataContext="{Binding PinListViewModel}"></HB:ImageGrid>
+			<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
+				<HB:ImageGrid.Header>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<StackPanel Orientation="Horizontal" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="3 3 3 1" MinHeight="48" Padding="12">
+							<Ellipse Width="40" Height="40">
+								<Ellipse.Fill>
+									<ImageBrush ImageSource="{Binding CurrentBoard.user.avatar.Squara}"></ImageBrush>
+								</Ellipse.Fill>
+							</Ellipse>
+							<TextBlock VerticalAlignment="Center" Text="{Binding CurrentBoard.user.username}" Margin="12 0"></TextBlock>
+						</StackPanel>
+						<Grid HorizontalAlignment="Stretch" Grid.Row="1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="3 0 3 3" Padding="12">
+							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Right">
+								<Run FontSize="12" Text="{Binding CurrentBoard.pin_count}"></Run>
+								<Run FontSize="12" Text="采集   "></Run>
+								<Run FontSize="12" Text="{Binding CurrentBoard.follow_count}"></Run>
+								<Run FontSize="12" Text="关注"></Run></TextBlock>
+						</Grid>
+					</Grid>
+				</HB:ImageGrid.Header>
+			</HB:ImageGrid>
 		</Grid>
 	</Grid>
 </HB:HBControl>

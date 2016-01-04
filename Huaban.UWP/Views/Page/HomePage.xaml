@@ -14,7 +14,7 @@
 		</Grid.RowDefinitions>
 		<HB:TitleControl></HB:TitleControl>
 		<Grid Grid.Row="1">
-			<HB:ImageGrid Margin="0 0 0 48" DataContext="{Binding PinListViewModel}"></HB:ImageGrid>
+			<HB:ImageGrid Margin="0 0 0 48" ListModel="{Binding PinListViewModel}"></HB:ImageGrid>
 			<CommandBar VerticalAlignment="Bottom">
 				<AppBarButton Label="分类" Icon="List" Command="{Binding ShowSelectCommand}"></AppBarButton>
 			</CommandBar>

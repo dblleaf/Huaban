@@ -12,35 +12,36 @@
     d:DesignWidth="432">
 	<Grid>
 		<ScrollViewer x:Name="scrollViewer" ScrollViewer.VerticalScrollBarVisibility="Auto" ViewChanged="ScrollViewer_ViewChanged" Padding="3">
-			
-			<ListView x:Name="lwGrid"
-				IsItemClickEnabled="True"
-				ScrollViewer.VerticalScrollMode="Disabled"
-				ItemTemplate="{StaticResource BoardGridTemplate}"
-				ItemsSource="{Binding BoardList}">
-				<ListView.Resources>
-					<!--这段放style.xaml文件中就起不到作用，不知道为什么-->
-					<Style TargetType="ListViewItem">
-						<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-						<Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-						<Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-						<Setter Property="Padding" Value="0"></Setter>
-						<Setter Property="Margin" Value="3"></Setter>
-						<Setter Property="Background" Value="{StaticResource ApplicationPageBackgroundThemeBrush}"></Setter>
-					</Style>
-				</ListView.Resources>
-				<ListView.ItemsPanel>
-					<ItemsPanelTemplate>
-						<HB:HBGridPanel x:Name="pbPanel" MinColumnCount="2" ColumnWidth="300" HeightWidthDiff="32" />
-					</ItemsPanelTemplate>
-				</ListView.ItemsPanel>
-				
-				<Interactivity:Interaction.Behaviors>
-					<Core:EventTriggerBehavior EventName="ItemClick">
-						<Core:InvokeCommandAction Command="{Binding ToBoardPinsCommand}"></Core:InvokeCommandAction>
-					</Core:EventTriggerBehavior>
-				</Interactivity:Interaction.Behaviors>
-			</ListView>
+			<StackPanel>
+				<ContentControl x:Name="HeaderContent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ContentControl>
+				<ListView x:Name="lwGrid"
+					IsItemClickEnabled="True"
+					ScrollViewer.VerticalScrollMode="Disabled"
+					ItemTemplate="{StaticResource BoardGridTemplate}"
+					ItemsSource="{Binding BoardList}">
+					<ListView.Resources>
+						<!--这段放style.xaml文件中就起不到作用，不知道为什么-->
+						<Style TargetType="ListViewItem">
+							<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+							<Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+							<Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+							<Setter Property="Padding" Value="0"></Setter>
+							<Setter Property="Margin" Value="3"></Setter>
+							<Setter Property="Background" Value="{StaticResource ApplicationPageBackgroundThemeBrush}"></Setter>
+						</Style>
+					</ListView.Resources>
+					<ListView.ItemsPanel>
+						<ItemsPanelTemplate>
+							<HB:HBGridPanel x:Name="pbPanel" MinColumnCount="2" ColumnWidth="300" HeightWidthDiff="32" />
+						</ItemsPanelTemplate>
+					</ListView.ItemsPanel>
+					<Interactivity:Interaction.Behaviors>
+						<Core:EventTriggerBehavior EventName="ItemClick">
+							<Core:InvokeCommandAction Command="{Binding ToBoardPinsCommand}"></Core:InvokeCommandAction>
+						</Core:EventTriggerBehavior>
+					</Interactivity:Interaction.Behaviors>
+				</ListView>
+			</StackPanel>
 		</ScrollViewer>
 	</Grid>
 </UserControl>

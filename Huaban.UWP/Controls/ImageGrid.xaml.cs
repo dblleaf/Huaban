@@ -17,15 +17,51 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Huaban.UWP.Controls
 {
+	using ViewModels;
 	public sealed partial class ImageGrid : UserControl
 	{
 		public ImageGrid()
 		{
 			this.InitializeComponent();
 		}
+
+		#region Header
+		public UIElement Header
+		{
+			get { return (UIElement)GetValue(HeaderProperty); }
+			set { SetValue(HeaderProperty, value); }
+		}
+
+		public static readonly DependencyProperty HeaderProperty =
+			DependencyProperty.Register("Header", typeof(UIElement), typeof(ImageGrid), new PropertyMetadata(null, OnHeaderChanged));
+
+		private static void OnHeaderChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (ImageGrid)sender;
+			control.HeaderContent.Content = e.NewValue;
+		}
+		#endregion
+
+		#region ListModel
+		public PinListViewModel ListModel
+		{
+			get { return (PinListViewModel)GetValue(ListModelProperty); }
+			set { SetValue(ListModelProperty, value); }
+		}
+
+		public static readonly DependencyProperty ListModelProperty =
+			DependencyProperty.Register("ListModel", typeof(PinListViewModel), typeof(ImageGrid), new PropertyMetadata(null, OnListModelChanged));
+
+		private static void OnListModelChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (ImageGrid)sender;
+			control.lvWf.DataContext = e.NewValue;
+		}
+		#endregion
+
 		private bool _loading;
 		public event RoutedEventHandler RequestData;
-		
+
 		private async void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
 		{
 			ScrollViewer sv = sender as ScrollViewer;

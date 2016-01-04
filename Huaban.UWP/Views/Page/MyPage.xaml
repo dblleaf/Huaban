@@ -35,7 +35,7 @@
 					</Grid>
 				</PivotItem.Header>
 				<Grid>
-					<HB:BoardGrid DataContext="{Binding BoardListViewModel}"></HB:BoardGrid>
+					<HB:BoardGrid ListModel="{Binding BoardListViewModel}"></HB:BoardGrid>
 				</Grid>
 			</PivotItem>
 			<PivotItem>
@@ -50,7 +50,7 @@
 					</Grid>
 				</PivotItem.Header>
 				<Grid>
-					<HB:ImageGrid DataContext="{Binding MyPinListViewModel}"></HB:ImageGrid>
+					<HB:ImageGrid ListModel="{Binding MyPinListViewModel}"></HB:ImageGrid>
 				</Grid>
 			</PivotItem>
 			<PivotItem>
@@ -65,7 +65,7 @@
 					</Grid>
 				</PivotItem.Header>
 				<Grid>
-					<HB:ImageGrid DataContext="{Binding LikePinListViewModel}"></HB:ImageGrid>
+					<HB:ImageGrid ListModel="{Binding LikePinListViewModel}"></HB:ImageGrid>
 				</Grid>
 			</PivotItem>
 			<PivotItem>

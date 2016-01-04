@@ -18,17 +18,49 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Controls
 {
+	using ViewModels;
 	public sealed partial class BoardGrid : UserControl
 	{
-		public static readonly DependencyProperty CellWidthProperty = DependencyProperty.Register("CellWidth", typeof(double), typeof(BoardGrid), new PropertyMetadata(0.0));
-		public double CellWidth { set; get; }
-		public string Fuck { set; get; } = "Fuck world!";
 		private bool _loading;
 		public BoardGrid()
 		{
 			this.InitializeComponent();
 			this.Loaded += BoardGrid_Loaded;
 		}
+
+		#region Header
+		public UIElement Header
+		{
+			get { return (UIElement)GetValue(HeaderProperty); }
+			set { SetValue(HeaderProperty, value); }
+		}
+
+		public static readonly DependencyProperty HeaderProperty =
+			DependencyProperty.Register("Header", typeof(UIElement), typeof(BoardGrid), new PropertyMetadata(null, OnHeaderChanged));
+
+		private static void OnHeaderChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (BoardGrid)sender;
+			control.HeaderContent.Content = e.NewValue;
+		}
+		#endregion
+
+		#region ListModel
+		public BoardListViewModel ListModel
+		{
+			get { return (BoardListViewModel)GetValue(ListModelProperty); }
+			set { SetValue(ListModelProperty, value); }
+		}
+
+		public static readonly DependencyProperty ListModelProperty =
+			DependencyProperty.Register("ListModel", typeof(BoardListViewModel), typeof(BoardGrid), new PropertyMetadata(null, OnListModelChanged));
+
+		private static void OnListModelChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (BoardGrid)sender;
+			control.lwGrid.DataContext = e.NewValue;
+		}
+		#endregion
 
 		private async void BoardGrid_Loaded(object sender, RoutedEventArgs e)
 		{

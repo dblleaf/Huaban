@@ -99,7 +99,7 @@
 							<TextBlock FontSize="12" Text="{Binding Pin.repin_count}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
 						</Grid>
 					</PivotItem.Header>
-					<HB:BoardGrid DataContext="{Binding BoardListViewModel}"></HB:BoardGrid>
+					<HB:BoardGrid ListModel="{Binding BoardListViewModel}"></HB:BoardGrid>
 				</PivotItem>
 				<PivotItem>
 					<PivotItem.Header>

@@ -39,7 +39,7 @@ namespace Huaban.UWP.ViewModels
 			set
 			{
 				SetValue(ref _CurrentBoard, value);
-				Title = _CurrentBoard.title;
+				Title = $"画板-{_CurrentBoard.title}";
 			}
 		}
 

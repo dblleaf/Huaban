@@ -25,14 +25,7 @@ namespace Huaban.UWP.ViewModels
 			get { return _LeftHeaderVisibility; }
 			protected set { SetValue(ref _LeftHeaderVisibility, value); }
 		}
-		public User User
-		{
-			get
-			{
-				return Context.User;
-			}
-		}
-
+	
 		public override Size ArrangeOverride(Size finalSize)
 		{
 			if (Window.Current.Bounds.Width >= 720)
