@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Huaban.UWP.Views"
 	xmlns:HB="using:Huaban.UWP.Controls"
+	xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="Gray">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="-1 0" Padding="1 0">
 		<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="48"/>
@@ -22,7 +24,12 @@
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 						<StackPanel Orientation="Horizontal" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="3 3 3 1" MinHeight="48" Padding="12">
-							<Ellipse Width="40" Height="40">
+							<Interactivity:Interaction.Behaviors>
+								<Core:EventTriggerBehavior EventName="Tapped">
+									<Core:InvokeCommandAction Command="{Binding ToUserPageCommand}" CommandParameter="{Binding CurrentBoard.user}"></Core:InvokeCommandAction>
+								</Core:EventTriggerBehavior>
+							</Interactivity:Interaction.Behaviors>
+							<Ellipse Stroke="{StaticResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
 								<Ellipse.Fill>
 									<ImageBrush ImageSource="{Binding CurrentBoard.user.avatar.Squara}"></ImageBrush>
 								</Ellipse.Fill>
@@ -40,5 +47,6 @@
 				</HB:ImageGrid.Header>
 			</HB:ImageGrid>
 		</Grid>
+		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
 	</Grid>
 </HB:HBControl>

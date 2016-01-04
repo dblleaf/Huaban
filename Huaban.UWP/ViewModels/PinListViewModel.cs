@@ -87,26 +87,6 @@ namespace Huaban.UWP.ViewModels
 				max = Convert.ToInt64(PinList[Count - 1].seq);
 			return max;
 		}
-		//ShowPinDetailCommand
-		private DelegateCommand _ShowPinDetailCommand;
-		public DelegateCommand ShowPinDetailCommand
-		{
-			get
-			{
-				return _ShowPinDetailCommand ?? (_ShowPinDetailCommand = new DelegateCommand(
-					(Object obj) =>
-					{
-						ItemClickEventArgs e = obj as ItemClickEventArgs;
-						var pin = e.ClickedItem as Pin;
-						if (pin != null)
-						{
-							Context.NavigationService.NavigateTo("PinDetailPage", pin);
-							//MainPage.Current.OFrame.Navigate(typeof(Views.PinDetailPage), pin);
-						}
-					},
-					(Object obj) => !IsLoading)
-				);
-			}
-		}
+		
 	}
 }

@@ -305,13 +305,18 @@ namespace Huaban.UWP.ViewModels
 		public async override void OnNavigatedTo(HBNavigationEventArgs e)
 		{
 			var pin = e.Parameter as Pin;
-			Pin = pin;
-			Liked = Pin.liked;
+
 			if (e.NavigationMode == NavigationMode.New)
 			{
 				IsLoading = true;
+
+				if (pin?.pin_id != Pin?.pin_id)
+				{
+					Pin = await Context.API.PinAPI.GetPin(pin.pin_id);
+				}
+
 				PivotSelectedIndex = 0;
-				ImageUri = pin.file.Orignal;
+				ImageUri = Pin.file.Orignal;
 				//Pin = await App.API.PinAPI.GetPin(pin.pin_id);
 				Liked = Pin.liked;
 				await BoardListViewModel.ClearAndReload();

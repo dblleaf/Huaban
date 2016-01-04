@@ -16,11 +16,6 @@
 				<Core:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=UserPage,Path=DataContext}"></Core:InvokeCommandAction>
 			</Core:EventTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="48"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
-		<local:UserPage Grid.Row="1" x:Name="UserPage"></local:UserPage>
+		<local:UserPage x:Name="UserPage"></local:UserPage>
 	</Grid>
 </HB:HBPage>

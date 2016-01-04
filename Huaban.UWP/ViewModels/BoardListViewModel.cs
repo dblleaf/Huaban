@@ -38,26 +38,6 @@ namespace Huaban.UWP.ViewModels
 
 		#region Commands
 
-		private DelegateCommand _ToBoardPinsCommand;
-		public DelegateCommand ToBoardPinsCommand
-		{
-			get
-			{
-				return _ToBoardPinsCommand ?? (_ToBoardPinsCommand = new DelegateCommand(
-					(Object obj) =>
-					{
-						ItemClickEventArgs e = obj as ItemClickEventArgs;
-						var board = e.ClickedItem as Board;
-						if (board != null)
-						{
-							Context.NavigationService.NavigateTo("BoardPinsPage", board);
-						}
-					},
-					(Object obj) => !IsLoading)
-				);
-			}
-		}
-
 		#endregion
 
 		#region Methods
