@@ -197,11 +197,11 @@
     <Compile Include="Views\Content\LoginDialog.xaml.cs">
       <DependentUpon>LoginDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\UserPage.xaml.cs">
-      <DependentUpon>UserPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Content\PinDetailPage.xaml.cs">
       <DependentUpon>PinDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\UserPage.xaml.cs">
+      <DependentUpon>UserPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Page\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
@@ -295,11 +295,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\UserPage.xaml">
+    <Page Include="Views\Content\PinDetailPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\PinDetailPage.xaml">
+    <Page Include="Views\Content\UserPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
