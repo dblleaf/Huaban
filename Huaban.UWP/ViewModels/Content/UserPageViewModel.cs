@@ -98,12 +98,19 @@ namespace Huaban.UWP.ViewModels
 
 		private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
 		{
+			BoardListViewModel.BoardList.NoMore();
 			IsLoading = true;
 
 			List<Board> list = new List<Board>();
+			
 			try
 			{
 				list = await Context.API.UserAPI.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
+
+				if (list.Count < 20)
+					BoardListViewModel.BoardList.NoMore();
+				else
+					BoardListViewModel.BoardList.HasMore();
 				return list;
 			}
 			catch (Exception ex)

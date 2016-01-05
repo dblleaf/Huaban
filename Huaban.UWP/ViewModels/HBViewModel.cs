@@ -21,6 +21,11 @@ namespace Huaban.UWP.ViewModels
 			LeftHeaderVisibility = Visibility.Visible;
 		}
 
+		public bool IsLogin
+		{
+			get { return Context.IsLogin; }
+		}
+
 		private Visibility _LeftHeaderVisibility;
 		public Visibility LeftHeaderVisibility
 		{

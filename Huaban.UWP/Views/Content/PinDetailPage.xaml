@@ -9,7 +9,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:HB="using:Huaban.UWP.Controls"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="-1 0" Padding="1 0">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1 0">
 		<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}">
 			<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
 			<Pivot Margin="0 0 0 48" SelectedIndex="{Binding PivotSelectedIndex,Mode=TwoWay}">
@@ -142,8 +142,8 @@
 			</Pivot>
 			<CommandBar VerticalAlignment="Bottom">
 				<AppBarButton Label="下载" Icon="Save" Command="{Binding DownLoadCommand}"></AppBarButton>
-				<AppBarButton Label="喜欢" Visibility="{Binding Path=Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Icon="{Binding Icon}" Command="{Binding LikeCommand}"></AppBarButton>
-				<AppBarButton Label="采集" Visibility="{Binding Path=Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Command="{Binding ShowSelectCommand}">
+				<AppBarButton Label="喜欢" Visibility="{Binding IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Icon="{Binding Icon}" Command="{Binding LikeCommand}"></AppBarButton>
+				<AppBarButton Label="采集" Visibility="{Binding IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Command="{Binding ShowSelectCommand}">
 					<AppBarButton.Icon>
 						<FontIcon Glyph=""></FontIcon>
 					</AppBarButton.Icon>

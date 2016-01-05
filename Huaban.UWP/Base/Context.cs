@@ -27,7 +27,10 @@ namespace Huaban.UWP.Base
 		private bool _IsLogin;
 		public bool IsLogin
 		{
-			get { return _IsLogin; }
+			get
+			{
+				return _IsLogin;
+			}
 			set { SetValue(ref _IsLogin, value); }
 		}
 
@@ -75,7 +78,7 @@ namespace Huaban.UWP.Base
 			catch (Exception ex)
 			{
 			}
-			
+
 			return list;
 		}
 	}

@@ -48,7 +48,7 @@
 				</HB:ImageGrid.Header>
 			</HB:ImageGrid>
 			<CommandBar Grid.Row="2">
-				<AppBarButton Label="关注" Command="{Binding LikeCommand}">
+				<AppBarButton Label="关注" Visibility="{Binding IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Command="{Binding LikeCommand}">
 					<AppBarButton.Icon>
 						<FontIcon Glyph=""></FontIcon>
 					</AppBarButton.Icon>

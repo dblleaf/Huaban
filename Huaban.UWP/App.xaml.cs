@@ -54,6 +54,7 @@ namespace Huaban.UWP
 		{
 			if (!ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
 			{
+
 				var titleBar = ApplicationView.GetForCurrentView().TitleBar;
 				var color = Color.FromArgb(255, 214, 23, 24);
 				titleBar.BackgroundColor = color;

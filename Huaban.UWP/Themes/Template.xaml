@@ -79,6 +79,7 @@
 						<Run FontSize="12" Text="关注"></Run></TextBlock>
 				</Grid>
 			</Grid>
+			
 			<Grid x:Name="owner" Grid.Row="1" Visibility="{Binding user_id,Converter={StaticResource OwnerVisiblityConverter}}">
 				<TextBlock HorizontalAlignment="Center" Margin="0 6">编辑</TextBlock>
 			</Grid>

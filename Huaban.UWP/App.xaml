@@ -14,12 +14,12 @@
 			<converters:ColorConverter x:Key="ColorConverter"/>
 			<converters:ImageBgConverter x:Key="ImageBgConverter"/>
 			<converters:OwnerVisiblityConverter x:Key="OwnerVisiblityConverter"/>
+			<converters:LoginVisiblityConverter x:Key="LoginVisiblityConverter"/>
 			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"></commands:PinImageLoadCommand>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Themes/Generic.xaml" />
 				<ResourceDictionary Source="Themes/Template.xaml" />
 				<ResourceDictionary Source="Themes/Style.xaml" />
-				
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
