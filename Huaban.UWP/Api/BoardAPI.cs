@@ -75,5 +75,18 @@ namespace Huaban.UWP.Api
 
 			return board;
 		}
+
+		public async Task<Board> GetBoard(string boardID)
+		{
+			
+			string uri = $"http://api.huaban.com/boards/{boardID}";
+
+			string json = await Get(uri);
+			JObject obj = JObject.Parse(json);
+			var objBoard = obj["board"] as JObject;
+			var board = Board.Parse(obj["board"] as JObject);
+
+			return board;
+		}
 	}
 }

@@ -9,7 +9,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:HB="using:Huaban.UWP.Controls"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1 0">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
 		<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}">
 			<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
 			<Pivot Margin="0 0 0 48" SelectedIndex="{Binding PivotSelectedIndex,Mode=TwoWay}">

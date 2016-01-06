@@ -81,13 +81,17 @@ namespace Huaban.UWP.ViewModels
 
 		public async override void OnNavigatedTo(HBNavigationEventArgs e)
 		{
-			var board = e.Parameter as Board;
-			if (board != null)
-				CurrentBoard = board;
-			if (e.NavigationMode == NavigationMode.New)
+			try
 			{
+				var board = e.Parameter as Board;
+				if (board == null || board == CurrentBoard)
+					return;
+
+				CurrentBoard = await Context.API.BoardAPI.GetBoard(board.board_id);
 				await PinListViewModel.ClearAndReload();
 			}
+			catch (Exception ex)
+			{ }
 		}
 		public override Size ArrangeOverride(Size finalSize)
 		{

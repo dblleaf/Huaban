@@ -19,6 +19,13 @@ namespace Huaban.UWP.Api
 		{
 			return await Get("http://api.huaban.com/users/me", o => SerializeExtension.JsonDeserlialize<User>(o));
 		}
+		public async Task<User> GetUser(string userID)
+		{
+			string uri = $"http://api.huaban.com/users/{userID}";
+			string json = await Get(uri);
+			var obj = JObject.Parse(json);
+			return User.Parse(obj);
+		}
 		//某人的画板
 		public async Task<List<Board>> GetBoards(string userID, long max)
 		{
