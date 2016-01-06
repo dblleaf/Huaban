@@ -67,7 +67,10 @@ namespace Huaban.UWP.ViewModels
 			PinList.Clear();
 			await PinList.LoadMoreItemsAsync(0);
 		}
-
+		public void Clear()
+		{
+			PinList.Clear(); 
+		}
 		public int Count
 		{
 			get { return PinList.Count; }

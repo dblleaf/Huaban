@@ -47,6 +47,10 @@ namespace Huaban.UWP.ViewModels
 			BoardList.Clear();
 			await BoardList.LoadMoreItemsAsync(0);
 		}
+		public void Clear()
+		{
+			BoardList.Clear();
+		}
 
 		public long GetMaxSeq()
 		{

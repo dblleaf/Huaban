@@ -102,15 +102,16 @@ namespace Huaban.UWP.ViewModels
 			IsLoading = true;
 
 			List<Board> list = new List<Board>();
-			
+
 			try
 			{
 				list = await Context.API.UserAPI.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
 
-				if (list.Count < 20)
+				if (list.Count == 0)
 					BoardListViewModel.BoardList.NoMore();
 				else
 					BoardListViewModel.BoardList.HasMore();
+
 				return list;
 			}
 			catch (Exception ex)
@@ -123,7 +124,7 @@ namespace Huaban.UWP.ViewModels
 			return list;
 		}
 
-		public async override void OnNavigatedTo(HBNavigationEventArgs e)
+		public override void OnNavigatedTo(HBNavigationEventArgs e)
 		{
 			try
 			{
@@ -131,9 +132,9 @@ namespace Huaban.UWP.ViewModels
 				if (user == null || user == User)
 					return;
 				User = user;
-				await MyPinListViewModel.ClearAndReload();
-				await LikePinListViewModel.ClearAndReload();
-				await BoardListViewModel.ClearAndReload();
+				MyPinListViewModel.Clear();
+				LikePinListViewModel.Clear();
+				BoardListViewModel.Clear();
 			}
 			catch { }
 		}

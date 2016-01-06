@@ -58,7 +58,7 @@ namespace Huaban.UWP.Api
 			if (max <= 0)
 				maxBoardID = "";
 			string uri = $"http://api.huaban.com/pins/{PinID}/relatedboards/?limit=12{maxBoardID}";
-			string json = await Get(uri + maxBoardID);
+			string json = await Get(uri);
 
 			var obj = JObject.Parse(json);
 			var list = Board.ParseList(obj["boards"] as JArray);
