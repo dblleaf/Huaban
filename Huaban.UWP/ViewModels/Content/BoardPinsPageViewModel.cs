@@ -76,6 +76,7 @@ namespace Huaban.UWP.ViewModels
 					CurrentBoard.following = (str != "{}");
 
 					SetVisibility();
+					Context.ShowTip(CurrentBoard.following ? "关注成功" : "已取消关注");
 				}, o => true));
 			}
 		}

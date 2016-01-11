@@ -11,12 +11,14 @@ namespace Huaban.UWP
 	{
 		private static StorageFolder RoamingFolder = ApplicationData.Current.RoamingFolder;
 		private static StorageFolder LocalFolder = ApplicationData.Current.LocalFolder;
+		private static StorageFolder TempFolder = ApplicationData.Current.TemporaryFolder;
+
 		private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 		public static async Task SaveLocal<T>(T model, string filename = "")
 		{
 			if (string.IsNullOrEmpty(filename))
 				filename = $"{typeof(T).Name}.json";
-
+			var folder = ApplicationData.Current.TemporaryFolder;
 			await LocalFolder.SaveStorageData(filename, model, SerializeExtension.JsonDeserlialize);
 		}
 
@@ -83,6 +85,12 @@ namespace Huaban.UWP
 			}
 			var file = await saveFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
 			await FileIO.WriteBytesAsync(file, buffer);
+		}
+
+		public static async Task<ulong> GetTempFolderSize()
+		{
+			var properties =await TempFolder.GetBasicPropertiesAsync();
+			return properties.Size;
 		}
 	}
 }

@@ -139,7 +139,8 @@ namespace Huaban.UWP.ViewModels
 							type = "jpg";
 
 						await StorageHelper.SaveImage(buffer, $"{DateTime.Now.Ticks}.{type}", "huaban");
-						await new MessageDialog("保存成功").ShowAsync();
+						Context.ShowTip("下载成功");
+
 					}, o => true)
 				);
 			}
@@ -157,6 +158,8 @@ namespace Huaban.UWP.ViewModels
 						string str = await Context.API.PinAPI.Like(Pin.pin_id, !Pin.liked);
 
 						Liked = (str != "{}");
+
+						Context.ShowTip(Liked ? "已设置为喜欢" : "已取消喜欢");
 					}, o => true)
 				);
 			}
@@ -237,7 +240,7 @@ namespace Huaban.UWP.ViewModels
 					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
 					if (board.cover == null)
 						board.cover = pin;
-					await new MessageDialog("保存成功").ShowAsync();
+					Context.ShowTip("采集成功");
 				}, o => true));
 			}
 		}
@@ -258,7 +261,7 @@ namespace Huaban.UWP.ViewModels
 						var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
 						board.pins.Add(pin);
 						board.cover = pin;
-						await new MessageDialog("采集成功").ShowAsync();
+						Context.ShowTip("采集成功");
 					}
 				}, o => true));
 			}

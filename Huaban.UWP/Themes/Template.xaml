@@ -91,7 +91,7 @@
 				</Interactivity:Interaction.Behaviors>
 				<TextBlock HorizontalAlignment="Center" Margin="0 6">编辑</TextBlock>
 			</Grid>
-			<StackPanel Visibility="{Binding ElementName=owner,Path=Visibility,Converter={StaticResource ReverseVisbilityConverter}}" Grid.Row="1">
+			<StackPanel Visibility="{Binding ElementName=owner,Path=Visibility,Converter={StaticResource ReverseVisbilityConverter}}" Grid.Row="1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 				<Interactivity:Interaction.Behaviors>
 					<Core:EventTriggerBehavior EventName="Tapped">
 						<Core:InvokeCommandAction Command="{StaticResource FollowBoardCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
