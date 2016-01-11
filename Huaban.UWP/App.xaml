@@ -16,6 +16,8 @@
 			<converters:OwnerVisiblityConverter x:Key="OwnerVisiblityConverter"/>
 			<converters:LoginVisiblityConverter x:Key="LoginVisiblityConverter"/>
 			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"></commands:PinImageLoadCommand>
+			<commands:FollowBoardCommand x:Key="FollowBoardCommand"></commands:FollowBoardCommand>
+			<commands:ToBoardPinsCommand x:Key="ToBoardPinsCommand"></commands:ToBoardPinsCommand>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Themes/Generic.xaml" />
 				<ResourceDictionary Source="Themes/Template.xaml" />

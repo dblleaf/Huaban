@@ -23,7 +23,11 @@ namespace Huaban.UWP.Models
 		public List<Pin> pins { set; get; }
 		public User user { set; get; }
 		public Pin cover { set; get; }
-		public bool following { set; get; }
+		private bool _following;
+		public bool following {
+			get { return _following; }
+			set { SetValue(ref _following, value); }
+		}
 
 		public int seq { set; get; }
 

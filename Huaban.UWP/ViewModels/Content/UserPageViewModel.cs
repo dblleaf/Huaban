@@ -133,7 +133,12 @@ namespace Huaban.UWP.ViewModels
 				var user = e.Parameter as User;
 				if (user == null || user == User)
 					return;
-				User = await Context.API.UserAPI.GetUser(user.user_id);
+
+				if (user.user_id == Context.User.user_id)
+					User = user;
+				else
+					User = await Context.API.UserAPI.GetUser(user.user_id);
+
 				await MyPinListViewModel.ClearAndReload();
 				await LikePinListViewModel.ClearAndReload();
 				await BoardListViewModel.ClearAndReload();

@@ -8,13 +8,14 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Navigation;
+using Windows.Foundation;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Models;
 	using Controls;
 	using Base;
-	using Windows.Foundation;
+	using Commands;
 
 	public class BoardPinsPageViewModel : HBViewModel
 	{
@@ -40,13 +41,44 @@ namespace Huaban.UWP.ViewModels
 			{
 				SetValue(ref _CurrentBoard, value);
 				Title = $"画板-{_CurrentBoard.title}";
+
+				SetVisibility();
 			}
 		}
 
+		private Visibility _FollowVisibility;
+		public Visibility FollowVisibility
+		{
+			get { return _FollowVisibility; }
+			set { SetValue(ref _FollowVisibility, value); }
+		}
+
+		private Visibility _UnFollowVisibility;
+		public Visibility UnFollowVisibility
+		{
+			get { return _UnFollowVisibility; }
+			set { SetValue(ref _UnFollowVisibility, value); }
+		}
 		#endregion
 
 		#region Commands
 
+		private DelegateCommand _FollowBoardCommand;
+		public DelegateCommand FollowBoardCommand
+		{
+			get
+			{
+				return _FollowBoardCommand ?? (_FollowBoardCommand = new DelegateCommand(
+				async o =>
+				{
+					string str = await Context.API.BoardAPI.follow(CurrentBoard.board_id, !CurrentBoard.following);
+
+					CurrentBoard.following = (str != "{}");
+					
+					SetVisibility();
+				}, o => true));
+			}
+		}
 
 		#endregion
 
@@ -97,6 +129,16 @@ namespace Huaban.UWP.ViewModels
 		{
 			PinListViewModel.SetWidth(finalSize.Width);
 			return finalSize;
+		}
+
+		private void SetVisibility()
+		{
+			if (!IsLogin)
+				FollowVisibility = UnFollowVisibility = Visibility.Collapsed;
+			else {
+				UnFollowVisibility = CurrentBoard.following ? Visibility.Visible : Visibility.Collapsed;
+				FollowVisibility = CurrentBoard.following ? Visibility.Collapsed : Visibility.Visible;
+			}
 		}
 		#endregion
 

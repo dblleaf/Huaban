@@ -13,8 +13,9 @@ namespace Huaban.UWP.Base
 	{
 		public Context()
 		{
+			NavigationService = new NavigationService(this);
 		}
-		public NavigationService NavigationService { get; private set; } = new NavigationService();
+		public NavigationService NavigationService { get; private set; }
 		public API API { private set; get; } = API.Current();
 
 		private User _User;
@@ -80,6 +81,12 @@ namespace Huaban.UWP.Base
 			}
 
 			return list;
+		}
+		private bool _FirstBack;
+		public bool FirstBack
+		{
+			get { return _FirstBack; }
+			set { SetValue(ref _FirstBack, value); }
 		}
 	}
 }

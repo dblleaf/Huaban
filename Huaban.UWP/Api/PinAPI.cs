@@ -51,7 +51,7 @@ namespace Huaban.UWP.Api
 
 		//http://api.huaban.com/pins/552897183/relatedboards/?max=38
 		//转采的画板（cover是封面）
-		public async Task<List<Board>> GetRelatedBoards(string PinID, int max)
+		public async Task<List<Board>> GetRelatedBoards(string PinID, long max)
 		{
 
 			string maxBoardID = "&max=" + max.ToString();
@@ -59,6 +59,8 @@ namespace Huaban.UWP.Api
 				maxBoardID = "";
 			string uri = $"http://api.huaban.com/pins/{PinID}/relatedboards/?limit=12{maxBoardID}";
 			string json = await Get(uri);
+			if (json == "[]")
+				return new List<Board>();
 
 			var obj = JObject.Parse(json);
 			var list = Board.ParseList(obj["boards"] as JArray);

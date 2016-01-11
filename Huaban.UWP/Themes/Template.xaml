@@ -68,6 +68,11 @@
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
 			<Grid Background="{Binding Converter={StaticResource ColorConverter}}">
+				<Interactivity:Interaction.Behaviors>
+					<Core:EventTriggerBehavior EventName="Tapped">
+						<Core:InvokeCommandAction Command="{StaticResource ToBoardPinsCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+					</Core:EventTriggerBehavior>
+				</Interactivity:Interaction.Behaviors>
 				<Image Source="{Binding cover.file.Sq235}"></Image>
 				<Grid Background="#99999999" VerticalAlignment="Bottom" Padding="6 0" RequestedTheme="Dark">
 					<TextBlock>
@@ -84,6 +89,11 @@
 				<TextBlock HorizontalAlignment="Center" Margin="0 6">编辑</TextBlock>
 			</Grid>
 			<StackPanel Visibility="{Binding ElementName=owner,Path=Visibility,Converter={StaticResource ReverseVisbilityConverter}}" Grid.Row="1">
+				<Interactivity:Interaction.Behaviors>
+					<Core:EventTriggerBehavior EventName="Tapped">
+						<Core:InvokeCommandAction Command="{StaticResource FollowBoardCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+					</Core:EventTriggerBehavior>
+				</Interactivity:Interaction.Behaviors>
 				<TextBlock Visibility="{Binding following,Converter={StaticResource ReverseVisbilityConverter}}" HorizontalAlignment="Center" Margin="0 6">
 					<Run Foreground="Red">+</Run>
 					<Run>关注</Run></TextBlock>

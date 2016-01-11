@@ -91,7 +91,7 @@ namespace Huaban.UWP.Controls
 					await incrementalLoading.LoadMoreItemsAsync((uint)lwGrid.Items.Count);
 				}
 
-				isOver = incrementalLoading.HasMoreItems;
+				isOver = !incrementalLoading.HasMoreItems;
 			}
 			catch (Exception ex)
 			{ }

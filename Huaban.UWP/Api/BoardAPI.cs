@@ -41,11 +41,11 @@ namespace Huaban.UWP.Api
 		/// <param name="boadID"></param>
 		/// <param name="follow"></param>
 		/// <returns></returns>
-		public async Task follow(string boadID, bool follow)
+		public async Task<string> follow(string boadID, bool follow)
 		{
 			string action = follow ? "follow" : "unfollow";
 			string uri = $"http://api.huaban.com/boards/{boadID}/{action}/";
-			await Post(uri);
+			return await Post(uri);
 		}
 
 		public async Task<List<Pin>> GetPins(string boardID, long max = 0, int limit = 20)
@@ -78,7 +78,7 @@ namespace Huaban.UWP.Api
 
 		public async Task<Board> GetBoard(string boardID)
 		{
-			
+
 			string uri = $"http://api.huaban.com/boards/{boardID}";
 
 			string json = await Get(uri);

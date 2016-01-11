@@ -15,15 +15,6 @@ namespace Huaban.UWP.Base
 		}
 
 		#region base
-		protected virtual void LockBack()
-		{
-			IsLockBack = true;
-		}
-		protected virtual void UnlockBack()
-		{
-			IsLockBack = false;
-		}
-		public virtual bool IsLockBack { set; get; }
 
 		public virtual void OnNavigatedTo(HBNavigationEventArgs e) { }
 
@@ -35,9 +26,7 @@ namespace Huaban.UWP.Base
 
 		public virtual bool OnNavigatingFrom(HBNavigatingCancelEventArgs e)
 		{
-			var ret = e.Cancel = IsLockBack;
-			UnlockBack();
-			return ret;
+			return true;
 		}
 		public virtual Size ArrangeOverride(Size finalSize)
 		{

@@ -29,6 +29,7 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		#region Properties
+
 		private Category _CurrentCategory;
 		public Category CurrentCategory
 		{
@@ -48,9 +49,9 @@ namespace Huaban.UWP.ViewModels
 			{
 				SetValue(ref _SelecterVisibility, value);
 				if (SelecterVisibility == Visibility.Visible)
-					LockBack();
+					this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
 				else
-					UnlockBack();
+					this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
 			}
 		}
 
@@ -154,8 +155,12 @@ namespace Huaban.UWP.ViewModels
 			}
 			return null;
 		}
-		
 
+		private void NavigationService_BackEvent(object sender, BackRequestedEventArgs e)
+		{
+			e.Handled = true;
+			SelecterVisibility = Visibility.Collapsed;
+		}
 		#endregion
 	}
 }

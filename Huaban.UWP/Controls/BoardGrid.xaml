@@ -35,11 +35,6 @@
 							<HB:HBGridPanel x:Name="pbPanel" MinColumnCount="2" ColumnWidth="300" HeightWidthDiff="32" />
 						</ItemsPanelTemplate>
 					</ListView.ItemsPanel>
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="ItemClick">
-							<Core:InvokeCommandAction Command="{Binding ToBoardPinsCommand}"></Core:InvokeCommandAction>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
 				</ListView>
 			</StackPanel>
 		</ScrollViewer>

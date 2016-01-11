@@ -24,7 +24,8 @@ namespace Huaban.UWP.Api
 			string uri = $"http://api.huaban.com/users/{userID}";
 			string json = await Get(uri);
 			var obj = JObject.Parse(json);
-			return User.Parse(obj);
+			var user = User.Parse(obj);
+			return user;
 		}
 		//某人的画板
 		public async Task<List<Board>> GetBoards(string userID, long max)

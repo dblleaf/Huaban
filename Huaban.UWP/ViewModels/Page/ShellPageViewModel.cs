@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.ViewManagement;
 using Windows.Foundation.Metadata;
@@ -15,6 +16,7 @@ namespace Huaban.UWP.ViewModels
 	using Services;
 	using Models;
 	using Commands;
+	using Views;
 	public class ShellPageViewModel : HBViewModel
 	{
 		public ShellPageViewModel(Context context)
@@ -22,15 +24,30 @@ namespace Huaban.UWP.ViewModels
 		{
 			NavList.Insert(3, UserItem);
 			UserItem.Special = context.IsLogin;
+			Context.PropertyChanged += Context_PropertyChanged;
+			FirstBackVisibility = Visibility.Collapsed;
 		}
 
 		#region Properties
 
 		private bool _IsPaneOpen;
-		public bool IsPaneOpen { get { return _IsPaneOpen; } set { SetValue(ref _IsPaneOpen, value); } }
-		private NavItemModel UserItem { set; get; } = new NavItemModel() { DestinationPage = "MyPage", Label = "我的", Symbol = Symbol.People, Authorization = true };
-		public ObservableCollection<NavItemModel> NavList { get; private set; } =
-			new ObservableCollection<NavItemModel>(new NavItemModel[] {
+		public bool IsPaneOpen
+		{
+			get { return _IsPaneOpen; }
+			set { SetValue(ref _IsPaneOpen, value); }
+		}
+
+		private NavItemModel UserItem { set; get; }
+			= new NavItemModel()
+			{
+				DestinationPage = "MyPage",
+				Label = "我的",
+				Symbol = Symbol.People,
+				Authorization = true
+			};
+
+		public ObservableCollection<NavItemModel> NavList { get; private set; }
+			= new ObservableCollection<NavItemModel>(new NavItemModel[] {
 				new NavItemModel() { DestinationPage = "HomePage", Label = "发现", Title = "发现", Symbol = Symbol.Find },
 				new NavItemModel() { DestinationPage = "FollowingPage", Label = "关注", SymbolChar = '', Authorization = true },
 				new NavItemModel() { DestinationPage = "MessagePage", Label = "消息", Title="消息", Symbol = Symbol.Message, Authorization = true },
@@ -42,6 +59,17 @@ namespace Huaban.UWP.ViewModels
 		{
 			get { return Context.User; }
 		}
+
+		private Visibility _FirstBackVisibility;
+		public Visibility FirstBackVisibility
+		{
+			get { return _FirstBackVisibility; }
+			set
+			{
+				SetValue(ref _FirstBackVisibility, value);
+			}
+		}
+
 		#endregion
 
 		#region Commands
@@ -88,6 +116,25 @@ namespace Huaban.UWP.ViewModels
 			base.Inited();
 
 			NavCommand.Execute(NavList[0]);
+		}
+
+		private async void Context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (e.PropertyName == "FirstBack")
+			{
+				try
+				{
+					await ShellPage.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+					{
+						FirstBackVisibility = Context.FirstBack ? Visibility.Visible : Visibility.Collapsed;
+					});
+				}
+				catch (Exception ex)
+				{
+
+					string aaa = ex.Message;
+				}
+			}
 		}
 		#endregion
 	}

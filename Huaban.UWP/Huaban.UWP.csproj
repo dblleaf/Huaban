@@ -116,6 +116,8 @@
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\PinImageLoadCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Commands\FollowBoardCommand.cs" />
+    <Compile Include="Commands\ToBoardPinsCommand.cs" />
     <Compile Include="Controls\BoardGrid.xaml.cs">
       <DependentUpon>BoardGrid.xaml</DependentUpon>
     </Compile>

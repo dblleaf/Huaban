@@ -6,23 +6,35 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using Microsoft.Practices.ServiceLocation;
+using System.Threading.Tasks;
+
 namespace Huaban.UWP.Services
 {
 	using Huaban.UWP.Controls;
 	using Base;
 	public class NavigationService
 	{
+		public event EventHandler<BackRequestedEventArgs> BackEvent;
 		private HBFrame HBFrame { get; set; }
 		private Frame Frame { get; set; }
-		public NavigationService()
-		{ }
+		private Context Context { get; set; }
+		public NavigationService(Context context)
+		{
+			Context = context;
+		}
 
 		private void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
 		{
+
+			BackEvent?.Invoke(sender, e);
 			bool handled = e.Handled;
-			this.BackRequested(ref handled);
+
+			if (!e.Handled)
+				this.BackRequested(ref handled);
+
 			e.Handled = handled;
 		}
+
 
 		private void BackRequested(ref bool handled)
 		{
@@ -30,6 +42,23 @@ namespace Huaban.UWP.Services
 			{
 				handled = true;
 				this.GoBack();
+			}
+			else if (!this.CanGoBack && !handled)
+			{
+				if (Context.FirstBack)
+				{
+					App.Current.Exit();
+				}
+				else
+				{
+					Context.FirstBack = true;
+					handled = true;
+					Task.Run(async () =>
+					{
+						await Task.Delay(1500);
+						Context.FirstBack = false;
+					});
+				}
 			}
 		}
 

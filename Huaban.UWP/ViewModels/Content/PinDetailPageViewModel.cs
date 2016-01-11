@@ -33,7 +33,7 @@ namespace Huaban.UWP.ViewModels
 		}
 		#region Properties
 
-		
+
 
 		public BoardListViewModel BoardListViewModel { set; get; }
 
@@ -84,14 +84,10 @@ namespace Huaban.UWP.ViewModels
 			set
 			{
 				SetValue(ref _SelecterVisibility, value);
-				if (value == Visibility.Visible)
-				{
-					LockBack();
-				}
+				if (SelecterVisibility == Visibility.Visible)
+					this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
 				else
-				{
-					UnlockBack();
-				}
+					this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
 			}
 		}
 
@@ -157,8 +153,6 @@ namespace Huaban.UWP.ViewModels
 		{
 			get
 			{
-				AppBarButton aaa = new AppBarButton();
-
 				return _LikeCommand ?? (_LikeCommand = new DelegateCommand(
 					async o =>
 					{
@@ -242,7 +236,7 @@ namespace Huaban.UWP.ViewModels
 					var board = o as Board;
 					if (board == null)
 						return;
-					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, "");
+					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
 					if (board.cover == null)
 						board.cover = pin;
 					await new MessageDialog("保存成功").ShowAsync();
@@ -276,18 +270,17 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
-		public async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
+		private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
 		{
-			IsLoading = true;
 			BoardListViewModel.BoardList.NoMore();
-			int max = 0;
+			IsLoading = true;
+
 			List<Board> list = new List<Board>();
-			if (BoardListViewModel.BoardList.Count > 0)
-				max = BoardListViewModel.BoardList[BoardListViewModel.BoardList.Count - 1].seq;
+
 			try
 			{
-				if (Pin != null)
-					list = await Context.API.PinAPI.GetRelatedBoards(Pin.pin_id, max);
+				list = await Context.API.PinAPI.GetRelatedBoards(Pin?.pin_id, BoardListViewModel.GetMaxSeq());
+
 				if (list.Count == 0)
 					BoardListViewModel.BoardList.NoMore();
 				else
@@ -325,6 +318,11 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
+		private void NavigationService_BackEvent(object sender, BackRequestedEventArgs e)
+		{
+			e.Handled = true;
+			SelecterVisibility = Visibility.Collapsed;
+		}
 		#endregion
 	}
 }
