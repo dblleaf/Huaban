@@ -33,8 +33,6 @@ namespace Huaban.UWP.ViewModels
 		}
 		#region Properties
 
-
-
 		public BoardListViewModel BoardListViewModel { set; get; }
 
 		public IncrementalLoadingList<Board> BoardList { set; get; }

@@ -60,7 +60,7 @@
 		</Grid>
 		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
 		<Grid Visibility="{Binding FirstBackVisibility}" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource ApplicationForegroundThemeBrush}" CornerRadius="2">
-			<TextBlock VerticalAlignment="Center" Foreground="{StaticResource ApplicationPageBackgroundThemeBrush}">再按一次退出</TextBlock>
+			<TextBlock VerticalAlignment="Center" Foreground="{StaticResource ApplicationPageBackgroundThemeBrush}" Text="{Binding Message}"></TextBlock>
 		</Grid>
 	</Grid>
 </HB:HBPage>

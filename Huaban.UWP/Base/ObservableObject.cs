@@ -18,12 +18,9 @@ namespace Huaban.UWP.Base
 		}
 		protected bool SetValue<Entity>(ref Entity propertyValue, Entity newValue, [CallerMemberName]string propertyName = "")
 		{
-			if (object.Equals(propertyValue, newValue))
-				return false;
-
 			propertyValue = newValue;
 			NotifyPropertyChanged(propertyName);
-			return true;
+			return object.Equals(propertyValue, newValue);
 		}
 	}
 }

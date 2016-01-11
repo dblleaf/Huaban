@@ -117,6 +117,7 @@
     <Compile Include="Commands\PinImageLoadCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\FollowBoardCommand.cs" />
+    <Compile Include="Commands\ToBoardDetailCommand.cs" />
     <Compile Include="Commands\ToBoardPinsCommand.cs" />
     <Compile Include="Controls\BoardGrid.xaml.cs">
       <DependentUpon>BoardGrid.xaml</DependentUpon>
@@ -187,6 +188,7 @@
     <Compile Include="Models\WeeklyHotBoardImg.cs" />
     <Compile Include="Models\WeeklyTopicBoardImg.cs" />
     <Compile Include="ViewModels\BoardListViewModel.cs" />
+    <Compile Include="ViewModels\Content\BoardDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardPinsPageViewModel.cs" />
     <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
     <Compile Include="ViewModels\Content\UserPageViewModel.cs" />
@@ -198,6 +200,9 @@
     <Compile Include="ViewModels\Page\FollowingPageViewModel.cs" />
     <Compile Include="ViewModels\HBViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
+    <Compile Include="Views\Content\BoardDetailPage.xaml.cs">
+      <DependentUpon>BoardDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Content\BoardPinsPage.xaml.cs">
       <DependentUpon>BoardPinsPage.xaml</DependentUpon>
     </Compile>
@@ -293,6 +298,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Content\BoardDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Content\BoardPinsPage.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -36,8 +36,7 @@ namespace Huaban.UWP.Api
 				o =>
 				{
 					List<Category> list = new List<Category>();
-					list.Add(new Category() { name = "首页", nav_link = "/all/" });
-					list.Add(new Category() { name = "最热", nav_link = "/popular/" });
+
 
 					var obj = JObject.Parse(o);
 					var array = obj["categories"] as JArray;
@@ -46,7 +45,9 @@ namespace Huaban.UWP.Api
 						list.Add(new Category()
 						{
 							name = jobj["name"].ToString(),
-							nav_link = jobj["nav_link"].ToString()
+							nav_link = jobj["nav_link"].ToString(),
+							id = jobj["id"].ToString(),
+							urlname = jobj["urlname"].ToString()
 						});
 					}
 					return list;

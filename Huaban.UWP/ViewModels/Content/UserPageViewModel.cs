@@ -107,6 +107,7 @@ namespace Huaban.UWP.ViewModels
 
 			try
 			{
+				await Task.Delay(500);
 				list = await Context.API.UserAPI.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
 
 				if (list.Count == 0)
@@ -135,7 +136,11 @@ namespace Huaban.UWP.ViewModels
 					return;
 
 				if (user.user_id == Context.User.user_id)
+				{
 					User = user;
+					Context.BoardList = BoardListViewModel.BoardList;
+				}
+
 				else
 					User = await Context.API.UserAPI.GetUser(user.user_id);
 

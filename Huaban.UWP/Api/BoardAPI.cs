@@ -36,6 +36,34 @@ namespace Huaban.UWP.Api
 		}
 
 		/// <summary>
+		/// 编辑画板
+		/// </summary>
+		/// <param name="board"></param>
+		/// <returns></returns>
+		public async Task<Board> edit(Board board)
+		{
+			List<KeyValuePair<string, string>> paramList = new List<KeyValuePair<string, string>>();
+			paramList.Add(new KeyValuePair<string, string>("title", board.title));
+			paramList.Add(new KeyValuePair<string, string>("description", board.description));
+			paramList.Add(new KeyValuePair<string, string>("category", board.category_id));
+			string json = await Post($"http://api.huaban.com/boards/{board.board_id}", paramList.ToArray());
+			return board;
+		}
+
+		/// <summary>
+		/// 删除画板
+		/// </summary>
+		/// <param name="board"></param>
+		/// <returns></returns>
+		public async Task delete(Board board)
+		{
+			List<KeyValuePair<string, string>> paramList = new List<KeyValuePair<string, string>>();
+			paramList.Add(new KeyValuePair<string, string>("_method", "DELETE"));
+			
+			string json = await Post($"http://api.huaban.com/boards/{board.board_id}", paramList.ToArray());
+		}
+
+		/// <summary>
 		/// 关注画板/取消关注
 		/// </summary>
 		/// <param name="boadID"></param>

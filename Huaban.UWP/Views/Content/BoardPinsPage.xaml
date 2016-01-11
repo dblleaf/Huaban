@@ -48,17 +48,12 @@
 				</HB:ImageGrid.Header>
 			</HB:ImageGrid>
 			<CommandBar Grid.Row="2">
-				<AppBarButton Label="关注" 
+				<AppBarButton Label="关注" Icon="Add"
 					Visibility="{Binding FollowVisibility}" 
-					Command="{Binding FollowBoardCommand}">
-					<AppBarButton.Icon>
-						<FontIcon Glyph=""></FontIcon>
-					</AppBarButton.Icon>
-				</AppBarButton>
+					Command="{Binding FollowBoardCommand}"/>
 				<AppBarButton Label="已关注" Icon="Accept"
 					Visibility="{Binding UnFollowVisibility}"
-					Command="{Binding FollowBoardCommand}">
-				</AppBarButton>
+					Command="{Binding FollowBoardCommand}"/>
 			</CommandBar>
 		</Grid>
 		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>

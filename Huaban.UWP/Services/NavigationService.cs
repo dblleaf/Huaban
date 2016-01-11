@@ -35,7 +35,7 @@ namespace Huaban.UWP.Services
 			e.Handled = handled;
 		}
 
-
+		private bool b;
 		private void BackRequested(ref bool handled)
 		{
 			if (this.CanGoBack)
@@ -45,18 +45,19 @@ namespace Huaban.UWP.Services
 			}
 			else if (!this.CanGoBack && !handled)
 			{
-				if (Context.FirstBack)
+				if (b)
 				{
 					App.Current.Exit();
 				}
 				else
 				{
-					Context.FirstBack = true;
+					b = true;
 					handled = true;
 					Task.Run(async () =>
 					{
+						Context.ShowTip("再按一次退出");
 						await Task.Delay(1500);
-						Context.FirstBack = false;
+						b = false;
 					});
 				}
 			}

@@ -26,6 +26,7 @@ namespace Huaban.UWP.ViewModels
 			PinListViewModel = new PinListViewModel(context, GetData);
 
 			SelecterVisibility = Visibility.Collapsed;
+
 		}
 
 		#region Properties
@@ -56,7 +57,8 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		public PinListViewModel PinListViewModel { set; get; }
-		public ObservableCollection<Category> CategoryList { set; get; } = new ObservableCollection<Category>();
+		public IncrementalLoadingList<Category> CategoryList { get; private set; }
+
 		#endregion
 
 		#region Commands
@@ -116,18 +118,22 @@ namespace Huaban.UWP.ViewModels
 			base.Inited();
 
 			IsLoading = true;
-			CategoryList.Clear();
-			var list = await Context.API.CategoryAPI.GetCategoryList();
-			foreach (var item in list)
+			try
 			{
-				CategoryList.Add(item);
+				CategoryList = Context.CategoryList;
+				await CategoryList.LoadMoreItemsAsync(0);
+				CurrentCategory = CategoryList[0];
+				await PinListViewModel.ClearAndReload();
 			}
-			CurrentCategory = list[0];
-
-			await PinListViewModel.ClearAndReload();
-
-			IsLoading = false;
+			catch (Exception ex)
+			{ }
+			finally
+			{
+				IsLoading = false;
+			}
 		}
+
+
 
 		private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
 		{

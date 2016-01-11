@@ -18,6 +18,7 @@
 			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"></commands:PinImageLoadCommand>
 			<commands:FollowBoardCommand x:Key="FollowBoardCommand"></commands:FollowBoardCommand>
 			<commands:ToBoardPinsCommand x:Key="ToBoardPinsCommand"></commands:ToBoardPinsCommand>
+			<commands:ToBoardDetailCommand x:Key="ToBoardDetailCommand"></commands:ToBoardDetailCommand>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Themes/Generic.xaml" />
 				<ResourceDictionary Source="Themes/Template.xaml" />

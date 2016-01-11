@@ -74,7 +74,7 @@ namespace Huaban.UWP.ViewModels
 					string str = await Context.API.BoardAPI.follow(CurrentBoard.board_id, !CurrentBoard.following);
 
 					CurrentBoard.following = (str != "{}");
-					
+
 					SetVisibility();
 				}, o => true));
 			}
@@ -133,7 +133,7 @@ namespace Huaban.UWP.ViewModels
 
 		private void SetVisibility()
 		{
-			if (!IsLogin)
+			if (!IsLogin || CurrentBoard?.user_id == Context?.User?.user_id)
 				FollowVisibility = UnFollowVisibility = Visibility.Collapsed;
 			else {
 				UnFollowVisibility = CurrentBoard.following ? Visibility.Visible : Visibility.Collapsed;

@@ -14,6 +14,10 @@ namespace Huaban.UWP.Base
 		public Context()
 		{
 			NavigationService = new NavigationService(this);
+			CategoryList = new IncrementalLoadingList<Category>(GetCategoryList);
+			Categories = new ObservableCollection<Category>();
+
+
 		}
 		public NavigationService NavigationService { get; private set; }
 		public API API { private set; get; } = API.Current();
@@ -34,6 +38,8 @@ namespace Huaban.UWP.Base
 			}
 			set { SetValue(ref _IsLogin, value); }
 		}
+
+		public IncrementalLoadingList<Category> CategoryList { get; private set; }
 
 		private ObservableCollection<Category> _Categories;
 		public ObservableCollection<Category> Categories
@@ -82,11 +88,39 @@ namespace Huaban.UWP.Base
 
 			return list;
 		}
-		private bool _FirstBack;
-		public bool FirstBack
+
+		private async Task<IEnumerable<Category>> GetCategoryList(uint startIndex, int page)
 		{
-			get { return _FirstBack; }
-			set { SetValue(ref _FirstBack, value); }
+			try
+			{
+				var list = await API.CategoryAPI.GetCategoryList();
+				foreach (var item in list)
+				{
+					Categories.Add(item);
+				}
+				list.Insert(0, new Category() { name = "最热", nav_link = "/popular/" });
+				list.Insert(0, new Category() { name = "首页", nav_link = "/all/" });
+
+				CategoryList.NoMore();
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
+
+			return null;
 		}
+		public void ShowTip(string msg)
+		{
+			Message = msg;
+		}
+
+		private string _Message;
+		public string Message
+		{
+			get { return _Message; }
+			private set { SetValue(ref _Message, value); }
+		}
+		
 	}
 }

@@ -69,7 +69,12 @@ namespace Huaban.UWP.ViewModels
 				SetValue(ref _FirstBackVisibility, value);
 			}
 		}
-
+		private string _Message;
+		public string Message
+		{
+			get { return _Message; }
+			set { SetValue(ref _Message, value); }
+		}
 		#endregion
 
 		#region Commands
@@ -120,13 +125,13 @@ namespace Huaban.UWP.ViewModels
 
 		private async void Context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
-			if (e.PropertyName == "FirstBack")
+			if (e.PropertyName == "Message")
 			{
 				try
 				{
 					await ShellPage.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
 					{
-						FirstBackVisibility = Context.FirstBack ? Visibility.Visible : Visibility.Collapsed;
+						ShowTip(Context.Message);
 					});
 				}
 				catch (Exception ex)
@@ -135,6 +140,25 @@ namespace Huaban.UWP.ViewModels
 					string aaa = ex.Message;
 				}
 			}
+		}
+
+		DispatcherTimer timer;
+		public void ShowTip(string txt)
+		{
+			FirstBackVisibility = Visibility.Visible;
+			Message = txt;
+			if (timer == null)
+			{
+				timer = new DispatcherTimer();
+				timer.Interval = TimeSpan.FromSeconds(1.5);
+			}
+			timer.Tick += Timer_Tick;
+			timer.Start();
+		}
+		private void Timer_Tick(object sender, object e)
+		{
+			FirstBackVisibility = Visibility.Collapsed;
+			timer.Tick -= Timer_Tick;
 		}
 		#endregion
 	}

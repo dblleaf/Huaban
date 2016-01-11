@@ -12,7 +12,7 @@
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<TextBlock Width="48" Visibility="{Binding LeftHeaderVisibility}"></TextBlock>
+		<TextBlock Height="48" Width="48" Visibility="{Binding LeftHeaderVisibility}"></TextBlock>
 		<TextBlock VerticalAlignment="Center" FontWeight="Bold" Text="{Binding Title}" Grid.Column="1"></TextBlock>
 	</Grid>
 </UserControl>
