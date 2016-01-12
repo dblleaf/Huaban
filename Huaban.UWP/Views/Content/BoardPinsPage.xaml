@@ -9,8 +9,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
-		<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
+		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="48"/>
 				<RowDefinition Height="*"/>
@@ -24,20 +24,20 @@
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
-						<StackPanel Orientation="Horizontal" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="3 3 3 1" MinHeight="48" Padding="12">
+						<StackPanel Orientation="Horizontal" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="3 3 3 1" MinHeight="48" Padding="12">
 							<Interactivity:Interaction.Behaviors>
 								<Core:EventTriggerBehavior EventName="Tapped">
 									<Core:InvokeCommandAction Command="{Binding ToUserPageCommand}" CommandParameter="{Binding CurrentBoard.user}"></Core:InvokeCommandAction>
 								</Core:EventTriggerBehavior>
 							</Interactivity:Interaction.Behaviors>
-							<Ellipse Stroke="{StaticResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
+							<Ellipse Stroke="{ThemeResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
 								<Ellipse.Fill>
 									<ImageBrush ImageSource="{Binding CurrentBoard.user.avatar.Squara}"></ImageBrush>
 								</Ellipse.Fill>
 							</Ellipse>
 							<TextBlock VerticalAlignment="Center" Text="{Binding CurrentBoard.user.username}" Margin="12 0"></TextBlock>
 						</StackPanel>
-						<Grid HorizontalAlignment="Stretch" Grid.Row="1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Margin="3 0 3 3" Padding="12">
+						<Grid HorizontalAlignment="Stretch" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="3 0 3 3" Padding="12">
 							<TextBlock VerticalAlignment="Center" HorizontalAlignment="Right">
 								<Run FontSize="12" Text="{Binding CurrentBoard.pin_count}"></Run>
 								<Run FontSize="12" Text="采集   "></Run>

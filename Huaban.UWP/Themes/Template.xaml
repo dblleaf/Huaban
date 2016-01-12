@@ -33,7 +33,7 @@
 	<!--关于列表-->
 	<DataTemplate x:Key="AboutListTemplate">
 		<StackPanel>
-			<TextBlock Foreground="{StaticResource SystemControlDisabledBaseLowBrush}" Text="{Binding Title}" Visibility="{Binding Converter={StaticResource ObjectToVisibilityConverter},Path=Title}"></TextBlock>
+			<TextBlock Foreground="{ThemeResource SystemControlDisabledBaseLowBrush}" Text="{Binding Title}" Visibility="{Binding Converter={StaticResource ObjectToVisibilityConverter},Path=Title}"></TextBlock>
 			<RichTextBlock TextWrapping="WrapWholeWords">
 				<Paragraph>
 					<Run Text="{Binding Label}" />
@@ -83,7 +83,7 @@
 						<Run FontSize="12" Text="关注"></Run></TextBlock>
 				</Grid>
 			</Grid>
-			<Grid x:Name="owner" Grid.Row="1" Visibility="{Binding user_id,Converter={StaticResource OwnerVisiblityConverter}}" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+			<Grid x:Name="owner" Grid.Row="1" Visibility="{Binding user_id,Converter={StaticResource OwnerVisiblityConverter}}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 				<Interactivity:Interaction.Behaviors>
 					<Core:EventTriggerBehavior EventName="Tapped">
 						<Core:InvokeCommandAction Command="{StaticResource ToBoardDetailCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
@@ -91,7 +91,7 @@
 				</Interactivity:Interaction.Behaviors>
 				<TextBlock HorizontalAlignment="Center" Margin="0 6">编辑</TextBlock>
 			</Grid>
-			<StackPanel Visibility="{Binding ElementName=owner,Path=Visibility,Converter={StaticResource ReverseVisbilityConverter}}" Grid.Row="1" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+			<StackPanel Visibility="{Binding ElementName=owner,Path=Visibility,Converter={StaticResource ReverseVisbilityConverter}}" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 				<Interactivity:Interaction.Behaviors>
 					<Core:EventTriggerBehavior EventName="Tapped">
 						<Core:InvokeCommandAction Command="{StaticResource FollowBoardCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>

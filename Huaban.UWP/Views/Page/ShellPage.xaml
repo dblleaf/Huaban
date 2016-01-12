@@ -9,6 +9,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+	RequestedTheme="{Binding Theme}"
     mc:Ignorable="d">
 	<Grid x:Name="RootGrid1">
 		<VisualStateManager.VisualStateGroups>
@@ -39,16 +40,30 @@
 		<Grid Grid.ColumnSpan="2">
 			<SplitView OpenPaneLength="256" x:Name="RootSplitView" IsPaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
 				<SplitView.Pane>
-					<ListView ItemsSource="{Binding NavList}"
-						Style="{StaticResource NavListStyle}"
-						ItemTemplate="{StaticResource NavigationListTemplate}" 
-						Margin="0 48 0 0">
-						<Interactivity:Interaction.Behaviors>
-							<Core:EventTriggerBehavior EventName="ItemClick">
-								<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
-							</Core:EventTriggerBehavior>
-						</Interactivity:Interaction.Behaviors>
-					</ListView>
+					<Grid>
+						<ListView ItemsSource="{Binding NavList}"
+							Style="{StaticResource NavListStyle}"
+							ItemTemplate="{StaticResource NavigationListTemplate}"
+							VerticalAlignment="Top"
+							Margin="0 48 0 0">
+							<Interactivity:Interaction.Behaviors>
+								<Core:EventTriggerBehavior EventName="ItemClick">
+									<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
+								</Core:EventTriggerBehavior>
+							</Interactivity:Interaction.Behaviors>
+						</ListView>
+						<ListView ItemsSource="{Binding NavFootList}"
+							Style="{StaticResource NavListStyle}"
+							ItemTemplate="{StaticResource NavigationListTemplate}"
+							VerticalAlignment="Bottom">
+							<Interactivity:Interaction.Behaviors>
+								<Core:EventTriggerBehavior EventName="ItemClick">
+									<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
+								</Core:EventTriggerBehavior>
+							</Interactivity:Interaction.Behaviors>
+						</ListView>
+					</Grid>
+					
 				</SplitView.Pane>
 				<SplitView.Content>
 					<Frame x:Name="MainFrame"></Frame>
@@ -59,8 +74,8 @@
 				Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
 		</Grid>
 		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
-		<Grid Visibility="{Binding FirstBackVisibility}" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource ApplicationForegroundThemeBrush}" CornerRadius="2">
-			<TextBlock VerticalAlignment="Center" Foreground="{StaticResource ApplicationPageBackgroundThemeBrush}" Text="{Binding Message}"></TextBlock>
+		<Grid Visibility="{Binding FirstBackVisibility}" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{ThemeResource ApplicationForegroundThemeBrush}" CornerRadius="2">
+			<TextBlock VerticalAlignment="Center" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" Text="{Binding Message}"></TextBlock>
 		</Grid>
 	</Grid>
 </HB:HBPage>

@@ -9,9 +9,8 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:HB="using:Huaban.UWP.Controls"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
-
-		<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}" Margin="-1 0" Padding="1 0">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
+		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}" Margin="-1 0" Padding="1 0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>

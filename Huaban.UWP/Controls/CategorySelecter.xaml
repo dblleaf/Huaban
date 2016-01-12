@@ -15,7 +15,7 @@
 				<Core:InvokeCommandAction Command="{Binding HideSelectCommand}"></Core:InvokeCommandAction>
 			</Core:EventTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
-		<Grid VerticalAlignment="Bottom" MinHeight="300" MaxHeight="420" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
+		<Grid VerticalAlignment="Bottom" MinHeight="300" MaxHeight="420" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
 			<ScrollViewer Padding="6">
 				<ListView ScrollViewer.VerticalScrollMode="Disabled" HorizontalAlignment="Center" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CurrentCategory, Mode=TwoWay}">
 					<ListView.ItemsPanel>

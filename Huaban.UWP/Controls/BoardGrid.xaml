@@ -27,7 +27,7 @@
 							<Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
 							<Setter Property="Padding" Value="0"></Setter>
 							<Setter Property="Margin" Value="3"></Setter>
-							<Setter Property="Background" Value="{StaticResource ApplicationPageBackgroundThemeBrush}"></Setter>
+							<Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Setter>
 						</Style>
 					</ListView.Resources>
 					<ListView.ItemsPanel>

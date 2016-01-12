@@ -24,11 +24,19 @@ namespace Huaban.UWP.ViewModels
 		{
 			NavList.Insert(3, UserItem);
 			UserItem.Special = context.IsLogin;
+			NavFootList.Insert(0, ThemeModeItem);
+
 			Context.PropertyChanged += Context_PropertyChanged;
 			FirstBackVisibility = Visibility.Collapsed;
+			Theme = ElementTheme.Dark;
 		}
 
 		#region Properties
+		private ElementTheme _Theme;
+		public ElementTheme Theme {
+			get { return _Theme; }
+			set { SetValue(ref _Theme, value); }
+		}
 
 		private bool _IsPaneOpen;
 		public bool IsPaneOpen
@@ -50,7 +58,19 @@ namespace Huaban.UWP.ViewModels
 			= new ObservableCollection<NavItemModel>(new NavItemModel[] {
 				new NavItemModel() { DestinationPage = "HomePage", Label = "发现", Title = "发现", Symbol = Symbol.Find },
 				new NavItemModel() { DestinationPage = "FollowingPage", Label = "关注", SymbolChar = '', Authorization = true },
-				new NavItemModel() { DestinationPage = "MessagePage", Label = "消息", Title="消息", Symbol = Symbol.Message, Authorization = true },
+				new NavItemModel() { DestinationPage = "MessagePage", Label = "消息", Title="消息", Symbol = Symbol.Message, Authorization = true }
+			});
+
+		private NavItemModel ThemeModeItem { set; get; }
+			= new NavItemModel()
+			{
+				Label = "白天模式",
+				SymbolChar = '',//夜间：
+				Authorization = true
+			};
+
+		public ObservableCollection<NavItemModel> NavFootList { get; private set; }
+			= new ObservableCollection<NavItemModel>(new NavItemModel[] {
 				new NavItemModel() { DestinationPage = "AboutPage", Label = "关于", Title="关于", Symbol = Symbol.Help },
 				new NavItemModel() { DestinationPage = "SettingPage", Label = "设置", Title="设置", Symbol = Symbol.Setting }
 			});
@@ -95,6 +115,12 @@ namespace Huaban.UWP.ViewModels
 
 						if (args != null)
 							item = args.ClickedItem as NavItemModel;
+						if (string.IsNullOrEmpty(item.DestinationPage))
+						{
+							ChangeTheme();
+							DisplayAndSaveTheme();
+							return;
+						}
 						if (item.Authorization && !Context.IsLogin)
 						{
 							LoginDialogViewModel login = new LoginDialogViewModel(Context);
@@ -121,8 +147,25 @@ namespace Huaban.UWP.ViewModels
 			base.Inited();
 
 			NavCommand.Execute(NavList[0]);
+			ReadTheme();
+			DisplayAndSaveTheme();
 		}
+		private async void ReadTheme()
+		{
+			ElementTheme theme = await StorageHelper.ReadLocal(o =>
+			{
+				if (string.IsNullOrEmpty(o))
+					return ElementTheme.Dark;
+				else
+				{
+					int t = 0;
+					int.TryParse(o, out t);
+					return (ElementTheme)t;
+				}
 
+			});
+			Theme = theme;
+		}
 		private async void Context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "Message")
@@ -160,6 +203,30 @@ namespace Huaban.UWP.ViewModels
 			FirstBackVisibility = Visibility.Collapsed;
 			timer.Tick -= Timer_Tick;
 		}
+
+		private void ChangeTheme()
+		{
+			if (Theme == ElementTheme.Dark)
+				Theme = ElementTheme.Light;
+			else
+				Theme = ElementTheme.Dark;
+		}
+
+		private async void DisplayAndSaveTheme()
+		{
+			ElementTheme theme = Theme;
+			if (theme == ElementTheme.Light)
+			{
+				ThemeModeItem.Label = "白天模式";
+				ThemeModeItem.SymbolChar = '';
+			}
+			else {
+				ThemeModeItem.Label = "夜间模式";
+				ThemeModeItem.SymbolChar = '';
+			}
+			await StorageHelper.SaveLocal(theme);
+		}
+
 		#endregion
 	}
 }

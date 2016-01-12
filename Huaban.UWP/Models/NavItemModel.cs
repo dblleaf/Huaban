@@ -6,8 +6,14 @@ namespace Huaban.UWP.Models
 	using Base;
 	public class NavItemModel : ObservableObject
 	{
-		public string Label { get; set; }
+		private string _Label;
+		public string Label
+		{
+			get { return _Label; }
+			set { SetValue(ref _Label, value); }
+		}
 		public string Title { set; get; }
+
 		public Symbol Symbol
 		{
 			set
@@ -16,13 +22,23 @@ namespace Huaban.UWP.Models
 				SymbolChar = c;
 			}
 		}
-		public char SymbolChar { set; get; }
+		private char _SymbolChar;
+		public char SymbolChar
+		{
+			get { return _SymbolChar; }
+			set { SetValue(ref _SymbolChar, value); }
+		}
 
 		public string DestinationPage { get; set; }
 		public object Arguments { get; set; }
 		public bool Authorization { set; get; }
+
 		private bool _Special;
-		public bool Special { set { SetValue(ref _Special, value); } get { return _Special; } }
+		public bool Special
+		{
+			get { return _Special; }
+			set { SetValue(ref _Special, value); }
+		}
 
 	}
 }

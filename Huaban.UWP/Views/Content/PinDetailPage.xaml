@@ -9,8 +9,8 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:HB="using:Huaban.UWP.Controls"
     mc:Ignorable="d">
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
-		<Grid Background="{StaticResource SystemControlBackgroundBaseLowBrush}">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
+		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 			<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
 			<Pivot Margin="0 0 0 48" SelectedIndex="{Binding PivotSelectedIndex,Mode=TwoWay}">
 				<PivotItem>
@@ -52,12 +52,12 @@
 									<Run Text="  " FontFamily="{StaticResource SymbolThemeFontFamily}"></Run>
 									<Run Text="{Binding Pin.repin_count}" FontSize="16"></Run></TextBlock>
 								</Border>
-								<Border Margin="12 12 0 12" Padding="10 1" CornerRadius="12" BorderThickness="1" BorderBrush="{StaticResource SystemControlBackgroundBaseLowBrush}">
+								<Border Margin="12 12 0 12" Padding="10 1" CornerRadius="12" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 									<TextBlock FontSize="12">
 									<Run Text="  " FontFamily="{StaticResource SymbolThemeFontFamily}"></Run>
 									<Run Text="{Binding Pin.comment_count}" FontSize="16"></Run></TextBlock>
 								</Border>
-								<Border Margin="12 12 0 12" Padding="10 1" CornerRadius="12" BorderThickness="1" BorderBrush="{StaticResource SystemControlBackgroundBaseLowBrush}">
+								<Border Margin="12 12 0 12" Padding="10 1" CornerRadius="12" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 									<TextBlock FontSize="12">
 									<Run Text="  " FontFamily="{StaticResource SymbolThemeFontFamily}"></Run>
 									<Run Text="{Binding Pin.like_count}" FontSize="16"></Run></TextBlock>
@@ -73,7 +73,7 @@
 									<ColumnDefinition Width="Auto"></ColumnDefinition>
 									<ColumnDefinition Width="*"></ColumnDefinition>
 								</Grid.ColumnDefinitions>
-								<Ellipse Stroke="{StaticResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
+								<Ellipse Stroke="{ThemeResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
 									<Ellipse.Fill>
 										<ImageBrush ImageSource="{Binding Pin.user.avatar.Squara}"></ImageBrush>
 									</Ellipse.Fill>

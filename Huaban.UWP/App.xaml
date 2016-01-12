@@ -5,8 +5,7 @@
     xmlns:local="using:Huaban.UWP"
 	xmlns:services="using:Huaban.UWP.Services"
 	xmlns:converters="using:Huaban.UWP.Converters"
-	xmlns:commands="using:Huaban.UWP.Commands"
-    RequestedTheme="Dark">
+	xmlns:commands="using:Huaban.UWP.Commands">
 	<Application.Resources>
 		<ResourceDictionary>
 			<converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>

@@ -87,6 +87,7 @@
 	<Style TargetType="ListView" x:Key="NavListStyle">
 		<Setter Property="IsItemClickEnabled" Value="True"/>
 		<Setter Property="ItemContainerStyle" Value="{StaticResource DefaultListViewItemStyle}"/>
+		<Setter Property="SelectionMode" Value="None"/>
 	</Style>
 	<Style TargetType="ListViewItem" x:Key="DefaultListViewItemStyle">
 		<Setter Property="Padding" Value="0"/>
@@ -113,7 +114,6 @@
 		<Setter Property="Margin" Value="3"></Setter>
 		<Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Setter>
 	</Style>
-
 	<Style TargetType="ListViewItem" x:Key="NoStyleListViewItemStyle">
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Stretch"/>

@@ -16,7 +16,7 @@
 				<Core:InvokeCommandAction Command="{Binding HideSelectCommand}"></Core:InvokeCommandAction>
 			</Core:EventTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
-		<Grid BorderThickness="0 1 0 0" BorderBrush="{StaticResource SystemControlBackgroundBaseLowBrush}" VerticalAlignment="Bottom" MaxHeight="420" Background="{StaticResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
+		<Grid BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}" VerticalAlignment="Bottom" MaxHeight="420" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>
@@ -35,7 +35,7 @@
 					</Interactivity:Interaction.Behaviors>
 				</ListView>
 			</ScrollViewer>
-			<StackPanel Grid.Row="1" Padding="6 6 6 48" BorderThickness="0 1 0 0" BorderBrush="{StaticResource SystemControlBackgroundBaseLowBrush}">
+			<StackPanel Grid.Row="1" Padding="6 6 6 48" BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 				<TextBlock>新画板：</TextBlock>
 				<TextBox x:Name="boardName" Visibility="{Binding ElementName=RootControl,Path=Visibility}" BorderThickness="1" Margin="0 6" HorizontalAlignment="Stretch"></TextBox>
 			</StackPanel>
