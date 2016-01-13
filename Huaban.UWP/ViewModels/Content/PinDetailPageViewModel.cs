@@ -44,6 +44,13 @@ namespace Huaban.UWP.ViewModels
 			set { SetValue(ref _Pin, value); }
 		}
 
+		private bool _ImageLoaded;
+		public bool ImageLoaded
+		{
+			get { return _ImageLoaded; }
+			set { SetValue(ref _ImageLoaded, value); }
+		}
+
 		private string _ImageUri;
 		public string ImageUri
 		{
@@ -53,6 +60,12 @@ namespace Huaban.UWP.ViewModels
 				return _ImageUri;
 			}
 			set { SetValue(ref _ImageUri, value); }
+		}
+		private string _SmallImageUrl;
+		public string SmallImageUrl
+		{
+			get { return _SmallImageUrl; }
+			set { SetValue(ref _SmallImageUrl, value); }
 		}
 
 		private IconElement _Icon = new FontIcon() { Glyph = "" };
@@ -192,6 +205,7 @@ namespace Huaban.UWP.ViewModels
 					o =>
 					{
 						IsLoading = false;
+						ImageLoaded = true;
 					}, o => true)
 				);
 			}
@@ -305,13 +319,14 @@ namespace Huaban.UWP.ViewModels
 			if (e.NavigationMode == NavigationMode.New)
 			{
 				IsLoading = true;
-
+				ImageLoaded = false;
 				if (pin?.pin_id != Pin?.pin_id)
 				{
 					Pin = await Context.API.PinAPI.GetPin(pin.pin_id);
 				}
 
 				PivotSelectedIndex = 0;
+				SmallImageUrl = pin.file.FW236;
 				ImageUri = Pin.file.Orignal;
 				//Pin = await App.API.PinAPI.GetPin(pin.pin_id);
 				Liked = Pin.liked;

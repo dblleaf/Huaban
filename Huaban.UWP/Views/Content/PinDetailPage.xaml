@@ -26,7 +26,8 @@
 								<RowDefinition Height="Auto"></RowDefinition>
 								<RowDefinition Height="Auto"></RowDefinition>
 							</Grid.RowDefinitions>
-							<Image Source="{Binding ImageUri}" HorizontalAlignment="Stretch" VerticalAlignment="Top" Stretch="UniformToFill">
+							<Image Source="{Binding SmallImageUrl}" Visibility="{Binding ImageLoaded,Converter={StaticResource ReverseVisbilityConverter}}"></Image>
+							<Image Source="{Binding ImageUri}">
 								<Interactivity:Interaction.Behaviors>
 									<Core:EventTriggerBehavior EventName="DoubleTapped">
 										<Core:InvokeCommandAction Command="{Binding HideCommand}"></Core:InvokeCommandAction>
