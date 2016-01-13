@@ -321,8 +321,11 @@ namespace Huaban.UWP.ViewModels
 
 		private void NavigationService_BackEvent(object sender, BackRequestedEventArgs e)
 		{
-			e.Handled = true;
-			SelecterVisibility = Visibility.Collapsed;
+			if (!e.Handled)
+			{
+				e.Handled = true;
+				SelecterVisibility = Visibility.Collapsed;
+			}
 		}
 		#endregion
 	}

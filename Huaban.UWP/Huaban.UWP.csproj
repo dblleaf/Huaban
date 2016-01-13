@@ -136,12 +136,14 @@
       <DependentUpon>ImageGrid.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\PageBase.cs" />
+    <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Controls\TitleControl.xaml.cs">
       <DependentUpon>TitleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\LoginVisiblityConverter.cs" />
     <Compile Include="Converters\OwnerVisiblityConverter.cs" />
     <Compile Include="Converters\ImageBgConverter.cs" />
+    <Compile Include="Extensions\XamlExtensions.cs" />
     <Compile Include="Models\AuthToken.cs" />
     <Compile Include="Models\Binding.cs" />
     <Compile Include="Models\Bindings.cs" />

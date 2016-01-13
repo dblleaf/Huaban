@@ -38,7 +38,9 @@
 			<ColumnDefinition Width="Auto"/>
 		</Grid.ColumnDefinitions>
 		<Grid Grid.ColumnSpan="2">
-			<SplitView OpenPaneLength="256" x:Name="RootSplitView" IsPaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
+			<HB:SwipeableSplitView OpenPaneLength="256" x:Name="RootSplitView" 
+				IsPanSelectorEnabled="False" 
+				IsSwipeablePaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
 				<SplitView.Pane>
 					<Grid>
 						<ListView ItemsSource="{Binding NavList}"
@@ -68,14 +70,14 @@
 				<SplitView.Content>
 					<Frame x:Name="MainFrame"></Frame>
 				</SplitView.Content>
-			</SplitView>
+			</HB:SwipeableSplitView>
 			<ToggleButton x:Name="TogglePaneButton" VerticalAlignment="Top"
-				IsChecked="{Binding IsPaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
+				IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
 				Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
 		</Grid>
 		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
-		<Grid Visibility="{Binding FirstBackVisibility}" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{ThemeResource ApplicationForegroundThemeBrush}" CornerRadius="2">
-			<TextBlock VerticalAlignment="Center" Foreground="{ThemeResource ApplicationPageBackgroundThemeBrush}" Text="{Binding Message}"></TextBlock>
+		<Grid Visibility="{Binding FirstBackVisibility}" RequestedTheme="Dark" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource HuabanColorBrush}" CornerRadius="2">
+			<TextBlock VerticalAlignment="Center" Text="{Binding Message}"></TextBlock>
 		</Grid>
 	</Grid>
 </HB:HBPage>

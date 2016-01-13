@@ -28,12 +28,12 @@ namespace Huaban.UWP.ViewModels
 
 			Context.PropertyChanged += Context_PropertyChanged;
 			FirstBackVisibility = Visibility.Collapsed;
-			Theme = ElementTheme.Dark;
 		}
 
 		#region Properties
 		private ElementTheme _Theme;
-		public ElementTheme Theme {
+		public ElementTheme Theme
+		{
 			get { return _Theme; }
 			set { SetValue(ref _Theme, value); }
 		}
@@ -42,7 +42,14 @@ namespace Huaban.UWP.ViewModels
 		public bool IsPaneOpen
 		{
 			get { return _IsPaneOpen; }
-			set { SetValue(ref _IsPaneOpen, value); }
+			set
+			{
+				SetValue(ref _IsPaneOpen, value);
+				if (_IsPaneOpen)
+					this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
+				else
+					this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
+			}
 		}
 
 		private NavItemModel UserItem { set; get; }
@@ -118,7 +125,7 @@ namespace Huaban.UWP.ViewModels
 						if (string.IsNullOrEmpty(item.DestinationPage))
 						{
 							ChangeTheme();
-							DisplayAndSaveTheme();
+							DisplayTheme();
 							return;
 						}
 						if (item.Authorization && !Context.IsLogin)
@@ -142,30 +149,67 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
+		private void NavigationService_BackEvent(object sender, Windows.UI.Core.BackRequestedEventArgs e)
+		{
+			if (!e.Handled)
+			{
+				e.Handled = true;
+				IsPaneOpen = false;
+
+			}
+		}
+
 		public override void Inited()
 		{
 			base.Inited();
 
 			NavCommand.Execute(NavList[0]);
-			ReadTheme();
-			DisplayAndSaveTheme();
-		}
-		private async void ReadTheme()
-		{
-			ElementTheme theme = await StorageHelper.ReadLocal(o =>
+
+			Task.Factory.StartNew(async () =>
 			{
-				if (string.IsNullOrEmpty(o))
-					return ElementTheme.Dark;
-				else
+				await ShellPage.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
 				{
-					int t = 0;
-					int.TryParse(o, out t);
-					return (ElementTheme)t;
-				}
+					await LoadTheme();
+					DisplayTheme();
+				});
 
 			});
-			Theme = theme;
+
 		}
+
+		/// <summary>
+		/// 加载主题模式
+		/// </summary>
+		/// <returns></returns>
+		private async Task LoadTheme()
+		{
+			try
+			{
+				ElementTheme theme = await StorageHelper.ReadLocal(o =>
+				{
+					if (string.IsNullOrEmpty(o))
+						return ElementTheme.Dark;
+					else
+					{
+						int t = 0;
+						int.TryParse(o, out t);
+						return (ElementTheme)t;
+					}
+
+				});
+				Theme = theme;
+			}
+			catch (Exception ex)
+			{
+				string aa = ex.Message;
+			}
+		}
+
+		/// <summary>
+		/// 根据Context的Message属性值改变弹出提示框
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		private async void Context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
 		{
 			if (e.PropertyName == "Message")
@@ -204,15 +248,18 @@ namespace Huaban.UWP.ViewModels
 			timer.Tick -= Timer_Tick;
 		}
 
-		private void ChangeTheme()
+		//改变主题设置并保存
+		private async void ChangeTheme()
 		{
 			if (Theme == ElementTheme.Dark)
 				Theme = ElementTheme.Light;
 			else
 				Theme = ElementTheme.Dark;
+			await StorageHelper.SaveLocal(Theme);
 		}
 
-		private async void DisplayAndSaveTheme()
+		//根据主题显示不同的菜单
+		private void DisplayTheme()
 		{
 			ElementTheme theme = Theme;
 			if (theme == ElementTheme.Light)
@@ -224,7 +271,7 @@ namespace Huaban.UWP.ViewModels
 				ThemeModeItem.Label = "夜间模式";
 				ThemeModeItem.SymbolChar = '';
 			}
-			await StorageHelper.SaveLocal(theme);
+
 		}
 
 		#endregion

@@ -13,7 +13,14 @@ namespace Huaban.UWP.Models
 		public string board_id { set; get; }
 		public string user_id { set; get; }
 		public string description { set; get; }
-		public string title { set; get; }
+
+		private string _title;
+		public string title
+		{
+			get { return _title; }
+			set { SetValue(ref _title, value); }
+		}
+
 		public string category_id { set; get; }
 		public string pin_count { set; get; }
 		public string follow_count { set; get; }
@@ -23,6 +30,7 @@ namespace Huaban.UWP.Models
 		public List<Pin> pins { set; get; }
 		public User user { set; get; }
 		public Pin cover { set; get; }
+
 		private bool _following;
 		public bool following {
 			get { return _following; }
