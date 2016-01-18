@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    Background="{ThemeResource StatusBarColorBrush}"
+    Background="{StaticResource HuabanColorBrush}"
 	RequestedTheme="{Binding Theme}"
     mc:Ignorable="d">
 	<Grid x:Name="RootGrid1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

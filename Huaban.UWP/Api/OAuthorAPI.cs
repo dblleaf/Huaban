@@ -24,7 +24,7 @@ namespace Huaban.UWP.Api
 			HttpClient client = new HttpClient();
 			client.DefaultRequestHeaders.Add(X_Client_ID, mClientInfo);
 			client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(mClientInfo)));
-			var resphonse = await 
+			var resphonse = await
 				client.PostAsync(
 					"https://huaban.com/oauth/access_token/",
 					new FormUrlEncodedContent(new KeyValuePair<string, string>[] {
@@ -38,18 +38,23 @@ namespace Huaban.UWP.Api
 
 		public async Task<AuthToken> RefreshToken(AuthToken token)
 		{
-			HttpClient client = new HttpClient();
-			client.DefaultRequestHeaders.Add(X_Client_ID, mClientInfo);
-			client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(mClientInfo)));
-			var resphonse = await
-				client.PostAsync(
-					"https://huaban.com/oauth/access_token/",
-					new FormUrlEncodedContent(new KeyValuePair<string, string>[] {
+			try
+			{
+				HttpClient client = new HttpClient();
+				client.DefaultRequestHeaders.Add(X_Client_ID, mClientInfo);
+				client.DefaultRequestHeaders.Add("Authorization", "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(mClientInfo)));
+				var resphonse = await
+					client.PostAsync(
+						"https://huaban.com/oauth/access_token/",
+						new FormUrlEncodedContent(new KeyValuePair<string, string>[] {
 						new KeyValuePair<string, string>("grant_type", "refresh_token"),
 						new KeyValuePair<string, string>("refresh_token", token.refresh_token)
-				})
-			);
-			return AuthToken.Parse(await resphonse.Content.ReadAsStringAsync());
+					})
+				);
+				return AuthToken.Parse(await resphonse.Content.ReadAsStringAsync());
+			}
+			catch { }
+			return null;
 		}
 	}
 }

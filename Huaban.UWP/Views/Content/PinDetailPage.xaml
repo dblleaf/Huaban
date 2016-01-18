@@ -12,7 +12,7 @@
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" BorderThickness="1 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1.1 0">
 		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 			<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
-			<Pivot Margin="0 0 0 48" SelectedIndex="{Binding PivotSelectedIndex,Mode=TwoWay}">
+			<Pivot Margin="0 0 0 48" Style="{StaticResource DarkThemeHeaderPivotStlye}" SelectedIndex="{Binding PivotSelectedIndex,Mode=TwoWay}">
 				<PivotItem>
 					<PivotItem.Header>
 						<TextBlock FontSize="18" Text="详情"></TextBlock>

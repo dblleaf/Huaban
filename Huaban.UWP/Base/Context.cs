@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Huaban.UWP.Base
 {
@@ -16,11 +19,13 @@ namespace Huaban.UWP.Base
 			NavigationService = new NavigationService(this);
 			CategoryList = new IncrementalLoadingList<Category>(GetCategoryList);
 			Categories = new ObservableCollection<Category>();
-
-
 		}
+		#region Properties
 		public NavigationService NavigationService { get; private set; }
+
 		public API API { private set; get; } = API.Current();
+
+		public CoreDispatcher Dispatcher { private set; get; }
 
 		private User _User;
 		public User User
@@ -55,6 +60,19 @@ namespace Huaban.UWP.Base
 			set { SetValue(ref _BoardList, value); }
 		}
 
+		private string _Message;
+		public string Message
+		{
+			get { return _Message; }
+			private set { SetValue(ref _Message, value); }
+		}
+
+		#endregion
+
+		#region Commands
+		#endregion
+
+		#region Methods
 		public async Task SetToken(AuthToken token)
 		{
 			BoardList = new IncrementalLoadingList<Board>(GetBoardList);
@@ -114,13 +132,11 @@ namespace Huaban.UWP.Base
 		{
 			Message = msg;
 		}
-
-		private string _Message;
-		public string Message
+		public void SetDispatcher(CoreDispatcher dispatcher)
 		{
-			get { return _Message; }
-			private set { SetValue(ref _Message, value); }
+			Dispatcher = dispatcher;
 		}
-		
+	
+		#endregion
 	}
 }

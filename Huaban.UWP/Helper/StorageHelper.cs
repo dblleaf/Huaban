@@ -11,7 +11,7 @@ namespace Huaban.UWP
 	{
 		private static StorageFolder RoamingFolder = ApplicationData.Current.RoamingFolder;
 		private static StorageFolder LocalFolder = ApplicationData.Current.LocalFolder;
-		private static StorageFolder TempFolder = ApplicationData.Current.TemporaryFolder;
+		private static StorageFolder CacheFolder = ApplicationData.Current.LocalCacheFolder;
 
 		private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 		public static async Task SaveLocal<T>(T model, string filename = "")
@@ -87,9 +87,19 @@ namespace Huaban.UWP
 			await FileIO.WriteBytesAsync(file, buffer);
 		}
 
-		public static async Task<ulong> GetTempFolderSize()
+		public static async Task<ulong> GetCacheFolderSize()
 		{
-			var properties =await TempFolder.GetBasicPropertiesAsync();
+			var folder = ApplicationData.Current.LocalFolder;
+			try
+			{
+				var aaa = await folder.GetParentAsync();
+
+			}
+			catch (Exception ex)
+			{
+			}
+
+			var properties = await folder.GetBasicPropertiesAsync();
 			return properties.Size;
 		}
 	}

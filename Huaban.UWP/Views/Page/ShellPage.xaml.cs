@@ -15,11 +15,13 @@ namespace Huaban.UWP.Views
 		public ShellPage()
 		{
 			this.InitializeComponent();
-			Current = this;
 			var context = ServiceLocator.Resolve<Context>();
 			if (context != null)
+			{
+				context.SetDispatcher( this.Dispatcher);
 				context.NavigationService.SetFrame(MainFrame, DetailFrame);
+			}
+
 		}
-		public static ShellPage Current { private set; get; }
 	}
 }

@@ -28,6 +28,11 @@ namespace Huaban.UWP.ViewModels
 
 			Context.PropertyChanged += Context_PropertyChanged;
 			FirstBackVisibility = Visibility.Collapsed;
+			Setting.Current.PropertyChanged += (s, e) =>
+			{
+				if (e.PropertyName == "DarkMode")
+					DisplayTheme();
+			};
 		}
 
 		#region Properties
@@ -125,7 +130,6 @@ namespace Huaban.UWP.ViewModels
 						if (string.IsNullOrEmpty(item.DestinationPage))
 						{
 							ChangeTheme();
-							DisplayTheme();
 							return;
 						}
 						if (item.Authorization && !Context.IsLogin)
@@ -167,9 +171,8 @@ namespace Huaban.UWP.ViewModels
 
 			Task.Factory.StartNew(async () =>
 			{
-				await ShellPage.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+				await Context.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
 				{
-					await LoadTheme();
 					DisplayTheme();
 				});
 
@@ -177,33 +180,6 @@ namespace Huaban.UWP.ViewModels
 
 		}
 
-		/// <summary>
-		/// 加载主题模式
-		/// </summary>
-		/// <returns></returns>
-		private async Task LoadTheme()
-		{
-			try
-			{
-				ElementTheme theme = await StorageHelper.ReadLocal(o =>
-				{
-					if (string.IsNullOrEmpty(o))
-						return ElementTheme.Dark;
-					else
-					{
-						int t = 0;
-						int.TryParse(o, out t);
-						return (ElementTheme)t;
-					}
-
-				});
-				Theme = theme;
-			}
-			catch (Exception ex)
-			{
-				string aa = ex.Message;
-			}
-		}
 
 		/// <summary>
 		/// 根据Context的Message属性值改变弹出提示框
@@ -216,7 +192,7 @@ namespace Huaban.UWP.ViewModels
 			{
 				try
 				{
-					await ShellPage.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+					await Context.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
 					{
 						ShowTip(Context.Message);
 					});
@@ -248,19 +224,17 @@ namespace Huaban.UWP.ViewModels
 			timer.Tick -= Timer_Tick;
 		}
 
-		//改变主题设置并保存
-		private async void ChangeTheme()
+		private void ChangeTheme()
 		{
-			if (Theme == ElementTheme.Dark)
-				Theme = ElementTheme.Light;
-			else
-				Theme = ElementTheme.Dark;
-			await StorageHelper.SaveLocal(Theme);
+			Setting.Current.DarkMode = !Setting.Current.DarkMode;
+
 		}
 
 		//根据主题显示不同的菜单
 		private void DisplayTheme()
 		{
+			Theme = Setting.Current.DarkMode ? ElementTheme.Dark : ElementTheme.Light;
+
 			ElementTheme theme = Theme;
 			if (theme == ElementTheme.Light)
 			{
