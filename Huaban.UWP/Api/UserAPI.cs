@@ -80,7 +80,7 @@ namespace Huaban.UWP.Api
 			return list;
 		}
 		//某人关注的画板
-		public async Task<List<Board>> GetFollowingBoards(string userID, int page = 0)
+		public async Task<List<Board>> GetFollowingBoardList(string userID, int page = 0)
 		{
 			if (page <= 0)
 				page = 1;
@@ -91,6 +91,39 @@ namespace Huaban.UWP.Api
 			return list;
 		}
 
+		//某人的粉丝
+		public async Task<List<User>> GetFollowerList(string userID, long max, int limit = 20)
+		{
+			string maxUser = "";
+			if (max > 0)
+				maxUser = "&max=" + max;
 
+			string uri = $"http://api.huaban.com/users/{userID}/followers/?limit={limit}{maxUser}&wfl=1";
+			string json = await Get(uri);
+			JObject obj = JObject.Parse(json);
+			var list = User.ParseList(obj["users"] as JArray);
+			return list;
+		}
+
+		//某人关注的人
+		public async Task<List<User>> GetFollowingUserList(string userID, long max, int limit = 20)
+		{
+			string maxUser = "";
+			if (max > 0)
+				maxUser = "&max=" + max;
+
+			string uri = $"http://api.huaban.com/users/{userID}/following/?limit={limit}{maxUser}&wfl=1";
+			string json = await Get(uri);
+			JObject obj = JObject.Parse(json);
+			var list = User.ParseList(obj["users"] as JArray);
+			return list;
+		}
+
+		public async Task<string> follow(string userID, bool follow)
+		{
+			string action = follow ? "follow" : "unfollow";
+			string uri = $"http://api.huaban.com/users/{userID}/{action}/";
+			return await Post(uri);
+		}
 	}
 }

@@ -12,6 +12,7 @@ namespace Huaban.UWP.Base
 {
 	using Models;
 	using Services;
+	using ViewModels;
 	public class Context : ObservableObject
 	{
 		public Context()
@@ -53,8 +54,8 @@ namespace Huaban.UWP.Base
 			set { SetValue(ref _Categories, value); }
 		}
 
-		private IncrementalLoadingList<Board> _BoardList;
-		public IncrementalLoadingList<Board> BoardList
+		private BoardListViewModel _BoardList;
+		public BoardListViewModel BoardListVM
 		{
 			get { return _BoardList; }
 			set { SetValue(ref _BoardList, value); }
@@ -75,7 +76,7 @@ namespace Huaban.UWP.Base
 		#region Methods
 		public async Task SetToken(AuthToken token)
 		{
-			BoardList = new IncrementalLoadingList<Board>(GetBoardList);
+			BoardListVM = new BoardListViewModel(this,GetBoardList);
 			API.SetToken(token);
 			var user = await API.UserAPI.GetSelf();
 
@@ -88,16 +89,16 @@ namespace Huaban.UWP.Base
 
 		private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
 		{
-			BoardList.NoMore();
+			BoardListVM.BoardList.NoMore();
 
 			List<Board> list = new List<Board>();
 			try
 			{
-				list = await API.UserAPI.GetBoards(User.user_id, 0);
-				if (list.Count < 20)
-					BoardList.NoMore();
+				list = await API.UserAPI.GetBoards(User.user_id, BoardListVM.GetMaxSeq());
+				if (list.Count == 0)
+					BoardListVM.BoardList.NoMore();
 				else
-					BoardList.HasMore();
+					BoardListVM.BoardList.HasMore();
 				return list;
 			}
 			catch (Exception ex)

@@ -28,9 +28,9 @@ namespace Huaban.UWP.Api
 		//http://api.huaban.com/search/?page=1&per_page=20&q=%E7%8B%97
 		//http://api.huaban.com/search/?q=%E7%8B%97
 		public CategoryAPI(string ctx) : base(ctx) { }
+
 		public async Task<List<Category>> GetCategoryList()
 		{
-
 			return await Get(
 				"http://api.huaban.com/categories/",
 				o =>

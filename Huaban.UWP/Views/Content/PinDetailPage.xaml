@@ -105,40 +105,20 @@
 				</PivotItem>
 				<PivotItem>
 					<PivotItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"></ColumnDefinition>
-								<ColumnDefinition Width="Auto"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<TextBlock FontSize="18" Text="采集"></TextBlock>
-							<TextBlock FontSize="12" Text="{Binding Pin.repin_count}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
-						</Grid>
+						<TextBlock FontSize="18" Text="采集"></TextBlock>
 					</PivotItem.Header>
 					<HB:BoardGrid ListModel="{Binding BoardListViewModel}"></HB:BoardGrid>
 				</PivotItem>
 				<PivotItem>
 					<PivotItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"></ColumnDefinition>
-								<ColumnDefinition Width="Auto"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<TextBlock FontSize="18" Text="评论"></TextBlock>
-							<TextBlock FontSize="12" Text="{Binding Pin.comment_count}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
-						</Grid>
+						<TextBlock FontSize="18" Text="评论"></TextBlock>
 					</PivotItem.Header>
 				</PivotItem>
 				<PivotItem>
 					<PivotItem.Header>
-						<Grid>
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"></ColumnDefinition>
-								<ColumnDefinition Width="Auto"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<TextBlock FontSize="18" Text="喜欢"></TextBlock>
-							<TextBlock FontSize="12" Text="{Binding Pin.like_count}" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right"></TextBlock>
-						</Grid>
+						<TextBlock FontSize="18" Text="喜欢"></TextBlock>
 					</PivotItem.Header>
+					<HB:UserGrid ListModel="{Binding UserListViewModel}"></HB:UserGrid>
 				</PivotItem>
 			</Pivot>
 			<CommandBar VerticalAlignment="Bottom">

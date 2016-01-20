@@ -21,6 +21,8 @@ namespace Huaban.UWP.ViewModels
 			this.SetWidth(Window.Current.Bounds.Width);
 		}
 
+		#region Properties
+
 		private double _BindWidth;
 		public double BindWidth
 		{
@@ -33,20 +35,7 @@ namespace Huaban.UWP.ViewModels
 			get { return _ColumnWidth; }
 			set { SetValue(ref _ColumnWidth, value); }
 		}
-		public void SetWidth(double width)
-		{
-			ColumnWidth = 240 - 6;
-			int columncount = Convert.ToInt32(Math.Max(2, Math.Floor(width / 240)));
-			double bindWidth = columncount * 240 - 6;
-			if (width < 720)
-			{
-				bindWidth = width - 6;
-				ColumnWidth = bindWidth / 2 - 6;
-			}
-				
-			ColumnCount = columncount;
-			BindWidth = bindWidth;
-		}
+
 		private int _ColumnCount;
 		public int ColumnCount
 		{
@@ -62,18 +51,33 @@ namespace Huaban.UWP.ViewModels
 			{ SetValue(ref _PinList, value); }
 		}
 
-		public async Task ClearAndReload()
-		{
-			PinList.Clear();
-			await PinList.LoadMoreItemsAsync(0);
-		}
-		public void Clear()
-		{
-			PinList.Clear(); 
-		}
 		public int Count
 		{
 			get { return PinList.Count; }
+		}
+
+		#endregion
+
+		#region Methods
+
+		public void SetWidth(double width)
+		{
+			ColumnWidth = 240 - 6;
+			int columncount = Convert.ToInt32(Math.Max(2, Math.Floor(width / 240)));
+			double bindWidth = columncount * 240 - 6;
+			if (width < 720)
+			{
+				bindWidth = width - 6;
+				ColumnWidth = bindWidth / 2 - 6;
+			}
+
+			ColumnCount = columncount;
+			BindWidth = bindWidth;
+		}
+
+		public async Task ClearAndReload()
+		{
+			await PinList.ClearAndReload();
 		}
 
 		public long GetMaxPinID()
@@ -90,6 +94,6 @@ namespace Huaban.UWP.ViewModels
 				max = Convert.ToInt64(PinList[Count - 1].seq);
 			return max;
 		}
-		
+		#endregion
 	}
 }

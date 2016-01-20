@@ -22,26 +22,38 @@
 				<RowDefinition></RowDefinition>
 			</Grid.RowDefinitions>
 			<ScrollViewer>
-				<ListView x:Name="lvBoard" ScrollViewer.VerticalScrollMode="Disabled" ItemsSource="{Binding BoardList}" SelectedIndex="{Binding CurrentBoardIndex, Mode=TwoWay}">
+				<ListView x:Name="lvBoard" IsItemClickEnabled="True" 
+					ScrollViewer.VerticalScrollMode="Disabled"
+					ItemsSource="{Binding BoardList}" SelectedIndex="-1">
 					<ListView.ItemTemplate>
 						<DataTemplate>
 							<TextBlock Margin="6 3" Text="{Binding title}"></TextBlock>
 						</DataTemplate>
 					</ListView.ItemTemplate>
 					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="SelectionChanged">
-							<Core:InvokeCommandAction Command="{Binding SelectBoardCommand}" CommandParameter="{Binding ElementName=lvBoard,Path=SelectedItem}"></Core:InvokeCommandAction>
+						<Core:EventTriggerBehavior EventName="ItemClick">
+							<Core:InvokeCommandAction Command="{Binding SelectBoardCommand}"></Core:InvokeCommandAction>
 						</Core:EventTriggerBehavior>
 					</Interactivity:Interaction.Behaviors>
 				</ListView>
 			</ScrollViewer>
 			<StackPanel Grid.Row="1" Padding="6 6 6 48" BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 				<TextBlock>新画板：</TextBlock>
-				<TextBox x:Name="boardName" Visibility="{Binding ElementName=RootControl,Path=Visibility}" BorderThickness="1" Margin="0 6" HorizontalAlignment="Stretch"></TextBox>
+				<TextBox x:Name="boardName"
+					Visibility="{Binding ElementName=RootControl,Path=Visibility}"
+					BorderThickness="1" Margin="0 6"
+					Text="{Binding NewBoardName,Mode=TwoWay}"
+					HorizontalAlignment="Stretch">
+					<Interactivity:Interaction.Behaviors>
+						<Core:EventTriggerBehavior EventName="KeyDown">
+							<Core:InvokeCommandAction Command="{Binding BoardKeyDownCommand}"></Core:InvokeCommandAction>
+						</Core:EventTriggerBehavior>
+					</Interactivity:Interaction.Behaviors>
+				</TextBox>
 			</StackPanel>
 		</Grid>
 		<CommandBar VerticalAlignment="Bottom">
-			<AppBarButton Icon="Accept" Command="{Binding NewBoardCommand}" CommandParameter="{Binding ElementName=boardName,Path=Text}"></AppBarButton>
+			<AppBarButton Icon="Accept" Command="{Binding NewBoardCommand}"></AppBarButton>
 		</CommandBar>
 	</Grid>
 </UserControl>

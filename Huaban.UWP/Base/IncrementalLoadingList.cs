@@ -29,6 +29,12 @@ namespace Huaban.UWP.Base
 			this.HasMoreItems = true;
 		}
 
+		public async Task ClearAndReload()
+		{
+			Clear();
+			Page = 0;
+			await LoadMoreItemsAsync(0);
+		}
 
 		public void NoMore()
 		{

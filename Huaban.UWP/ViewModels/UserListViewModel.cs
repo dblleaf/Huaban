@@ -4,34 +4,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
-	using Models;
 	using Commands;
-
-	public class BoardListViewModel : HBViewModel
+	using Models;
+	public class UserListViewModel : HBViewModel
 	{
-		public BoardListViewModel(Context context, Func<uint, int, Task<IEnumerable<Board>>> _func)
+		public UserListViewModel(Context context, Func<uint, int, Task<IEnumerable<User>>> _func)
 			: base(context)
 		{
-			BoardList = new IncrementalLoadingList<Board>(_func);
+			UserList = new IncrementalLoadingList<User>(_func);
 		}
 
 		#region Properties
 
-		private IncrementalLoadingList<Board> _BoardList;
-		public IncrementalLoadingList<Board> BoardList
+		private IncrementalLoadingList<User> _UserList;
+		public IncrementalLoadingList<User> UserList
 		{
-			get { return _BoardList; }
+			get { return _UserList; }
 			set
-			{ SetValue(ref _BoardList, value); }
+			{ SetValue(ref _UserList, value); }
 		}
 
 		public int Count
 		{
-			get { return BoardList.Count; }
+			get { return UserList.Count; }
 		}
 
 		#endregion
@@ -44,14 +44,14 @@ namespace Huaban.UWP.ViewModels
 
 		public async Task ClearAndReload()
 		{
-			await BoardList.ClearAndReload();
+			await UserList.ClearAndReload();
 		}
-
+		
 		public long GetMaxSeq()
 		{
 			long max = 0;
 			if (Count > 0)
-				max = Convert.ToInt64(BoardList[Count - 1].seq);
+				max = Convert.ToInt64(UserList[Count - 1].seq);
 			return max;
 		}
 
@@ -59,7 +59,7 @@ namespace Huaban.UWP.ViewModels
 		{
 			long max = 0;
 			if (Count > 0)
-				max = Convert.ToInt64(BoardList[Count - 1].board_id);
+				max = Convert.ToInt64(UserList[Count - 1].user_id);
 			return max;
 		}
 

@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+
 namespace Huaban.UWP.Models
 {
-	public class User
+	using Base;
+	public class User : ObservableObject
 	{
 		public ImageFile avatar { set; get; }
 		public int board_count { set; get; }
@@ -15,7 +17,13 @@ namespace Huaban.UWP.Models
 		public String email { set; get; }
 		public int follower_count { set; get; }
 		public List<User> followers { set; get; }
-		public bool following { set; get; }
+
+		private bool _following;
+		public bool following
+		{
+			get { return _following; }
+			set { SetValue(ref _following, value); }
+		}
 		public int following_count { set; get; }
 		public List<User> followings { set; get; }
 		public int like_count { set; get; }

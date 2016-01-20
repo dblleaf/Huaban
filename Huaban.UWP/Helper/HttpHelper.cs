@@ -98,5 +98,6 @@ namespace Huaban.UWP
 			HttpClient client = new HttpClient();
 			return await client.GetByteArrayAsync(uri);
 		}
+
 	}
 }

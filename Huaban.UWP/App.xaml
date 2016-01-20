@@ -14,10 +14,12 @@
 			<converters:ImageBgConverter x:Key="ImageBgConverter"/>
 			<converters:OwnerVisiblityConverter x:Key="OwnerVisiblityConverter"/>
 			<converters:LoginVisiblityConverter x:Key="LoginVisiblityConverter"/>
-			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"></commands:PinImageLoadCommand>
-			<commands:FollowBoardCommand x:Key="FollowBoardCommand"></commands:FollowBoardCommand>
-			<commands:ToBoardPinsCommand x:Key="ToBoardPinsCommand"></commands:ToBoardPinsCommand>
-			<commands:ToBoardDetailCommand x:Key="ToBoardDetailCommand"></commands:ToBoardDetailCommand>
+			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"/>
+			<commands:FollowBoardCommand x:Key="FollowBoardCommand"/>
+			<commands:ToBoardPinsCommand x:Key="ToBoardPinsCommand"/>
+			<commands:ToBoardDetailCommand x:Key="ToBoardDetailCommand"/>
+			<commands:ToUserCommand x:Key="ToUserCommand"/>
+			<commands:FollowUserCommand x:Key="FollowUserCommand"/>
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="Themes/Generic.xaml" />
 				<ResourceDictionary Source="Themes/Template.xaml" />

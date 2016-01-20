@@ -8,9 +8,11 @@
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Dark">
 			<Color x:Key="StatusBarColor">#000000</Color>
+			<Color x:Key="HBForegroundLightColor">#CCCCCC</Color>
 		</ResourceDictionary>
 		<ResourceDictionary x:Key="Light">
 			<Color x:Key="StatusBarColor">#d61718</Color>
+			<Color x:Key="HBForegroundLightColor">#555555</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 	<Color x:Key="HuabanColor">#d61718</Color>
@@ -18,6 +20,7 @@
 	<SolidColorBrush x:Key="StatusBarColorBrush" Color="{ThemeResource StatusBarColor}"></SolidColorBrush>
 	<SolidColorBrush x:Key="HuabanColorBrush" Color="{StaticResource HuabanColor}"></SolidColorBrush>
 	<SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"></SolidColorBrush>
+	<SolidColorBrush x:Key="HBForegroundLightColorBrush" Color="{ThemeResource HBForegroundLightColor}"></SolidColorBrush>
 	<Style TargetType="PivotHeaderItem">
 		<Setter Property="FontSize" Value="16"/>
 	</Style>

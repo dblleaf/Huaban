@@ -11,6 +11,7 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Input;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -26,7 +27,8 @@ namespace Huaban.UWP.ViewModels
 			: base(context)
 		{
 			BoardListViewModel = new BoardListViewModel(context, GetBoardList);
-			BoardList = Context.BoardList;
+			UserListViewModel = new UserListViewModel(context, GetLikeList);
+			BoardList = Context.BoardListVM?.BoardList;
 			SelecterVisibility = Visibility.Collapsed;
 			CurrentBoardIndex = -1;
 
@@ -34,6 +36,8 @@ namespace Huaban.UWP.ViewModels
 		#region Properties
 
 		public BoardListViewModel BoardListViewModel { set; get; }
+
+		public UserListViewModel UserListViewModel { set; get; }
 
 		public IncrementalLoadingList<Board> BoardList { set; get; }
 
@@ -123,6 +127,12 @@ namespace Huaban.UWP.ViewModels
 			set { SetValue(ref _PivotSelectedIndex, value); }
 		}
 
+		private string _NewBoardName;
+		public string NewBoardName
+		{
+			get { return _NewBoardName; }
+			set { SetValue(ref _NewBoardName, value); }
+		}
 		#endregion
 
 		#region Commands
@@ -248,12 +258,17 @@ namespace Huaban.UWP.ViewModels
 				return _SelectBoardCommand ?? (_SelectBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					var board = o as Board;
-					if (board == null)
+					var args = o as ItemClickEventArgs;
+					var item = o as Board;
+					if (args == null && item == null)
 						return;
-					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
-					if (board.cover == null)
-						board.cover = pin;
+
+					if (args != null)
+						item = args.ClickedItem as Board;
+
+					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
+					if (item.cover == null)
+						item.cover = pin;
 					Context.ShowTip("采集成功");
 				}, o => true));
 			}
@@ -267,10 +282,15 @@ namespace Huaban.UWP.ViewModels
 				return _NewBoardCommand ?? (_NewBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					var board = await Context.API.BoardAPI.add(o.ToString());
+					if (string.IsNullOrEmpty(NewBoardName))
+						return;
+					string boardName = NewBoardName;
+					NewBoardName = "";
+					var board = await Context.API.BoardAPI.add(boardName);
+
 					if (board != null)
 					{
-						var list = Context.BoardList;
+						var list = Context.BoardListVM.BoardList;
 						list.Add(board);
 						var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
 						board.pins.Add(pin);
@@ -281,6 +301,27 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
+		private DelegateCommand _BoardKeyDownCommand;
+		public DelegateCommand BoardKeyDownCommand
+		{
+			get
+			{
+				return _BoardKeyDownCommand ?? (_BoardKeyDownCommand = new DelegateCommand(
+				o =>
+				{
+					var e = o as KeyRoutedEventArgs;
+
+					if (e?.Key == Windows.System.VirtualKey.Enter)
+					{
+						var txt = e.OriginalSource as TextBox;
+						NewBoardName = txt.Text;
+						NewBoardCommand.Execute(e.OriginalSource);
+						SelecterVisibility = Visibility.Collapsed;
+					}
+
+				}, o => true));
+			}
+		}
 		#endregion
 
 		#region Methods
@@ -295,6 +336,34 @@ namespace Huaban.UWP.ViewModels
 			try
 			{
 				list = await Context.API.PinAPI.GetRelatedBoards(Pin?.pin_id, BoardListViewModel.GetMaxSeq());
+
+				if (list.Count == 0)
+					BoardListViewModel.BoardList.NoMore();
+				else
+					BoardListViewModel.BoardList.HasMore();
+			}
+			catch (Exception ex)
+			{
+				string a = ex.Message;
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			return list;
+		}
+
+		public async Task<IEnumerable<User>> GetLikeList(uint startIndex, int page)
+		{
+
+			UserListViewModel.UserList.NoMore();
+			IsLoading = true;
+
+			List<User> list = new List<User>();
+
+			try
+			{
+				list = await Context.API.PinAPI.GetLikeList(Pin.pin_id, UserListViewModel.GetMaxID());
 
 				if (list.Count == 0)
 					BoardListViewModel.BoardList.NoMore();

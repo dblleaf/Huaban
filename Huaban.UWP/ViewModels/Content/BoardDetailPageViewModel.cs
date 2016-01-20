@@ -64,7 +64,7 @@ namespace Huaban.UWP.ViewModels
 						await Context.API.BoardAPI.delete(Board);//远程服务器删除
 						Context.ShowTip("删除成功！");
 
-						Context.BoardList.Remove(Board);//从自己的画板列表中删除
+						Context.BoardListVM.BoardList.Remove(Board);//从自己的画板列表中删除
 						Context.NavigationService.GoBack();
 						
 					});

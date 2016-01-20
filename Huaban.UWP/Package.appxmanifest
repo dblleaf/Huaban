@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="807song-zhaoli.UWP" Publisher="CN=5875BCA4-CAAB-47CB-8D31-34FF173FD4B5" Version="1.1.1.0" />
+  <Identity Name="807song-zhaoli.UWP" Publisher="CN=5875BCA4-CAAB-47CB-8D31-34FF173FD4B5" Version="1.1.6.0" />
   <mp:PhoneIdentity PhoneProductId="59af9af8-78b2-423d-baa5-e30bac25ed17" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>花瓣UWP</DisplayName>
+    <DisplayName>爱花瓣UWP</DisplayName>
     <PublisherDisplayName>song-zhaoli</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,8 +15,8 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Huaban.UWP.App">
-      <uap:VisualElements DisplayName="花瓣网UWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Huaban.UWP" BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="花瓣">
+      <uap:VisualElements DisplayName="爱花瓣UWP" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Huaban.UWP" BackgroundColor="transparent">
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="爱花瓣UWP">
           <uap:ShowNameOnTiles>
             <uap:ShowOn Tile="square150x150Logo" />
             <uap:ShowOn Tile="wide310x150Logo" />

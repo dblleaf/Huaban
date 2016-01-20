@@ -19,6 +19,8 @@ namespace Huaban.UWP.ViewModels
 			MyPinListViewModel = new PinListViewModel(context, GetPinList);
 			LikePinListViewModel = new PinListViewModel(context, GetLikePinList);
 			BoardListViewModel = new BoardListViewModel(context, GetBoardList);
+			FollowingListViewModel = new UserListViewModel(context, GetFollowingUserList);
+			FollowerListViewModel = new UserListViewModel(context, GetFollowerList);
 			//BoardListViewModel.BoardList = context.BoardList;
 		}
 
@@ -31,11 +33,15 @@ namespace Huaban.UWP.ViewModels
 			set { SetValue(ref _User, value); }
 		}
 
-		public PinListViewModel MyPinListViewModel { set; get; }
+		public PinListViewModel MyPinListViewModel { private set; get; }
 
-		public PinListViewModel LikePinListViewModel { set; get; }
+		public PinListViewModel LikePinListViewModel { private set; get; }
 
-		public BoardListViewModel BoardListViewModel { set; get; }
+		public BoardListViewModel BoardListViewModel { private set; get; }
+
+		public UserListViewModel FollowingListViewModel { private set; get; }
+
+		public UserListViewModel FollowerListViewModel { private set; get; }
 
 		#endregion
 
@@ -107,13 +113,68 @@ namespace Huaban.UWP.ViewModels
 
 			try
 			{
-				await Task.Delay(500);
+				await Task.Delay(300);
 				list = await Context.API.UserAPI.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
 
 				if (list.Count == 0)
 					BoardListViewModel.BoardList.NoMore();
 				else
 					BoardListViewModel.BoardList.HasMore();
+
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			return list;
+		}
+
+		public async Task<IEnumerable<User>> GetFollowerList(uint startIndex, int page)
+		{
+			FollowerListViewModel.UserList.NoMore();
+			IsLoading = true;
+			var list = new List<User>();
+			try
+			{
+				await Task.Delay(300);
+				list = await Context.API.UserAPI.GetFollowerList(User?.user_id, FollowerListViewModel.GetMaxSeq());
+
+				if (list.Count == 0)
+					FollowerListViewModel.UserList.NoMore();
+				else
+					FollowerListViewModel.UserList.HasMore();
+
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			return list;
+		}
+
+		public async Task<IEnumerable<User>> GetFollowingUserList(uint startIndex, int page)
+		{
+
+			FollowingListViewModel.UserList.NoMore();
+			IsLoading = true;
+			var list = new List<User>();
+			try
+			{
+				await Task.Delay(300);
+				list = await Context.API.UserAPI.GetFollowingUserList(User?.user_id, FollowingListViewModel.GetMaxSeq());
+
+				if (list.Count == 0)
+					FollowingListViewModel.UserList.NoMore();
+				else
+					FollowingListViewModel.UserList.HasMore();
 
 				return list;
 			}
@@ -135,10 +196,10 @@ namespace Huaban.UWP.ViewModels
 				if (user == null || user == User)
 					return;
 
-				if (user.user_id == Context.User.user_id)
+				if (user.user_id == Context.User?.user_id)
 				{
 					User = user;
-					Context.BoardList = BoardListViewModel.BoardList;
+					Context.BoardListVM.BoardList = BoardListViewModel.BoardList;
 				}
 
 				else

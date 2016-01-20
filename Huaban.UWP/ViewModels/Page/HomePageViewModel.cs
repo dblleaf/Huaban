@@ -90,6 +90,7 @@ namespace Huaban.UWP.ViewModels
 				}, o => true));
 			}
 		}
+
 		private DelegateCommand _HideSelectCommand;
 		public DelegateCommand HideSelectCommand
 		{
@@ -99,6 +100,19 @@ namespace Huaban.UWP.ViewModels
 				o =>
 				{
 					SelecterVisibility = Visibility.Collapsed;
+				}, o => true));
+			}
+		}
+
+		private DelegateCommand _ToSearchCommand;
+		public DelegateCommand ToSearchCommand
+		{
+			get
+			{
+				return _ToSearchCommand ?? (_ToSearchCommand = new DelegateCommand(
+				o =>
+				{
+					this.Context.NavigationService.NavigateTo("SearchPage");
 				}, o => true));
 			}
 		}
@@ -118,9 +132,11 @@ namespace Huaban.UWP.ViewModels
 			base.Inited();
 
 			IsLoading = true;
+
+			CategoryList = Context.CategoryList;
+
 			try
 			{
-				CategoryList = Context.CategoryList;
 				await CategoryList.LoadMoreItemsAsync(0);
 				CurrentCategory = CategoryList[0];
 				await PinListViewModel.ClearAndReload();
@@ -131,9 +147,8 @@ namespace Huaban.UWP.ViewModels
 			{
 				IsLoading = false;
 			}
+
 		}
-
-
 
 		private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
 		{

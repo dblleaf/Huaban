@@ -18,9 +18,9 @@
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <PackageCertificateKeyFile>Huaban.UWP_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <AppxPackageDir>D:\AppPackages\\huaban\</AppxPackageDir>
+    <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
-    <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
+    <AppxBundlePlatforms>arm</AppxBundlePlatforms>
     <PackageCertificateThumbprint>60E359ABB941DCC8E416311341498BEE697BCC98</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -116,11 +116,16 @@
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Commands\FollowUserCommand.cs" />
     <Compile Include="Commands\PinImageLoadCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\FollowBoardCommand.cs" />
+    <Compile Include="Commands\ToUserCommand.cs" />
     <Compile Include="Commands\ToBoardDetailCommand.cs" />
     <Compile Include="Commands\ToBoardPinsCommand.cs" />
+    <Compile Include="Controls\UserGrid.xaml.cs">
+      <DependentUpon>UserGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\BoardGrid.xaml.cs">
       <DependentUpon>BoardGrid.xaml</DependentUpon>
     </Compile>
@@ -196,6 +201,7 @@
     <Compile Include="ViewModels\Content\BoardDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardPinsPageViewModel.cs" />
     <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
+    <Compile Include="ViewModels\Content\SearchPageViewModel.cs" />
     <Compile Include="ViewModels\Content\UserPageViewModel.cs" />
     <Compile Include="ViewModels\Content\PinDetailPageViewModel.cs" />
     <Compile Include="ViewModels\Page\AboutPageViewModel.cs" />
@@ -204,6 +210,7 @@
     <Compile Include="ViewModels\Page\SettingPageViewModel.cs" />
     <Compile Include="ViewModels\Page\FollowingPageViewModel.cs" />
     <Compile Include="ViewModels\HBViewModel.cs" />
+    <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
     <Compile Include="Views\Content\BoardDetailPage.xaml.cs">
       <DependentUpon>BoardDetailPage.xaml</DependentUpon>
@@ -216,6 +223,9 @@
     </Compile>
     <Compile Include="Views\Content\PinDetailPage.xaml.cs">
       <DependentUpon>PinDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\SearchPage.xaml.cs">
+      <DependentUpon>SearchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\UserPage.xaml.cs">
       <DependentUpon>UserPage.xaml</DependentUpon>
@@ -270,6 +280,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\UserGrid.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Controls\BoardGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -318,6 +332,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Content\PinDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\SearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

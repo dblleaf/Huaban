@@ -78,7 +78,7 @@ namespace Huaban.UWP.ViewModels
 			List<Board> list = new List<Board>();
 			try
 			{
-				list = await Context.API.UserAPI.GetFollowingBoards(Context.User.urlname, page);
+				list = await Context.API.UserAPI.GetFollowingBoardList(Context.User.urlname, page);
 				if (list.Count == 0)
 					BoardListViewModel.BoardList.NoMore();
 				else

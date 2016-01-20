@@ -16,7 +16,8 @@
 		<Grid Grid.Row="1">
 			<HB:ImageGrid Margin="0 0 0 48" ListModel="{Binding PinListViewModel}"></HB:ImageGrid>
 			<CommandBar VerticalAlignment="Bottom">
-				<AppBarButton Label="分类" Icon="List" Command="{Binding ShowSelectCommand}"></AppBarButton>
+				<AppBarButton Label="搜索" Icon="Find" Command="{Binding ToSearchCommand}"/>
+				<AppBarButton Label="分类" Icon="List" Command="{Binding ShowSelectCommand}"/>
 			</CommandBar>
 		</Grid>
 		<HB:CategorySelecter Grid.Row="1" Visibility="{Binding SelecterVisibility}"></HB:CategorySelecter>

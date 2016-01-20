@@ -8,7 +8,7 @@ using System.Windows.Input;
 namespace Huaban.UWP.Commands
 {
 	using Models;
-	public class FollowBoardCommand : ICommand
+	public class FollowUserCommand : ICommand
 	{
 		public event EventHandler CanExecuteChanged;
 
@@ -19,10 +19,10 @@ namespace Huaban.UWP.Commands
 
 		public async void Execute(object parameter)
 		{
-			Board board = parameter as Board;
-			string str = await App.AppContext.API.BoardAPI.follow(board.board_id, !board.following);
-			board.following = (str != "{}");
-			App.AppContext.ShowTip(board.following ? "关注成功" : "已取消关注");
+			User user = parameter as User;
+			string str = await App.AppContext.API.UserAPI.follow(user?.user_id, !user.following);
+			user.following = !user.following;
+			App.AppContext.ShowTip(user.following ? "关注成功" : "已取消关注");
 		}
 	}
 }

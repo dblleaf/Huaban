@@ -9,6 +9,7 @@
 		<Setter Property="Content" Value="&#xE700;" />
 		<Setter Property="AutomationProperties.Name" Value="Menu" />
 		<Setter Property="UseSystemFocusVisuals" Value="True" />
+		<Setter Property="RequestedTheme" Value="Dark"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToggleButton">

@@ -22,7 +22,7 @@
 							<ImageBrush ImageSource="{Binding User.avatar.Squara}"></ImageBrush>
 						</Ellipse.Fill>
 					</Ellipse>
-					<TextBlock Text="{Binding User.username}" HorizontalAlignment="Center"></TextBlock>
+					<TextBlock Text="{Binding User.username}" HorizontalAlignment="Center" RequestedTheme="Dark"></TextBlock>
 				</StackPanel>
 			</Grid>
 			<Pivot Grid.Row="1" Margin="0 -48 0 0" Style="{StaticResource PivotHeaderCenterStyle}">
@@ -82,6 +82,7 @@
 							<TextBlock Text="{Binding User.follower_count}" Grid.Column="1" FontSize="10" Margin="3 0" VerticalAlignment="Top"></TextBlock>
 						</Grid>
 					</PivotItem.Header>
+					<HB:UserGrid ListModel="{Binding FollowerListViewModel}"></HB:UserGrid>
 				</PivotItem>
 				<PivotItem>
 					<PivotItem.Header>
@@ -94,6 +95,7 @@
 							<TextBlock Text="{Binding User.following_count}" Grid.Column="1" FontSize="10" Margin="3 0" VerticalAlignment="Top"></TextBlock>
 						</Grid>
 					</PivotItem.Header>
+					<HB:UserGrid ListModel="{Binding FollowingListViewModel}"></HB:UserGrid>
 				</PivotItem>
 			</Pivot>
 			<ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>

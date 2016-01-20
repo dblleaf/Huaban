@@ -71,9 +71,13 @@
 					<Frame x:Name="MainFrame"></Frame>
 				</SplitView.Content>
 			</HB:SwipeableSplitView>
-			<ToggleButton x:Name="TogglePaneButton" VerticalAlignment="Top"
-				IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
-				Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
+			<Grid Background="{StaticResource HuabanColorBrush}" Width="48" Height="48" 
+				HorizontalAlignment="Left" VerticalAlignment="Top">
+				<ToggleButton x:Name="TogglePaneButton"
+					IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
+					Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
+			</Grid>
+			
 		</Grid>
 		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
 		<Grid Visibility="{Binding FirstBackVisibility}" RequestedTheme="Dark" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource HuabanColorBrush}" CornerRadius="2">
