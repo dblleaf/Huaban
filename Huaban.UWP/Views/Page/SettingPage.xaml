@@ -16,7 +16,6 @@
 			<ToggleSwitch Margin="0 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
 			<ToggleSwitch Margin="0 6" Header="直接退出" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
 			<ToggleSwitch Margin="0 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
-			
 			<Button Style="{StaticResource SettingButton}" Margin="0 12">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock HorizontalAlignment="Left">清除缓存</TextBlock>
@@ -24,7 +23,13 @@
 				</StackPanel>
 			</Button>
 			<Button Style="{StaticResource SettingButton}" Margin="0 12" Command="{Binding ReViewCommand}">
-				<TextBlock HorizontalAlignment="Left">给我评价</TextBlock>
+				<TextBlock HorizontalAlignment="Left" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}">给我评价</TextBlock>
+			</Button>
+			<Button Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
+				Style="{StaticResource SettingButton}" 
+				Margin="0 12" 
+				Command="{Binding LogoutCommand}">
+				<TextBlock HorizontalAlignment="Left">退出登录</TextBlock>
 			</Button>
 		</StackPanel>
 	</Grid>

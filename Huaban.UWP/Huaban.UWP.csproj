@@ -21,7 +21,7 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>60E359ABB941DCC8E416311341498BEE697BCC98</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>885FEF979FC1312F4B4E15BC404CC6F1950C92FE</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>

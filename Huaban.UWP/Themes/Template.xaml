@@ -52,7 +52,7 @@
 				<Grid Visibility="{Binding Path=IsLoaded,Converter={StaticResource ReverseVisbilityConverter}}" 
 					Width="{Binding Width}" Height="{Binding Height}" 
 					Background="{Binding Converter={StaticResource ColorConverter}}"></Grid>
-				<Image Source="{Binding file.FW236}" VerticalAlignment="Top" x:Name="img">
+				<Image HorizontalAlignment="Stretch" Source="{Binding file.FW236}" VerticalAlignment="Top" x:Name="img">
 					<Interactivity:Interaction.Behaviors>
 						<Core:EventTriggerBehavior EventName="ImageOpened">
 							<Core:InvokeCommandAction Command="{StaticResource PinImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>

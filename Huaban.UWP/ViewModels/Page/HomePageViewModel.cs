@@ -24,7 +24,7 @@ namespace Huaban.UWP.ViewModels
 		{
 			Title = "发现";
 			PinListViewModel = new PinListViewModel(context, GetData);
-
+			CategoryList = Context.CategoryList;
 			SelecterVisibility = Visibility.Collapsed;
 
 		}
@@ -133,8 +133,7 @@ namespace Huaban.UWP.ViewModels
 
 			IsLoading = true;
 
-			CategoryList = Context.CategoryList;
-
+		
 			try
 			{
 				await CategoryList.LoadMoreItemsAsync(0);

@@ -26,6 +26,7 @@ namespace Huaban.UWP.Controls
 		{
 			this.InitializeComponent();
 			this.Loaded += BoardGrid_Loaded;
+			
 		}
 
 		#region Header
@@ -74,7 +75,7 @@ namespace Huaban.UWP.Controls
 		private async void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
 		{
 			ScrollViewer sv = sender as ScrollViewer;
-			if (sv.VerticalOffset > sv.ScrollableHeight - 40 && !_loading)
+			if (sv.VerticalOffset > sv.ScrollableHeight - this.ActualHeight && !_loading)
 			{
 				await LoadData();
 			}

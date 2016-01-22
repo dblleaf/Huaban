@@ -55,7 +55,7 @@
 							</Interactivity:Interaction.Behaviors>
 						</ListView>
 						<ListView ItemsSource="{Binding NavFootList}"
-							Style="{StaticResource NavListStyle}"
+							Style="{StaticResource NavListStyle}" Margin="0 0 0 24"
 							ItemTemplate="{StaticResource NavigationListTemplate}"
 							VerticalAlignment="Bottom">
 							<Interactivity:Interaction.Behaviors>

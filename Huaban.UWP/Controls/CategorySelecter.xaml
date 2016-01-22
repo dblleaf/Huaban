@@ -16,25 +16,25 @@
 			</Core:EventTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
 		<Grid VerticalAlignment="Bottom" MinHeight="300" MaxHeight="420" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
-			<ScrollViewer Padding="6">
-				<ListView ScrollViewer.VerticalScrollMode="Disabled" HorizontalAlignment="Center" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CurrentCategory, Mode=TwoWay}">
-					<ListView.ItemsPanel>
-						<ItemsPanelTemplate>
-							<ItemsWrapGrid Orientation="Horizontal" MaximumRowsOrColumns="5"></ItemsWrapGrid>
-						</ItemsPanelTemplate>
-					</ListView.ItemsPanel>
-					<ListView.ItemTemplate>
-						<DataTemplate>
-							<TextBlock VerticalAlignment="Center" Width="80" Margin="0 6" Text="{Binding name}"></TextBlock>
-						</DataTemplate>
-					</ListView.ItemTemplate>
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="SelectionChanged">
-							<Core:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"></Core:InvokeCommandAction>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
-				</ListView>
-			</ScrollViewer>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition/>
+			</Grid.RowDefinitions>
+			<Grid BorderThickness="0 0 0 1" Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+				<TextBlock Margin="12" FontWeight="Bold">选择分类</TextBlock>
+			</Grid>
+			<ListView Grid.Row="1" ItemsSource="{Binding CategoryList}" SelectedItem="{Binding CurrentCategory, Mode=TwoWay}">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<TextBlock VerticalAlignment="Center" Width="80" Margin="12 6" Text="{Binding name}"></TextBlock>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+				<Interactivity:Interaction.Behaviors>
+					<Core:EventTriggerBehavior EventName="SelectionChanged">
+						<Core:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"></Core:InvokeCommandAction>
+					</Core:EventTriggerBehavior>
+				</Interactivity:Interaction.Behaviors>
+			</ListView>
 		</Grid>
 	</Grid>
 </UserControl>

@@ -24,6 +24,7 @@ namespace Huaban.UWP.Controls
 			ViewModel = (ViewModelBase)ControlHelper.GetViewModel(this.GetType());
 			this.Loaded += (s, e) =>
 			{
+			
 				if (!ViewModel.IsInited)
 					ViewModel.Inited();
 			};
