@@ -1,4 +1,10 @@
-﻿using System;
+﻿using ImageLib;
+using ImageLib.Cache.Memory.CacheImpl;
+using ImageLib.Cache.Storage;
+using ImageLib.Cache.Storage.CacheImpl;
+using ImageLib.Gif;
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -19,6 +25,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.Foundation.Metadata;
+using Windows.Storage;
 
 namespace Huaban.UWP
 {
@@ -44,6 +51,15 @@ namespace Huaban.UWP
 			this.InitLocator();
 
 			this.Suspending += OnSuspending;
+
+			ImageLoader.Initialize(new ImageConfig.Builder()
+			{
+				CacheMode = ImageLib.Cache.CacheMode.MemoryAndStorageCache,
+				MemoryCacheImpl = new LRUMemoryCache(),
+				StorageCacheImpl = new LimitedStorageCache(ApplicationData.Current.LocalCacheFolder,
+				"cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
+			}.AddDecoder<GifDecoder>().Build(), true);
+
 		}
 		private void InitLocator()
 		{
@@ -92,7 +108,7 @@ namespace Huaban.UWP
 			}
 			//NotifyPropertyChanged("User");
 		}
-		
+
 		/// <summary>
 		/// 在应用程序由最终用户正常启动时进行调用。
 		/// 将在启动应用程序以打开特定文件等情况下使用。

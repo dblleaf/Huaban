@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Storage;
+using Windows.Storage.Streams;
+using Windows.Storage.FileProperties;
 
 namespace Huaban.UWP
 {
@@ -75,7 +78,7 @@ namespace Huaban.UWP
 			return "";
 		}
 
-		public static async Task SaveImage(byte[] buffer, string fileName, string folderName = "")
+		public static async Task SaveImage(byte[] bytes, string fileName, string folderName = "")
 		{
 			var folder = KnownFolders.PicturesLibrary;
 			StorageFolder saveFolder = folder;
@@ -83,24 +86,91 @@ namespace Huaban.UWP
 			{
 				saveFolder = await folder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
 			}
-			var file = await saveFolder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
-			await FileIO.WriteBytesAsync(file, buffer);
+			var file = await saveFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+			await FileIO.WriteBytesAsync(file, bytes);
 		}
 
-		public static async Task<ulong> GetCacheFolderSize()
+		public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream, string folderName = "")
 		{
-			var folder = ApplicationData.Current.LocalFolder;
+			var folder = KnownFolders.PicturesLibrary;
+			StorageFolder saveFolder = folder;
+			if (!string.IsNullOrEmpty(folderName))
+			{
+				saveFolder = await folder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+			}
+
+			var storageFile = await saveFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+			using (IRandomAccessStream outputStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
+			{
+				try
+				{
+					using (IInputStream IS = cacheStream.GetInputStreamAt(0))
+					{
+						using (IOutputStream OS = outputStream.GetOutputStreamAt(0))
+						{
+							await RandomAccessStream.CopyAsync(IS, OS);
+						}
+					}
+					return true;
+				}
+				catch
+				{
+					try
+					{
+						await storageFile.DeleteAsync();
+					}
+					catch { }
+				}
+			}
+			return false;
+
+		}
+
+
+		public static async Task<double> GetCacheFolderSize()
+		{
 			try
 			{
-				var aaa = await folder.GetParentAsync();
-
+				StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
+				var files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
+				double size = 0; BasicProperties p;
+				foreach (var f in files)
+				{
+					p = await f.GetBasicPropertiesAsync();
+					size += p.Size;
+				}
+				return size;
 			}
-			catch (Exception ex)
+			catch
 			{
+				return 0;
 			}
+		}
 
-			var properties = await folder.GetBasicPropertiesAsync();
-			return properties.Size;
+		public static async Task ClearCache()
+		{
+			try
+			{
+				StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
+				if (folder != null)
+				{
+					IReadOnlyCollection<StorageFile> files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
+					//files.ToList().ForEach(async (f) => await f.DeleteAsync(StorageDeleteOption.PermanentDelete));
+					List<IAsyncAction> list = new List<IAsyncAction>();
+					foreach (var f in files)
+					{
+						list.Add(f.DeleteAsync(StorageDeleteOption.PermanentDelete));
+					}
+					List<Task> list2 = new List<Task>();
+					list.ForEach((t) => list2.Add(t.AsTask()));
+
+					await Task.Run(() => { Task.WaitAll(list2.ToArray()); });
+				}
+			}
+			catch
+			{
+
+			}
 		}
 	}
 }

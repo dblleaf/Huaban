@@ -86,7 +86,7 @@ namespace Huaban.UWP.ViewModels
 				return _UpdateBoardCommand ?? (_UpdateBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					Board.category_id = CurrentCategory.id;
+					Board.category_id = CurrentCategory?.id;
 
 					await Context.API.BoardAPI.edit(Board);
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Controls;
@@ -12,6 +13,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Input;
+using Windows.Storage;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -31,6 +33,7 @@ namespace Huaban.UWP.ViewModels
 			BoardList = Context.BoardListVM?.BoardList;
 			SelecterVisibility = Visibility.Collapsed;
 			CurrentBoardIndex = -1;
+			SetQuickBoard(QuickBoard);
 
 		}
 		#region Properties
@@ -133,6 +136,23 @@ namespace Huaban.UWP.ViewModels
 			get { return _NewBoardName; }
 			set { SetValue(ref _NewBoardName, value); }
 		}
+
+
+		private bool _CanQuick;
+		public bool CanQuick
+		{
+			get { return _CanQuick; }
+			set { SetValue(ref _CanQuick, value); }
+		}
+
+		private string _QuickBoardName;
+		public string QuickBoardName
+		{
+			get { return _QuickBoardName; }
+			set { SetValue(ref _QuickBoardName, value); }
+		}
+
+		internal static Board QuickBoard { set; get; }
 		#endregion
 
 		#region Commands
@@ -160,8 +180,9 @@ namespace Huaban.UWP.ViewModels
 							type = "gif";
 						else
 							type = "jpg";
+						var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
 
-						await StorageHelper.SaveImage(buffer, $"{DateTime.Now.Ticks}.{type}", "huaban");
+						await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img, "huaban");
 						Context.ShowTip("下载成功");
 
 					}, o => true)
@@ -270,6 +291,7 @@ namespace Huaban.UWP.ViewModels
 					if (item.cover == null)
 						item.cover = pin;
 					Context.ShowTip("采集成功");
+					SetQuickBoard(item);
 				}, o => true));
 			}
 		}
@@ -296,6 +318,7 @@ namespace Huaban.UWP.ViewModels
 						board.pins.Add(pin);
 						board.cover = pin;
 						Context.ShowTip("采集成功");
+						SetQuickBoard(board);
 					}
 				}, o => true));
 			}
@@ -322,6 +345,21 @@ namespace Huaban.UWP.ViewModels
 				}, o => true));
 			}
 		}
+
+		//快速采集
+		private DelegateCommand _QuickPinCommand;
+		public DelegateCommand QuickPinCommand
+		{
+			get
+			{
+				return _QuickPinCommand ?? (_QuickPinCommand = new DelegateCommand(
+				o =>
+				{
+					SelectBoardCommand.Execute(QuickBoard);
+				}, o => true));
+			}
+		}
+
 		#endregion
 
 		#region Methods
@@ -410,6 +448,13 @@ namespace Huaban.UWP.ViewModels
 				e.Handled = true;
 				SelecterVisibility = Visibility.Collapsed;
 			}
+		}
+
+		private void SetQuickBoard(Board board)
+		{
+			QuickBoard = board;
+			CanQuick = IsLogin && QuickBoard != null;
+			QuickBoardName = QuickBoard?.title;
 		}
 		#endregion
 	}

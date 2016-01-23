@@ -16,21 +16,19 @@
 			<ToggleSwitch Margin="0 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
 			<ToggleSwitch Margin="0 6" Header="直接退出" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
 			<ToggleSwitch Margin="0 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
-			<Button Style="{StaticResource SettingButton}" Margin="0 12">
-				<StackPanel Orientation="Horizontal">
-					<TextBlock HorizontalAlignment="Left">清除缓存</TextBlock>
-					<TextBlock VerticalAlignment="Bottom"><Run Text=" [ "/><Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/><Run Text=" ] "/></TextBlock>
-				</StackPanel>
+			<Button Style="{StaticResource SettingButton}" Padding="0 12" Command="{Binding ClearCacheCommand}">
+				<TextBlock VerticalAlignment="Bottom">清除缓存 (<Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/>)</TextBlock>
 			</Button>
-			<Button Style="{StaticResource SettingButton}" Margin="0 12" Command="{Binding ReViewCommand}">
+			<Button Style="{StaticResource SettingButton}" Padding="0 12" Command="{Binding ReViewCommand}">
 				<TextBlock HorizontalAlignment="Left" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}">给我评价</TextBlock>
 			</Button>
 			<Button Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
 				Style="{StaticResource SettingButton}" 
-				Margin="0 12" 
+				Padding="0 12" 
 				Command="{Binding LogoutCommand}">
 				<TextBlock HorizontalAlignment="Left">退出登录</TextBlock>
 			</Button>
 		</StackPanel>
+		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
 	</Grid>
 </HB:HBPage>

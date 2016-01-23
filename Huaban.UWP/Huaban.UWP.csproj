@@ -21,7 +21,7 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>885FEF979FC1312F4B4E15BC404CC6F1950C92FE</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>D30F8C26DF2153A7B68F5782A6701D8FC4BC4D84</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -266,6 +266,7 @@
   <ItemGroup>
     <Content Include="Assets\HuabanLogo_singlecolor_styleB_color02.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="History.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

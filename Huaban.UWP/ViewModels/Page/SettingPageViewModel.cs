@@ -60,9 +60,20 @@ namespace Huaban.UWP.ViewModels
 			get
 			{
 				return _ClearCacheCommand ?? (_ClearCacheCommand = new DelegateCommand(
-					o =>
+					async o =>
 					{
-						//await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5X991"));
+						IsLoading = true;
+						ClearCacheCommand.RaiseCanExecuteChanged();
+						CacheSize = "清理中...";
+						await Task.Delay(1500);
+						await StorageHelper.ClearCache();
+						
+						await Task.Delay(500);
+
+						CacheSize = GetFormatSize(await StorageHelper.GetCacheFolderSize());
+						IsLoading = false;
+						ClearCacheCommand.RaiseCanExecuteChanged();
+						Context.ShowTip("清理完成");
 					},
 					o => !IsLoading)
 				);
