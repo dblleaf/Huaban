@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using static System.Net.WebUtility;
 
 namespace Huaban.UWP.Models
 {
@@ -86,7 +87,7 @@ namespace Huaban.UWP.Models
 			item.media_type = obj.GetObject<string>("media_type");
 			item.source = obj.GetObject<string>("source");
 			item.link = obj.GetObject<string>("link");
-			item.raw_text = obj.GetObject<string>("raw_text");
+			item.raw_text = HtmlDecode(obj.GetObject<string>("raw_text"));
 			item.via = obj.GetObject<string>("via");
 			item.original = obj.GetObject<string>("original");
 			item.created_at = obj.GetObject<string>("created_at");

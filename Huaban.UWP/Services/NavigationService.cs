@@ -80,14 +80,14 @@ namespace Huaban.UWP.Services
 			Frame.Navigate(sourcePageType, parameter);
 			DisplayBackButton();
 		}
-		public void NavigateTo(string pageName, object parameter = null)
+		public void NavigateTo(string pageName, object parameter = null, string targetName = null)
 		{
-			HBFrame.Navigate(GetPageType(pageName), parameter);
+			HBFrame.Navigate(GetPageType(pageName), parameter, targetName);
 			DisplayBackButton();
 		}
-		public void NavigateTo(Type sourcePageType, object parameter = null)
+		public void NavigateTo(Type sourcePageType, object parameter = null, string targetName = null)
 		{
-			HBFrame.Navigate(sourcePageType, parameter);
+			HBFrame.Navigate(sourcePageType, parameter, targetName);
 			DisplayBackButton();
 		}
 		public void GoBack()

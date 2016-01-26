@@ -2,6 +2,7 @@
     x:Class="Huaban.UWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	RequestedTheme="Dark"
     xmlns:local="using:Huaban.UWP"
 	xmlns:services="using:Huaban.UWP.Services"
 	xmlns:converters="using:Huaban.UWP.Converters"

@@ -19,12 +19,13 @@ namespace Huaban.UWP.Controls
 
 	public class HBControl : UserControl
 	{
+		internal string TargetName { set; get; }
 		public HBControl()
 		{
 			ViewModel = (ViewModelBase)ControlHelper.GetViewModel(this.GetType());
 			this.Loaded += (s, e) =>
 			{
-			
+
 				if (!ViewModel.IsInited)
 					ViewModel.Inited();
 			};

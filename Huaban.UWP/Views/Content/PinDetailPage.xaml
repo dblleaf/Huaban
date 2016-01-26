@@ -29,7 +29,7 @@
 								<RowDefinition Height="Auto"></RowDefinition>
 							</Grid.RowDefinitions>
 							<Image Source="{Binding SmallImageUrl}" Visibility="{Binding ImageLoaded,Converter={StaticResource ReverseVisbilityConverter}}"></Image>
-							<controls:ImageView UriSource="{Binding ImageUri}" Stretch="UniformToFill">
+							<controls:ImageView UriSource="{Binding ImageUri}" Stretch="Uniform">
 								<Interactivity:Interaction.Behaviors>
 									<Core:EventTriggerBehavior EventName="LoadingCompleted">
 										<Core:InvokeCommandAction Command="{Binding LoadedCommand}"></Core:InvokeCommandAction>

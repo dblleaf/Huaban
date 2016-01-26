@@ -34,6 +34,9 @@ namespace Huaban.UWP.Controls
 		{
 			get
 			{
+				//if (IsWideScreen)
+				//	return PageIndex > 0;
+				//else
 				return PageIndex >= 0;
 			}
 		}
@@ -58,10 +61,25 @@ namespace Huaban.UWP.Controls
 			}
 		}
 
-		public bool Navigate(Type sourcePageType, object parameter = null)
+		/// <summary>
+		/// 是否宽屏
+		/// </summary>
+		public bool IsWideScreen
+		{
+			get { return (bool)GetValue(IsWideScreenProperty); }
+			set { SetValue(IsWideScreenProperty, value); }
+		}
+
+		// Using a DependencyProperty as the backing store for IsWideScreen.  This enables animation, styling, binding, etc...
+		public static readonly DependencyProperty IsWideScreenProperty =
+			DependencyProperty.Register("IsWideScreen", typeof(bool), typeof(HBFrame), new PropertyMetadata(false));
+
+
+
+		public bool Navigate(Type sourcePageType, object parameter = null, string targetName = null)
 		{
 			this.Visibility = Visibility.Visible;
-			var page = CreatePage(sourcePageType);
+			var page = CreatePage(sourcePageType, targetName);
 			var args = new HBNavigationEventArgs()
 			{
 				SourcePageType = sourcePageType,
@@ -74,10 +92,13 @@ namespace Huaban.UWP.Controls
 			page.OnNavigatedTo(args);
 
 			Navigated?.Invoke(this, args);
-			page.RenderTransform = new CompositeTransform();
-			page.ManipulationMode = ManipulationModes.TranslateX;
-			page.ManipulationDelta += HBPage_ManipulationDelta;
-			page.ManipulationCompleted += Page_ManipulationCompleted;
+			if (false)
+			{
+				page.RenderTransform = new CompositeTransform();
+				page.ManipulationMode = ManipulationModes.TranslateX;
+				page.ManipulationDelta += HBPage_ManipulationDelta;
+				page.ManipulationCompleted += Page_ManipulationCompleted;
+			}
 			return true;
 		}
 
@@ -139,7 +160,7 @@ namespace Huaban.UWP.Controls
 			}
 		}
 
-		private HBControl CreatePage(Type type)
+		private HBControl CreatePage(Type type, string targetName = null)
 		{
 			if (PageIndex <= PageStack.Count - 1)
 			{
@@ -150,8 +171,11 @@ namespace Huaban.UWP.Controls
 					FrameGrid.Children.Remove(_page);
 				}
 			}
-			var page = Activator.CreateInstance(type) as HBControl;
+			if (PageStack.Count > 0 && !string.IsNullOrEmpty(targetName) && PageStack[PageIndex].TargetName == targetName)
+				return PageStack[PageIndex];
 
+			var page = Activator.CreateInstance(type) as HBControl;
+			page.TargetName = targetName;
 			FrameGrid.Children.Add(page);
 			PageStack.Add(page);
 			PageIndex++;

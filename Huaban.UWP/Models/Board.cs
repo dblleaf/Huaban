@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using static System.Net.WebUtility;
 
 namespace Huaban.UWP.Models
 {
@@ -32,7 +33,8 @@ namespace Huaban.UWP.Models
 		public Pin cover { set; get; }
 
 		private bool _following;
-		public bool following {
+		public bool following
+		{
 			get { return _following; }
 			set { SetValue(ref _following, value); }
 		}
@@ -61,7 +63,7 @@ namespace Huaban.UWP.Models
 				board.board_id = obj.GetObject<string>("board_id");
 				board.user_id = obj.GetObject<string>("user_id");
 				board.description = obj.GetObject<string>("description");
-				board.title = obj.GetObject<string>("title");
+				board.title = HtmlDecode(obj.GetObject<string>("title"));
 				board.category_id = obj.GetObject<string>("category_id");
 				board.pin_count = obj.GetObject<string>("pin_count");
 				board.follow_count = obj.GetObject<string>("follow_count");

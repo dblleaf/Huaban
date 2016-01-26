@@ -24,6 +24,7 @@ namespace Huaban.UWP.ViewModels
 		{
 			Title = "发现";
 			PinListViewModel = new PinListViewModel(context, GetData);
+			PinListViewModel.TargetName = "HomePage";
 			CategoryList = Context.CategoryList;
 			SelecterVisibility = Visibility.Collapsed;
 
@@ -58,6 +59,13 @@ namespace Huaban.UWP.ViewModels
 
 		public PinListViewModel PinListViewModel { set; get; }
 		public IncrementalLoadingList<Category> CategoryList { get; private set; }
+
+		private bool _ShowSearchBox;
+		public bool ShowSearchBox
+		{
+			get { return _ShowSearchBox; }
+			set { SetValue(ref _ShowSearchBox, value); }
+		}
 
 		#endregion
 
@@ -112,7 +120,7 @@ namespace Huaban.UWP.ViewModels
 				return _ToSearchCommand ?? (_ToSearchCommand = new DelegateCommand(
 				o =>
 				{
-					this.Context.NavigationService.NavigateTo("SearchPage");
+					this.Context.NavigationService.NavigateTo("SearchPage", null, "SearchPage");
 				}, o => true));
 			}
 		}
@@ -133,7 +141,7 @@ namespace Huaban.UWP.ViewModels
 
 			IsLoading = true;
 
-		
+
 			try
 			{
 				await CategoryList.LoadMoreItemsAsync(0);

@@ -18,7 +18,7 @@
 			</Grid.RowDefinitions>
 			<HB:TitleControl>
 				<HB:TitleControl.Content>
-					<AutoSuggestBox QueryIcon="Find" PlaceholderText="搜索你喜欢的">
+					<AutoSuggestBox x:Name="searchBox" QuerySubmitted="searchBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
 						<Interactivity:Interaction.Behaviors>
 							<Core:EventTriggerBehavior EventName="QuerySubmitted">
 								<Core:InvokeCommandAction Command="{Binding QueryCommand}" CommandParameter="{Binding Pin.user}"></Core:InvokeCommandAction>

@@ -70,7 +70,7 @@ namespace Huaban.UWP.ViewModels
 
 		public ObservableCollection<NavItemModel> NavList { get; private set; }
 			= new ObservableCollection<NavItemModel>(new NavItemModel[] {
-				new NavItemModel() { DestinationPage = "HomePage", Label = "发现", Title = "发现", Symbol = Symbol.Find },
+				new NavItemModel() { DestinationPage = "HomePage", Label = "首页", Title = "首页", Symbol = Symbol.Home },
 				new NavItemModel() { DestinationPage = "FollowingPage", Label = "关注", SymbolChar = '', Authorization = true },
 				new NavItemModel() { DestinationPage = "MessagePage", Label = "消息", Title="消息", Symbol = Symbol.Message, Authorization = true }
 			});
@@ -85,7 +85,7 @@ namespace Huaban.UWP.ViewModels
 
 		public ObservableCollection<NavItemModel> NavFootList { get; private set; }
 			= new ObservableCollection<NavItemModel>(new NavItemModel[] {
-				new NavItemModel() { DestinationPage = "AboutPage", Label = "关于", Title="关于", Symbol = Symbol.Help },
+				new NavItemModel() { DestinationPage = "AboutPage", Label = "关于", Title="关于", SymbolChar='' },
 				new NavItemModel() { DestinationPage = "SettingPage", Label = "设置", Title="设置", Symbol = Symbol.Setting }
 			});
 
@@ -174,33 +174,28 @@ namespace Huaban.UWP.ViewModels
 			Task.Factory.StartNew(async () =>
 			{
 				await Context.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
-				 {
-					 DisplayTheme();
-					 if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_1")))
-					 {
-						 try
-						 {
-							 string msg = @"
-1.支持播放gif图片
-2.支持大图缓存，在设置中可以清理缓存
-3.新增快速采集，可以直接采集到上次采集到的画板
+				{
+					DisplayTheme();
+					if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_2")))
+					{
+						try
+						{
+							string msg = @"
+1.细微UI更改
+2.支持PC端，大家可以欢快的下载了
+3.修复手机端和PC端版本不一致的bug";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.2");
 
-顺便求大大^_^商店评价，多多介绍给其他人";
-							 var dialog = new MessageDialog(msg, "版本更新 v1.2.1");
-							 dialog.Commands.Add(new UICommand("给个五星", async c =>
-							 {
-								 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
-							 }));
-							 dialog.Commands.Add(new UICommand("你告退吧"));
-							 await dialog.ShowAsync();
-							 StorageHelper.SaveSetting("v1_2_1", "1");
-						 }
-						 catch (Exception ex)
-						 {
-							 string aa = ex.Message;
-						 }
-					 }
-				 });
+
+							await dialog.ShowAsync();
+							StorageHelper.SaveSetting("v1_2_2", "1");
+						}
+						catch (Exception ex)
+						{
+							string aa = ex.Message;
+						}
+					}
+				});
 
 			});
 

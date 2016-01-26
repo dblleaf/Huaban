@@ -425,6 +425,7 @@ namespace Huaban.UWP.ViewModels
 
 			if (e.NavigationMode == NavigationMode.New)
 			{
+				_LoadingCount = 0;
 				IsLoading = true;
 				ImageLoaded = false;
 				if (pin?.pin_id != Pin?.pin_id)

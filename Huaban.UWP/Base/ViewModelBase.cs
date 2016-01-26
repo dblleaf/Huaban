@@ -48,7 +48,7 @@ namespace Huaban.UWP.Base
 
 		#region loading
 		protected Action Loading;
-		private int _LoadingCount;
+		protected int _LoadingCount;
 		private bool _IsLoading;
 		public bool IsLoading
 		{

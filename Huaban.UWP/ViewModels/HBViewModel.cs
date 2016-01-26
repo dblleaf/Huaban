@@ -41,7 +41,7 @@ namespace Huaban.UWP.ViewModels
 				LeftHeaderVisibility = Visibility.Visible;
 			return finalSize;
 		}
-
+		public string TargetName { set; get; }
 		#region Commands
 
 		private DelegateCommand _ToBoardPinsCommand;
@@ -88,7 +88,7 @@ namespace Huaban.UWP.ViewModels
 
 						if (item != null)
 						{
-							Context.NavigationService.NavigateTo("PinDetailPage", item);
+							Context.NavigationService.NavigateTo("PinDetailPage", item, "PinDetail");
 						}
 					},
 					(Object obj) => !IsLoading)

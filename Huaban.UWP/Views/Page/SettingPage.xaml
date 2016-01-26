@@ -12,22 +12,21 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
-		<StackPanel Padding="24 12" Grid.Row="1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-			<ToggleSwitch Margin="0 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
-			<ToggleSwitch Margin="0 6" Header="直接退出" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
-			<ToggleSwitch Margin="0 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
-			<Button Style="{StaticResource SettingButton}" Padding="0 12" Command="{Binding ClearCacheCommand}">
-				<TextBlock VerticalAlignment="Bottom">清除缓存 (<Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/>)</TextBlock>
+		<StackPanel Padding="12 12" Grid.Row="1">
+			<ToggleSwitch Margin="12 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
+			<ToggleSwitch Margin="12 6" Header="直接退出" IsEnabled="False" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
+			<ToggleSwitch Margin="12 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
+			<Button Style="{StaticResource SettingButton}" Command="{Binding ClearCacheCommand}">
+				<Grid HorizontalAlignment="Stretch">
+					<TextBlock VerticalAlignment="Center">缓存大小：<Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/></TextBlock>
+					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Padding="12 0"><Run FontFamily="{StaticResource SymbolThemeFontFamily}" Text=""></Run>清理</TextBlock>
+				</Grid>
+				
 			</Button>
-			<Button Style="{StaticResource SettingButton}" Padding="0 12" Command="{Binding ReViewCommand}">
-				<TextBlock HorizontalAlignment="Left" Foreground="{ThemeResource SystemControlBackgroundAccentBrush}">给我评价</TextBlock>
-			</Button>
-			<Button Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
-				Style="{StaticResource SettingButton}" 
-				Padding="0 12" 
-				Command="{Binding LogoutCommand}">
-				<TextBlock HorizontalAlignment="Left">退出登录</TextBlock>
-			</Button>
+			<Button Background="{StaticResource HuabanColorBrush}" RequestedTheme="Dark" Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="给我评价"/>
+			<Button Background="{StaticResource HuabanColorBrush}" IsEnabled="False" Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
+				Style="{StaticResource SettingButton}" Content="退出登录"
+				Command="{Binding LogoutCommand}"></Button>
 		</StackPanel>
 		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
 	</Grid>

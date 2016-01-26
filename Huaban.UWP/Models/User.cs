@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
-
+using static System.Net.WebUtility;
 namespace Huaban.UWP.Models
 {
 	using Base;
@@ -49,7 +49,7 @@ namespace Huaban.UWP.Models
 				return null;
 			User user = new User();
 			user.user_id = obj.GetObject<string>("user_id");
-			user.username = obj.GetObject<string>("username");
+			user.username = HtmlDecode(obj.GetObject<string>("username"));
 			user.created_at = obj.GetObject<string>("created_at");
 			user.urlname = obj.GetObject<string>("urlname");
 			user.avatar = ImageFile.Parse(obj["avatar"] as JObject);

@@ -15,7 +15,7 @@
 		<ScrollViewer ViewChanged="ScrollViewer_ViewChanged" Padding="3">
 			<StackPanel>
 				<ContentControl x:Name="HeaderContent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ContentControl>
-				<ListView x:Name="lvWf" 
+				<ListView x:Name="lvWf"
 					ItemsSource="{Binding PinList}"
 					Width="{Binding BindWidth}" 
 					Style="{StaticResource ImageGridStyle}"

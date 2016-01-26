@@ -8,17 +8,40 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    Background="{StaticResource HuabanColorBrush}"
+    Background="{StaticResource HeadColorBrush}"
 	RequestedTheme="{Binding Theme}"
     mc:Ignorable="d">
 	<Grid x:Name="RootGrid1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
+				<!--<VisualState>
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowWidth="1200"></AdaptiveTrigger>
+					</VisualState.StateTriggers>
+					<VisualState.Setters>
+						<Setter Target="DetailFrame.(Grid.ColumnSpan)" Value="1" />
+						<Setter Target="DetailFrame.(Grid.Column)" Value="1" />
+						<Setter Target="LeftGrid.Width" Value="480" />
+						<Setter Target="DetailFrame.Visibility" Value="Visible" />
+						<Setter Target="DetailFrame.IsWideScreen" Value="True" />
+						<Setter Target="LeftGrid.(Grid.ColumnSpan)" Value="1" />
+						<Setter Target="LeftGrid.(Grid.Column)" Value="0" />
+						<Setter Target="RootSplitView.DisplayMode" Value="CompactOverlay" />
+						<Setter Target="RootSplitView.IsPaneOpen" Value="False" />
+					</VisualState.Setters>
+				</VisualState>-->
 				<VisualState>
 					<VisualState.StateTriggers>
 						<AdaptiveTrigger MinWindowWidth="720"></AdaptiveTrigger>
 					</VisualState.StateTriggers>
 					<VisualState.Setters>
+						<Setter Target="DetailFrame.(Grid.ColumnSpan)" Value="1" />
+						<Setter Target="DetailFrame.(Grid.Column)" Value="1" />
+						<Setter Target="LeftGrid.Width" Value="480" />
+						<Setter Target="DetailFrame.Visibility" Value="Visible" />
+						<Setter Target="DetailFrame.IsWideScreen" Value="True" />
+						<Setter Target="LeftGrid.(Grid.ColumnSpan)" Value="1" />
+						<Setter Target="LeftGrid.(Grid.Column)" Value="0" />
 						<Setter Target="RootSplitView.DisplayMode" Value="CompactOverlay" />
 						<Setter Target="RootSplitView.IsPaneOpen" Value="False" />
 					</VisualState.Setters>
@@ -34,12 +57,14 @@
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*"/>
+			
 			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
-		<Grid Grid.ColumnSpan="2">
+		<HB:TitleControl Height="48" Grid.ColumnSpan="2" VerticalAlignment="Top"></HB:TitleControl>
+		<Grid Grid.ColumnSpan="2" x:Name="LeftGrid">
 			<HB:SwipeableSplitView OpenPaneLength="256" x:Name="RootSplitView" 
-				IsPanSelectorEnabled="False" 
+				IsPanSelectorEnabled="False"
 				IsSwipeablePaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
 				<SplitView.Pane>
 					<Grid>
@@ -71,7 +96,7 @@
 					<Frame x:Name="MainFrame"></Frame>
 				</SplitView.Content>
 			</HB:SwipeableSplitView>
-			<Grid Background="{StaticResource HuabanColorBrush}" Width="48" Height="48" 
+			<Grid Background="Transparent" Width="48" Height="48" 
 				HorizontalAlignment="Left" VerticalAlignment="Top">
 				<ToggleButton x:Name="TogglePaneButton"
 					IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
@@ -79,8 +104,9 @@
 			</Grid>
 			
 		</Grid>
+		
 		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
-		<Grid Visibility="{Binding FirstBackVisibility}" RequestedTheme="Dark" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource HuabanColorBrush}" CornerRadius="2">
+		<Grid Grid.ColumnSpan="2" Visibility="{Binding FirstBackVisibility}" RequestedTheme="Dark" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource HuabanColorBrush}" CornerRadius="2">
 			<TextBlock VerticalAlignment="Center" Text="{Binding Message}"></TextBlock>
 		</Grid>
 	</Grid>

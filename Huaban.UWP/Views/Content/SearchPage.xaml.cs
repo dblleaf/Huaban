@@ -20,7 +20,17 @@ namespace Huaban.UWP.Views
 	{
 		public SearchPage()
 		{
+			
 			this.InitializeComponent();
+			this.Loaded += (s, e) => {
+				searchBox.Focus(FocusState.Programmatic);
+			};
+		}
+
+		private void searchBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+		{
+			
+			this.Focus(FocusState.Programmatic);
 		}
 	}
 }

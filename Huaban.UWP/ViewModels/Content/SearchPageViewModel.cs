@@ -56,6 +56,7 @@ namespace Huaban.UWP.ViewModels
 
 		public override Size ArrangeOverride(Size finalSize)
 		{
+			PinListViewModel?.SetWidth(finalSize.Width);
 			return finalSize;
 		}
 

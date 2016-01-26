@@ -80,6 +80,11 @@ namespace Huaban.UWP.ViewModels
 			await PinList.ClearAndReload();
 		}
 
+		public void Clear()
+		{
+			PinList.Clear();
+		}
+
 		public long GetMaxPinID()
 		{
 			long max = 0;
