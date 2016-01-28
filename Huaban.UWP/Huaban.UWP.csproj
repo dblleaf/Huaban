@@ -201,8 +201,8 @@
     <Compile Include="ViewModels\BoardListViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardDetailViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardPinsViewModel.cs" />
-    <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
     <Compile Include="ViewModels\Content\ImageViewModel.cs" />
+    <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
     <Compile Include="ViewModels\Content\SearchViewModel.cs" />
     <Compile Include="ViewModels\Content\UserViewModel.cs" />
     <Compile Include="ViewModels\Content\PinDetailViewModel.cs" />
