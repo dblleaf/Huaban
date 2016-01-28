@@ -47,13 +47,19 @@ namespace Huaban.UWP.ViewModels
 		public IncrementalLoadingList<Pin> PinList
 		{
 			get { return _PinList; }
-			set
-			{ SetValue(ref _PinList, value); }
+			set { SetValue(ref _PinList, value); }
 		}
 
 		public int Count
 		{
 			get { return PinList.Count; }
+		}
+
+		private Pin _SelectedItem;
+		public Pin SelectedItem
+		{
+			get { return _SelectedItem; }
+			set { SetValue(ref _SelectedItem, value); }
 		}
 
 		#endregion

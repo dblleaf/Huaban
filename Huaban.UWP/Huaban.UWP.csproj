@@ -123,6 +123,7 @@
     <Compile Include="Commands\ToUserCommand.cs" />
     <Compile Include="Commands\ToBoardDetailCommand.cs" />
     <Compile Include="Commands\ToBoardPinsCommand.cs" />
+    <Compile Include="Controls\IncrementalLoadingFlipView.cs" />
     <Compile Include="Controls\UserGrid.xaml.cs">
       <DependentUpon>UserGrid.xaml</DependentUpon>
     </Compile>
@@ -198,62 +199,66 @@
     <Compile Include="Models\WeeklyHotBoardImg.cs" />
     <Compile Include="Models\WeeklyTopicBoardImg.cs" />
     <Compile Include="ViewModels\BoardListViewModel.cs" />
-    <Compile Include="ViewModels\Content\BoardDetailPageViewModel.cs" />
-    <Compile Include="ViewModels\Content\BoardPinsPageViewModel.cs" />
+    <Compile Include="ViewModels\Content\BoardDetailViewModel.cs" />
+    <Compile Include="ViewModels\Content\BoardPinsViewModel.cs" />
     <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
-    <Compile Include="ViewModels\Content\SearchPageViewModel.cs" />
-    <Compile Include="ViewModels\Content\UserPageViewModel.cs" />
-    <Compile Include="ViewModels\Content\PinDetailPageViewModel.cs" />
-    <Compile Include="ViewModels\Page\AboutPageViewModel.cs" />
-    <Compile Include="ViewModels\Page\MessagePageViewModel.cs" />
-    <Compile Include="ViewModels\Page\MyPageViewModel.cs" />
-    <Compile Include="ViewModels\Page\SettingPageViewModel.cs" />
-    <Compile Include="ViewModels\Page\FollowingPageViewModel.cs" />
+    <Compile Include="ViewModels\Content\ImageViewModel.cs" />
+    <Compile Include="ViewModels\Content\SearchViewModel.cs" />
+    <Compile Include="ViewModels\Content\UserViewModel.cs" />
+    <Compile Include="ViewModels\Content\PinDetailViewModel.cs" />
+    <Compile Include="ViewModels\Page\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Page\MessageViewModel.cs" />
+    <Compile Include="ViewModels\Page\MyViewModel.cs" />
+    <Compile Include="ViewModels\Page\SettingViewModel.cs" />
+    <Compile Include="ViewModels\Page\FollowingViewModel.cs" />
     <Compile Include="ViewModels\HBViewModel.cs" />
     <Compile Include="ViewModels\UserListViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
-    <Compile Include="Views\Content\BoardDetailPage.xaml.cs">
-      <DependentUpon>BoardDetailPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\ImageView.xaml.cs">
+      <DependentUpon>ImageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\BoardPinsPage.xaml.cs">
-      <DependentUpon>BoardPinsPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\BoardDetailView.xaml.cs">
+      <DependentUpon>BoardDetailView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\BoardPinsView.xaml.cs">
+      <DependentUpon>BoardPinsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\LoginDialog.xaml.cs">
       <DependentUpon>LoginDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\PinDetailPage.xaml.cs">
-      <DependentUpon>PinDetailPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\PinDetailView.xaml.cs">
+      <DependentUpon>PinDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\SearchPage.xaml.cs">
-      <DependentUpon>SearchPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\UserPage.xaml.cs">
-      <DependentUpon>UserPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page\AboutPage.xaml.cs">
-      <DependentUpon>AboutPage.xaml</DependentUpon>
+    <Compile Include="Views\Page\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page\SettingPage.xaml.cs">
-      <DependentUpon>SettingPage.xaml</DependentUpon>
+    <Compile Include="Views\Page\SettingView.xaml.cs">
+      <DependentUpon>SettingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page\MessagePage.xaml.cs">
-      <DependentUpon>MessagePage.xaml</DependentUpon>
+    <Compile Include="Views\Page\MessageView.xaml.cs">
+      <DependentUpon>MessageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page\MyPage.xaml.cs">
-      <DependentUpon>MyPage.xaml</DependentUpon>
+    <Compile Include="Views\Page\MyView.xaml.cs">
+      <DependentUpon>MyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page\FollowingPage.xaml.cs">
-      <DependentUpon>FollowingPage.xaml</DependentUpon>
+    <Compile Include="Views\Page\FollowingView.xaml.cs">
+      <DependentUpon>FollowingView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Page\HomePageViewModel.cs" />
-    <Compile Include="ViewModels\Page\ShellPageViewModel.cs" />
+    <Compile Include="ViewModels\Page\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Page\ShellViewModel.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
-    <Compile Include="Views\Page\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
+    <Compile Include="Views\Page\HomeView.xaml.cs">
+      <DependentUpon>HomeView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Page\ShellPage.xaml.cs">
-      <DependentUpon>ShellPage.xaml</DependentUpon>
+    <Compile Include="Views\Page\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -320,11 +325,15 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\Content\BoardDetailPage.xaml">
+    <Page Include="Views\Content\ImageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\BoardPinsPage.xaml">
+    <Page Include="Views\Content\BoardDetailView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\BoardPinsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -332,43 +341,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\PinDetailPage.xaml">
+    <Page Include="Views\Content\PinDetailView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\SearchPage.xaml">
+    <Page Include="Views\Content\SearchView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\UserPage.xaml">
+    <Page Include="Views\Content\UserView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page\AboutPage.xaml">
+    <Page Include="Views\Page\AboutView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page\SettingPage.xaml">
+    <Page Include="Views\Page\SettingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page\MessagePage.xaml">
+    <Page Include="Views\Page\MessageView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page\MyPage.xaml">
+    <Page Include="Views\Page\MyView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Page\FollowingPage.xaml">
+    <Page Include="Views\Page\FollowingView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Page\HomePage.xaml">
+    <Page Include="Views\Page\HomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Page\ShellPage.xaml">
+    <Page Include="Views\Page\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

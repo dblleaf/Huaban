@@ -15,7 +15,7 @@ namespace Huaban.UWP.Controls
 
 			var assemblyQualifiedAppType = type.AssemblyQualifiedName;
 
-			var pageNameWithParameter = assemblyQualifiedAppType.Replace(type.FullName, type.Namespace.Substring(0, type.Namespace.LastIndexOf('.')) + ".ViewModels.{0}ViewModel");
+			var pageNameWithParameter = assemblyQualifiedAppType.Replace(type.FullName, type.Namespace.Substring(0, type.Namespace.LastIndexOf('.')) + ".ViewModels.{0}Model");
 
 			var viewFullName = string.Format(pageNameWithParameter, pageName);
 			var viewType = Type.GetType(viewFullName);

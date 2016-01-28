@@ -1,0 +1,24 @@
+﻿<HB:HBPage
+	x:Class="Huaban.UWP.Views.FollowingView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:HB="using:Huaban.UWP.Controls"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d">
+	<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
+		<Pivot Style="{StaticResource DarkThemeHeaderPivotStlye}">
+			<Pivot.LeftHeader>
+				<Grid Width="48" Visibility="{Binding LeftHeaderVisibility}"></Grid>
+			</Pivot.LeftHeader>
+			<PivotItem Header="关注的采集">
+				<HB:ImageGrid ListModel="{Binding PinListViewModel}"></HB:ImageGrid>
+			</PivotItem>
+			<PivotItem Header="关注的画板">
+				<HB:BoardGrid ListModel="{Binding BoardListViewModel}"></HB:BoardGrid>
+			</PivotItem>
+		</Pivot>
+		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
+	</Grid>
+</HB:HBPage>

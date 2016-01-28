@@ -18,7 +18,7 @@ namespace Huaban.UWP.Commands
 
 		public void Execute(object parameter)
 		{
-			App.AppContext.NavigationService.NavigateTo("BoardPinsPage", parameter);
+			App.AppContext.NavigationService.NavigateTo("BoardPins", parameter);
 		}
 	}
 }

@@ -61,7 +61,7 @@ namespace Huaban.UWP.ViewModels
 							item = args.ClickedItem as Board;
 						if (item != null)
 						{
-							Context.NavigationService.NavigateTo("BoardPinsPage", item);
+							Context.NavigationService.NavigateTo("BoardPins", item);
 						}
 					},
 					(Object obj) => !IsLoading)
@@ -78,18 +78,12 @@ namespace Huaban.UWP.ViewModels
 				return _ToPinDetailCommand ?? (_ToPinDetailCommand = new DelegateCommand(
 					(Object obj) =>
 					{
-						var args = obj as ItemClickEventArgs;
-						var item = obj as Pin;
-						if (args == null && item == null)
+						PinListViewModel model = obj as PinListViewModel;
+
+						if (model == null)
 							return;
 
-						if (args != null)
-							item = args.ClickedItem as Pin;
-
-						if (item != null)
-						{
-							Context.NavigationService.NavigateTo("PinDetailPage", item, "PinDetail");
-						}
+						Context.NavigationService.NavigateTo("Image", model);
 					},
 					(Object obj) => !IsLoading)
 				);
@@ -116,7 +110,7 @@ namespace Huaban.UWP.ViewModels
 
 						if (item != null)
 						{
-							Context.NavigationService.NavigateTo("UserPage", item);
+							Context.NavigationService.NavigateTo("User", item);
 						}
 					},
 					(Object obj) => !IsLoading)

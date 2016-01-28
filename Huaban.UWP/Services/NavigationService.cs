@@ -126,7 +126,7 @@ namespace Huaban.UWP.Services
 			var type = this.GetType();
 			var assemblyQualifiedAppType = type.AssemblyQualifiedName;
 
-			var pageNameWithParameter = assemblyQualifiedAppType.Replace(type.FullName, type.Namespace.Substring(0, type.Namespace.LastIndexOf('.')) + ".Views.{0}");
+			var pageNameWithParameter = assemblyQualifiedAppType.Replace(type.FullName, type.Namespace.Substring(0, type.Namespace.LastIndexOf('.')) + ".Views.{0}View");
 
 			var viewFullName = string.Format(pageNameWithParameter, pageName);
 			var viewType = Type.GetType(viewFullName);
@@ -147,7 +147,7 @@ namespace Huaban.UWP.Services
 			var type = this.GetType();
 			var assemblyQualifiedAppType = type.AssemblyQualifiedName;
 
-			var pageNameWithParameter = assemblyQualifiedAppType.Replace(this.GetType().FullName, type.Namespace.Substring(0, type.Namespace.LastIndexOf('.')) + ".ViewModels.{0}ViewModel");
+			var pageNameWithParameter = assemblyQualifiedAppType.Replace(this.GetType().FullName, type.Namespace.Substring(0, type.Namespace.LastIndexOf('.')) + ".ViewModels.{0}Model");
 
 			var viewFullName = string.Format(pageNameWithParameter, pageName);
 			var viewType = Type.GetType(viewFullName);
