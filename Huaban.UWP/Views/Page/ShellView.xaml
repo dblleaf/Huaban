@@ -59,10 +59,9 @@
 		<Grid Grid.ColumnSpan="2" x:Name="LeftGrid">
 			<HB:SwipeableSplitView OpenPaneLength="256" x:Name="RootSplitView" 
 				IsPanSelectorEnabled="False"
-
 				IsSwipeablePaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
 				<SplitView.Pane>
-					<Grid Background="Red">
+					<Grid Background="{StaticResource HuabanLightColorBrush}" RequestedTheme="Dark">
 						<ListView ItemsSource="{Binding NavList}"
 							Style="{StaticResource NavListStyle}"
 							ItemTemplate="{StaticResource NavigationListTemplate}"
@@ -75,7 +74,7 @@
 							</Interactivity:Interaction.Behaviors>
 						</ListView>
 						<ListView ItemsSource="{Binding NavFootList}"
-							Style="{StaticResource NavListStyle}" Margin="0 0 0 24"
+							Style="{StaticResource NavListStyle}"
 							ItemTemplate="{StaticResource NavigationListTemplate}"
 							VerticalAlignment="Bottom">
 							<Interactivity:Interaction.Behaviors>
@@ -93,7 +92,7 @@
 			</HB:SwipeableSplitView>
 			<Grid Background="Transparent" Width="48" Height="48" 
 				HorizontalAlignment="Left" VerticalAlignment="Top">
-				<ToggleButton x:Name="TogglePaneButton"
+				<ToggleButton x:Name="TogglePaneButton" RequestedTheme="Dark"
 					IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
 					Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
 			</Grid>

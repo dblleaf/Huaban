@@ -62,7 +62,7 @@ namespace Huaban.UWP.ViewModels
 		private NavItemModel UserItem { set; get; }
 			= new NavItemModel()
 			{
-				DestinationPage = "MyPage",
+				DestinationPage = "My",
 				Label = "我的",
 				Symbol = Symbol.People,
 				Authorization = true
@@ -85,8 +85,8 @@ namespace Huaban.UWP.ViewModels
 
 		public ObservableCollection<NavItemModel> NavFootList { get; private set; }
 			= new ObservableCollection<NavItemModel>(new NavItemModel[] {
-				new NavItemModel() { DestinationPage = "AboutPage", Label = "关于", Title="关于", SymbolChar='' },
-				new NavItemModel() { DestinationPage = "SettingPage", Label = "设置", Title="设置", Symbol = Symbol.Setting }
+				new NavItemModel() { DestinationPage = "About", Label = "关于", Title="关于", SymbolChar='' },
+				new NavItemModel() { DestinationPage = "Setting", Label = "设置", Title="设置", Symbol = Symbol.Setting }
 			});
 
 		public User User
@@ -176,19 +176,21 @@ namespace Huaban.UWP.ViewModels
 				await Context.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
 				{
 					DisplayTheme();
-					if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_2")))
+					if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_5")))
 					{
 						try
 						{
 							string msg = @"
-1.细微UI更改
-2.支持PC端，大家可以欢快的下载了
-3.修复手机端和PC端版本不一致的bug";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.2");
+1.PC端取消左右分栏以便有更大空间
+2.点击采集（也叫图片）进入大图预览模式，可以手机端左右滑动或者PC端滚动鼠标滚轮以前后翻页
+3.大图预览模式轻触/点击屏幕，可以隐藏/取消隐藏图片详情和相应操作，可以轻触/点击详情空白处进入更多内容（推荐、采集、讨论、喜欢），点击人头查看采集者信息，点击采集到的画板查看该画板更多的采集。
+4.更多内容里取消详情显示，增加推荐采集
+5.细微UI更改";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.5");
 
 
 							await dialog.ShowAsync();
-							StorageHelper.SaveSetting("v1_2_2", "1");
+							StorageHelper.SaveSetting("v1_2_5", "1");
 						}
 						catch (Exception ex)
 						{

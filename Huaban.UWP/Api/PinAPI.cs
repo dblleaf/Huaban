@@ -87,7 +87,16 @@ namespace Huaban.UWP.Api
 			var obj = JObject.Parse(json);
 			var list = User.ParseList(obj["users"] as JArray);
 			return list;
+		}
 
+		//推荐的采集
+		public async Task<List<Pin>> GetRecommendList(string PinID, int page = 1, int per_page = 10)
+		{
+			string uri = $"http://api.huaban.com/pins/{PinID}/recommend/?ijzu3ifx&page={page}&per_page={per_page}&wfl=1";
+
+			string json = await Get(uri);
+			var arr = JArray.Parse(json);
+			return Models.Pin.ParseList(arr);
 		}
 	}
 }

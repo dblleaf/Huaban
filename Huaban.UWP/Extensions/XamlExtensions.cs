@@ -13,16 +13,16 @@ namespace Huaban.UWP
 	/// </summary>
 	public static class XamlExtensions
 	{
-		public static List<Control> AllChildren(this DependencyObject parent)
+		public static List<FrameworkElement> AllChildren(this DependencyObject parent)
 		{
-			var list = new List<Control>();
+			var list = new List<FrameworkElement>();
 
 			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
 			{
 				var _Child = VisualTreeHelper.GetChild(parent, i);
-				if (_Child is Control)
+				if (_Child is FrameworkElement)
 				{
-					list.Add(_Child as Control);
+					list.Add(_Child as FrameworkElement);
 				}
 				list.AddRange(AllChildren(_Child));
 			}
@@ -33,7 +33,7 @@ namespace Huaban.UWP
 		public static T GetChild<T>(this DependencyObject parentContainer, string controlName)
 		{
 			var childControls = AllChildren(parentContainer);
-			var control = childControls.OfType<Control>().Where(x => x.Name.Equals(controlName)).Cast<T>().First();
+			var control = childControls.OfType<FrameworkElement>().Where(x => x.Name.Equals(controlName)).Cast<T>().First();
 
 			return control;
 		}

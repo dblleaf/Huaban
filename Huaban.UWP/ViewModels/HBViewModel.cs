@@ -78,6 +78,29 @@ namespace Huaban.UWP.ViewModels
 				return _ToPinDetailCommand ?? (_ToPinDetailCommand = new DelegateCommand(
 					(Object obj) =>
 					{
+						var args = obj as ItemClickEventArgs;
+						var item = obj as Pin;
+						if (args == null && item == null)
+							return;
+
+						if (args != null)
+							item = args.ClickedItem as Pin;
+
+						Context.NavigationService.NavigateTo("PinDetail", item);
+					},
+					(Object obj) => !IsLoading)
+				);
+			}
+		}
+		//ToImageViewCommand
+		private DelegateCommand _ToImageViewCommand;
+		public DelegateCommand ToImageViewCommand
+		{
+			get
+			{
+				return _ToImageViewCommand ?? (_ToImageViewCommand = new DelegateCommand(
+					(Object obj) =>
+					{
 						PinListViewModel model = obj as PinListViewModel;
 
 						if (model == null)
@@ -89,7 +112,6 @@ namespace Huaban.UWP.ViewModels
 				);
 			}
 		}
-
 
 		//ToPinDetailCommand
 		private DelegateCommand _ToUserPageCommand;

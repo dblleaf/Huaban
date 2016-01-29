@@ -28,7 +28,7 @@
 					</ListView.ItemsPanel>
 					<Interactivity:Interaction.Behaviors>
 						<Core:EventTriggerBehavior EventName="ItemClick">
-							<Core:InvokeCommandAction Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+							<Core:InvokeCommandAction Command="{Binding ToImageViewCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
 						</Core:EventTriggerBehavior>
 					</Interactivity:Interaction.Behaviors>
 				</ListView>
