@@ -117,6 +117,7 @@
     <Compile Include="Base\ViewModelBase.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\FollowUserCommand.cs" />
+    <Compile Include="Commands\PinImageLoadingCommand.cs" />
     <Compile Include="Commands\PinImageLoadCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Commands\FollowBoardCommand.cs" />

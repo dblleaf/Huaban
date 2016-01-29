@@ -9,7 +9,7 @@ namespace Huaban.UWP.Commands
 {
 	using Models;
 	using ViewModels;
-	public class PinImageLoadCommand : ICommand
+	public class PinImageLoadingCommand : ICommand
 	{
 		public event EventHandler CanExecuteChanged;
 
@@ -20,12 +20,9 @@ namespace Huaban.UWP.Commands
 
 		public void Execute(object parameter)
 		{
-			var pin = parameter as Pin;
-			if (pin != null)
-				pin.IsLoaded = true;
-			var model = parameter as HBViewModel;
+			var model = parameter as PinListViewModel;
 			if (model != null)
-				model.IsLoading = false;
+				model.IsLoading = true;
 
 		}
 	}

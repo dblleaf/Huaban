@@ -16,11 +16,17 @@ using Windows.UI.Xaml.Navigation;
 namespace Huaban.UWP.Views
 {
 	using Controls;
+	using ViewModels;
 	public sealed partial class ImageView : HBControl
 	{
 		public ImageView()
 		{
 			this.InitializeComponent();
+
+		}
+		public HBViewModel HBVM
+		{
+			get { return this.ViewModel as HBViewModel; }
 		}
 	}
 }

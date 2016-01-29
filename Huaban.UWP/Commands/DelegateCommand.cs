@@ -42,9 +42,6 @@ namespace Huaban.UWP.Commands
 			}
 			catch (Exception ex)
 			{
-#if DEBUG
-				Debug.WriteLine(ex.Message);
-#endif
 			}
 		}
 

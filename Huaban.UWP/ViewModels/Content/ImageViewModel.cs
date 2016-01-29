@@ -2,7 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI;
+using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
+using Windows.UI.Core;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Input;
+using Windows.Storage;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -16,24 +27,356 @@ namespace Huaban.UWP.ViewModels
 		public ImageViewModel(Context context)
 			: base(context)
 		{
-
+			BoardList = Context.BoardListVM?.BoardList;
+			SelecterVisibility = Visibility.Collapsed;
+			CurrentBoardIndex = -1;
+			SetQuickBoard(QuickBoard);
 		}
+
 		#region Properties
+		public IncrementalLoadingList<Board> BoardList { set; get; }
+
 		private PinListViewModel _PinListViewModel;
 		public PinListViewModel PinListViewModel
 		{
 			get { return _PinListViewModel; }
 			set { SetValue(ref _PinListViewModel, value); }
 		}
+
+		public Pin Pin
+		{
+			get { return PinListViewModel.SelectedItem; }
+		}
+
+		private bool _ImageLoaded;
+		public bool ImageLoaded
+		{
+			get { return _ImageLoaded; }
+			set { SetValue(ref _ImageLoaded, value); }
+		}
+
+		private IconElement _Icon = new FontIcon() { Glyph = "" };
+		public IconElement Icon
+		{
+			get { return _Icon; }
+			set { SetValue(ref _Icon, value); }
+		}
+
+		public bool Liked
+		{
+			set
+			{
+				Pin.liked = value;
+				if (value)
+					Icon = new FontIcon() { Glyph = "", Foreground = new SolidColorBrush(Colors.Red) };
+				else
+					Icon = new FontIcon() { Glyph = "" };
+			}
+			get { return Pin.liked; }
+		}
+
+		private Visibility _SelecterVisibility;
+		public Visibility SelecterVisibility
+		{
+			get { return _SelecterVisibility; }
+			set
+			{
+				SetValue(ref _SelecterVisibility, value);
+				if (SelecterVisibility == Visibility.Visible)
+					this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
+				else
+					this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
+			}
+		}
+
+		private Board _CurrentBoard;
+		public Board CurrentBoard
+		{
+			get { return _CurrentBoard; }
+			set { SetValue(ref _CurrentBoard, value); }
+		}
+
+		private int _CurrentBoardIndex;
+		public int CurrentBoardIndex
+		{
+			get { return _CurrentBoardIndex; }
+			set { SetValue(ref _CurrentBoardIndex, value); }
+		}
+
+		private int _PivotSelectedIndex;
+		public int PivotSelectedIndex
+		{
+			get { return _PivotSelectedIndex; }
+			set { SetValue(ref _PivotSelectedIndex, value); }
+		}
+
+		private string _NewBoardName;
+		public string NewBoardName
+		{
+			get { return _NewBoardName; }
+			set { SetValue(ref _NewBoardName, value); }
+		}
+
+
+		private bool _CanQuick;
+		public bool CanQuick
+		{
+			get { return _CanQuick; }
+			set { SetValue(ref _CanQuick, value); }
+		}
+
+		private string _QuickBoardName;
+		public string QuickBoardName
+		{
+			get { return _QuickBoardName; }
+			set { SetValue(ref _QuickBoardName, value); }
+		}
+
+		internal static Board QuickBoard { set; get; }
+		#endregion
+
+		#region Commands
+
+		//下载
+		private DelegateCommand _DownloadCommand;
+		public DelegateCommand DownLoadCommand
+		{
+			get
+			{
+				AppBarButton aaa = new AppBarButton();
+
+				return _DownloadCommand ?? (_DownloadCommand = new DelegateCommand(
+					async o =>
+					{
+						if (Pin == null)
+							return;
+						var buffer = await HttpHelper.Factory.GetBytes(Pin.file.Orignal);
+						string type = Pin.file.type?.ToLower();
+						if (type?.IndexOf("png") >= 0)
+							type = "png";
+						else if (type.IndexOf("bmp") >= 0)
+							type = "bmp";
+						else if (type.IndexOf("gif") >= 0)
+							type = "gif";
+						else
+							type = "jpg";
+						var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
+
+						await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img, "huaban");
+						Context.ShowTip("下载成功");
+
+					}, o => true)
+				);
+			}
+		}
+
+		//喜欢/取消喜欢
+		private DelegateCommand _LikeCommand;
+		public DelegateCommand LikeCommand
+		{
+			get
+			{
+				return _LikeCommand ?? (_LikeCommand = new DelegateCommand(
+					async o =>
+					{
+						string str = await Context.API.PinAPI.Like(Pin.pin_id, !Pin.liked);
+
+						Liked = (str != "{}");
+
+						Context.ShowTip(Liked ? "已设置为喜欢" : "已取消喜欢");
+					}, o => true)
+				);
+			}
+		}
+
+		//返回主界面
+		private DelegateCommand _HideCommand;
+		public DelegateCommand HideCommand
+		{
+			get
+			{
+				return _HideCommand ?? (_HideCommand = new DelegateCommand(
+					obj =>
+					{
+						Context.NavigationService.GoBack();
+					}, o => true)
+				);
+			}
+		}
+
+		private DelegateCommand _LoadingStartedCommand;
+		public DelegateCommand LoadingStartedCommand
+		{
+			get
+			{
+				return _LoadingStartedCommand ?? (_LoadingStartedCommand = new DelegateCommand(
+					o =>
+					{
+						IsLoading = true;
+						ImageLoaded = true;
+					}, o => true)
+				);
+			}
+		}
+		//图片加载完毕
+		private DelegateCommand _LoadedCommand;
+		public DelegateCommand LoadedCommand
+		{
+			get
+			{
+				return _LoadedCommand ?? (_LoadedCommand = new DelegateCommand(
+					o =>
+					{
+						IsLoading = false;
+						ImageLoaded = true;
+					}, o => true)
+				);
+			}
+		}
+
+		//弹出选择采集到画板
+		private DelegateCommand _ShowSelectCommand;
+		public DelegateCommand ShowSelectCommand
+		{
+			get
+			{
+				return _ShowSelectCommand ?? (_ShowSelectCommand = new DelegateCommand(
+				o =>
+				{
+					SelecterVisibility = Visibility.Visible;
+					CurrentBoardIndex = -1;
+				}, o => true));
+			}
+		}
+
+		//隐藏选择采集到画板
+		private DelegateCommand _HideSelectCommand;
+		public DelegateCommand HideSelectCommand
+		{
+			get
+			{
+				return _HideSelectCommand ?? (_HideSelectCommand = new DelegateCommand(
+				o =>
+				{
+					SelecterVisibility = Visibility.Collapsed;
+				}, o => true));
+			}
+		}
+
+		private DelegateCommand _SelectBoardCommand;
+		public DelegateCommand SelectBoardCommand
+		{
+			get
+			{
+				return _SelectBoardCommand ?? (_SelectBoardCommand = new DelegateCommand(
+				async o =>
+				{
+					var args = o as ItemClickEventArgs;
+					var item = o as Board;
+					if (args == null && item == null)
+						return;
+
+					if (args != null)
+						item = args.ClickedItem as Board;
+
+					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
+					if (item.cover == null)
+						item.cover = pin;
+					Context.ShowTip("采集成功");
+					SetQuickBoard(item);
+				}, o => true));
+			}
+		}
+
+		private DelegateCommand _NewBoardCommand;
+		public DelegateCommand NewBoardCommand
+		{
+			get
+			{
+				return _NewBoardCommand ?? (_NewBoardCommand = new DelegateCommand(
+				async o =>
+				{
+					if (string.IsNullOrEmpty(NewBoardName))
+						return;
+					string boardName = NewBoardName;
+					NewBoardName = "";
+					var board = await Context.API.BoardAPI.add(boardName);
+
+					if (board != null)
+					{
+						var list = Context.BoardListVM.BoardList;
+						list.Add(board);
+						var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
+						board.pins.Add(pin);
+						board.cover = pin;
+						Context.ShowTip("采集成功");
+						SetQuickBoard(board);
+					}
+				}, o => true));
+			}
+		}
+
+		private DelegateCommand _BoardKeyDownCommand;
+		public DelegateCommand BoardKeyDownCommand
+		{
+			get
+			{
+				return _BoardKeyDownCommand ?? (_BoardKeyDownCommand = new DelegateCommand(
+				o =>
+				{
+					var e = o as KeyRoutedEventArgs;
+
+					if (e?.Key == Windows.System.VirtualKey.Enter)
+					{
+						var txt = e.OriginalSource as TextBox;
+						NewBoardName = txt.Text;
+						NewBoardCommand.Execute(e.OriginalSource);
+						SelecterVisibility = Visibility.Collapsed;
+					}
+
+				}, o => true));
+			}
+		}
+
+		//快速采集
+		private DelegateCommand _QuickPinCommand;
+		public DelegateCommand QuickPinCommand
+		{
+			get
+			{
+				return _QuickPinCommand ?? (_QuickPinCommand = new DelegateCommand(
+				o =>
+				{
+					SelectBoardCommand.Execute(QuickBoard);
+				}, o => true));
+			}
+		}
+
 		#endregion
 
 		#region Methods
+
 		public override void OnNavigatedTo(HBNavigationEventArgs e)
 		{
 			PinListViewModel model = e.Parameter as PinListViewModel;
 			if (model != null)
 				PinListViewModel = model;
 			
+		}
+		private void NavigationService_BackEvent(object sender, BackRequestedEventArgs e)
+		{
+			if (!e.Handled)
+			{
+				e.Handled = true;
+				SelecterVisibility = Visibility.Collapsed;
+			}
+		}
+
+		private void SetQuickBoard(Board board)
+		{
+			QuickBoard = board;
+			CanQuick = IsLogin && QuickBoard != null;
+			QuickBoardName = QuickBoard?.title;
 		}
 		#endregion
 	}

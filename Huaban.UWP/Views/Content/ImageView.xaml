@@ -9,30 +9,53 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:controls="using:ImageLib.Controls"
+	xmlns:commands="using:Huaban.UWP.Commands"
     mc:Ignorable="d">
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
+	<Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
 		BorderThickness="0.9 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1 0">
+		<Grid.Resources></Grid.Resources>
 		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
-			<HB:IncrementalLoadingFlipView DataContext="{Binding PinListViewModel}"
-				ItemsSource="{Binding PinList}" 
-				SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
-				<FlipView.ItemTemplate>
+			<HB:IncrementalLoadingFlipView
+				ItemsSource="{Binding PinListViewModel.PinList}" 
+				SelectedItem="{Binding PinListViewModel.SelectedItem,Mode=TwoWay}">
+				<HB:IncrementalLoadingFlipView.ItemTemplate>
 					<DataTemplate>
 						<ScrollViewer ZoomMode="Enabled" VerticalScrollMode="Disabled" VerticalScrollBarVisibility="Disabled">
-							<controls:ImageView UriSource="{Binding file.Orignal}" Stretch="Uniform">
-								<Interactivity:Interaction.Behaviors>
-									<Core:EventTriggerBehavior EventName="LoadingCompleted">
-										<Core:InvokeCommandAction Command="{Binding LoadedCommand}"></Core:InvokeCommandAction>
-									</Core:EventTriggerBehavior>
-									<Core:EventTriggerBehavior EventName="LoadingFailed">
-										<Core:InvokeCommandAction Command="{Binding LoadedCommand}"></Core:InvokeCommandAction>
-									</Core:EventTriggerBehavior>
-								</Interactivity:Interaction.Behaviors>
-							</controls:ImageView>
+							<Grid>
+								<controls:ImageView UriSource="{Binding file.Orignal}"  Stretch="Uniform" x:Name="img"></controls:ImageView>
+								<ProgressRing IsActive="{Binding ElementName=img,Path=IsLoading}"></ProgressRing>
+							</Grid>
 						</ScrollViewer>
 					</DataTemplate>
-				</FlipView.ItemTemplate>
+				</HB:IncrementalLoadingFlipView.ItemTemplate>
 			</HB:IncrementalLoadingFlipView>
+			<CommandBar VerticalAlignment="Bottom">
+				<AppBarButton Label="下载" Icon="Save" Command="{Binding DownLoadCommand}"></AppBarButton>
+				<AppBarButton Label="喜欢" Visibility="{Binding IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Icon="{Binding Icon}" Command="{Binding LikeCommand}"></AppBarButton>
+				<AppBarButton Label="采集" Visibility="{Binding IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}" Command="{Binding ShowSelectCommand}">
+					<AppBarButton.Icon>
+						<FontIcon Glyph=""></FontIcon>
+					</AppBarButton.Icon>
+				</AppBarButton>
+				<AppBarButton Label="快速采集" Visibility="{Binding CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}" Command="{Binding QuickPinCommand}">
+					<AppBarButton.Icon>
+						<FontIcon Glyph=""></FontIcon>
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</CommandBar>
+			<StackPanel Margin="0 0 0 36"
+				Opacity="0.7" RequestedTheme="Dark"
+				HorizontalAlignment="Right" VerticalAlignment="Bottom" 
+				Visibility="{Binding CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}">
+				<StackPanel
+					Padding="24 12"
+					Background="{StaticResource HuabanColorBrush}">
+					<TextBlock>快速采集到画板：<Run Text="{Binding QuickBoardName}"/></TextBlock>
+				</StackPanel>
+				<Polygon HorizontalAlignment="Right" Width="94" Height="12" Points="0,0 24,0 12,12" Fill="{StaticResource HuabanColorBrush}"/>
+			</StackPanel>
+			<HB:BoardSelecter Visibility="{Binding SelecterVisibility}"></HB:BoardSelecter>
+
 		</Grid>
 	</Grid>
 </HB:HBControl>

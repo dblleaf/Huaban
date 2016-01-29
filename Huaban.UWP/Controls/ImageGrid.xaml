@@ -19,7 +19,7 @@
 					ItemsSource="{Binding PinList}"
 					Width="{Binding BindWidth}" 
 					Style="{StaticResource ImageGridStyle}"
-					SelectedItem="{Binding SelectedItem}"
+					SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
 					ItemTemplate="{StaticResource ImageGridTemplate}">
 					<ListView.ItemsPanel>
 						<ItemsPanelTemplate>
