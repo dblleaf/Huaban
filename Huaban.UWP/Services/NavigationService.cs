@@ -114,7 +114,7 @@ namespace Huaban.UWP.Services
 				return HBFrame.CanGoBack || Frame.CanGoBack;
 			}
 		}
-		private void DisplayBackButton()
+		public void DisplayBackButton()
 		{
 			if (CanGoBack)
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;

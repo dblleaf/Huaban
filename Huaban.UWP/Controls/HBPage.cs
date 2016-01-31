@@ -23,6 +23,7 @@ namespace Huaban.UWP.Controls
 			ViewModel = (ViewModelBase)ControlHelper.GetViewModel(this.GetType());
 			this.Loaded += (s, e) =>
 			{
+				var ddd = Window.Current.Dispatcher;
 				if (!ViewModel.IsInited)
 					ViewModel.Inited();
 			};

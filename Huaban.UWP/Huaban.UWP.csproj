@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
@@ -16,12 +17,13 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Huaban.UWP_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Huaban.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>882877025718E27D9D4A454548477CCE51B4FADB</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>AE090C299AE2595C1E3932C25B6FF044D78F325D</PackageCertificateThumbprint>
+	<SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -203,7 +205,7 @@
     <Compile Include="ViewModels\Content\BoardDetailViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardPinsViewModel.cs" />
     <Compile Include="ViewModels\Content\ImageViewModel.cs" />
-    <Compile Include="ViewModels\Content\LoginDialogViewModel.cs" />
+    <Compile Include="ViewModels\Content\LoginViewModel.cs" />
     <Compile Include="ViewModels\Content\SearchViewModel.cs" />
     <Compile Include="ViewModels\Content\UserViewModel.cs" />
     <Compile Include="ViewModels\Content\PinDetailViewModel.cs" />
@@ -224,8 +226,8 @@
     <Compile Include="Views\Content\BoardPinsView.xaml.cs">
       <DependentUpon>BoardPinsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\LoginDialog.xaml.cs">
-      <DependentUpon>LoginDialog.xaml</DependentUpon>
+    <Compile Include="Views\Content\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\PinDetailView.xaml.cs">
       <DependentUpon>PinDetailView.xaml</DependentUpon>
@@ -272,10 +274,11 @@
   <ItemGroup>
     <Content Include="Assets\HuabanLogo_singlecolor_styleB_color02.png" />
     <None Include="Package.StoreAssociation.xml" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="History.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
-    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\scale-200.png" />
     <Content Include="Assets\Square150x150Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.scale-200.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
@@ -338,7 +341,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\LoginDialog.xaml">
+    <Page Include="Views\Content\LoginView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

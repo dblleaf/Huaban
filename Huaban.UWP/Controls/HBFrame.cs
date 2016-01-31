@@ -144,9 +144,9 @@ namespace Huaban.UWP.Controls
 			FrameGrid.Children.Remove(page);
 
 			page.OnNavigatedFrom(new HBNavigationEventArgs());
-			GC.Collect();
+			
 			GC.SuppressFinalize(page);
-			GC.ReRegisterForFinalize(page);
+			GC.Collect();
 			page.Content = null;
 			page = null;
 			PageIndex--;

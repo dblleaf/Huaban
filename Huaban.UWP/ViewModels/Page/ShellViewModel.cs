@@ -64,7 +64,7 @@ namespace Huaban.UWP.ViewModels
 			{
 				DestinationPage = "My",
 				Label = "我的",
-				Symbol = Symbol.People,
+				SymbolChar = '',
 				Authorization = true
 			};
 
@@ -119,7 +119,7 @@ namespace Huaban.UWP.ViewModels
 			get
 			{
 				return _NavCommand ?? (_NavCommand = new DelegateCommand(
-					async o =>
+					o =>
 					{
 						IsPaneOpen = false;
 						var args = o as ItemClickEventArgs;
@@ -136,13 +136,13 @@ namespace Huaban.UWP.ViewModels
 						}
 						if (item.Authorization && !Context.IsLogin)
 						{
-							LoginDialogViewModel login = new LoginDialogViewModel(Context);
-							if (await login.Show())
+							LoginViewModel login = new LoginViewModel(Context, token =>
 							{
 								NotifyPropertyChanged("User");
 								UserItem.Special = true;
 								Context.NavigationService.MenuNavigateTo(item.DestinationPage);
-							}
+							});
+							login.Show();
 						}
 						else
 							Context.NavigationService.MenuNavigateTo(item.DestinationPage);
@@ -173,13 +173,14 @@ namespace Huaban.UWP.ViewModels
 
 			Task.Factory.StartNew(async () =>
 			{
-				await Context.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+				await ShellView.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
 				{
-					DisplayTheme();
-					if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_5")))
+					try
 					{
-						try
+						DisplayTheme();
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_6")))
 						{
+
 							string msg = @"
 1.PC端取消左右分栏以便有更大空间
 2.点击采集（也叫图片）进入大图预览模式，可以手机端左右滑动或者PC端滚动鼠标滚轮以前后翻页
@@ -191,12 +192,14 @@ namespace Huaban.UWP.ViewModels
 
 							await dialog.ShowAsync();
 							StorageHelper.SaveSetting("v1_2_5", "1");
-						}
-						catch (Exception ex)
-						{
-							string aa = ex.Message;
+
 						}
 					}
+					catch (Exception ex)
+					{
+						string aaa = ex.Message;
+					}
+
 				});
 
 			});
@@ -216,7 +219,7 @@ namespace Huaban.UWP.ViewModels
 			{
 				try
 				{
-					await Context.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+					await ShellView.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
 					{
 						ShowTip(Context.Message);
 					});

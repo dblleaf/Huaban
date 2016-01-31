@@ -26,8 +26,6 @@ namespace Huaban.UWP.Base
 
 		public API API { private set; get; } = API.Current();
 
-		public CoreDispatcher Dispatcher { private set; get; }
-
 		private User _User;
 		public User User
 		{
@@ -133,11 +131,7 @@ namespace Huaban.UWP.Base
 		{
 			Message = msg;
 		}
-		public void SetDispatcher(CoreDispatcher dispatcher)
-		{
-			Dispatcher = dispatcher;
-		}
-	
+		
 		#endregion
 	}
 }
