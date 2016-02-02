@@ -43,9 +43,15 @@ namespace Huaban.UWP.Views
 			var fvi = fv.ContainerFromItem(fv.SelectedItem) as FlipViewItem;
 			if (fvi == null)
 				return;
+
+			var a = this;
 			var scrollView = fvi.GetChild<ScrollViewer>("scrollViewer");
-			Pin pin = scrollView.DataContext as Pin;
 			var imgView = fvi.GetChild<ImageLib.Controls.ImageView>("imgView");
+			if (scrollView == null || imgView == null)
+				return;
+			Pin pin = scrollView.DataContext as Pin;
+
+
 			imgView.MaxHeight = scrollView.ActualHeight;
 			imgView.MaxWidth = Math.Min(pin.file.width, scrollView.ActualWidth);
 			scrollView.ZoomToFactor(1);
@@ -56,6 +62,8 @@ namespace Huaban.UWP.Views
 			var scrollView = sender as ScrollViewer;
 			Pin pin = scrollView.DataContext as Pin;
 			var imgView = scrollView.GetChild<ImageLib.Controls.ImageView>("imgView");
+			if (scrollView == null)
+				return;
 			imgView.MaxHeight = scrollView.ActualHeight;
 			imgView.MaxWidth = Math.Min(pin.file.width, scrollView.ActualWidth);
 

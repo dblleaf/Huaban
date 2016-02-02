@@ -20,6 +20,7 @@ namespace Huaban.UWP.ViewModels
 			LeftHeaderVisibility = Windows.UI.Xaml.Visibility.Collapsed;
 			PinListViewModel = new PinListViewModel(context, GetData);
 			KeyWord = "";
+			Title = "搜索";
 		}
 
 		#region Properties

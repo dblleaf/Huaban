@@ -6,13 +6,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-	<Grid Padding="12 0" MinHeight="48" Background="{ThemeResource HeadColorBrush}" RequestedTheme="Dark">
+	<Grid Padding="12 0" MinHeight="48" Background="{ThemeResource HeadColorBrush}">
 		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="*"/>
 		</Grid.ColumnDefinitions>
 		<TextBlock Height="24" Width="48" Visibility="{Binding LeftHeaderVisibility}"></TextBlock>
-		<TextBlock VerticalAlignment="Center" FontWeight="Bold" Text="{Binding Title}" Grid.Column="1"></TextBlock>
-		<ContentControl x:Name="contentControl" Grid.Column="1" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
+		<TextBlock VerticalAlignment="Center" FontWeight="Bold" Text="{Binding Title}" Grid.Column="1" RequestedTheme="Dark" Padding="0 0 12 0"></TextBlock>
+		<ContentControl x:Name="contentControl" Grid.Column="2" VerticalAlignment="Center" HorizontalContentAlignment="Stretch" HorizontalAlignment="Stretch"/>
 	</Grid>
 </UserControl>

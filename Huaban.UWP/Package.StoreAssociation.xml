@@ -358,11 +358,14 @@
     <Language Code="zu-za" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>807song-zhaoli.UWP</MainPackageIdentityName>
+    <MainPackageIdentityName>807song-zhaoli.6556FDFCA06E</MainPackageIdentityName>
     <ReservedNames>
+      <ReservedName>爱花瓣</ReservedName>
       <ReservedName>爱花瓣UWP</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
-  <AccountPackageIdentityNames />
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5FWXP" />
+  <AccountPackageIdentityNames>
+    <MainPackageIdentityName>807song-zhaoli.UWP</MainPackageIdentityName>
+  </AccountPackageIdentityNames>
+  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5PJJT" />
 </StoreAssociation>

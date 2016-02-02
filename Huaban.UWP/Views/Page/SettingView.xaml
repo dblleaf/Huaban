@@ -23,7 +23,7 @@
 				</Grid>
 				
 			</Button>
-			<Button Background="{StaticResource HuabanColorBrush}" RequestedTheme="Dark" Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="给我评价"/>
+			<Button Background="{StaticResource HuabanColorBrush}" RequestedTheme="Dark" Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="五星评价"/>
 			<Button Background="{StaticResource HuabanColorBrush}" IsEnabled="False" Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
 				Style="{StaticResource SettingButton}" Content="退出登录"
 				Command="{Binding LogoutCommand}"></Button>

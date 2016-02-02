@@ -19,7 +19,7 @@ namespace Huaban.UWP.ViewModels
 			new NavItemModel() { Title="Email",Label="song-zhaoli@outlook.com"},
 			new NavItemModel() { Title="微博",Label="@宋小召召"},
 			new NavItemModel() { Title="QQ群",Label="534867173"},
-			new NavItemModel() { Title="版本",Label="v1.2.5"},
+			new NavItemModel() { Title="版本",Label="v1.2.7"},
 			new NavItemModel() { Label=@"    花瓣，无论你是什么样的人群，都能找到自己喜欢的美图。当然还有些，你懂得，现在就开始去发现吧！"}
 		});
 	}

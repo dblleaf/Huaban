@@ -47,7 +47,7 @@ namespace Huaban.UWP.ViewModels
 				return _ReViewCommand ?? (_ReViewCommand = new DelegateCommand(
 					async o =>
 					{
-						await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
+						await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5PJJT"));//9NBLGGH5PJJT//9NBLGGH5FWXP
 					},
 					o => !IsLoading)
 				);

@@ -73,7 +73,10 @@
 						</StackPanel>
 					</StackPanel>
 					<StackPanel Grid.Row="1">
-						<StackPanel Padding="12 6" Orientation="Horizontal" HorizontalAlignment="Stretch" Background="Transparent">
+						<StackPanel Visibility="{Binding PinListViewModel.SelectedItem.user,Converter={StaticResource ObjectToVisibilityConverter}}"
+							Padding="12 6" 
+							Orientation="Horizontal" HorizontalAlignment="Stretch" 
+							Background="Transparent">
 							<Interactivity:Interaction.Behaviors>
 								<Core:EventTriggerBehavior EventName="Tapped">
 									<Core:InvokeCommandAction Command="{StaticResource ToUserCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem.user}"></Core:InvokeCommandAction>
@@ -89,7 +92,9 @@
 								<TextBlock Text="{Binding PinListViewModel.SelectedItem.user.username}"></TextBlock>
 							</StackPanel>
 						</StackPanel>
-						<StackPanel Padding="12 6" Orientation="Horizontal" HorizontalAlignment="Stretch" Background="Transparent">
+						<StackPanel Visibility="{Binding PinListViewModel.SelectedItem.board,Converter={StaticResource ObjectToVisibilityConverter}}"
+							Padding="12 6" Orientation="Horizontal" HorizontalAlignment="Stretch" 
+							Background="Transparent">
 							<Interactivity:Interaction.Behaviors>
 								<Core:EventTriggerBehavior EventName="Tapped">
 									<Core:InvokeCommandAction Command="{StaticResource ToBoardPinsCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem.board}"></Core:InvokeCommandAction>

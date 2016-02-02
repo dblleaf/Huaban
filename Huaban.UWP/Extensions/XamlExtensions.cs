@@ -33,7 +33,7 @@ namespace Huaban.UWP
 		public static T GetChild<T>(this DependencyObject parentContainer, string controlName)
 		{
 			var childControls = AllChildren(parentContainer);
-			var control = childControls.OfType<FrameworkElement>().Where(x => x.Name.Equals(controlName)).Cast<T>().First();
+			var control = childControls.OfType<FrameworkElement>().Where(x => x.Name.Equals(controlName)).Cast<T>().FirstOrDefault();
 
 			return control;
 		}

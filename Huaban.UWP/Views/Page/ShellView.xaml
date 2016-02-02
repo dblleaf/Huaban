@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-    Background="{StaticResource HeadColorBrush}"
+    Background="{ThemeResource HeadColorBrush}"
 	RequestedTheme="{Binding Theme}"
     mc:Ignorable="d">
 	<Grid x:Name="RootGrid1" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -35,7 +35,6 @@
 						<AdaptiveTrigger MinWindowWidth="720"></AdaptiveTrigger>
 					</VisualState.StateTriggers>
 					<VisualState.Setters>
-						
 						<Setter Target="RootSplitView.DisplayMode" Value="CompactOverlay" />
 						<Setter Target="RootSplitView.IsPaneOpen" Value="False" />
 					</VisualState.Setters>
@@ -48,43 +47,48 @@
 						<Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
 					</VisualState.Setters>
 				</VisualState>
+				
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="64*"/>
 			<ColumnDefinition Width="36*"/>
-			
 		</Grid.ColumnDefinitions>
 		<HB:TitleControl Height="48" Grid.ColumnSpan="2" VerticalAlignment="Top"></HB:TitleControl>
 		<Grid Grid.ColumnSpan="2" x:Name="LeftGrid">
 			<HB:SwipeableSplitView OpenPaneLength="256" x:Name="RootSplitView" 
-				IsPanSelectorEnabled="False"
+				IsPanSelectorEnabled="False" PaneBackground="Transparent"
 				IsSwipeablePaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
 				<SplitView.Pane>
-					<Grid Background="{StaticResource HuabanLightColorBrush}" RequestedTheme="Dark">
-						<ListView ItemsSource="{Binding NavList}"
-							Style="{StaticResource NavListStyle}"
-							ItemTemplate="{StaticResource NavigationListTemplate}"
-							VerticalAlignment="Top"
-							Margin="0 48 0 0">
-							<Interactivity:Interaction.Behaviors>
-								<Core:EventTriggerBehavior EventName="ItemClick">
-									<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
-								</Core:EventTriggerBehavior>
-							</Interactivity:Interaction.Behaviors>
-						</ListView>
-						<ListView ItemsSource="{Binding NavFootList}"
-							Style="{StaticResource NavListStyle}"
-							ItemTemplate="{StaticResource NavigationListTemplate}"
-							VerticalAlignment="Bottom">
-							<Interactivity:Interaction.Behaviors>
-								<Core:EventTriggerBehavior EventName="ItemClick">
-									<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
-								</Core:EventTriggerBehavior>
-							</Interactivity:Interaction.Behaviors>
-						</ListView>
+					<Grid RequestedTheme="Dark">
+						<Grid HorizontalAlignment="Left" Background="{StaticResource HuabanLightColorBrush}" Width="148"></Grid>
+						<Image Source="/Assets/banner-1.png" VerticalAlignment="Top" Margin="0 -48 0 0" Visibility="{Binding IsPaneOpen,Converter={StaticResource ObjectToVisibilityConverter}}"/>
+						<Grid Width="148" HorizontalAlignment="Left">
+							<ListView ItemsSource="{Binding NavList}"
+								Style="{StaticResource NavListStyle}"
+								ItemTemplate="{StaticResource NavigationListTemplate}"
+								Margin="0 48 0 0">
+								<Interactivity:Interaction.Behaviors>
+									<Core:EventTriggerBehavior EventName="ItemClick">
+										<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
+									</Core:EventTriggerBehavior>
+								</Interactivity:Interaction.Behaviors>
+								<ListView.Footer>
+									<ListView ItemsSource="{Binding NavFootList}"
+										Style="{StaticResource NavListStyle}"
+										ItemTemplate="{StaticResource NavigationListTemplate}"
+										VerticalAlignment="Bottom">
+										<Interactivity:Interaction.Behaviors>
+											<Core:EventTriggerBehavior EventName="ItemClick">
+												<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
+											</Core:EventTriggerBehavior>
+										</Interactivity:Interaction.Behaviors>
+									</ListView>
+								</ListView.Footer>
+							</ListView>
+							
+						</Grid>
 					</Grid>
-					
 				</SplitView.Pane>
 				<SplitView.Content>
 					<Frame x:Name="MainFrame"></Frame>
@@ -96,9 +100,7 @@
 					IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
 					Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
 			</Grid>
-			
 		</Grid>
-		
 		<HB:HBFrame x:Name="DetailFrame" Grid.ColumnSpan="2" Visibility="Collapsed"></HB:HBFrame>
 		<Grid Grid.ColumnSpan="2" Visibility="{Binding FirstBackVisibility}" RequestedTheme="Dark" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{StaticResource HuabanColorBrush}" CornerRadius="2">
 			<TextBlock VerticalAlignment="Center" Text="{Binding Message}"></TextBlock>

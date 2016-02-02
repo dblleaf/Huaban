@@ -9,8 +9,8 @@
 	HorizontalAlignment="Stretch"
 	VerticalAlignment="Stretch"
     mc:Ignorable="d">
-	<StackPanel x:Name="rootPanel" RequestedTheme="{Binding Theme}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<HB:TitleControl VerticalAlignment="Top"/>
+	<Grid x:Name="rootPanel" Background="#ED000000">
+		
 		<StackPanel Width="240" HorizontalAlignment="Center" Margin="12">
 			<StackPanel Margin="0 12">
 				<TextBox BorderThickness="0 0 0 1" PlaceholderText="用户名/邮箱地址" Text="{Binding UserName, Mode=TwoWay}"></TextBox>
@@ -27,6 +27,15 @@
 			</Grid>
 
 		</StackPanel>
+		
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
+			<Grid Width="80" Height="80" Margin="12" CornerRadius="40" Background="{StaticResource HuabanColorBrush}">
+				<Image Source="/Assets/LOGO_48x48huaban.png" Width="36"/>
+			</Grid>
+			<Grid Width="80" Height="80" Margin="12" CornerRadius="40" Background="{StaticResource HuabanColorBrush}">
+				<Image Source="/Assets/LOGO_48x48sina.png" Width="36"/>
+			</Grid>
+		</StackPanel>
 		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
-	</StackPanel>
+	</Grid>
 </UserControl>
