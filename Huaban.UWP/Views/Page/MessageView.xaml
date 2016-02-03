@@ -7,6 +7,11 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
 	<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
 		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
+		<HB:PinGrid Grid.Row="1"></HB:PinGrid>
 	</Grid>
 </HB:HBPage>

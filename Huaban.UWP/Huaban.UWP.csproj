@@ -126,6 +126,9 @@
     <Compile Include="Commands\ToBoardDetailCommand.cs" />
     <Compile Include="Commands\ToBoardPinsCommand.cs" />
     <Compile Include="Controls\IncrementalLoadingFlipView.cs" />
+    <Compile Include="Controls\PinGrid.xaml.cs">
+      <DependentUpon>PinGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UserGrid.xaml.cs">
       <DependentUpon>UserGrid.xaml</DependentUpon>
     </Compile>
@@ -293,6 +296,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\PinGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\UserGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
