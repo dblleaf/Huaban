@@ -78,13 +78,27 @@ namespace Huaban.UWP
 
 		public async Task<string> Request(HttpRequestMessage requestMessage)
 		{
+
+			var response = await GetResponse(requestMessage);
+
+			var result = await response.Content.ReadAsStringAsync();
+			return result;
+		}
+
+		public async Task<HttpResponseMessage> GetResponse(string uri)
+		{
+			HttpRequestMessage request = CreateRequest(HttpMethod.Get, new Uri(uri));
+			return await GetResponse(request);
+		}
+
+		public async Task<HttpResponseMessage> GetResponse(HttpRequestMessage requestMessage)
+		{
 			HttpClient client = DefaultHttpClient();
 			HttpResponseMessage response = null;
 
 			response = await client.SendAsync(requestMessage);
 
-			var result = await response.Content.ReadAsStringAsync();
-			return result;
+			return response;
 		}
 
 		public virtual HttpClient DefaultHttpClient()

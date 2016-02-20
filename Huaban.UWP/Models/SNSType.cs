@@ -8,8 +8,9 @@ namespace Huaban.UWP.Models
 {
 	public class SNSType
 	{
-		public int mShareBtnInt;
-		public String strName;
-		public String strType;
+		public string strName { set; get; }
+		public string strType { set; get; }
+		public string Icon { set; get; }
+		public string Url { set; get; }
 	}
 }

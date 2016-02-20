@@ -486,4 +486,5 @@
 		</Setter>
 	</Style>
 	<!-- 可swipe的splitview 来自github https://github.com/JustinXinLiu/SwipeableSplitView -->
+
 </ResourceDictionary>

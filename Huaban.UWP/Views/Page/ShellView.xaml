@@ -47,7 +47,6 @@
 						<Setter Target="RootSplitView.DisplayMode" Value="Overlay" />
 					</VisualState.Setters>
 				</VisualState>
-				
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid.ColumnDefinitions>
@@ -56,42 +55,36 @@
 		</Grid.ColumnDefinitions>
 		<HB:TitleControl Height="48" Grid.ColumnSpan="2" VerticalAlignment="Top"></HB:TitleControl>
 		<Grid Grid.ColumnSpan="2" x:Name="LeftGrid">
-			<HB:SwipeableSplitView OpenPaneLength="256" x:Name="RootSplitView" 
-				IsPanSelectorEnabled="False" PaneBackground="Transparent"
-				IsSwipeablePaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
+			<HB:SwipeableSplitView OpenPaneLength="256" x:Name="RootSplitView" RequestedTheme="Dark"
+				IsPanSelectorEnabled="False" IsSwipeablePaneOpen="{Binding IsPaneOpen,Mode=TwoWay}">
 				<SplitView.Pane>
-					<Grid RequestedTheme="Dark">
-						<Grid HorizontalAlignment="Left" Background="{StaticResource HuabanLightColorBrush}" Width="148"></Grid>
-						<Image Source="/Assets/banner-1.png" VerticalAlignment="Top" Margin="0 -48 0 0" Visibility="{Binding IsPaneOpen,Converter={StaticResource ObjectToVisibilityConverter}}"/>
-						<Grid Width="148" HorizontalAlignment="Left">
-							<ListView ItemsSource="{Binding NavList}"
+					<Grid>
+						<ListView ItemsSource="{Binding NavList}"
 								Style="{StaticResource NavListStyle}"
 								ItemTemplate="{StaticResource NavigationListTemplate}"
 								Margin="0 48 0 0">
-								<Interactivity:Interaction.Behaviors>
-									<Core:EventTriggerBehavior EventName="ItemClick">
-										<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
-									</Core:EventTriggerBehavior>
-								</Interactivity:Interaction.Behaviors>
-								<ListView.Footer>
-									<ListView ItemsSource="{Binding NavFootList}"
+							<Interactivity:Interaction.Behaviors>
+								<Core:EventTriggerBehavior EventName="ItemClick">
+									<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
+								</Core:EventTriggerBehavior>
+							</Interactivity:Interaction.Behaviors>
+							<ListView.Footer>
+								<ListView ItemsSource="{Binding NavFootList}"
 										Style="{StaticResource NavListStyle}"
 										ItemTemplate="{StaticResource NavigationListTemplate}"
 										VerticalAlignment="Bottom">
-										<Interactivity:Interaction.Behaviors>
-											<Core:EventTriggerBehavior EventName="ItemClick">
-												<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
-											</Core:EventTriggerBehavior>
-										</Interactivity:Interaction.Behaviors>
-									</ListView>
-								</ListView.Footer>
-							</ListView>
-							
-						</Grid>
+									<Interactivity:Interaction.Behaviors>
+										<Core:EventTriggerBehavior EventName="ItemClick">
+											<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
+										</Core:EventTriggerBehavior>
+									</Interactivity:Interaction.Behaviors>
+								</ListView>
+							</ListView.Footer>
+						</ListView>
 					</Grid>
 				</SplitView.Pane>
 				<SplitView.Content>
-					<Frame x:Name="MainFrame"></Frame>
+					<Frame x:Name="MainFrame" RequestedTheme="{Binding Theme}"></Frame>
 				</SplitView.Content>
 			</HB:SwipeableSplitView>
 			<Grid Background="Transparent" Width="48" Height="48" 

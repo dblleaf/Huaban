@@ -2,21 +2,27 @@
     x:Class="Huaban.UWP.Controls.PinGrid"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Huaban.UWP.Controls"
+    xmlns:HB="using:Huaban.UWP.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     d:DesignHeight="300"
     d:DesignWidth="400">
-	<Grid>
-		<GridView x:Name="gridView" ItemsSource="{Binding PinListVM.PinList}">
-			<GridView.ItemTemplate>
+	<Grid Margin="3">
+		<HB:PinGridView x:Name="gridView" ItemsSource="{Binding PinListVM.PinList}">
+			<HB:PinGridView.Resources>
+				<Style TargetType="GridViewItem">
+					<Setter Property="Padding" Value="0"/>
+					<Setter Property="Margin" Value="3"/>
+				</Style>
+			</HB:PinGridView.Resources>
+			<HB:PinGridView.ItemTemplate>
 				<DataTemplate>
-					<Grid Height="180" Margin="3" Background="{Binding Converter={StaticResource ColorConverter}}">
-						<Image Source="{Binding file.FW236}"/>
+					<Grid Width="{Binding ElementName=gridView,Path=PinWidth}" Height="{Binding ElementName=gridView,Path=PinWidth}" Background="{Binding Converter={StaticResource ColorConverter}}">
+						<Image Source="{Binding file.Sq140}"/>
 					</Grid>
 				</DataTemplate>
-			</GridView.ItemTemplate>
-		</GridView>
+			</HB:PinGridView.ItemTemplate>
+		</HB:PinGridView>
 	</Grid>
 </UserControl>

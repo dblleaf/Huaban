@@ -20,6 +20,7 @@ namespace Huaban.UWP.Views
 
 		private void LoginView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
+			this.Focus(FocusState.Programmatic);
 			if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
 			{
 				rootPanel.Margin = new Thickness(0, 21, 0, 0);
@@ -34,6 +35,11 @@ namespace Huaban.UWP.Views
 		{
 			this.Width = Shell.ActualWidth;
 			this.Height = Shell.ActualHeight;
+		}
+
+		private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			this.Focus(FocusState.Programmatic);
 		}
 	}
 }

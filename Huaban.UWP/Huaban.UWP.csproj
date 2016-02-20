@@ -21,7 +21,7 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>7AA17E447E3152831CF7E759F2DD09735FB90E9B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>B86EB8F37619DD17E836944AF348EED32DCA5F2B</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
@@ -129,6 +129,7 @@
     <Compile Include="Controls\PinGrid.xaml.cs">
       <DependentUpon>PinGrid.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PinGridView.cs" />
     <Compile Include="Controls\UserGrid.xaml.cs">
       <DependentUpon>UserGrid.xaml</DependentUpon>
     </Compile>
@@ -275,11 +276,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\banner-1.png" />
+    <Content Include="Assets\douban_50px.png" />
+    <Content Include="Assets\HuabanLogo_singlecolor_styleA_color03.png" />
     <Content Include="Assets\HuabanLogo_singlecolor_styleB_color02.png" />
     <None Include="Package.StoreAssociation.xml" />
-    <Content Include="Assets\LOGO_48x48huaban.png" />
-    <Content Include="Assets\LOGO_48x48sina.png" />
+    <Content Include="Assets\qq_50px.png" />
+    <Content Include="Assets\renren_50px.png" />
+    <Content Include="Assets\sina_weibo_50px.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Test.html" />
     <Content Include="Requirements.txt" />
     <Content Include="History.txt" />
     <Content Include="Properties\Default.rd.xml" />

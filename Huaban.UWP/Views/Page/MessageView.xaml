@@ -12,6 +12,6 @@
 			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
-		<HB:PinGrid Grid.Row="1"></HB:PinGrid>
+		
 	</Grid>
 </HB:HBPage>

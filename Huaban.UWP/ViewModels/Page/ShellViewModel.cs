@@ -179,11 +179,10 @@ namespace Huaban.UWP.ViewModels
 					{
 						DisplayTheme();
 
-						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_7")))
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_9")))
 						{
-							string msg = @"1.解决图片列表有时刷不出数据的bug
-2.支持横屏";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.7");
+							string msg = @"1.增加新浪微博、QQ、豆瓣、人人网四大社交账号登录";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.9");
 
 							//dialog.Commands.Add(new UICommand("马上下载", async o =>
 							//{
@@ -191,6 +190,7 @@ namespace Huaban.UWP.ViewModels
 							//}));
 							//dialog.Commands.Add(new UICommand("取消"));
 							await dialog.ShowAsync();
+							StorageHelper.SaveSetting("v1_2_9", "1");
 						}
 
 					}

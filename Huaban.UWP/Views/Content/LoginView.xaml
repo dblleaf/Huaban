@@ -5,37 +5,102 @@
     xmlns:local="using:Huaban.UWP.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
 	xmlns:HB="using:Huaban.UWP.Controls"
 	HorizontalAlignment="Stretch"
 	VerticalAlignment="Stretch"
     mc:Ignorable="d">
 	<Grid x:Name="rootPanel" Background="#ED000000">
+		<Image Source="/Assets/HuabanLogo_singlecolor_styleA_color03.png" VerticalAlignment="Top" Margin="12" Height="80"/>
+		<Pivot Margin="0 40 0 0" SelectedIndex="{Binding PivotIndex,Mode=TwoWay}" SelectionChanged="Pivot_SelectionChanged">
+			<PivotItem>
+				<Grid>
+					<StackPanel Width="260" HorizontalAlignment="Center">
+						<TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用花瓣账号登录</TextBlock>
+						<StackPanel Margin="12">
+							<TextBox BorderThickness="0 0 0 1" PlaceholderText="用户名/邮箱地址" Text="{Binding UserName, Mode=TwoWay}"></TextBox>
+							<PasswordBox BorderThickness="0 0 0 1" PlaceholderText="密码" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
+						</StackPanel>
+						<Grid Margin="12 0" VerticalAlignment="Top" RequestedTheme="Dark">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+								<ColumnDefinition Width="3"></ColumnDefinition>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="登录" Command="{Binding LoginCommand}"></Button>
+							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
+						</Grid>
+					</StackPanel>
+					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>
+				</Grid>
+			</PivotItem>
+			<PivotItem>
+				<Grid>
+					<StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+						<TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用社交账号登录</TextBlock>
+						<ListBox ItemsSource="{Binding SnsTypes}" Background="Transparent">
+							<Interactivity:Interaction.Behaviors>
+								<Core:EventTriggerBehavior EventName="SelectionChanged">
+									<Core:InvokeCommandAction Command="{Binding ShowWebViewCommand}"></Core:InvokeCommandAction>
+								</Core:EventTriggerBehavior>
+							</Interactivity:Interaction.Behaviors>
+							<ListBox.Resources>
+								<Style TargetType="ListBoxItem">
+									<Setter Property="Padding" Value="6"/>
+									<Setter Property="Margin" Value="0"/>
+									<Setter Property="Template">
+										<Setter.Value>
+											<ControlTemplate TargetType="ListBoxItem">
+												<Grid Background="Transparent">
+													<VisualStateManager.VisualStateGroups>
+														<VisualStateGroup>
+															<!--缺省样式-->
+															<VisualState x:Name="Normal" />
+														</VisualStateGroup>
+													</VisualStateManager.VisualStateGroups>
+													<Grid x:Name="ContentBackground">
+														<ContentPresenter
+															Content="{TemplateBinding Content}"
+															Margin="{TemplateBinding Padding}" />
+													</Grid>
+												</Grid>
+											</ControlTemplate>
+										</Setter.Value>
+									</Setter>
+								</Style>
+							</ListBox.Resources>
+							<ListBox.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
+								</ItemsPanelTemplate>
+							</ListBox.ItemsPanel>
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<Grid>
+										<Ellipse Width="48" Height="48" Margin="1" Fill="White"/>
+										<Image Width="50" Height="50" Source="{Binding Icon}"/>
+									</Grid>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+						<Border CornerRadius="2" HorizontalAlignment="Center" Background="Red" Margin="24"></Border>
+					</StackPanel>
+					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content="&lt; 花瓣账号登录 " BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="0"></Button>
+				</Grid>
+			</PivotItem>
+		</Pivot>
+		<Grid Visibility="{Binding WebViewVisibility}" Background="White">
+			<WebView Source="{Binding LoginUri}" x:Name="wv">
+				<Interactivity:Interaction.Behaviors>
+					<Core:EventTriggerBehavior EventName="ScriptNotify">
+						<Core:InvokeCommandAction Command="{Binding ScriptNotifyCommand}"></Core:InvokeCommandAction>
+					</Core:EventTriggerBehavior>
+					
+				</Interactivity:Interaction.Behaviors>
+			</WebView>
+		</Grid>
 		
-		<StackPanel Width="240" HorizontalAlignment="Center" Margin="12">
-			<StackPanel Margin="0 12">
-				<TextBox BorderThickness="0 0 0 1" PlaceholderText="用户名/邮箱地址" Text="{Binding UserName, Mode=TwoWay}"></TextBox>
-				<PasswordBox BorderThickness="0 0 0 1" PlaceholderText="密码" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-			</StackPanel>
-			<Grid VerticalAlignment="Bottom" RequestedTheme="Dark">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*"></ColumnDefinition>
-					<ColumnDefinition Width="3"></ColumnDefinition>
-					<ColumnDefinition Width="*"></ColumnDefinition>
-				</Grid.ColumnDefinitions>
-				<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="登录" Command="{Binding LoginCommand}"></Button>
-				<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
-			</Grid>
-
-		</StackPanel>
-		
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="Collapsed">
-			<Grid Width="80" Height="80" Margin="12" CornerRadius="40" Background="{StaticResource HuabanColorBrush}">
-				<Image Source="/Assets/LOGO_48x48huaban.png" Width="36"/>
-			</Grid>
-			<Grid Width="80" Height="80" Margin="12" CornerRadius="40" Background="{StaticResource HuabanColorBrush}">
-				<Image Source="/Assets/LOGO_48x48sina.png" Width="36"/>
-			</Grid>
-		</StackPanel>
 		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
 	</Grid>
 </UserControl>
