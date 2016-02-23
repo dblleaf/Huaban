@@ -22,8 +22,8 @@ namespace Huaban.UWP.Models
 
 			item.name = obj.GetObject<string>("name");
 			item.id = obj.GetObject<string>("id");
-			item.nav_link = obj.GetObject<string>("nav_link");
 			item.urlname = obj.GetObject<string>("urlname");
+			item.nav_link = $"favorite/{item.urlname}";
 
 			return item;
 		}
