@@ -9,17 +9,63 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 	<Grid Margin="3">
-		<HB:PinGridView x:Name="gridView" ItemsSource="{Binding PinListVM.PinList}">
+		<HB:PinGridView x:Name="gridView" ItemsSource="{Binding PinList}">
 			<HB:PinGridView.Resources>
 				<Style TargetType="GridViewItem">
 					<Setter Property="Padding" Value="0"/>
 					<Setter Property="Margin" Value="3"/>
+					<Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="GridViewItem">
+								<Grid Background="{TemplateBinding Background}">
+									<VisualStateManager.VisualStateGroups>
+										<VisualStateGroup>
+											<!--缺省样式-->
+											<VisualState x:Name="Normal" />
+										</VisualStateGroup>
+									</VisualStateManager.VisualStateGroups>
+									<Grid x:Name="ContentBackground">
+										<ContentPresenter
+											Content="{TemplateBinding Content}"
+											Margin="{TemplateBinding Padding}" />
+									</Grid>
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
 				</Style>
 			</HB:PinGridView.Resources>
 			<HB:PinGridView.ItemTemplate>
 				<DataTemplate>
-					<Grid Width="{Binding ElementName=gridView,Path=PinWidth}" Height="{Binding ElementName=gridView,Path=PinWidth}" Background="{Binding Converter={StaticResource ColorConverter}}">
-						<Image Source="{Binding file.Sq140}"/>
+					<Grid Width="{Binding ElementName=gridView,Path=PinWidth}">
+						<Grid.RowDefinitions>
+							<RowDefinition/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<Grid Height="{Binding ElementName=gridView,Path=PinWidth}" 
+							Background="{Binding Converter={StaticResource ColorConverter}}">
+							<Image Source="{Binding file.Sq235}"/>
+							<Grid Padding="6 3" VerticalAlignment="Bottom" Background="#88888888" RequestedTheme="Dark"
+									Visibility="{Binding Path=raw_text,Converter={StaticResource ObjectToVisibilityConverter}}">
+								<TextBlock Text="{Binding raw_text}" MaxLines="2" TextWrapping="Wrap"></TextBlock>
+							</Grid>
+						</Grid>
+						<StackPanel Grid.Row="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Orientation="Horizontal" HorizontalAlignment="Right" DataContext="{Binding ElementName=gridView,Path=DataContext}">
+							<!--喜欢-->
+							<Button Padding="12 7" Background="Transparent" BorderThickness="0">
+								<FontIcon Glyph="" FontSize="16"/>
+							</Button>
+							<!--采集-->
+							<Button Padding="12 7" Background="Transparent" BorderThickness="0">
+								<FontIcon Glyph="" FontSize="16"/>
+							</Button>
+							<!--快速采集-->
+							<Button Padding="12 7" Background="Transparent" BorderThickness="0"
+								Command="{Binding ElementName=gridView,Path=DataContext.}">
+								<FontIcon Glyph="" FontSize="16"/>
+							</Button>
+						</StackPanel>
 					</Grid>
 				</DataTemplate>
 			</HB:PinGridView.ItemTemplate>

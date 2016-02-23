@@ -13,15 +13,34 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The User Control item template is documented at http://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace Huaban.UWP.Controls
 {
+	using ViewModels;
 	public sealed partial class PinGrid : UserControl
 	{
 		public PinGrid()
 		{
 			this.InitializeComponent();
+			TextBlock tb = new TextBlock();
+			
 		}
+		#region ListModel
+		public PinListViewModel ListModel
+		{
+			get { return (PinListViewModel)GetValue(ListModelProperty); }
+			set { SetValue(ListModelProperty, value); }
+		}
+
+		public static readonly DependencyProperty ListModelProperty =
+			DependencyProperty.Register("ListModel", typeof(PinListViewModel), typeof(PinGrid), new PropertyMetadata(null, OnListModelChanged));
+
+		private static void OnListModelChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (PinGrid)sender;
+			control.gridView.DataContext = e.NewValue;
+		}
+
+		#endregion
 	}
 }
