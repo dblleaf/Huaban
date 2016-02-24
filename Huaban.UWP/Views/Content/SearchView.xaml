@@ -27,7 +27,8 @@
 					</AutoSuggestBox>
 				</HB:TitleControl.Content>
 			</HB:TitleControl>
-			<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:ImageGrid>
+			<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:PinGrid>
+			<!--<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:ImageGrid>-->
 			<ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>
 		</Grid>
 	</Grid>

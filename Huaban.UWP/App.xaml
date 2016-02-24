@@ -15,6 +15,7 @@
 			<converters:ImageBgConverter x:Key="ImageBgConverter"/>
 			<converters:OwnerVisiblityConverter x:Key="OwnerVisiblityConverter"/>
 			<converters:LoginVisiblityConverter x:Key="LoginVisiblityConverter"/>
+			<converters:LikeColorConverter x:Key="LikeColorConverter"/>
 			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"/>
 			<commands:PinImageLoadingCommand x:Key="PinImageLoadingCommand"/>
 			<commands:FollowBoardCommand x:Key="FollowBoardCommand"/>

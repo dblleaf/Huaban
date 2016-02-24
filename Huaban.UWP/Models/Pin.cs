@@ -31,7 +31,7 @@ namespace Huaban.UWP.Models
 		public string repin_count { set; get; }
 		public string orig_source { set; get; }
 		public ImageFile file { set; get; }
-		public bool liked { set; get; }
+		
 
 		public User user { set; get; }
 		public Board board { set; get; }
@@ -51,6 +51,12 @@ namespace Huaban.UWP.Models
 		{
 			get { return _IsLoaded; }
 			set { SetValue(ref _IsLoaded, value); }
+		}
+		private bool _liked;
+		public bool liked
+		{
+			get { return _liked; }
+			set { SetValue(ref _liked, value); }
 		}
 
 		public static List<Pin> ParseList(JArray arr, bool deptParse = false)

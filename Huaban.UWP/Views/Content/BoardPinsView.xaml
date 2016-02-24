@@ -18,8 +18,8 @@
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<HB:TitleControl></HB:TitleControl>
-			<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
-				<HB:ImageGrid.Header>
+			<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
+				<HB:PinGrid.Header>
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
@@ -46,8 +46,9 @@
 								<Run FontSize="12" Text="关注"></Run></TextBlock>
 						</Grid>
 					</Grid>
-				</HB:ImageGrid.Header>
-			</HB:ImageGrid>
+				</HB:PinGrid.Header>
+			</HB:PinGrid>
+			
 			<CommandBar Grid.Row="2">
 				<AppBarButton Label="关注" Icon="Add"
 					Visibility="{Binding FollowVisibility}" 

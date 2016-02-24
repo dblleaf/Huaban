@@ -11,51 +11,40 @@
     d:DesignHeight="768"
     d:DesignWidth="432">
 	<Grid>
-		<ScrollViewer x:Name="scrollViewer" ScrollViewer.VerticalScrollBarVisibility="Auto" ViewChanged="ScrollViewer_ViewChanged" Padding="3">
-			<StackPanel>
+		<HB:ExtendGridView x:Name="gridView" Padding="3"
+			ItemsSource="{Binding UserList}"
+			ItemTemplate="{StaticResource UserGridTemplate}">
+			<HB:ExtendGridView.Resources>
+				<Style TargetType="GridViewItem">
+					<Setter Property="Padding" Value="0"/>
+					<Setter Property="Margin" Value="3"/>
+					<Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="GridViewItem">
+								<Grid Background="{TemplateBinding Background}">
+									<VisualStateManager.VisualStateGroups>
+										<VisualStateGroup>
+											<!--缺省样式-->
+											<VisualState x:Name="Normal" />
+										</VisualStateGroup>
+									</VisualStateManager.VisualStateGroups>
+									<Grid x:Name="ContentBackground">
+										<ContentPresenter
+											Content="{TemplateBinding Content}"
+											Margin="{TemplateBinding Padding}" />
+									</Grid>
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</HB:ExtendGridView.Resources>
+			<HB:ExtendGridView.Header>
 				<ContentControl x:Name="HeaderContent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ContentControl>
-				<ListView x:Name="lwGrid"
-					IsItemClickEnabled="True"
-					ScrollViewer.VerticalScrollMode="Disabled"
-					ItemTemplate="{StaticResource UserGridTemplate}"
-					ItemsSource="{Binding UserList}">
-					<ListView.Resources>
-						<!--这段放style.xaml文件中就起不到作用，不知道为什么-->
-						<Style TargetType="ListViewItem">
-							<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-							<Setter Property="VerticalAlignment" Value="Stretch"></Setter>
-							<Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-							<Setter Property="Padding" Value="0"></Setter>
-							<Setter Property="Margin" Value="3"></Setter>
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="ListViewItem">
-										<ListViewItemPresenter ContentTransitions="{TemplateBinding ContentTransitions}" 
-											SelectionCheckMarkVisualEnabled="True" DragBackground="{TemplateBinding Background}"
-											FocusBorderBrush="{ThemeResource SystemControlForegroundAltHighBrush}"
-											FocusSecondaryBorderBrush="{ThemeResource SystemControlForegroundBaseHighBrush}"
-											PlaceholderBackground="{TemplateBinding Background}"
-											PointerOverBackground="{TemplateBinding Background}"
-											SelectedBackground="{TemplateBinding Background}" 
-											SelectedPointerOverBackground="{TemplateBinding Background}" 
-											PressedBackground="{TemplateBinding Background}" 
-											SelectedPressedBackground="{TemplateBinding Background}" 
-											HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" 
-											VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" 
-											ContentMargin="{TemplateBinding Padding}" 
-											CheckMode="Inline" />
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
-						</Style>
-					</ListView.Resources>
-					<ListView.ItemsPanel>
-						<ItemsPanelTemplate>
-							<HB:HBGridPanel x:Name="pbPanel" MinColumnCount="2" ColumnWidth="250" />
-						</ItemsPanelTemplate>
-					</ListView.ItemsPanel>
-				</ListView>
-			</StackPanel>
-		</ScrollViewer>
+			</HB:ExtendGridView.Header>
+		
+		</HB:ExtendGridView>
+		
 	</Grid>
 </UserControl>

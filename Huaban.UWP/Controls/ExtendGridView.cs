@@ -8,9 +8,9 @@ using Windows.UI.Xaml;
 
 namespace Huaban.UWP.Controls
 {
-	public class PinGridView : GridView
+	public class ExtendGridView : GridView
 	{
-		public PinGridView()
+		public ExtendGridView()
 		{
 
 			this.SizeChanged += PinGridView_SizeChanged;
@@ -22,9 +22,9 @@ namespace Huaban.UWP.Controls
 			try
 			{
 				if (e.NewSize.Width <= 500)
-					PinWidth = (e.NewSize.Width - 1) / 2 - 6;
+					PinWidth = (e.NewSize.Width - 6.5) / 2 - 6;
 				else
-					PinWidth = (e.NewSize.Width - 6) / Math.Floor(e.NewSize.Width / 240) - 6;
+					PinWidth = (e.NewSize.Width - 12) / Math.Floor(e.NewSize.Width / 240) - 6;
 			}
 			catch (Exception ex)
 			{
@@ -45,6 +45,6 @@ namespace Huaban.UWP.Controls
 			}
 		}
 
-		public static readonly DependencyProperty PinWidthProperty = DependencyProperty.Register("PinWidth", typeof(double), typeof(PinGridView), new PropertyMetadata(235));
+		public static readonly DependencyProperty PinWidthProperty = DependencyProperty.Register("PinWidth", typeof(double), typeof(ExtendGridView), new PropertyMetadata(235));
 	}
 }

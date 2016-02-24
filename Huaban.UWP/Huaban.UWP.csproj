@@ -21,8 +21,9 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>B86EB8F37619DD17E836944AF348EED32DCA5F2B</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>FB0258630A81A75526B199EF326FD3E41770C09F</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
+    <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -129,7 +130,7 @@
     <Compile Include="Controls\PinGrid.xaml.cs">
       <DependentUpon>PinGrid.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\PinGridView.cs" />
+    <Compile Include="Controls\ExtendGridView.cs" />
     <Compile Include="Controls\UserGrid.xaml.cs">
       <DependentUpon>UserGrid.xaml</DependentUpon>
     </Compile>
@@ -144,17 +145,13 @@
     </Compile>
     <Compile Include="Controls\ControlHelper.cs" />
     <Compile Include="Controls\HBControl.cs" />
-    <Compile Include="Controls\HBGridPanel.cs" />
-    <Compile Include="Controls\HBWaterFullPanel.cs" />
-    <Compile Include="Controls\ImageGrid.xaml.cs">
-      <DependentUpon>ImageGrid.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\PageBase.cs" />
     <Compile Include="Controls\SwipeableSplitView.cs" />
     <Compile Include="Controls\TitleControl.xaml.cs">
       <DependentUpon>TitleControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\LoginVisiblityConverter.cs" />
+    <Compile Include="Converters\LikeColorConverter.cs" />
     <Compile Include="Converters\OwnerVisiblityConverter.cs" />
     <Compile Include="Converters\ImageBgConverter.cs" />
     <Compile Include="Extensions\XamlExtensions.cs" />
@@ -318,10 +315,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\CategorySelecter.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Controls\ImageGrid.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

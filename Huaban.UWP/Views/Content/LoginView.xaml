@@ -14,27 +14,7 @@
 	<Grid x:Name="rootPanel" Background="#ED000000">
 		<Image Source="/Assets/HuabanLogo_singlecolor_styleA_color03.png" VerticalAlignment="Top" Margin="12" Height="80"/>
 		<Pivot Margin="0 40 0 0" SelectedIndex="{Binding PivotIndex,Mode=TwoWay}" SelectionChanged="Pivot_SelectionChanged">
-			<PivotItem>
-				<Grid>
-					<StackPanel Width="260" HorizontalAlignment="Center">
-						<TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用花瓣账号登录</TextBlock>
-						<StackPanel Margin="12">
-							<TextBox BorderThickness="0 0 0 1" PlaceholderText="用户名/邮箱地址" Text="{Binding UserName, Mode=TwoWay}"></TextBox>
-							<PasswordBox BorderThickness="0 0 0 1" PlaceholderText="密码" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-						</StackPanel>
-						<Grid Margin="12 0" VerticalAlignment="Top" RequestedTheme="Dark">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"></ColumnDefinition>
-								<ColumnDefinition Width="3"></ColumnDefinition>
-								<ColumnDefinition Width="*"></ColumnDefinition>
-							</Grid.ColumnDefinitions>
-							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="登录" Command="{Binding LoginCommand}"></Button>
-							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
-						</Grid>
-					</StackPanel>
-					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>
-				</Grid>
-			</PivotItem>
+			
 			<PivotItem>
 				<Grid>
 					<StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
@@ -87,6 +67,27 @@
 						<Border CornerRadius="2" HorizontalAlignment="Center" Background="Red" Margin="24"></Border>
 					</StackPanel>
 					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content="&lt; 花瓣账号登录 " BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="0"></Button>
+				</Grid>
+			</PivotItem>
+			<PivotItem>
+				<Grid>
+					<StackPanel Width="260" HorizontalAlignment="Center">
+						<TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用花瓣账号登录</TextBlock>
+						<StackPanel Margin="12">
+							<TextBox BorderThickness="0 0 0 1" PlaceholderText="用户名/邮箱地址" Text="{Binding UserName, Mode=TwoWay}"></TextBox>
+							<PasswordBox BorderThickness="0 0 0 1" PlaceholderText="密码" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
+						</StackPanel>
+						<Grid Margin="12 0" VerticalAlignment="Top" RequestedTheme="Dark">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+								<ColumnDefinition Width="3"></ColumnDefinition>
+								<ColumnDefinition Width="*"></ColumnDefinition>
+							</Grid.ColumnDefinitions>
+							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="登录" Command="{Binding LoginCommand}"></Button>
+							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
+						</Grid>
+					</StackPanel>
+					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>
 				</Grid>
 			</PivotItem>
 		</Pivot>

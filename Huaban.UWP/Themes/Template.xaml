@@ -67,12 +67,12 @@
 	</DataTemplate>
 	<!--画板列表-->
 	<DataTemplate x:Key="BoardGridTemplate">
-		<Grid x:Name="itemGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" VerticalAlignment="Stretch">
+		<Grid x:Name="itemGrid" Width="{Binding ElementName=gridView,Path=PinWidth}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" VerticalAlignment="Stretch">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
-			<Grid Background="{Binding Converter={StaticResource ColorConverter}}">
+			<Grid Background="{Binding Converter={StaticResource ColorConverter}}" Height="{Binding ElementName=gridView,Path=PinWidth}">
 				<Interactivity:Interaction.Behaviors>
 					<Core:EventTriggerBehavior EventName="Tapped">
 						<Core:InvokeCommandAction Command="{StaticResource ToBoardPinsCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
@@ -114,7 +114,7 @@
 	</DataTemplate>
 	<!--用户列表-->
 	<DataTemplate x:Key="UserGridTemplate">
-		<Grid x:Name="itemGrid" VerticalAlignment="Stretch" CornerRadius="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+		<Grid x:Name="itemGrid" Width="{Binding ElementName=gridView,Path=PinWidth}" VerticalAlignment="Stretch" CornerRadius="2" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>

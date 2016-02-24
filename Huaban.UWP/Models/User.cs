@@ -52,7 +52,7 @@ namespace Huaban.UWP.Models
 			user.username = HtmlDecode(obj.GetObject<string>("username"));
 			user.created_at = obj.GetObject<string>("created_at");
 			user.urlname = obj.GetObject<string>("urlname");
-			user.avatar = ImageFile.Parse(obj["avatar"] as JObject);
+			user.avatar = ImageFile.Parse(obj["avatar"] as JObject)?? GetDefaultAvatar();
 			user.seq = obj.GetObject<int>("seq");
 			user.email = obj.GetObject<string>("email");
 			user.follower_count = obj.GetObject<int>("follower_count");
@@ -65,6 +65,15 @@ namespace Huaban.UWP.Models
 			user.boards = Board.ParseList(obj["boards"] as JArray);
 
 			return user;
+		}
+		public static ImageFile GetDefaultAvatar()
+		{
+			return new ImageFile()
+			{
+				width = 300,
+				height = 300,
+				key = "23a58517fb73f86bca85937f069724486b3e00a44caa-GMc99I"
+			};
 		}
 		public static List<User> ParseList(JArray arry, bool deptParse = false)
 		{

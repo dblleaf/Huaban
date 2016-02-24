@@ -28,6 +28,11 @@ namespace Huaban.UWP.ViewModels
 			CategoryList = Context.CategoryList;
 			SelecterVisibility = Visibility.Collapsed;
 
+			QuickBoardChanged += (s, e) =>
+			{
+				QuickBoardName = QuickBoard?.title;
+				CanQuick = QuickBoard != null;
+			};
 		}
 
 		#region Properties

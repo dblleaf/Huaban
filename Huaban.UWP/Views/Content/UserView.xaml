@@ -54,7 +54,7 @@
 						</Grid>
 					</PivotItem.Header>
 					<Grid>
-						<HB:ImageGrid ListModel="{Binding MyPinListViewModel}"></HB:ImageGrid>
+						<HB:PinGrid ListModel="{Binding MyPinListViewModel}"></HB:PinGrid>
 					</Grid>
 				</PivotItem>
 				<PivotItem>
@@ -69,7 +69,7 @@
 						</Grid>
 					</PivotItem.Header>
 					<Grid>
-						<HB:ImageGrid ListModel="{Binding LikePinListViewModel}"></HB:ImageGrid>
+						<HB:PinGrid ListModel="{Binding LikePinListViewModel}"></HB:PinGrid>
 					</Grid>
 				</PivotItem>
 				<PivotItem>

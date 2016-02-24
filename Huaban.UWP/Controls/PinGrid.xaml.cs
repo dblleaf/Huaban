@@ -22,9 +22,24 @@ namespace Huaban.UWP.Controls
 		public PinGrid()
 		{
 			this.InitializeComponent();
-			TextBlock tb = new TextBlock();
-			
 		}
+		#region Header
+		public UIElement Header
+		{
+			get { return (UIElement)GetValue(HeaderProperty); }
+			set { SetValue(HeaderProperty, value); }
+		}
+
+		public static readonly DependencyProperty HeaderProperty =
+			DependencyProperty.Register("Header", typeof(UIElement), typeof(PinGrid), new PropertyMetadata(null, OnHeaderChanged));
+
+		private static void OnHeaderChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (PinGrid)sender;
+			control.HeaderContent.Content = e.NewValue;
+		}
+		#endregion
+
 		#region ListModel
 		public PinListViewModel ListModel
 		{
@@ -38,7 +53,7 @@ namespace Huaban.UWP.Controls
 		private static void OnListModelChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
 		{
 			var control = (PinGrid)sender;
-			control.gridView.DataContext = e.NewValue;
+			control.pinGrid.DataContext = e.NewValue;
 		}
 
 		#endregion

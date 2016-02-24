@@ -25,7 +25,6 @@ namespace Huaban.UWP.Controls
 		public UserGrid()
 		{
 			this.InitializeComponent();
-			this.Loaded += UserGrid_Loaded;
 		}
 
 		#region Header
@@ -36,7 +35,7 @@ namespace Huaban.UWP.Controls
 		}
 
 		public static readonly DependencyProperty HeaderProperty =
-			DependencyProperty.Register("Header", typeof(UIElement), typeof(BoardGrid), new PropertyMetadata(null, OnHeaderChanged));
+			DependencyProperty.Register("Header", typeof(UIElement), typeof(UserGrid), new PropertyMetadata(null, OnHeaderChanged));
 
 		private static void OnHeaderChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
 		{
@@ -58,48 +57,10 @@ namespace Huaban.UWP.Controls
 		private static void OnListModelChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
 		{
 			var control = (UserGrid)sender;
-			control.lwGrid.DataContext = e.NewValue;
+			control.gridView.DataContext = e.NewValue;
 		}
+
 		#endregion
 
-		private async void UserGrid_Loaded(object sender, RoutedEventArgs e)
-		{
-			bool isOver = false;
-			while (scrollViewer.ComputedVerticalScrollBarVisibility != Visibility.Visible && !isOver)
-			{
-				isOver = await LoadData();
-			}
-		}
-
-		private async void ScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
-		{
-			ScrollViewer sv = sender as ScrollViewer;
-			if (sv.VerticalOffset > sv.ScrollableHeight - this.ActualHeight && !_loading)
-			{
-				await LoadData();
-			}
-		}
-		private async Task<bool> LoadData()
-		{
-			_loading = true;
-			bool isOver = false;
-			try
-			{
-				var incrementalLoading = lwGrid.ItemsSource as ISupportIncrementalLoading;
-				if (incrementalLoading != null && incrementalLoading.HasMoreItems)
-				{
-					await incrementalLoading.LoadMoreItemsAsync((uint)lwGrid.Items.Count);
-				}
-
-				isOver = !incrementalLoading.HasMoreItems;
-			}
-			catch (Exception ex)
-			{ }
-			finally
-			{
-				_loading = false;
-			}
-			return isOver;
-		}
 	}
 }

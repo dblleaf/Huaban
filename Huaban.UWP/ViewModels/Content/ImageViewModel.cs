@@ -30,7 +30,12 @@ namespace Huaban.UWP.ViewModels
 			BoardList = Context.BoardListVM?.BoardList;
 			SelecterVisibility = Visibility.Collapsed;
 			CurrentBoardIndex = -1;
-			SetQuickBoard(QuickBoard);
+			
+			QuickBoardChanged += (s, e) =>
+			{
+				InitQuickBoard();
+			};
+			InitQuickBoard();
 		}
 
 		#region Properties
@@ -117,22 +122,6 @@ namespace Huaban.UWP.ViewModels
 			set { SetValue(ref _NewBoardName, value); }
 		}
 
-
-		private bool _CanQuick;
-		public bool CanQuick
-		{
-			get { return _CanQuick; }
-			set { SetValue(ref _CanQuick, value); }
-		}
-
-		private string _QuickBoardName;
-		public string QuickBoardName
-		{
-			get { return _QuickBoardName; }
-			set { SetValue(ref _QuickBoardName, value); }
-		}
-
-		internal static Board QuickBoard { set; get; }
 		#endregion
 
 		#region Commands
@@ -282,8 +271,8 @@ namespace Huaban.UWP.ViewModels
 					var pin = await Context.API.PinAPI.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
 					if (item.cover == null)
 						item.cover = pin;
-					Context.ShowTip("采集成功");
-					SetQuickBoard(item);
+					Context.ShowTip($"采集到了画板：{item.title}");
+					QuickBoard = item;
 				}, o => true));
 			}
 		}
@@ -309,8 +298,8 @@ namespace Huaban.UWP.ViewModels
 						var pin = await Context.API.PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
 						board.pins.Add(pin);
 						board.cover = pin;
-						Context.ShowTip("采集成功");
-						SetQuickBoard(board);
+						Context.ShowTip($"采集到了画板：{board.title}");
+						QuickBoard = board;
 					}
 				}, o => true));
 			}
@@ -361,7 +350,7 @@ namespace Huaban.UWP.ViewModels
 			PinListViewModel model = e.Parameter as PinListViewModel;
 			if (model != null)
 				PinListViewModel = model;
-			
+
 		}
 		private void NavigationService_BackEvent(object sender, BackRequestedEventArgs e)
 		{
@@ -372,12 +361,6 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
-		private void SetQuickBoard(Board board)
-		{
-			QuickBoard = board;
-			CanQuick = IsLogin && QuickBoard != null;
-			QuickBoardName = QuickBoard?.title;
-		}
 		#endregion
 	}
 }

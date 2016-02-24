@@ -16,13 +16,13 @@
 			<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
 			<Pivot Margin="0" Style="{StaticResource DarkThemeHeaderPivotStlye}" SelectedIndex="{Binding PivotSelectedIndex,Mode=TwoWay}">
 				<PivotItem Header="推荐">
-					<HB:ImageGrid Grid.Row="1" ListModel="{Binding RecommendListViewModel}">
-						<HB:ImageGrid.Header>
+					<HB:PinGrid Grid.Row="1" ListModel="{Binding RecommendListViewModel}">
+						<HB:PinGrid.Header>
 							<Grid Padding="12" Margin="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 								<TextBlock>推荐的采集</TextBlock>
 							</Grid>
-						</HB:ImageGrid.Header>
-					</HB:ImageGrid>
+						</HB:PinGrid.Header>
+					</HB:PinGrid>
 				</PivotItem>
 				<PivotItem Header="采集">
 					<HB:BoardGrid ListModel="{Binding BoardListViewModel}">

@@ -13,7 +13,7 @@
 				<Grid Width="48" Visibility="{Binding LeftHeaderVisibility}"></Grid>
 			</Pivot.LeftHeader>
 			<PivotItem Header="关注的采集">
-				<HB:ImageGrid ListModel="{Binding PinListViewModel}"></HB:ImageGrid>
+				<HB:PinGrid ListModel="{Binding PinListViewModel}"></HB:PinGrid>
 			</PivotItem>
 			<PivotItem Header="关注的画板">
 				<HB:BoardGrid ListModel="{Binding BoardListViewModel}"></HB:BoardGrid>

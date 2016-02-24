@@ -38,6 +38,12 @@
 		<HB:TitleControl></HB:TitleControl>
 		<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:PinGrid>
 		<CommandBar Grid.Row="2" x:Name="commandBar">
+			<CommandBar.Content>
+				<StackPanel  Visibility="{Binding Path=CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}" Orientation="Horizontal" Padding="12">
+					<FontIcon Glyph="" FontSize="16" VerticalAlignment="Center"/>
+					<TextBlock VerticalAlignment="Center">：<Run Text="{Binding QuickBoardName}"/></TextBlock>
+				</StackPanel>
+			</CommandBar.Content>
 			<AppBarButton Label="搜索" Icon="Find" Command="{Binding ToSearchCommand}"/>
 			<AppBarButton Label="分类" Icon="List" Command="{Binding ShowSelectCommand}"/>
 		</CommandBar>
