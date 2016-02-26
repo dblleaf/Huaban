@@ -34,6 +34,11 @@ namespace Huaban.UWP
 			return t;
 		}
 
+		public static async Task DeleteLocal(string fileName)
+		{
+			await LocalFolder.DeleteStorageFile(fileName);
+		}
+
 		public static async Task SaveRoaming<T>(T model, string filename = "")
 		{
 			if (string.IsNullOrEmpty(filename))
@@ -51,6 +56,11 @@ namespace Huaban.UWP
 			return t;
 		}
 
+		public static async Task DeleteRoaming(string fileName)
+		{
+			await RoamingFolder.DeleteStorageFile(fileName);
+		}
+
 		private static async Task<T> ReadStorageData<T>(this StorageFolder folder, string fileName, Func<string, T> func)
 		{
 			var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
@@ -64,6 +74,11 @@ namespace Huaban.UWP
 			await FileIO.WriteTextAsync(file, func(data));
 		}
 
+		public static async Task DeleteStorageFile(this StorageFolder folder, string fileName)
+		{
+			var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
+			await file.DeleteAsync();
+		}
 
 		public static void SaveSetting(string key, string value)
 		{

@@ -36,10 +36,7 @@ namespace Huaban.UWP.Base
 		private bool _IsLogin;
 		public bool IsLogin
 		{
-			get
-			{
-				return _IsLogin;
-			}
+			get { return _IsLogin; }
 			set { SetValue(ref _IsLogin, value); }
 		}
 
@@ -74,7 +71,7 @@ namespace Huaban.UWP.Base
 		#region Methods
 		public async Task SetToken(AuthToken token)
 		{
-			BoardListVM = new BoardListViewModel(this,GetBoardList);
+			BoardListVM = new BoardListViewModel(this, GetBoardList);
 			API.SetToken(token);
 			var user = await API.UserAPI.GetSelf();
 
@@ -85,6 +82,15 @@ namespace Huaban.UWP.Base
 			await StorageHelper.SaveLocal(user);
 		}
 
+		public async Task ClearToken()
+		{
+			API.SetToken(null);
+			IsLogin = false;
+			User = null;
+			ShellViewModel.UserItem.Special = false;
+			await StorageHelper.DeleteLocal($"{typeof(AuthToken).Name}.json");
+			await StorageHelper.DeleteLocal($"{typeof(User).Name}.json");
+		}
 		private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
 		{
 			BoardListVM.BoardList.NoMore();
@@ -131,7 +137,7 @@ namespace Huaban.UWP.Base
 		{
 			Message = msg;
 		}
-		
+
 		#endregion
 	}
 }

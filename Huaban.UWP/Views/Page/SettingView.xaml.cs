@@ -1,12 +1,11 @@
 ﻿namespace Huaban.UWP.Views
 {
 	using Controls;
-	public sealed partial class BoardPinsView : HBControl
+	public sealed partial class SettingView : HBPage
 	{
-		public BoardPinsView()
+		public SettingView()
 		{
 			this.InitializeComponent();
-			
 		}
 	}
 }

@@ -42,6 +42,11 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
+		public void Clear()
+		{
+			UserList.Clear();
+		}
+
 		public async Task ClearAndReload()
 		{
 			await UserList.ClearAndReload();

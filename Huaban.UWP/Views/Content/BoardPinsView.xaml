@@ -20,7 +20,7 @@
 			<HB:TitleControl></HB:TitleControl>
 			<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
 				<HB:PinGrid.Header>
-					<Grid>
+					<Grid x:Name="headGrid" DataContext="{x:Bind ViewModel}">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="Auto"/>
@@ -31,6 +31,7 @@
 									<Core:InvokeCommandAction Command="{Binding ToUserPageCommand}" CommandParameter="{Binding CurrentBoard.user}"></Core:InvokeCommandAction>
 								</Core:EventTriggerBehavior>
 							</Interactivity:Interaction.Behaviors>
+							
 							<Ellipse Stroke="{ThemeResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
 								<Ellipse.Fill>
 									<ImageBrush ImageSource="{Binding CurrentBoard.user.avatar.Squara}"></ImageBrush>

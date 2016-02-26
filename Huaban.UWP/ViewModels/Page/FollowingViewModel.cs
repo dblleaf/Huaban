@@ -26,15 +26,6 @@ namespace Huaban.UWP.ViewModels
 
 		public PinListViewModel PinListViewModel { set; get; }
 
-		private double _BindWidth;
-		public double BindWidth
-		{
-			get { return _BindWidth; }
-			set
-			{ SetValue(ref _BindWidth, value); }
-		}
-
-
 		#endregion
 
 		#region Commands
@@ -93,12 +84,6 @@ namespace Huaban.UWP.ViewModels
 				IsLoading = false;
 			}
 			return list;
-		}
-
-		public override Size ArrangeOverride(Size finalSize)
-		{
-			PinListViewModel.SetWidth(finalSize.Width);
-			return base.ArrangeOverride(finalSize);
 		}
 
 		public async override void Inited()

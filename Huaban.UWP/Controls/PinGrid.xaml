@@ -45,13 +45,8 @@
 			</HB:ExtendGridView.Header>
 			<HB:ExtendGridView.ItemTemplate>
 				<DataTemplate>
-					<Grid Width="{Binding ElementName=gridView,Path=PinWidth}">
-						<Grid.RowDefinitions>
-							<RowDefinition/>
-							<RowDefinition Height="Auto"/>
-						</Grid.RowDefinitions>
+					<Grid Width="{Binding ElementName=gridView,Path=PinWidth}" Height="{Binding ElementName=gridView,Path=PinWidth}">
 						<Grid Visibility="{Binding Path=IsLoaded,Converter={StaticResource ReverseVisbilityConverter}}" 
-							Height="{Binding ElementName=gridView,Path=PinWidth}" 
 							Background="{Binding Converter={StaticResource ColorConverter}}"></Grid>
 						<Grid>
 							<Interactivity:Interaction.Behaviors>
@@ -59,50 +54,55 @@
 									<Core:InvokeCommandAction Command="{Binding ElementName=gridView,Path=DataContext.ToImageViewCommand}" CommandParameter="{Binding ElementName=gridView,Path=DataContext}"></Core:InvokeCommandAction>
 								</Core:EventTriggerBehavior>
 							</Interactivity:Interaction.Behaviors>
-							<Image Source="{Binding file.Sq235}">
+							<Image Source="{Binding file.FW236}">
 								<Interactivity:Interaction.Behaviors>
 									<Core:EventTriggerBehavior EventName="ImageOpened">
 										<Core:InvokeCommandAction Command="{StaticResource PinImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
 									</Core:EventTriggerBehavior>
 								</Interactivity:Interaction.Behaviors>
 							</Image>
-							<Grid Padding="6 3" VerticalAlignment="Bottom" Background="#88888888" RequestedTheme="Dark"
+						</Grid>
+						<StackPanel VerticalAlignment="Bottom" Background="#AA000000" RequestedTheme="Dark">
+							<Grid Padding="6 3"
 									Visibility="{Binding Path=raw_text,Converter={StaticResource ObjectToVisibilityConverter}}">
 								<TextBlock Text="{Binding raw_text}" MaxLines="2" TextWrapping="Wrap"></TextBlock>
 							</Grid>
-						</Grid>
-						<StackPanel Grid.Row="2" 
-							Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-							Orientation="Horizontal" HorizontalAlignment="Right">
-							<!--快速采集-->
-							<Button Padding="12 7" Background="Transparent" BorderThickness="0"
-								Visibility="{Binding ElementName=gridView,Path=DataContext.CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}"
-								Command="{Binding ElementName=gridView,Path=DataContext.QuickPinCommand}"
-								CommandParameter="{Binding}">
-								<FontIcon Glyph="" FontSize="16"/>
-							</Button>
-							<!--喜欢-->
-							<Button Padding="12 7" Background="Transparent" BorderThickness="0" 
-								Command="{Binding ElementName=gridView,Path=DataContext.LikeCommand}"
-								CommandParameter="{Binding}">
-								<Grid>
-									<FontIcon Glyph="" FontSize="16"/>
-									<FontIcon Glyph="" FontSize="16" Foreground="{Binding Path=liked,Converter={StaticResource LikeColorConverter}}"/>
-								</Grid>
-							</Button>
-							<!--采集-->
-							<Button Padding="12 7" Background="Transparent" BorderThickness="0"	
-								Command="{Binding ElementName=gridView,Path=DataContext.ShowSelectCommand}"
-								CommandParameter="{Binding}">
-								<FontIcon Glyph="" FontSize="16"/>
-							</Button>
-							
+							<StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+								<!--快速采集-->
+								<Button Padding="12 7" Background="Transparent" BorderThickness="0"
+										Visibility="{Binding ElementName=gridView,Path=DataContext.CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}"
+										Command="{Binding ElementName=gridView,Path=DataContext.QuickPinCommand}"
+										CommandParameter="{Binding}">
+									<FontIcon Glyph="" FontSize="16"/>
+								</Button>
+								<!--喜欢-->
+								<Button Padding="12 7" Background="Transparent" BorderThickness="0" 
+										Command="{Binding ElementName=gridView,Path=DataContext.LikeCommand}"
+										CommandParameter="{Binding}">
+									<Grid>
+										<FontIcon Glyph="" FontSize="16"/>
+										<FontIcon Glyph="" FontSize="16" Foreground="{Binding Path=liked,Converter={StaticResource LikeColorConverter}}"/>
+									</Grid>
+								</Button>
+								<!--采集-->
+								<Button Padding="12 7" Background="Transparent" BorderThickness="0"	
+										Command="{Binding ElementName=gridView,Path=DataContext.ShowSelectCommand}"
+										CommandParameter="{Binding}">
+									<FontIcon Glyph="" FontSize="16"/>
+								</Button>
+							</StackPanel>
 						</StackPanel>
 					</Grid>
 				</DataTemplate>
 			</HB:ExtendGridView.ItemTemplate>
 		</HB:ExtendGridView>
-		
+		<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" 
+			Padding="12" Orientation="Horizontal" RequestedTheme="Dark"
+			Visibility="{Binding Path=CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}"
+			Background="{StaticResource HuabanColorBrush}" Opacity="0.7">
+			<FontIcon Glyph="" FontSize="16" VerticalAlignment="Center"/>
+			<TextBlock VerticalAlignment="Center">：<Run Text="{Binding QuickBoardName}"/></TextBlock>
+		</StackPanel>
 		<HB:BoardSelecter Visibility="{Binding SelecterVisibility}"></HB:BoardSelecter>
 	</Grid>
 </UserControl>

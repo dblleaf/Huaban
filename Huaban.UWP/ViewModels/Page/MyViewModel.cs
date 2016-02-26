@@ -38,5 +38,9 @@ namespace Huaban.UWP.ViewModels
 				}, o => true));
 			}
 		}
+		public override void OnNavigatedFrom(HBNavigationEventArgs e)
+		{
+			_UserViewModel.OnNavigatedFrom(new HBNavigationEventArgs() { });
+		}
 	}
 }

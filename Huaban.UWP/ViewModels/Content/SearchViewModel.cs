@@ -55,12 +55,6 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
-		public override Size ArrangeOverride(Size finalSize)
-		{
-			PinListViewModel?.SetWidth(finalSize.Width);
-			return finalSize;
-		}
-
 		private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
 		{
 			PinListViewModel.PinList.NoMore();

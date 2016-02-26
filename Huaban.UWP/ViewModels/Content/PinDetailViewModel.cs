@@ -162,12 +162,7 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
-		public override Size ArrangeOverride(Size finalSize)
-		{
-			RecommendListViewModel.SetWidth(finalSize.Width);
-			return finalSize;
-		}
-
+		
 		#endregion
 	}
 }

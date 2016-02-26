@@ -205,19 +205,18 @@ namespace Huaban.UWP.ViewModels
 				else
 					User = await Context.API.UserAPI.GetUser(user.user_id);
 
-				await MyPinListViewModel.ClearAndReload();
-				await LikePinListViewModel.ClearAndReload();
-				await BoardListViewModel.ClearAndReload();
 			}
 			catch { }
 		}
-
-		public override Size ArrangeOverride(Size finalSize)
+		public override void OnNavigatedFrom(HBNavigationEventArgs e)
 		{
-			MyPinListViewModel.SetWidth(finalSize.Width);
-			LikePinListViewModel.SetWidth(finalSize.Width);
-			return base.ArrangeOverride(finalSize);
+			MyPinListViewModel.Clear();
+			LikePinListViewModel.Clear();
+			FollowingListViewModel.Clear();
+			FollowerListViewModel.Clear();
+			base.OnNavigatedFrom(e);
 		}
+		
 		#endregion
 	}
 }

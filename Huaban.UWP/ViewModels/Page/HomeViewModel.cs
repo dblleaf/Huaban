@@ -27,12 +27,6 @@ namespace Huaban.UWP.ViewModels
 			PinListViewModel.TargetName = "HomePage";
 			CategoryList = Context.CategoryList;
 			SelecterVisibility = Visibility.Collapsed;
-
-			QuickBoardChanged += (s, e) =>
-			{
-				QuickBoardName = QuickBoard?.title;
-				CanQuick = QuickBoard != null;
-			};
 		}
 
 		#region Properties
@@ -134,18 +128,12 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
-		public override Size ArrangeOverride(Size finalSize)
-		{
-			base.ArrangeOverride(finalSize);
-			PinListViewModel?.SetWidth(finalSize.Width);
-			return finalSize;
-		}
+	
 		public async override void Inited()
 		{
 			base.Inited();
 
 			IsLoading = true;
-
 
 			try
 			{
@@ -177,6 +165,10 @@ namespace Huaban.UWP.ViewModels
 					if (item.file != null)
 						item.Height = ((PinListViewModel.ColumnWidth - 0.8) * item.file.height / item.file.width);
 				}
+				if (list.Count == 0)
+					PinListViewModel.PinList.NoMore();
+				else
+					PinListViewModel.PinList.HasMore();
 				return list;
 			}
 			catch (Exception ex)

@@ -67,7 +67,7 @@ namespace Huaban.UWP.ViewModels
 						CacheSize = "清理中...";
 						await Task.Delay(1500);
 						await StorageHelper.ClearCache();
-						
+
 						await Task.Delay(500);
 
 						CacheSize = GetFormatSize(await StorageHelper.GetCacheFolderSize());
@@ -80,12 +80,31 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
+		private DelegateCommand _LogoutCommand;
+		public DelegateCommand LogoutCommand
+		{
+			get
+			{
+				return _LogoutCommand ?? (_LogoutCommand = new DelegateCommand(
+					async o =>
+					{
+						await Context.ClearToken();
+						Context.ShowTip("已经退出");
+						LogoutCommand.RaiseCanExecuteChanged();
+					},
+					o => Context.IsLogin)
+				);
+			}
+		}
+
 		#endregion
 
 		#region Methods
 		public async override void OnNavigatedTo(HBNavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
+			LogoutCommand.RaiseCanExecuteChanged();
+
 			if (e.NavigationMode == NavigationMode.New)
 			{
 				CacheSize = GetFormatSize(await StorageHelper.GetCacheFolderSize());

@@ -59,7 +59,7 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
-		private NavItemModel UserItem { set; get; }
+		internal static NavItemModel UserItem { set; get; }
 			= new NavItemModel()
 			{
 				DestinationPage = "My",

@@ -20,7 +20,6 @@ namespace Huaban.UWP.ViewModels
 			: base(context)
 		{
 			PinList = new IncrementalLoadingList<Pin>(_func);
-			this.SetWidth(Window.Current.Bounds.Width);
 			SelecterVisibility = Visibility.Collapsed;
 			BoardList = Context.BoardListVM?.BoardList;
 
@@ -28,16 +27,13 @@ namespace Huaban.UWP.ViewModels
 			{
 				InitQuickBoard();
 			};
+
+			InitQuickBoard();
 		}
 
 		#region Properties
 
-		private double _BindWidth;
-		public double BindWidth
-		{
-			get { return _BindWidth; }
-			set { SetValue(ref _BindWidth, value); }
-		}
+		
 		private double _ColumnWidth;
 		public double ColumnWidth
 		{
@@ -93,6 +89,8 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		public IncrementalLoadingList<Board> BoardList { set; get; }
+
+		
 		#endregion
 
 		#region Commands
@@ -299,21 +297,6 @@ namespace Huaban.UWP.ViewModels
 		#endregion
 
 		#region Methods
-
-		public void SetWidth(double width)
-		{
-			ColumnWidth = 240 - 6;
-			int columncount = Convert.ToInt32(Math.Max(2, Math.Floor(width / 240)));
-			double bindWidth = columncount * 240 - 6;
-			if (width < 720)
-			{
-				bindWidth = width - 6;
-				ColumnWidth = bindWidth / 2 - 6;
-			}
-
-			ColumnCount = columncount;
-			BindWidth = bindWidth;
-		}
 
 		public async Task ClearAndReload()
 		{
