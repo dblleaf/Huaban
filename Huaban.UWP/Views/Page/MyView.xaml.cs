@@ -1,13 +1,11 @@
 ﻿namespace Huaban.UWP.Views
 {
 	using Controls;
-	public sealed partial class AboutView : HBPage
+	public sealed partial class MyView : HBPage
 	{
-		public AboutView()
+		public MyView()
 		{
 			this.InitializeComponent();
 		}
-
-
 	}
 }
