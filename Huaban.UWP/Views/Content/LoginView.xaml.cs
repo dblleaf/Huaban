@@ -21,10 +21,7 @@ namespace Huaban.UWP.Views
 		private void LoginView_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
 			this.Focus(FocusState.Programmatic);
-			if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-			{
-				rootPanel.Margin = new Thickness(0, 21, 0, 0);
-			}
+			
 			Shell = Window.Current.Content as Frame;
 			this.Width = Shell.ActualWidth;
 			this.Height = Shell.ActualHeight;

@@ -66,7 +66,7 @@
 						</ListBox>
 						<Border CornerRadius="2" HorizontalAlignment="Center" Background="Red" Margin="24"></Border>
 					</StackPanel>
-					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content="&lt; 花瓣账号登录 " BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="0"></Button>
+					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content="&lt; 花瓣账号登录 " BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>
 				</Grid>
 			</PivotItem>
 			<PivotItem>
@@ -87,7 +87,7 @@
 							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
 						</Grid>
 					</StackPanel>
-					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>
+					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="0"></Button>
 				</Grid>
 			</PivotItem>
 		</Pivot>

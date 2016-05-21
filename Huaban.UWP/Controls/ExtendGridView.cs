@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
+using Windows.Foundation.Metadata;
 
 namespace Huaban.UWP.Controls
 {
@@ -19,12 +20,20 @@ namespace Huaban.UWP.Controls
 
 		private void PinGridView_SizeChanged(object sender, SizeChangedEventArgs e)
 		{
+
 			try
 			{
-				if (e.NewSize.Width <= 500)
-					PinWidth = (e.NewSize.Width - 6.5) / 2 - 6;
-				else
-					PinWidth = (e.NewSize.Width - 12) / Math.Floor(e.NewSize.Width / 240) - 6;
+				double width = Math.Floor(e.NewSize.Width);
+
+				double col = Math.Floor(width / 240);
+				if (col <= 1)
+					col = 2;
+
+				double w = 13;
+				if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+					w = 6.1;
+
+				PinWidth = Math.Floor((width - w) * 2 / col) / 2 - 6;
 			}
 			catch (Exception ex)
 			{

@@ -1,0 +1,2 @@
+MainPackage=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\bin\ARM\Release\Upload\Huaban.UWP_1.2.20.0_ARM.appx
+ResourcePack=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\_language-zh-hans.appx

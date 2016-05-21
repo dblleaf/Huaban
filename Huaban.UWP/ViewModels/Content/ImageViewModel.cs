@@ -143,9 +143,9 @@ namespace Huaban.UWP.ViewModels
 						string type = Pin.file.type?.ToLower();
 						if (type?.IndexOf("png") >= 0)
 							type = "png";
-						else if (type.IndexOf("bmp") >= 0)
+						else if (type?.IndexOf("bmp") >= 0)
 							type = "bmp";
-						else if (type.IndexOf("gif") >= 0)
+						else if (type?.IndexOf("gif") >= 0)
 							type = "gif";
 						else
 							type = "jpg";

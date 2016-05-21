@@ -1,0 +1,1 @@
+MainPackage=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\bin\x64\Release\Upload\Huaban.UWP_1.2.20.0_x64.appx

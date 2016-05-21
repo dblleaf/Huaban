@@ -28,6 +28,7 @@ namespace Huaban.UWP.Controls
 						list?.LoadMoreItemsAsync((uint)this.Items.Count);
 				}
 			};
+			
 		}
 
 	}

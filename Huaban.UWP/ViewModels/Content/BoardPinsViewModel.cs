@@ -140,6 +140,12 @@ namespace Huaban.UWP.ViewModels
 				FollowVisibility = CurrentBoard.following ? Visibility.Collapsed : Visibility.Visible;
 			}
 		}
+
+		public override Size ArrangeOverride(Size finalSize)
+		{
+			return finalSize;
+		}
+
 		#endregion
 
 
