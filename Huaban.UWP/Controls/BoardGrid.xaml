@@ -22,7 +22,25 @@
 					<Setter Property="Padding" Value="0"></Setter>
 					<Setter Property="Margin" Value="3"></Setter>
 					<Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Setter>
-					
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="GridViewItem">
+								<Grid Background="{TemplateBinding Background}">
+									<VisualStateManager.VisualStateGroups>
+										<VisualStateGroup>
+											<!--缺省样式-->
+											<VisualState x:Name="Normal" />
+										</VisualStateGroup>
+									</VisualStateManager.VisualStateGroups>
+									<Grid x:Name="ContentBackground">
+										<ContentPresenter
+											Content="{TemplateBinding Content}"
+											Margin="{TemplateBinding Padding}" />
+									</Grid>
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
 				</Style>
 			</HB:ExtendGridView.Resources>
 			<HB:ExtendGridView.Header>

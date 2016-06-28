@@ -119,7 +119,7 @@
 				<RowDefinition Height="*"></RowDefinition>
 				<RowDefinition Height="Auto"></RowDefinition>
 			</Grid.RowDefinitions>
-			<StackPanel Padding="0 12 0 3">
+			<StackPanel Padding="0 12 0 3" Background="Transparent">
 				<Interactivity:Interaction.Behaviors>
 					<Core:EventTriggerBehavior EventName="Tapped">
 						<Core:InvokeCommandAction Command="{StaticResource ToUserCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>

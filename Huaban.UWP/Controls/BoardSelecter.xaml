@@ -16,7 +16,10 @@
 				<Core:InvokeCommandAction Command="{Binding HideSelectCommand}"></Core:InvokeCommandAction>
 			</Core:EventTriggerBehavior>
 		</Interactivity:Interaction.Behaviors>
-		<Grid BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}" VerticalAlignment="Bottom" MaxHeight="420" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Stretch">
+		<Grid BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+              VerticalAlignment="Bottom" MaxHeight="420" 
+              Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+              HorizontalAlignment="Stretch">
 			<Grid.RowDefinitions>
 				<RowDefinition></RowDefinition>
 				<RowDefinition></RowDefinition>

@@ -130,6 +130,8 @@
 					</AppBarButton>
 					<CommandBar.SecondaryCommands>
 						<AppBarButton Label="查看更多内容" Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem}"/>
+						<AppBarButton Label="复制地址" Command="{Binding CopyLinkCommmand}"/>
+						<AppBarButton Label="浏览器中打开" Command="{Binding OpenInBrowser}"/>
 					</CommandBar.SecondaryCommands>
 				</CommandBar>
 				<StackPanel Margin="0 0 0 36"

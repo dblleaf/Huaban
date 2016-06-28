@@ -27,7 +27,7 @@
 				<PivotItem Header="采集">
 					<HB:BoardGrid ListModel="{Binding BoardListViewModel}">
 						<HB:BoardGrid.Header>
-							<Grid Padding="12" Margin="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+							<Grid DataContext="{x:Bind ViewModel}" Padding="12" Margin="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 								<TextBlock>还被采集在（<Run Text="{Binding BoardListViewModel.Count}"/>）个画板</TextBlock>
 							</Grid>
 						</HB:BoardGrid.Header>
@@ -39,7 +39,7 @@
 				<PivotItem Header="喜欢">
 					<HB:UserGrid ListModel="{Binding UserListViewModel}">
 						<HB:UserGrid.Header>
-							<Grid Padding="12" Margin="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+							<Grid DataContext="{x:Bind ViewModel}" Padding="12" Margin="3" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 								<TextBlock>共有（<Run Text="{Binding UserListViewModel.Count}"/>）个人喜欢</TextBlock>
 							</Grid>
 						</HB:UserGrid.Header>

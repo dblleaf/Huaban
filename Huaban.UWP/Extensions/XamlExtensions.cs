@@ -37,6 +37,24 @@ namespace Huaban.UWP
 
 			return control;
 		}
+		public static T GetChild<T>(this DependencyObject obj)
+		{
+			Type type = typeof(T);
+			var childControls = AllChildren(obj);
+			var control = childControls
+							.OfType<T>()
+							.FirstOrDefault();
+			return control;
+		}
+
+		public static IEnumerable<T> GetChildren<T>(this DependencyObject obj)
+		{
+			Type type = typeof(T);
+			var childControls = AllChildren(obj);
+			var children = childControls
+							.OfType<T>();
+			return children;
+		}
 
 		public static T GetParent<T>(this FrameworkElement element, string message = null) where T : DependencyObject
 		{

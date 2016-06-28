@@ -88,6 +88,10 @@ namespace Huaban.UWP.ViewModels
 			}
 			return null;
 		}
+		public override Size ArrangeOverride(Size finalSize)
+		{
+			return finalSize;
+		}
 		#endregion
 	}
 }

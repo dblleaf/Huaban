@@ -14,7 +14,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Input;
 using Windows.Storage;
-
+using Windows.ApplicationModel.DataTransfer;
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
@@ -30,7 +30,7 @@ namespace Huaban.UWP.ViewModels
 			BoardList = Context.BoardListVM?.BoardList;
 			SelecterVisibility = Visibility.Collapsed;
 			CurrentBoardIndex = -1;
-			
+
 			QuickBoardChanged += (s, e) =>
 			{
 				InitQuickBoard();
@@ -341,6 +341,37 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
+		//复制地址到剪贴板
+		private DelegateCommand _CopyLinkCommmand;
+		public DelegateCommand CopyLinkCommmand
+		{
+			get
+			{
+				return _CopyLinkCommmand ?? (_CopyLinkCommmand = new DelegateCommand(
+				o =>
+				{
+					DataPackage dp = new DataPackage();
+					dp.SetText($"http://huaban.com/pins/{Pin?.pin_id}");
+					Clipboard.SetContent(dp);
+
+					Context.ShowTip("地址已复制到剪贴板！");
+				}, o => true));
+			}
+		}
+
+		//在浏览器中打开
+		private DelegateCommand _OpenInBrowser;
+		public DelegateCommand OpenInBrowser
+		{
+			get
+			{
+				return _OpenInBrowser ?? (_OpenInBrowser = new DelegateCommand(
+				async o =>
+				{
+					await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huaban.com/pins/{Pin?.pin_id}"));
+				}, o => true));
+			}
+		}
 		#endregion
 
 		#region Methods

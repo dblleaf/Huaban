@@ -179,13 +179,14 @@ namespace Huaban.UWP.ViewModels
 					{
 						DisplayTheme();
 
-						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_20")))
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_21")))
 						{
-							string msg = @"1.修复PC端社区账号和花瓣账号不能切换登录的问题
-
-欢迎进QQ群534867173讨论或者提建议，或者发电子邮件到关于的邮箱地址。
-";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.20");
+							string msg = @"1.修复采集、用户列表空白处点击不跳转的问题
+2.修复采集详情不显示采集数和喜欢数
+3.用户页下拉自动隐藏头像
+4.采集预览和画板详情页，可以复制采集地址或打开链接
+5.其他细节修改";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.21");
 
 							//dialog.Commands.Add(new UICommand("马上下载", async o =>
 							//{
@@ -193,7 +194,7 @@ namespace Huaban.UWP.ViewModels
 							//}));
 							//dialog.Commands.Add(new UICommand("取消"));
 							await dialog.ShowAsync();
-							StorageHelper.SaveSetting("v1_2_20", "1");
+							StorageHelper.SaveSetting("v1_2_21", "1");
 						}
 
 					}

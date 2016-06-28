@@ -9,6 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Navigation;
 using Windows.Foundation;
+using Windows.ApplicationModel.DataTransfer;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -81,6 +82,37 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
+		//复制地址到剪贴板
+		private DelegateCommand _CopyLinkCommmand;
+		public DelegateCommand CopyLinkCommmand
+		{
+			get
+			{
+				return _CopyLinkCommmand ?? (_CopyLinkCommmand = new DelegateCommand(
+				o =>
+				{
+					DataPackage dp = new DataPackage();
+					dp.SetText($"http://huaban.com/boards/{CurrentBoard.board_id}");
+					Clipboard.SetContent(dp);
+
+					Context.ShowTip("地址已复制到剪贴板！");
+				}, o => true));
+			}
+		}
+
+		//在浏览器中打开
+		private DelegateCommand _OpenInBrowser;
+		public DelegateCommand OpenInBrowser
+		{
+			get
+			{
+				return _OpenInBrowser ?? (_OpenInBrowser = new DelegateCommand(
+				async o =>
+				{
+					await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huaban.com/boards/{CurrentBoard.board_id}"));
+				}, o => true));
+			}
+		}
 		#endregion
 
 		#region Methods

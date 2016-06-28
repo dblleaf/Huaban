@@ -51,6 +51,8 @@
 			</HB:PinGrid>
 			
 			<CommandBar Grid.Row="2">
+				<AppBarButton Label="复制地址" Icon="Copy" Command="{Binding CopyLinkCommmand}"/>
+				<AppBarButton Label="浏览器中打开" Icon="Go" Command="{Binding OpenInBrowser}"/>
 				<AppBarButton Label="关注" Icon="Add"
 					Visibility="{Binding FollowVisibility}" 
 					Command="{Binding FollowBoardCommand}"/>
