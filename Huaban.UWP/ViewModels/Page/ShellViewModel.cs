@@ -179,22 +179,19 @@ namespace Huaban.UWP.ViewModels
 					{
 						DisplayTheme();
 
-						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_21")))
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_35")))
 						{
-							string msg = @"1.修复采集、用户列表空白处点击不跳转的问题
-2.修复采集详情不显示采集数和喜欢数
-3.用户页下拉自动隐藏头像
-4.采集预览和画板详情页，可以复制采集地址或打开链接
-5.其他细节修改";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.21");
+							string msg = @"1.修复用户界面异常";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.35");
 
-							//dialog.Commands.Add(new UICommand("马上下载", async o =>
-							//{
-							//	await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://pdp/?ProductId=9NBLGGH5PJJT"));
-							//}));
-							//dialog.Commands.Add(new UICommand("取消"));
+							dialog.Commands.Add(new UICommand("评价应用", async o =>
+							{
+								await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
+							}));
+							dialog.Commands.Add(new UICommand("不想评价"));
+
 							await dialog.ShowAsync();
-							StorageHelper.SaveSetting("v1_2_21", "1");
+							StorageHelper.SaveSetting("v1_2_35", "1");
 						}
 
 					}
@@ -202,12 +199,8 @@ namespace Huaban.UWP.ViewModels
 					{
 						string aaa = ex.Message;
 					}
-
 				});
-
 			});
-
-
 		}
 
 

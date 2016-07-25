@@ -360,11 +360,12 @@
   <ProductReservedInfo>
     <MainPackageIdentityName>807song-zhaoli.UWP</MainPackageIdentityName>
     <ReservedNames>
+      <ReservedName>9ef548 1e9660 爱花瓣UWP</ReservedName>
       <ReservedName>爱花瓣UWP</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>
     <MainPackageIdentityName>807song-zhaoli.6556FDFCA06E</MainPackageIdentityName>
   </AccountPackageIdentityNames>
-  <PackageInfoList LandingUrl="https://dev.windows.com/dashboard/Application?appId=9NBLGGH5FWXP" />
+  <PackageInfoList LandingUrl="https://developer.microsoft.com/dashboard/Application?appId=9NBLGGH5FWXP" />
 </StoreAssociation>

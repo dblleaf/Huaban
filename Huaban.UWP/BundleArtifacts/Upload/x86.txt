@@ -1,1 +1,2 @@
-MainPackage=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\bin\x86\Release\Upload\Huaban.UWP_1.2.20.0_x86.appx
+MainPackage=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\bin\x86\Release\Upload\Huaban.UWP_1.2.35.0_x86.appx
+SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.35.0\Huaban.UWP_1.2.35.0_x86.appxsym

@@ -21,7 +21,7 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>77C7C464B858A47EB9A0A6EF6B0D087B9DA2C3BA</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>13AC40CAEF7DFB1225012335DB77627F18558342</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
@@ -100,6 +100,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="Huaban.UWP_StoreKey.pfx" />
+    <None Include="Huaban.UWP_TemporaryKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -272,7 +273,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Huaban.UWP_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\banner-1.png" />
