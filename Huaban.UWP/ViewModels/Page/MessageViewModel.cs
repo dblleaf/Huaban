@@ -16,6 +16,7 @@ namespace Huaban.UWP.ViewModels
 		{
 			Title = "消息";
 			PinListVM = new PinListViewModel(context, GetData);
+			
 		}
 
 		#region Properties
