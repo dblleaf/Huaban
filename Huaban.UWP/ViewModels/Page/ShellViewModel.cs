@@ -244,6 +244,7 @@ namespace Huaban.UWP.ViewModels
 		private void Timer_Tick(object sender, object e)
 		{
 			FirstBackVisibility = Visibility.Collapsed;
+
 			timer.Tick -= Timer_Tick;
 		}
 
