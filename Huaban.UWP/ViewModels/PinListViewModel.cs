@@ -14,6 +14,7 @@ namespace Huaban.UWP.ViewModels
 	using Commands;
 	using Services;
 	using Models;
+	public delegate void SelectedChangedHandler(Pin args);
 	public class PinListViewModel : HBViewModel
 	{
 		public PinListViewModel(Context context, Func<uint, int, Task<IEnumerable<Pin>>> _func)
@@ -31,9 +32,10 @@ namespace Huaban.UWP.ViewModels
 			InitQuickBoard();
 		}
 
+		public event SelectedChangedHandler OnSelectedChanged;
 		#region Properties
 
-		
+
 		private double _ColumnWidth;
 		public double ColumnWidth
 		{
@@ -64,7 +66,11 @@ namespace Huaban.UWP.ViewModels
 		public Pin SelectedItem
 		{
 			get { return _SelectedItem; }
-			set { SetValue(ref _SelectedItem, value); }
+			set
+			{
+				SetValue(ref _SelectedItem, value);
+				OnSelectedChanged?.Invoke(value);
+			}
 		}
 
 		private string _NewBoardName;
@@ -90,7 +96,7 @@ namespace Huaban.UWP.ViewModels
 
 		public IncrementalLoadingList<Board> BoardList { set; get; }
 
-		
+
 		#endregion
 
 		#region Commands
@@ -332,6 +338,11 @@ namespace Huaban.UWP.ViewModels
 			}
 		}
 
+		public override void Dispose()
+		{
+			this.Clear();
+			base.Dispose();
+		}
 		#endregion
 	}
 }

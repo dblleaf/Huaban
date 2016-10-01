@@ -51,7 +51,6 @@ namespace Huaban.UWP.Views
 				return;
 			Pin pin = scrollView.DataContext as Pin;
 
-
 			imgView.MaxHeight = scrollView.ActualHeight;
 			imgView.MaxWidth = Math.Min(pin.file.width, scrollView.ActualWidth);
 			scrollView.ZoomToFactor(1);

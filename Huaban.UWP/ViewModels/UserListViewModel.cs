@@ -68,6 +68,11 @@ namespace Huaban.UWP.ViewModels
 			return max;
 		}
 
+		public override void Dispose()
+		{
+			Clear();
+			base.Dispose();
+		}
 		#endregion
 	}
 }

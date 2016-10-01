@@ -54,13 +54,14 @@ namespace Huaban.UWP.Base
 			{
 				try
 				{
+					
 					if (_isBusy)
 					{
 						throw new InvalidOperationException("忙着呢，先不搭理你");
 					}
 					_isBusy = true;
 
-					var _items = await func(count, ++Page);
+					var _items = await func?.Invoke(count, ++Page);
 					foreach (var item in _items)
 					{
 						this.Add(item);

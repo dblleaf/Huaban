@@ -8,7 +8,7 @@ namespace Huaban.UWP.Base
 {
 	using Controls;
 	using Services;
-	public abstract class ViewModelBase : ObservableObject
+	public abstract class ViewModelBase : ObservableObject, IDisposable
 	{
 		public ViewModelBase()
 		{
@@ -26,6 +26,7 @@ namespace Huaban.UWP.Base
 
 		public virtual bool OnNavigatingFrom(HBNavigatingCancelEventArgs e)
 		{
+			Dispose();
 			return true;
 		}
 		public virtual Size ArrangeOverride(Size finalSize)
@@ -38,6 +39,14 @@ namespace Huaban.UWP.Base
 		public virtual void Inited()
 		{
 			IsInited = true;
+		}
+
+		public virtual void Dispose()
+		{
+			GC.SuppressFinalize(this);
+			GC.Collect();
+			GC.WaitForPendingFinalizers();
+			GC.Collect();
 		}
 		#endregion
 

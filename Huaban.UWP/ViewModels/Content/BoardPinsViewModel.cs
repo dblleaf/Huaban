@@ -20,8 +20,6 @@ namespace Huaban.UWP.ViewModels
 
 	public class BoardPinsViewModel : HBViewModel
 	{
-
-
 		public BoardPinsViewModel(Context context)
 			: base(context)
 		{
@@ -178,6 +176,12 @@ namespace Huaban.UWP.ViewModels
 			return finalSize;
 		}
 
+		public override void Dispose()
+		{
+			
+			PinListViewModel.Dispose();
+			base.Dispose();
+		}
 		#endregion
 
 

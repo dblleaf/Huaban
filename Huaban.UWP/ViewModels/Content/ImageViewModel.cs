@@ -380,8 +380,25 @@ namespace Huaban.UWP.ViewModels
 		{
 			PinListViewModel model = e.Parameter as PinListViewModel;
 			if (model != null)
+			{
 				PinListViewModel = model;
+				PinListViewModel.OnSelectedChanged += PinListViewModel_OnSelectedChanged;
+			}
 
+
+		}
+
+		private void PinListViewModel_OnSelectedChanged(Pin args)
+		{
+			if (Pin != null)
+				Liked = Pin.liked;
+		}
+
+		public override bool OnNavigatingFrom(HBNavigatingCancelEventArgs e)
+		{
+			if (PinListViewModel != null)
+				PinListViewModel.OnSelectedChanged -= PinListViewModel_OnSelectedChanged;
+			return base.OnNavigatingFrom(e);
 		}
 		private void NavigationService_BackEvent(object sender, BackRequestedEventArgs e)
 		{
@@ -390,6 +407,13 @@ namespace Huaban.UWP.ViewModels
 				e.Handled = true;
 				SelecterVisibility = Visibility.Collapsed;
 			}
+		}
+
+		public override void Dispose()
+		{
+			PinListViewModel = new PinListViewModel(Context, null);
+
+			base.Dispose();
 		}
 
 		#endregion
