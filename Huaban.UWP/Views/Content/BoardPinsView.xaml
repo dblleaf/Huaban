@@ -9,13 +9,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" 
-		BorderThickness="0.9 0" BorderBrush="{StaticResource SystemAccentColorBrush}" Margin="-1 0">
+	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="48"/>
 				<RowDefinition Height="*"/>
-				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			<HB:TitleControl></HB:TitleControl>
 			<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
@@ -31,7 +29,7 @@
 									<Core:InvokeCommandAction Command="{Binding ToUserPageCommand}" CommandParameter="{Binding CurrentBoard.user}"></Core:InvokeCommandAction>
 								</Core:EventTriggerBehavior>
 							</Interactivity:Interaction.Behaviors>
-							
+
 							<Ellipse Stroke="{ThemeResource SystemControlBackgroundBaseLowBrush}" StrokeThickness="1" Width="40" Height="40">
 								<Ellipse.Fill>
 									<ImageBrush ImageSource="{Binding CurrentBoard.user.avatar.Squara}"></ImageBrush>
@@ -48,19 +46,22 @@
 						</Grid>
 					</Grid>
 				</HB:PinGrid.Header>
+				<HB:PinGrid.Footer>
+					<Grid DataContext="{x:Bind ViewModel}">
+						<CommandBar>
+							<AppBarButton Label="复制地址" Icon="Copy" Command="{Binding CopyLinkCommmand}"/>
+							<AppBarButton Label="浏览器中打开" Icon="Go" Command="{Binding OpenInBrowser}"/>
+							<AppBarButton Label="关注" Icon="Add"
+							Visibility="{Binding FollowVisibility}" 
+							Command="{Binding FollowBoardCommand}"/>
+							<AppBarButton Label="已关注" Icon="Accept"
+							Visibility="{Binding UnFollowVisibility}"
+							Command="{Binding FollowBoardCommand}"/>
+						</CommandBar>
+					</Grid>
+				</HB:PinGrid.Footer>
 			</HB:PinGrid>
-			
-			<CommandBar Grid.Row="2">
-				<AppBarButton Label="复制地址" Icon="Copy" Command="{Binding CopyLinkCommmand}"/>
-				<AppBarButton Label="浏览器中打开" Icon="Go" Command="{Binding OpenInBrowser}"/>
-				<AppBarButton Label="关注" Icon="Add"
-					Visibility="{Binding FollowVisibility}" 
-					Command="{Binding FollowBoardCommand}"/>
-				<AppBarButton Label="已关注" Icon="Accept"
-					Visibility="{Binding UnFollowVisibility}"
-					Command="{Binding FollowBoardCommand}"/>
-			</CommandBar>
 		</Grid>
-		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
+		<ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>
 	</Grid>
 </HB:HBControl>

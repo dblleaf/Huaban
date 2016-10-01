@@ -66,6 +66,12 @@ namespace Huaban.UWP.ViewModels
 					if (item.file != null)
 						item.Height = ((MyPinListViewModel.ColumnWidth - 0.8) * item.file.height / item.file.width);
 				}
+
+				if (list.Count == 0)
+					MyPinListViewModel.PinList.NoMore();
+				else
+					MyPinListViewModel.PinList.HasMore();
+
 				return list;
 			}
 			catch (Exception ex)
@@ -92,6 +98,10 @@ namespace Huaban.UWP.ViewModels
 					if (item.file != null)
 						item.Height = ((LikePinListViewModel.ColumnWidth - 0.8) * item.file.height / item.file.width);
 				}
+				if (list.Count == 0)
+					LikePinListViewModel.PinList.NoMore();
+				else
+					LikePinListViewModel.PinList.HasMore();
 				return list;
 			}
 			catch (Exception ex)

@@ -179,10 +179,13 @@ namespace Huaban.UWP.ViewModels
 					{
 						DisplayTheme();
 
-						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_35")))
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_36")))
 						{
-							string msg = @"1.修复用户界面异常";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.35");
+							string msg = @"1.修复切换图片时喜欢图标不变的bug
+2.修复个人个人页面喜欢选项卡、关注页面关注的画板无限加载的bug
+3.修复登录失败的bug
+4.布局细节修改";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.36");
 
 							dialog.Commands.Add(new UICommand("评价应用", async o =>
 							{
@@ -191,7 +194,7 @@ namespace Huaban.UWP.ViewModels
 							dialog.Commands.Add(new UICommand("不想评价"));
 
 							await dialog.ShowAsync();
-							StorageHelper.SaveSetting("v1_2_35", "1");
+							StorageHelper.SaveSetting("v1_2_36", "1");
 						}
 
 					}

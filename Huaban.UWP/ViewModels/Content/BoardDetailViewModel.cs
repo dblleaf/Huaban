@@ -26,6 +26,7 @@ namespace Huaban.UWP.ViewModels
 			LeftHeaderVisibility = Visibility.Collapsed;
 			Title = "编辑画板";
 			CategoryList = Context.Categories;
+
 		}
 
 		#region Properties

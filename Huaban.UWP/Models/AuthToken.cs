@@ -47,6 +47,6 @@ namespace Huaban.UWP.Models
 		private static Regex rgxAccessToken = new Regex("access_token=([^&]+)");
 		private static Regex rgxRefreshToken = new Regex("refresh_token=([^&]+)");
 		private static Regex rgxTokenType = new Regex("token_type=([^&]+)");
-		private static Regex rgxExpiresIn = new Regex("expires_in=([^&]+)");
+		private static Regex rgxExpiresIn = new Regex("expires_in=([0-9]+)");
 	}
 }

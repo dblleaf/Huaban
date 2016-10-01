@@ -11,6 +11,10 @@
     d:DesignHeight="300"
     d:DesignWidth="400">
 	<Grid x:Name="pinGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
 		<HB:ExtendGridView x:Name="gridView" Padding="3"
 			ItemsSource="{Binding PinList}"
 			SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
@@ -97,6 +101,7 @@
 				</DataTemplate>
 			</HB:ExtendGridView.ItemTemplate>
 		</HB:ExtendGridView>
+		<ContentControl Grid.Row="1" x:Name="FooterContent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ContentControl>
 		<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" 
 			Padding="12" Orientation="Horizontal" RequestedTheme="Dark"
 			Visibility="{Binding Path=CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}"
@@ -104,6 +109,6 @@
 			<FontIcon Glyph="" FontSize="16" VerticalAlignment="Center"/>
 			<TextBlock VerticalAlignment="Center">：<Run Text="{Binding QuickBoardName}"/></TextBlock>
 		</StackPanel>
-		<HB:BoardSelecter Visibility="{Binding SelecterVisibility}"></HB:BoardSelecter>
+		<HB:BoardSelecter Grid.RowSpan="2" Visibility="{Binding SelecterVisibility}"></HB:BoardSelecter>
 	</Grid>
 </UserControl>

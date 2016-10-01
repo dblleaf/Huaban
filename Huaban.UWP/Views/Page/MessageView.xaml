@@ -16,7 +16,7 @@
 		</Grid.RowDefinitions>
 		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
 		<ScrollViewer Grid.Row="1">
-			<mdc:WaterfallFlowView ItemSource="{Binding PinListVM.PinList}" DelayMeasure="True" StackCount="5">
+			<!--<mdc:WaterfallFlowView ItemSource="{Binding PinListVM.PinList}" DelayMeasure="True" StackCount="5">
 				<mdc:WaterfallFlowView.ItemTemplate>
 					<DataTemplate>
 						<Grid Width="{Binding ElementName=gridView,Path=PinWidth}" Height="{Binding ElementName=gridView,Path=PinWidth}">
@@ -44,14 +44,14 @@
 								</StackPanel>
 							</Grid>
 							<StackPanel VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Right" RequestedTheme="Dark">
-								<!--快速采集-->
+								快速采集
 								<Button Padding="12 7" Background="Transparent" BorderThickness="0"
 										Visibility="{Binding ElementName=gridView,Path=DataContext.CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}"
 										Command="{Binding ElementName=gridView,Path=DataContext.QuickPinCommand}"
 										CommandParameter="{Binding}">
 									<FontIcon Glyph="" FontSize="16"/>
 								</Button>
-								<!--喜欢-->
+								喜欢
 								<Button Padding="12 7" Background="Transparent" BorderThickness="0" 
 										Command="{Binding ElementName=gridView,Path=DataContext.LikeCommand}"
 										CommandParameter="{Binding}">
@@ -60,7 +60,7 @@
 										<FontIcon Glyph="" FontSize="16" Foreground="{Binding Path=liked,Converter={StaticResource LikeColorConverter}}"/>
 									</Grid>
 								</Button>
-								<!--采集-->
+								采集
 								<Button Padding="12 7" Background="Transparent" BorderThickness="0"	
 										Command="{Binding ElementName=gridView,Path=DataContext.ShowSelectCommand}"
 										CommandParameter="{Binding}">
@@ -70,7 +70,7 @@
 						</Grid>
 					</DataTemplate>
 				</mdc:WaterfallFlowView.ItemTemplate>
-			</mdc:WaterfallFlowView>
+			</mdc:WaterfallFlowView>-->
 		</ScrollViewer>
 	</Grid>
 </HB:HBPage>

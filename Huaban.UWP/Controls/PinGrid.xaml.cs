@@ -40,6 +40,23 @@ namespace Huaban.UWP.Controls
 		}
 		#endregion
 
+		#region Footer
+		public UIElement Footer
+		{
+			get { return (UIElement)GetValue(FooterProperty); }
+			set { SetValue(FooterProperty, value); }
+		}
+
+		public static readonly DependencyProperty FooterProperty =
+			DependencyProperty.Register("Footer", typeof(UIElement), typeof(PinGrid), new PropertyMetadata(null, OnFooterChanged));
+
+		private static void OnFooterChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+		{
+			var control = (PinGrid)sender;
+			control.FooterContent.Content = e.NewValue;
+		}
+		#endregion
+
 		#region ListModel
 		public PinListViewModel ListModel
 		{
