@@ -286,7 +286,6 @@
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\Test.html" />
     <Content Include="Requirements.txt" />
-    <Content Include="History.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\scale-200.png" />
