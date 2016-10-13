@@ -1,6 +1,6 @@
 # 花瓣网 UWP #
 
-###你可以在应用商店 [下载](ms-windows-store://review/?ProductId=9NBLGGH5FWXP)
+###你可以在应用商店 [下载](https://www.microsoft.com/zh-cn/store/p/%E7%88%B1%E8%8A%B1%E7%93%A3uwp/9nblggh5fwxp)
 
 >	花瓣网，一个帮你收集、发现网络上你喜欢的事物的网站。画板是某种主题的集合，用户可以把各种各样的采集放入不同画板，并以你的方式给画板命名。
 
