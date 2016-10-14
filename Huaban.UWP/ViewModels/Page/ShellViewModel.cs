@@ -103,6 +103,16 @@ namespace Huaban.UWP.ViewModels
 				SetValue(ref _FirstBackVisibility, value);
 			}
 		}
+		private Visibility _BackButtonVisibility;
+		public Visibility BackButtonVisibility
+		{
+			get { return _BackButtonVisibility; }
+			set
+			{
+				SetValue(ref _BackButtonVisibility, value);
+			}
+		}
+
 		private string _Message;
 		public string Message
 		{
@@ -229,6 +239,21 @@ namespace Huaban.UWP.ViewModels
 					string aaa = ex.Message;
 				}
 			}
+			else if (e.PropertyName == "AppViewBackButtonVisibility")
+			{
+				try
+				{
+					await ShellView.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+					{
+						SetAppViewBackButtonVisibility(Context.AppViewBackButtonVisibility == Windows.UI.Core.AppViewBackButtonVisibility.Visible ? Visibility.Visible : Visibility.Collapsed);
+					});
+				}
+				catch (Exception ex)
+				{
+
+					string aaa = ex.Message;
+				}
+			}
 		}
 
 		DispatcherTimer timer;
@@ -251,6 +276,10 @@ namespace Huaban.UWP.ViewModels
 			timer.Tick -= Timer_Tick;
 		}
 
+		private void SetAppViewBackButtonVisibility(Visibility visibility)
+		{
+			BackButtonVisibility = visibility;
+		}
 		private void ChangeTheme()
 		{
 			Setting.Current.DarkMode = !Setting.Current.DarkMode;
@@ -268,7 +297,8 @@ namespace Huaban.UWP.ViewModels
 				ThemeModeItem.Label = "白天模式";
 				ThemeModeItem.SymbolChar = '';
 			}
-			else {
+			else
+			{
 				ThemeModeItem.Label = "夜间模式";
 				ThemeModeItem.SymbolChar = '';
 			}

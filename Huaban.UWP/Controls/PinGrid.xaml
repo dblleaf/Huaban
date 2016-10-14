@@ -105,7 +105,7 @@
 		<StackPanel VerticalAlignment="Top" HorizontalAlignment="Right" 
 			Padding="12" Orientation="Horizontal" RequestedTheme="Dark"
 			Visibility="{Binding Path=CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}"
-			Background="{StaticResource HuabanColorBrush}" Opacity="0.7">
+			Background="{StaticResource InkToolbarAccentColorThemeBrush}" Opacity="0.7">
 			<FontIcon Glyph="" FontSize="16" VerticalAlignment="Center"/>
 			<TextBlock VerticalAlignment="Center">：<Run Text="{Binding QuickBoardName}"/></TextBlock>
 		</StackPanel>

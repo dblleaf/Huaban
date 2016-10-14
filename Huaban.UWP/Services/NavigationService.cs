@@ -121,6 +121,7 @@ namespace Huaban.UWP.Services
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 			else
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+			Context.AppViewBackButtonVisibility = SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility;
 		}
 		private Type GetPageType(string pageName)
 		{

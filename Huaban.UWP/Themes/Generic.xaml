@@ -5,23 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d">
-	<ResourceDictionary.ThemeDictionaries>
-		<ResourceDictionary x:Key="Default">
-			<Color x:Key="HeadColor">#EE000000</Color>
-		</ResourceDictionary>
-		<ResourceDictionary x:Key="Light">
-			<Color x:Key="HeadColor">#d61718</Color>
-		</ResourceDictionary>
-	</ResourceDictionary.ThemeDictionaries>
-	
-	<Color x:Key="HuabanColor">#d61718</Color>
-	<Color x:Key="HuabanLightColor">#d25055</Color>
-	<Color x:Key="SystemAccentColor">#d61718</Color>
-	<SolidColorBrush x:Key="HeadColorBrush" Color="{ThemeResource HeadColor}"></SolidColorBrush>
-	<SolidColorBrush x:Key="HuabanColorBrush" Color="{StaticResource HuabanColor}"></SolidColorBrush>
-	<SolidColorBrush x:Key="HuabanLightColorBrush" Color="{StaticResource HuabanLightColor}"></SolidColorBrush>
-	<SolidColorBrush x:Key="SystemAccentColorBrush" Color="{StaticResource SystemAccentColor}"></SolidColorBrush>
-	<SolidColorBrush x:Key="HBForegroundLightColorBrush" Color="{ThemeResource HBForegroundLightColor}"></SolidColorBrush>
+
 	<Style TargetType="PivotHeaderItem">
 		<Setter Property="FontSize" Value="16"/>
 	</Style>

@@ -7,6 +7,8 @@ using Windows.Foundation;
 using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml.Media;
+using Windows.ApplicationModel.Core;
 using Windows.Storage;
 using ImageLib;
 using ImageLib.Cache.Memory.CacheImpl;
@@ -26,8 +28,11 @@ namespace Huaban.UWP.Views
 			this.InitializeComponent();
 			Current = this;
 			InitImageLoader();
-			InitLayout();
-			InitLocator();
+
+			this.Loaded += (s, e) =>
+			{
+				InitLayout();
+			};
 			var context = ServiceLocator.Resolve<Context>();
 			if (context != null)
 			{
@@ -52,27 +57,24 @@ namespace Huaban.UWP.Views
 		{
 			if (!ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
 			{
+				var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+				coreTitleBar.ExtendViewIntoTitleBar = true;
 
 				var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-				var color = Color.FromArgb(255, 214, 23, 24);
-				titleBar.BackgroundColor = color;
-				titleBar.ButtonBackgroundColor = color;
+
+				titleBar.BackgroundColor = Colors.Transparent;
+				titleBar.ButtonBackgroundColor = Colors.Transparent;
 				titleBar.ButtonForegroundColor = Colors.White;
-				titleBar.ButtonHoverBackgroundColor = Colors.Red;
+				titleBar.ButtonHoverBackgroundColor = Color.FromArgb(122, 0, 0, 0);
 				titleBar.ButtonHoverForegroundColor = Colors.White;
-				titleBar.ButtonInactiveBackgroundColor = color;
+				titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
 				titleBar.ButtonInactiveForegroundColor = Colors.White;
-				titleBar.ButtonPressedBackgroundColor = color;
+				titleBar.ButtonPressedBackgroundColor = Colors.Transparent;
 				titleBar.ButtonPressedForegroundColor = Colors.White;
 				titleBar.ForegroundColor = Colors.White;
-				titleBar.InactiveBackgroundColor = color;
+				titleBar.InactiveBackgroundColor = Colors.Transparent;
 				titleBar.InactiveForegroundColor = Colors.White;
 			}
-		}
-		private void InitLocator()
-		{
-			ServiceLocator.BuildLocator();
-			ServiceLocator.RegisterInstance(App.AppContext);
 		}
 	}
 }

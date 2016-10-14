@@ -59,27 +59,6 @@ namespace Huaban.UWP
 			ServiceLocator.RegisterInstance(AppContext);
 		}
 
-		private void InitLayout()
-		{
-			if (!ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
-			{
-				var titleBar = ApplicationView.GetForCurrentView().TitleBar;
-				var color = Color.FromArgb(255, 214, 23, 24);
-				titleBar.BackgroundColor = color;
-				titleBar.ButtonBackgroundColor = color;
-				titleBar.ButtonForegroundColor = Colors.White;
-				titleBar.ButtonHoverBackgroundColor = Colors.Red;
-				titleBar.ButtonHoverForegroundColor = Colors.White;
-				titleBar.ButtonInactiveBackgroundColor = color;
-				titleBar.ButtonInactiveForegroundColor = Colors.White;
-				titleBar.ButtonPressedBackgroundColor = color;
-				titleBar.ButtonPressedForegroundColor = Colors.White;
-				titleBar.ForegroundColor = Colors.White;
-				titleBar.InactiveBackgroundColor = color;
-				titleBar.InactiveForegroundColor = Colors.White;
-			}
-		}
-
 		//加载数据
 		private async Task LoadData()
 		{
@@ -127,8 +106,6 @@ namespace Huaban.UWP
 				
 				Window.Current.Activate();
 			}
-
-			this.InitLayout();
 		}
 
 		/// <summary>

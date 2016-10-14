@@ -63,6 +63,13 @@ namespace Huaban.UWP.Base
 			private set { SetValue(ref _Message, value); }
 		}
 
+		private AppViewBackButtonVisibility _AppViewBackButtonVisibility;
+		public AppViewBackButtonVisibility AppViewBackButtonVisibility
+		{
+			get { return _AppViewBackButtonVisibility; }
+			set { SetValue(ref _AppViewBackButtonVisibility, value); }
+		}
+
 		#endregion
 
 		#region Commands

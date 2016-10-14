@@ -139,10 +139,10 @@
 					Visibility="{Binding CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}">
 					<StackPanel
 						Padding="12"
-						Background="{StaticResource HuabanColorBrush}">
+						Background="{StaticResource InkToolbarAccentColorThemeBrush}">
 						<TextBlock>快速采集到：<Run Text="{Binding QuickBoardName}"/></TextBlock>
 					</StackPanel>
-					<Polygon HorizontalAlignment="Right" Width="94" Height="12" Points="0,0 24,0 12,12" Fill="{StaticResource HuabanColorBrush}"/>
+					<Polygon HorizontalAlignment="Right" Width="94" Height="12" Points="0,0 24,0 12,12" Fill="{StaticResource InkToolbarAccentColorThemeBrush}"/>
 				</StackPanel>
 				
 				

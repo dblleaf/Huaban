@@ -83,8 +83,8 @@
 								<ColumnDefinition Width="3"></ColumnDefinition>
 								<ColumnDefinition Width="*"></ColumnDefinition>
 							</Grid.ColumnDefinitions>
-							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="登录" Command="{Binding LoginCommand}"></Button>
-							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource HuabanColorBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
+							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource InkToolbarAccentColorThemeBrush}" Content="登录" Command="{Binding LoginCommand}"></Button>
+							<Button HorizontalAlignment="Stretch" BorderThickness="0" Background="{StaticResource InkToolbarAccentColorThemeBrush}" Content="取消" Command="{Binding CancelCommand}" Grid.Column="2"></Button>
 						</Grid>
 					</StackPanel>
 					<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="0"></Button>
