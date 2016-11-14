@@ -21,7 +21,7 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>095713D9DDB8943388FB5C2D78164AD5BDDF8F9E</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A09EEB8F6AA848DC5D9269543E0074B7E559CB44</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
   </PropertyGroup>
@@ -118,6 +118,7 @@
     <Compile Include="Base\IncrementalLoadingList.cs" />
     <Compile Include="Base\ObservableObject.cs" />
     <Compile Include="Base\ViewModelBase.cs" />
+    <Compile Include="Commands\PinSImageLoadCommand.cs" />
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Commands\FollowUserCommand.cs" />
     <Compile Include="Commands\PinImageLoadingCommand.cs" />

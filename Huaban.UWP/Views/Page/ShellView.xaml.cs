@@ -10,11 +10,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Media;
 using Windows.ApplicationModel.Core;
 using Windows.Storage;
-using ImageLib;
-using ImageLib.Cache.Memory.CacheImpl;
-using ImageLib.Cache.Storage;
-using ImageLib.Cache.Storage.CacheImpl;
-using ImageLib.Gif;
 
 namespace Huaban.UWP.Views
 {
@@ -27,7 +22,6 @@ namespace Huaban.UWP.Views
 		{
 			this.InitializeComponent();
 			Current = this;
-			InitImageLoader();
 
 			this.Loaded += (s, e) =>
 			{
@@ -41,17 +35,6 @@ namespace Huaban.UWP.Views
 
 		}
 		public static ShellView Current { private set; get; }
-
-		private void InitImageLoader()
-		{
-			ImageLoader.Initialize(new ImageConfig.Builder()
-			{
-				CacheMode = ImageLib.Cache.CacheMode.MemoryAndStorageCache,
-				MemoryCacheImpl = new LRUMemoryCache(),
-				StorageCacheImpl = new LimitedStorageCache(ApplicationData.Current.LocalCacheFolder,
-				"cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
-			}.AddDecoder<GifDecoder>().Build(), true);
-		}
 
 		private void InitLayout()
 		{

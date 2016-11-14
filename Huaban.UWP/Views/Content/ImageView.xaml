@@ -8,7 +8,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:controls="using:ImageLib.Controls"
+	xmlns:gif="using:XamlAnimatedGif"
 	xmlns:commands="using:Huaban.UWP.Commands"
     mc:Ignorable="d">
 	<Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -19,16 +19,26 @@
 				<HB:IncrementalLoadingFlipView.ItemTemplate>
 					<DataTemplate>
 						<Grid>
-							<ScrollViewer Tapped="Grid_Tapped" x:Name="scrollViewer" MinZoomFactor="1" ZoomMode="Enabled" 
+                            <ScrollViewer Tapped="Grid_Tapped" x:Name="scrollViewer" MinZoomFactor="1" ZoomMode="Enabled" 
 								VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled"
 								HorizontalScrollBarVisibility="Hidden" HorizontalScrollMode="Enabled"
 								SizeChanged="scrollView_SizeChanged">
-								<Grid>
-									<controls:ImageView Name="imgView" MaxWidth="{Binding file.width}" UriSource="{Binding file.Orignal}" Stretch="Uniform"/>
-									<ProgressRing IsActive="{Binding ElementName=imgView,Path=IsLoading}"/>
-								</Grid>
-							</ScrollViewer>
-						</Grid>
+                                <Grid>
+                                    <Image x:Name="imgView" gif:AnimationBehavior.SourceUri="{Binding file.Orignal}" gif:AnimationBehavior.AnimateInDesignMode="True" MaxWidth="{Binding file.width}" Stretch="Uniform" VerticalAlignment="Center" HorizontalAlignment="Center">
+                                        <Interactivity:Interaction.Behaviors>
+                                            <Core:EventTriggerBehavior EventName="ImageOpened">
+                                                <Core:InvokeCommandAction Command="{StaticResource PinImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+                                            </Core:EventTriggerBehavior>
+                                            <Core:EventTriggerBehavior EventName="Loaded">
+                                                <Core:InvokeCommandAction Command="{StaticResource PinImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+                                            </Core:EventTriggerBehavior>
+                                        </Interactivity:Interaction.Behaviors>
+                                    </Image>
+
+                                </Grid>
+                            </ScrollViewer>
+                            <ProgressRing IsActive="{Binding PinLoading}"/>
+                        </Grid>
 					</DataTemplate>
 				</HB:IncrementalLoadingFlipView.ItemTemplate>
 			</HB:IncrementalLoadingFlipView>

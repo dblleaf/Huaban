@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,12 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Input;
 using Windows.Storage;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Resources.Core;
+using Windows.Security.Cryptography;
+using Windows.Security.Cryptography.Core;
+using Windows.Storage.Streams;
+using System.Net.Http;
+
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
@@ -149,9 +156,8 @@ namespace Huaban.UWP.ViewModels
 							type = "gif";
 						else
 							type = "jpg";
-						var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
+						
 
-						await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img, "huaban");
 						Context.ShowTip("下载成功");
 
 					}, o => true)
@@ -416,6 +422,110 @@ namespace Huaban.UWP.ViewModels
 			base.Dispose();
 		}
 
-		#endregion
-	}
+        #region download image
+
+        private static async Task DownLoad(string url)
+        {
+            Uri uri = new Uri(url);
+            string cacheFileName = GetCacheFileName(uri);
+            var cacheFile = await OpenTempFileAsync(cacheFileName);
+            if (cacheFile == null)
+            {
+                await DownloadToCacheFileAsync(uri, cacheFileName, null);
+            }
+        }
+        private static string GetCacheFileName(Uri uri)
+        {
+            HashAlgorithmProvider sha1 = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);
+            byte[] bytes = Encoding.UTF8.GetBytes(uri.AbsoluteUri);
+            IBuffer bytesBuffer = CryptographicBuffer.CreateFromByteArray(bytes);
+            IBuffer hashBuffer = sha1.HashData(bytesBuffer);
+            return CryptographicBuffer.EncodeToHexString(hashBuffer);
+        }
+
+        private static async Task DownloadToCacheFileAsync(Uri uri, string fileName, IProgress<int> progress)
+        {
+            try
+            {
+                using (var client = new HttpClient())
+                {
+                    var request = new HttpRequestMessage(HttpMethod.Get, uri);
+                    var response = await client.SendAsync(request);
+                    response.EnsureSuccessStatusCode();
+                    long length = response.Content.Headers.ContentLength ?? 0;
+                    using (var responseStream = await response.Content.ReadAsStreamAsync())
+                    using (var fileStream = await CreateTempFileStreamAsync(fileName))
+                    {
+                        IProgress<long> absoluteProgress = null;
+                        if (progress != null)
+                        {
+                            absoluteProgress =
+                                new Progress<long>(bytesCopied =>
+                                {
+                                    if (length > 0)
+                                        progress.Report((int)(100 * bytesCopied / length));
+                                    else
+                                        progress.Report(-1);
+                                });
+                        }
+                        await responseStream.CopyToAsync(fileStream, absoluteProgress);
+                    }
+                }
+            }
+            catch
+            {
+                await DeleteTempFileAsync(fileName);
+                throw;
+            }
+        }
+
+        private static async Task<Stream> CreateTempFileStreamAsync(string fileName)
+        {
+            IStorageFile file = await ApplicationData.Current.TemporaryFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+            return await file.OpenStreamForWriteAsync();
+        }
+
+        private static async Task DeleteTempFileAsync(string fileName)
+        {
+            try
+            {
+                var file = await ApplicationData.Current.TemporaryFolder.GetFileAsync(fileName);
+                await file.DeleteAsync();
+            }
+            catch
+            {
+            }
+        }
+
+        //private static async Task<Stream> GetNetworkStreamAsync(Uri uri, IProgress<int> progress)
+        //{
+        //    string cacheFileName = GetCacheFileName(uri);
+        //    var cacheStream = await OpenTempFileStreamAsync(cacheFileName);
+        //    if (cacheStream == null)
+        //    {
+        //        await DownloadToCacheFileAsync(uri, cacheFileName, progress);
+        //    }
+        //    return await OpenTempFileStreamAsync(cacheFileName);
+        //}
+
+        private static async Task<StorageFile> OpenTempFileStreamAsync(string fileName)
+        {
+            StorageFile file;
+            try
+            {
+                
+                file = await ApplicationData.Current.TemporaryFolder.GetFileAsync(fileName);
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
+            }
+
+            return file;
+        }
+
+
+        #endregion
+        #endregion
+    }
 }

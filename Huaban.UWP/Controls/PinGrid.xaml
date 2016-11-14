@@ -16,9 +16,14 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 		<HB:ExtendGridView x:Name="gridView" Padding="3"
-			ItemsSource="{Binding PinList}"
+			ItemsSource="{Binding PinList}" IsItemClickEnabled="True"
 			SelectedItem="{Binding SelectedItem,Mode=TwoWay}">
-			<HB:ExtendGridView.Resources>
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="ItemClick">
+                    <Core:InvokeCommandAction Command="{Binding ToImageViewCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <HB:ExtendGridView.Resources>
 				<Style TargetType="GridViewItem">
 					<Setter Property="Padding" Value="0"/>
 					<Setter Property="Margin" Value="3"/>
@@ -53,17 +58,14 @@
 						<Grid Visibility="{Binding Path=IsLoaded,Converter={StaticResource ReverseVisbilityConverter}}" 
 							Background="{Binding Converter={StaticResource ColorConverter}}"></Grid>
 						<Grid HorizontalAlignment="Stretch" Background="Transparent">
-							<Interactivity:Interaction.Behaviors>
-								<Core:EventTriggerBehavior EventName="Tapped">
-									<Core:InvokeCommandAction Command="{Binding ElementName=gridView,Path=DataContext.ToImageViewCommand}" CommandParameter="{Binding ElementName=gridView,Path=DataContext}"></Core:InvokeCommandAction>
-								</Core:EventTriggerBehavior>
-							</Interactivity:Interaction.Behaviors>
+							
 							<Image Source="{Binding file.FW236}">
 								<Interactivity:Interaction.Behaviors>
 									<Core:EventTriggerBehavior EventName="ImageOpened">
-										<Core:InvokeCommandAction Command="{StaticResource PinImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+                                        <Core:InvokeCommandAction Command="{StaticResource PinSImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
 									</Core:EventTriggerBehavior>
-								</Interactivity:Interaction.Behaviors>
+                                    
+                                </Interactivity:Interaction.Behaviors>
 							</Image>
 							<StackPanel VerticalAlignment="Bottom" Background="#AA000000" RequestedTheme="Dark">
 								<Grid Padding="6 3"

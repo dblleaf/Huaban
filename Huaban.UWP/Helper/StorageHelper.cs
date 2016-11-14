@@ -7,14 +7,17 @@ using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Storage.FileProperties;
+using System.IO;
+using System.Threading;
 
 namespace Huaban.UWP
 {
-	public static class StorageHelper
+	internal static class StorageHelper
 	{
 		private static StorageFolder RoamingFolder = ApplicationData.Current.RoamingFolder;
 		private static StorageFolder LocalFolder = ApplicationData.Current.LocalFolder;
 		private static StorageFolder CacheFolder = ApplicationData.Current.LocalCacheFolder;
+        private static StorageFolder TempFolder = ApplicationData.Current.TemporaryFolder;
 
 		private static ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 		public static async Task SaveLocal<T>(T model, string filename = "")
@@ -105,7 +108,20 @@ namespace Huaban.UWP
 			await FileIO.WriteBytesAsync(file, bytes);
 		}
 
-		public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream, string folderName = "")
+        public static async Task CopyToAsync(this Stream source, Stream destination, IProgress<long> progress, int bufferSize = 81920, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            byte[] buffer = new byte[bufferSize];
+            int bytesRead;
+            long bytesCopied = 0;
+            while ((bytesRead = await source.ReadAsync(buffer, 0, buffer.Length, cancellationToken).ConfigureAwait(false)) != 0)
+            {
+                await destination.WriteAsync(buffer, 0, bytesRead, cancellationToken).ConfigureAwait(false);
+                bytesCopied += bytesRead;
+                progress?.Report(bytesCopied);
+            }
+        }
+
+        public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream, string folderName = "")
 		{
 			var folder = KnownFolders.PicturesLibrary;
 			StorageFolder saveFolder = folder;
@@ -146,7 +162,7 @@ namespace Huaban.UWP
 		{
 			try
 			{
-				StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
+				StorageFolder folder = await TempFolder.GetFolderAsync("cache");
 				var files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
 				double size = 0; BasicProperties p;
 				foreach (var f in files)
@@ -164,28 +180,35 @@ namespace Huaban.UWP
 
 		public static async Task ClearCache()
 		{
-			try
-			{
-				StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
-				if (folder != null)
-				{
-					IReadOnlyCollection<StorageFile> files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
-					//files.ToList().ForEach(async (f) => await f.DeleteAsync(StorageDeleteOption.PermanentDelete));
-					List<IAsyncAction> list = new List<IAsyncAction>();
-					foreach (var f in files)
-					{
-						list.Add(f.DeleteAsync(StorageDeleteOption.PermanentDelete));
-					}
-					List<Task> list2 = new List<Task>();
-					list.ForEach((t) => list2.Add(t.AsTask()));
-
-					await Task.Run(() => { Task.WaitAll(list2.ToArray()); });
-				}
-			}
-			catch
-			{
-
-			}
+            await ClearFolder(TempFolder);
+            //Orginal cache images.
+            StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
+            await ClearFolder(folder);
 		}
+
+        private static async Task ClearFolder(StorageFolder folder)
+        {
+            try
+            {
+                if (folder != null)
+                {
+                    IReadOnlyCollection<StorageFile> files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
+                    //files.ToList().ForEach(async (f) => await f.DeleteAsync(StorageDeleteOption.PermanentDelete));
+                    List<IAsyncAction> list = new List<IAsyncAction>();
+                    foreach (var f in files)
+                    {
+                        list.Add(f.DeleteAsync(StorageDeleteOption.PermanentDelete));
+                    }
+                    List<Task> list2 = new List<Task>();
+                    list.ForEach((t) => list2.Add(t.AsTask()));
+
+                    await Task.Run(() => { Task.WaitAll(list2.ToArray()); });
+                }
+            }
+            catch
+            {
+
+            }
+        }
 	}
 }

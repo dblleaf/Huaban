@@ -20,13 +20,12 @@ namespace Huaban.UWP.Commands
 
 		public void Execute(object parameter)
 		{
-			var pin = parameter as Pin;
-			if (pin != null)
-				pin.IsLoaded = true;
-			var model = parameter as HBViewModel;
-			if (model != null)
-				model.IsLoading = false;
-
-		}
+            var pin = parameter as Pin;
+            if (pin != null)
+            {
+                pin.IsLoaded = true;
+                pin.PinLoading = false;
+            }
+        }
 	}
 }

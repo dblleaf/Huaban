@@ -1,8 +1,8 @@
-﻿using ImageLib;
-using ImageLib.Cache.Memory.CacheImpl;
-using ImageLib.Cache.Storage;
-using ImageLib.Cache.Storage.CacheImpl;
-using ImageLib.Gif;
+﻿//using ImageLib;
+//using ImageLib.Cache.Memory.CacheImpl;
+//using ImageLib.Cache.Storage;
+//using ImageLib.Cache.Storage.CacheImpl;
+//using ImageLib.Gif;
 
 using System;
 using System.Collections.Generic;
@@ -41,17 +41,7 @@ namespace Huaban.UWP
 		{
 			this.InitializeComponent();
 			this.InitLocator();
-
 			this.Suspending += OnSuspending;
-
-			ImageLoader.Initialize(new ImageConfig.Builder()
-			{
-				CacheMode = ImageLib.Cache.CacheMode.MemoryAndStorageCache,
-				MemoryCacheImpl = new LRUMemoryCache(),
-				StorageCacheImpl = new LimitedStorageCache(ApplicationData.Current.LocalCacheFolder,
-				"cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
-			}.AddDecoder<GifDecoder>().Build(), true);
-
 		}
 		private void InitLocator()
 		{
@@ -100,7 +90,6 @@ namespace Huaban.UWP
 			{
 				if (rootFrame.Content == null)
 				{
-					
 					rootFrame.Navigate(typeof(Views.ShellView), e.Arguments);
 				}
 				
