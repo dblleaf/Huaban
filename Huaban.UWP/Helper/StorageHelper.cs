@@ -162,7 +162,7 @@ namespace Huaban.UWP
 		{
 			try
 			{
-				StorageFolder folder = await TempFolder.GetFolderAsync("cache");
+				StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
 				var files = await folder.GetFilesAsync(Windows.Storage.Search.CommonFileQuery.DefaultQuery);
 				double size = 0; BasicProperties p;
 				foreach (var f in files)
@@ -180,7 +180,7 @@ namespace Huaban.UWP
 
 		public static async Task ClearCache()
 		{
-            await ClearFolder(TempFolder);
+            //await ClearFolder(TempFolder);
             //Orginal cache images.
             StorageFolder folder = await CacheFolder.GetFolderAsync("cache");
             await ClearFolder(folder);

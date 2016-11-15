@@ -1,3 +1,3 @@
-MainPackage=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.36.0_ARM.appx
-SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.36.0_Test\Huaban.UWP_1.2.36.0_ARM.appxsym
-ResourcePack=D:\songzhaoli\Source\Repos\NewRepo\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.36.0_language-zh-hans.appx
+MainPackage=D:\Projects\UWP\Huaban\Huaban.UWP\bin\ARM\Debug\Huaban.UWP_1.2.37.0_ARM_Debug.appx
+SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.37.0_Debug_Test\Huaban.UWP_1.2.37.0_ARM_Debug.appxsym
+ResourcePack=D:\Projects\UWP\Huaban\Huaban.UWP\bin\ARM\Debug\Huaban.UWP_1.2.37.0_language-zh-hans.appx

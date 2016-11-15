@@ -26,6 +26,11 @@ using Windows.UI.Xaml.Navigation;
 using Windows.UI.ViewManagement;
 using Windows.Foundation.Metadata;
 using Windows.Storage;
+using ImageLib;
+using ImageLib.Cache.Memory.CacheImpl;
+using ImageLib.Cache.Storage;
+using ImageLib.Cache.Storage.CacheImpl;
+using ImageLib.Gif;
 
 namespace Huaban.UWP
 {
@@ -47,7 +52,13 @@ namespace Huaban.UWP
 		{
 			ServiceLocator.BuildLocator();
 			ServiceLocator.RegisterInstance(AppContext);
-		}
+            var config = new ImageConfig.Builder()
+                .LimitedStorageCache(ApplicationData.Current.LocalCacheFolder, "cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
+                .NewApi(false)
+                .AddDecoder<GifDecoder>()
+                .Build();
+            ImageLoader.Initialize(config);
+        }
 
 		//加载数据
 		private async Task LoadData()

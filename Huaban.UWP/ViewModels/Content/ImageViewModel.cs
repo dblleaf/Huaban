@@ -424,16 +424,7 @@ namespace Huaban.UWP.ViewModels
 
         #region download image
 
-        private static async Task DownLoad(string url)
-        {
-            Uri uri = new Uri(url);
-            string cacheFileName = GetCacheFileName(uri);
-            var cacheFile = await OpenTempFileAsync(cacheFileName);
-            if (cacheFile == null)
-            {
-                await DownloadToCacheFileAsync(uri, cacheFileName, null);
-            }
-        }
+       
         private static string GetCacheFileName(Uri uri)
         {
             HashAlgorithmProvider sha1 = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);

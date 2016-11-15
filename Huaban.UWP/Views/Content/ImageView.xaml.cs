@@ -46,7 +46,7 @@ namespace Huaban.UWP.Views
 
             var a = this;
             var scrollView = fvi.GetChild<ScrollViewer>("scrollViewer");
-            var imgView = fvi.GetChild<Image>("imgView");
+            var imgView = fvi.GetChild<ImageLib.Controls.ImageView>("imgView");
             if (scrollView == null || imgView == null)
                 return;
             Pin pin = scrollView.DataContext as Pin;
@@ -60,7 +60,7 @@ namespace Huaban.UWP.Views
 		{
             var scrollView = sender as ScrollViewer;
             Pin pin = scrollView.DataContext as Pin;
-            var imgView = scrollView.GetChild<Image>("imgView");
+            var imgView = scrollView.GetChild<ImageLib.Controls.ImageView>("imgView");
             if (scrollView == null)
                 return;
             imgView.MaxHeight = scrollView.ActualHeight;
