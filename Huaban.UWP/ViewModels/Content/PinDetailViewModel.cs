@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using Windows.Foundation;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Models;
 	using Base;
 	using Controls;
-	using Commands;
 
 	public class PinDetailViewModel : HBViewModel
 	{

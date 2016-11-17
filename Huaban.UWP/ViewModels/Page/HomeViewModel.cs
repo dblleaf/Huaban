@@ -1,21 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
-	using Services;
 	using Models;
 	using Commands;
-	using Windows.Foundation;
-	using Controls;
 
 	public class HomeViewModel : HBViewModel
 	{

@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
 	using Models;
-	using Commands;
 
-	public class BoardListViewModel : HBViewModel
+    public class BoardListViewModel : HBViewModel
 	{
 		public BoardListViewModel(Context context, Func<uint, int, Task<IEnumerable<Board>>> _func)
 			: base(context)

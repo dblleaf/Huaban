@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Huaban.UWP.ViewModels
+﻿namespace Huaban.UWP.ViewModels
 {
 	using Base;
 	using Controls;
-	using Models;
 	using Commands;
 
 	public class MyViewModel : HBViewModel

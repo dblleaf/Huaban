@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
 	using Models;
-	using Windows.Foundation;
 
 	public class FollowingViewModel : HBViewModel
 	{

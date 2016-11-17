@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Huaban.UWP
+﻿namespace Huaban.UWP
 {
 	using Api;
 	using Models;

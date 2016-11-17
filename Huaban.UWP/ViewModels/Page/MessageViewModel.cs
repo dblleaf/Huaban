@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
 	using Base;
-	using Services;
 	using Models;
 	public class MessageViewModel : HBViewModel
 	{

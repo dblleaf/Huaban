@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.ViewManagement;
-using Windows.Foundation.Metadata;
 using Windows.UI.Popups;
 
 namespace Huaban.UWP.ViewModels

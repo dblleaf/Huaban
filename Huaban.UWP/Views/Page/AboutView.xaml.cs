@@ -7,7 +7,5 @@
 		{
 			this.InitializeComponent();
 		}
-
-
 	}
 }

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using Windows.UI.Xaml.Navigation;
 using Windows.Foundation;
-using Windows.UI.Xaml;
+
 namespace Huaban.UWP.Base
 {
 	using Controls;
-	using Services;
 	public abstract class ViewModelBase : ObservableObject, IDisposable
 	{
 		public ViewModelBase()

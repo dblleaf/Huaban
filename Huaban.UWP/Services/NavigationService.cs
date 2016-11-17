@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media.Animation;
-using Windows.UI.Xaml.Navigation;
-using Microsoft.Practices.ServiceLocation;
 using System.Threading.Tasks;
 
 namespace Huaban.UWP.Services
