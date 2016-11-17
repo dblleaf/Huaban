@@ -8,13 +8,14 @@ namespace Huaban.UWP.Api
 	using Models;
 	public class CategoryAPI : APIBase
 	{
-		public CategoryAPI(string ctx) : base(ctx) { }
+		public CategoryAPI(IClient client, AuthToken token)
+            : base(client, token) { }
 
-		public async Task<List<Category>> GetCategoryList()
+        public async Task<List<Category>> GetCategoryList()
 		{
 			try
 			{
-				string json = await Get("http://api.huaban.com/categories/");
+				string json = await Get(Client.API_CATEGORY);
 				var obj = JObject.Parse(json);
 				return Category.ParseList(obj["categories"] as JArray);
 			}
@@ -38,7 +39,7 @@ namespace Huaban.UWP.Api
 			if (max <= 0)
 				maxStr = "";
 			nav_link = nav_link.TrimStart('/');
-			return await Get($"http://api.huaban.com/{nav_link}?limit={limit}&max={maxStr}");
+			return await Get($"{Client.API_MAIN}{nav_link}?limit={limit}&max={maxStr}");
 		}
 	}
 }

@@ -4,55 +4,58 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
-	using Base;
-	using Models;
-	public class MessageViewModel : HBViewModel
-	{
-		public MessageViewModel(Context context)
-			: base(context)
-		{
-			Title = "消息";
-			PinListVM = new PinListViewModel(context, GetData);
-			
-		}
+    using Base;
+    using Models;
+    using Api;
+    public class MessageViewModel : HBViewModel
+    {
+        private CategoryAPI CategoryAPI { set; get; }
 
-		#region Properties
+        public MessageViewModel(Context context, CategoryAPI categoryAPI)
+            : base(context)
+        {
+            CategoryAPI = categoryAPI;
+            Title = "消息";
+            PinListVM = new PinListViewModel(context, GetData);
+        }
 
-		public PinListViewModel PinListVM { get; set; }
+        #region Properties
 
-		#endregion
+        public PinListViewModel PinListVM { get; set; }
 
-		#region Commands
+        #endregion
+
+        #region Commands
 
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
-		{
-			PinListVM.PinList.HasMore();
+        private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
+        {
+            PinListVM.PinList.HasMore();
 
-			IsLoading = true;
-			try
-			{
-				var list = await Context.API.CategoryAPI.GetCategoryPinList("/all/", 20, PinListVM.GetMaxPinID());
-				if (list?.Count == 0)
-					PinListVM.PinList.NoMore();
-				else
-					PinListVM.PinList.HasMore();
-				return list;
-			}
-			catch (Exception ex)
-			{
-			}
-			finally
-			{
-				IsLoading = false;
-			}
-			return null;
-		}
+            IsLoading = true;
+            try
+            {
+                var list = await CategoryAPI.GetCategoryPinList("/all/", 20, PinListVM.GetMaxPinID());
+                if (list?.Count == 0)
+                    PinListVM.PinList.NoMore();
+                else
+                    PinListVM.PinList.HasMore();
+                return list;
+            }
+            catch (Exception ex)
+            {
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+            return null;
+        }
 
-		#endregion
-	}
+        #endregion
+    }
 }

@@ -104,7 +104,6 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\API.cs" />
     <Compile Include="Api\APIBase.cs" />
     <Compile Include="Api\APIException.cs" />
     <Compile Include="Api\BoardAPI.cs" />
@@ -168,12 +167,14 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Channel.cs" />
     <Compile Include="Models\ChannelType.cs" />
+    <Compile Include="Models\Client.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Commodity.cs" />
     <Compile Include="Models\Content.cs" />
     <Compile Include="Models\Feed.cs" />
     <Compile Include="Models\FindFriends.cs" />
     <Compile Include="Base\Context.cs" />
+    <Compile Include="Models\IClient.cs" />
     <Compile Include="Models\ImageFile.cs" />
     <Compile Include="Models\JsonExtension.cs" />
     <Compile Include="Models\Message.cs" />

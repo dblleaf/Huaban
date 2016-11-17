@@ -41,18 +41,18 @@ namespace Huaban.UWP
 		//加载数据
 		private async Task LoadData()
 		{
-			var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
-			var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
-			if (token != null)
-			{
-				token = await AppContext.API.OAuthorAPI.RefreshToken(token);
-			}
+			//var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
+			//var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
+			//if (token != null)
+			//{
+			//	token = await AppContext.API.OAuthorAPI.RefreshToken(token);
+			//}
 
-			AppContext.User = user;
-			if (token != null && token.ExpiresIn > DateTime.Now)
-			{
-				await AppContext.SetToken(token);
-			}
+			//AppContext.User = user;
+			//if (token != null && token.ExpiresIn > DateTime.Now)
+			//{
+			//	await AppContext.SetToken(token);
+			//}
 		}
 
 		protected async override void OnLaunched(LaunchActivatedEventArgs e)
