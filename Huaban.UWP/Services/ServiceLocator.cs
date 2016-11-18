@@ -5,9 +5,10 @@ namespace Huaban.UWP.Services
 {
     using Models;
     using Api;
+    using Base;
     public class ServiceLocator
     {
-        public static ServiceLocator Current { get; private set; }
+        private static ServiceLocator Current { get; set; }
 
         public IUnityContainer Container { set; get; }
         private ServiceLocator()
@@ -25,6 +26,10 @@ namespace Huaban.UWP.Services
                 OAuthCallback = "ms-appx-web:///Assets/Test.html",
                 MD = "com.huaban.android"
             };
+            var context = new Context();
+            var ns = new NavigationService(context);
+            Container.RegisterInstance(context);
+            Container.RegisterInstance(ns);
             Container.RegisterInstance<IClient>(client);
             
             Container.RegisterType<BoardAPI>();
@@ -33,7 +38,7 @@ namespace Huaban.UWP.Services
             Container.RegisterType<PinAPI>();
             Container.RegisterType<UserAPI>();
         }
-        public static ServiceLocator BuildLocator(NavigationService ns = null)
+        public static ServiceLocator BuildLocator()
         {
             if (Current != null)
                 return Current;

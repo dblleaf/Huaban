@@ -19,10 +19,10 @@ namespace Huaban.UWP.Views
 			{
 				InitLayout();
 			};
-			var context = ServiceLocator.Resolve<Context>();
-			if (context != null)
+			var navigationService = ServiceLocator.Resolve<NavigationService>();
+			if (navigationService != null)
 			{
-				context.NavigationService.SetFrame(MainFrame, DetailFrame);
+                navigationService.SetFrame(MainFrame, DetailFrame);
 			}
 
 		}

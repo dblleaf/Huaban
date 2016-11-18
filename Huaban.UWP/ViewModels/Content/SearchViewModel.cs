@@ -10,15 +10,16 @@ namespace Huaban.UWP.ViewModels
     using Commands;
     using Models;
     using Api;
+    using Services;
     public class SearchViewModel : HBViewModel
     {
         private PinAPI PinApi { get; set; }
-        public SearchViewModel(Context context, PinAPI pinApi)
-            : base(context)
+        public SearchViewModel(Context context, NavigationService ns, PinAPI pinApi)
+            : base(context, ns)
         {
             PinApi = pinApi;
             LeftHeaderVisibility = Windows.UI.Xaml.Visibility.Collapsed;
-            PinListViewModel = new PinListViewModel(context, GetData);
+            PinListViewModel = new PinListViewModel(context, ns, GetData);
             KeyWord = "";
             Title = "搜索";
         }

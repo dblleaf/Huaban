@@ -20,8 +20,8 @@ namespace Huaban.UWP.ViewModels
     {
         private PinAPI PinAPI { set; get; }
         private BoardAPI BoardAPI { set; get; }
-        public PinListViewModel(Context context, Func<uint, int, Task<IEnumerable<Pin>>> _func)
-            : base(context)
+        public PinListViewModel(Context context, Services.NavigationService ns, Func<uint, int, Task<IEnumerable<Pin>>> _func)
+            : base(context, ns)
         {
             PinAPI = ServiceLocator.Resolve<PinAPI>();
             BoardAPI = ServiceLocator.Resolve<BoardAPI>();
@@ -283,7 +283,7 @@ namespace Huaban.UWP.ViewModels
                         item = args.ClickedItem as Pin;
                     SelectedItem = item;
                     SelecterVisibility = Visibility.Visible;
-                    Context.NavigationService.BackEvent += NavigationService_BackEvent;
+                    NavigationService.BackEvent += NavigationService_BackEvent;
                     CurrentBoardIndex = -1;
 
                 }, o => true));
@@ -300,7 +300,7 @@ namespace Huaban.UWP.ViewModels
                 o =>
                 {
                     SelecterVisibility = Visibility.Collapsed;
-                    Context.NavigationService.BackEvent -= NavigationService_BackEvent;
+                    NavigationService.BackEvent -= NavigationService_BackEvent;
                 }, o => true));
             }
         }

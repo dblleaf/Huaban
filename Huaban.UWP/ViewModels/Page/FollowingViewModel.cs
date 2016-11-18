@@ -11,14 +11,14 @@ namespace Huaban.UWP.ViewModels
     {
         private UserAPI UserAPI { set; get; }
         private BoardAPI BoardAPI { set; get; }
-        public FollowingViewModel(Context context, UserAPI userApi, BoardAPI boardApi)
-            : base(context)
+        public FollowingViewModel(Context context, Services.NavigationService ns, UserAPI userApi, BoardAPI boardApi)
+            : base(context, ns)
         {
             UserAPI = userApi;
             BoardAPI = boardApi;
             Title = "";
-            PinListViewModel = new PinListViewModel(context, GetPinList);
-            BoardListViewModel = new BoardListViewModel(context, GetBoardList);
+            PinListViewModel = new PinListViewModel(context, ns, GetPinList);
+            BoardListViewModel = new BoardListViewModel(context, ns, GetBoardList);
         }
 
         #region Properties

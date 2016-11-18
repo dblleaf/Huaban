@@ -13,13 +13,14 @@ namespace Huaban.UWP.ViewModels
     using Base;
     using Models;
     using Api;
+    using Services;
     public class LoginViewModel : HBViewModel
     {
-
-        public LoginViewModel(Context context, Action<AuthToken> successAction)
-            : base(context)
+        public LoginViewModel(Context context, NavigationService ns, Action<AuthToken> successAction)
+            : base(context, ns)
         {
             Title = "登录";
+            
             LeftHeaderVisibility = Windows.UI.Xaml.Visibility.Collapsed;
             SuccessAction = successAction;
 
@@ -213,15 +214,15 @@ namespace Huaban.UWP.ViewModels
 
         public void Hide()
         {
-            this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
-            this.Context.NavigationService.DisplayBackButton();
+            NavigationService.BackEvent -= NavigationService_BackEvent;
+            NavigationService.DisplayBackButton();
             this.Popup.IsOpen = false;
         }
         public void Show()
         {
             this.Popup.IsOpen = true;
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
+            NavigationService.BackEvent += NavigationService_BackEvent;
         }
 
         private void NavigationService_BackEvent(object sender, Windows.UI.Core.BackRequestedEventArgs e)

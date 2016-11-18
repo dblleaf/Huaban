@@ -6,6 +6,7 @@ namespace Huaban.UWP.Commands
     using Models;
     using Services;
     using Api;
+    using Base;
     public class FollowBoardCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -21,7 +22,7 @@ namespace Huaban.UWP.Commands
 
             string str = await ServiceLocator.Resolve<BoardAPI>().follow(board.board_id, !board.following);
             board.following = (str != "{}");
-            App.AppContext.ShowTip(board.following ? "关注成功" : "已取消关注");
+            ServiceLocator.Resolve<Context>()?.ShowTip(board.following ? "关注成功" : "已取消关注");
         }
     }
 }

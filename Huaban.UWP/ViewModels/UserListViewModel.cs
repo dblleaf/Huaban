@@ -8,71 +8,71 @@ using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-	using Base;
-	using Commands;
-	using Models;
-	public class UserListViewModel : HBViewModel
-	{
-		public UserListViewModel(Context context, Func<uint, int, Task<IEnumerable<User>>> _func)
-			: base(context)
-		{
-			UserList = new IncrementalLoadingList<User>(_func);
-		}
+    using Base;
+    using Commands;
+    using Models;
+    public class UserListViewModel : HBViewModel
+    {
+        public UserListViewModel(Context context, Services.NavigationService ns, Func<uint, int, Task<IEnumerable<User>>> _func)
+            : base(context, ns)
+        {
+            UserList = new IncrementalLoadingList<User>(_func);
+        }
 
-		#region Properties
+        #region Properties
 
-		private IncrementalLoadingList<User> _UserList;
-		public IncrementalLoadingList<User> UserList
-		{
-			get { return _UserList; }
-			set
-			{ SetValue(ref _UserList, value); }
-		}
+        private IncrementalLoadingList<User> _UserList;
+        public IncrementalLoadingList<User> UserList
+        {
+            get { return _UserList; }
+            set
+            { SetValue(ref _UserList, value); }
+        }
 
-		public int Count
-		{
-			get { return UserList.Count; }
-		}
+        public int Count
+        {
+            get { return UserList.Count; }
+        }
 
-		#endregion
+        #endregion
 
-		#region Commands
+        #region Commands
 
-		#endregion
+        #endregion
 
-		#region Methods
+        #region Methods
 
-		public void Clear()
-		{
-			UserList.Clear();
-		}
+        public void Clear()
+        {
+            UserList.Clear();
+        }
 
-		public async Task ClearAndReload()
-		{
-			await UserList.ClearAndReload();
-		}
-		
-		public long GetMaxSeq()
-		{
-			long max = 0;
-			if (Count > 0)
-				max = Convert.ToInt64(UserList[Count - 1].seq);
-			return max;
-		}
+        public async Task ClearAndReload()
+        {
+            await UserList.ClearAndReload();
+        }
 
-		public long GetMaxID()
-		{
-			long max = 0;
-			if (Count > 0)
-				max = Convert.ToInt64(UserList[Count - 1].user_id);
-			return max;
-		}
+        public long GetMaxSeq()
+        {
+            long max = 0;
+            if (Count > 0)
+                max = Convert.ToInt64(UserList[Count - 1].seq);
+            return max;
+        }
 
-		public override void Dispose()
-		{
-			Clear();
-			base.Dispose();
-		}
-		#endregion
-	}
+        public long GetMaxID()
+        {
+            long max = 0;
+            if (Count > 0)
+                max = Convert.ToInt64(UserList[Count - 1].user_id);
+            return max;
+        }
+
+        public override void Dispose()
+        {
+            Clear();
+            base.Dispose();
+        }
+        #endregion
+    }
 }

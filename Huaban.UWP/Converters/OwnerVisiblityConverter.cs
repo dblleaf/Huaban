@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Data;
 
 namespace Huaban.UWP.Converters
 {
+    using Services;
+    using Base;
 	public class OwnerVisiblityConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, string language)
@@ -12,7 +14,7 @@ namespace Huaban.UWP.Converters
 			Visibility visibility = Visibility.Collapsed;
 			if (!string.IsNullOrEmpty(userID))
 			{
-				if (userID == App.AppContext?.User?.user_id)
+				if (userID == ServiceLocator.Resolve<Context>()?.User?.user_id)
 				{
 					visibility = Visibility.Visible;
 				}

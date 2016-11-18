@@ -16,12 +16,12 @@ namespace Huaban.UWP.ViewModels
     {
         private BoardAPI BoardAPI { set; get; }
         private PinAPI PinAPI { set; get; }
-        public BoardPinsViewModel(Context context, BoardAPI boardAPI, PinAPI pinApi)
-            : base(context)
+        public BoardPinsViewModel(Context context, Services.NavigationService ns, BoardAPI boardAPI, PinAPI pinApi)
+            : base(context, ns)
         {
             BoardAPI = boardAPI;
             PinAPI = pinApi;
-            PinListViewModel = new PinListViewModel(context, GetData);
+            PinListViewModel = new PinListViewModel(context, NavigationService, GetData);
             Title = "画板";
             LeftHeaderVisibility = Visibility.Collapsed;
         }

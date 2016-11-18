@@ -18,8 +18,6 @@ namespace Huaban.UWP
 
 	sealed partial class App : Application
 	{
-		public static Context AppContext { private set; get; } = new Context();
-
 		public App()
 		{
 			this.InitializeComponent();
@@ -29,7 +27,7 @@ namespace Huaban.UWP
 		private void InitLocator()
 		{
 			ServiceLocator.BuildLocator();
-			ServiceLocator.RegisterInstance(AppContext);
+			
             var config = new ImageConfig.Builder()
                 .LimitedStorageCache(ApplicationData.Current.LocalCacheFolder, "cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
                 .NewApi(false)

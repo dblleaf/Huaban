@@ -14,12 +14,10 @@ namespace Huaban.UWP.Base
     {
         public Context()
         {
-            NavigationService = new NavigationService(this);
             CategoryList = new IncrementalLoadingList<Category>(GetCategoryList);
             Categories = new ObservableCollection<Category>();
         }
         #region Properties
-        public NavigationService NavigationService { get; private set; }
 
         private User _User;
         public User User
@@ -76,7 +74,7 @@ namespace Huaban.UWP.Base
             ServiceLocator.RegisterInstance(token);
 
             var user = await ServiceLocator.Resolve<UserAPI>().GetSelf();
-            BoardListVM = new BoardListViewModel(this, GetBoardList);
+            BoardListVM = new BoardListViewModel(this, null, GetBoardList);
             User = user;
             IsLogin = true;
 

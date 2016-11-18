@@ -13,11 +13,12 @@ namespace Huaban.UWP.ViewModels
     using Base;
     using Commands;
     using Api;
+    using Services;
     public class BoardDetailViewModel : HBViewModel
     {
         private BoardAPI BoardAPI { get; set; }
-        public BoardDetailViewModel(Context context, BoardAPI boardApi)
-            : base(context)
+        public BoardDetailViewModel(Context context, NavigationService ns, BoardAPI boardApi)
+            : base(context, ns)
         {
             LeftHeaderVisibility = Visibility.Collapsed;
             Title = "编辑画板";
@@ -62,7 +63,7 @@ namespace Huaban.UWP.ViewModels
                         Context.ShowTip("删除成功！");
 
                         Context.BoardListVM.BoardList.Remove(Board);//从自己的画板列表中删除
-                        Context.NavigationService.GoBack();
+                        NavigationService.GoBack();
 
                     });
                     UICommand no = new UICommand("取消");

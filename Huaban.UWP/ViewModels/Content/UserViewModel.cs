@@ -11,15 +11,15 @@ namespace Huaban.UWP.ViewModels
     public class UserViewModel : HBViewModel
     {
         private UserAPI UserApi { set; get; }
-        public UserViewModel(Context context, UserAPI userApi)
-            : base(context)
+        public UserViewModel(Context context, Services.NavigationService ns, UserAPI userApi)
+            : base(context, ns)
         {
             UserApi = userApi;
-            MyPinListViewModel = new PinListViewModel(context, GetPinList);
-            LikePinListViewModel = new PinListViewModel(context, GetLikePinList);
-            BoardListViewModel = new BoardListViewModel(context, GetBoardList);
-            FollowingListViewModel = new UserListViewModel(context, GetFollowingUserList);
-            FollowerListViewModel = new UserListViewModel(context, GetFollowerList);
+            MyPinListViewModel = new PinListViewModel(context, ns, GetPinList);
+            LikePinListViewModel = new PinListViewModel(context, ns, GetLikePinList);
+            BoardListViewModel = new BoardListViewModel(context, ns, GetBoardList);
+            FollowingListViewModel = new UserListViewModel(context, ns, GetFollowingUserList);
+            FollowerListViewModel = new UserListViewModel(context, ns, GetFollowerList);
             //BoardListViewModel.BoardList = context.BoardList;
         }
 

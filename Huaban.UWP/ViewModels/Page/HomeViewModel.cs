@@ -14,13 +14,13 @@ namespace Huaban.UWP.ViewModels
     {
         private CategoryAPI CategoryApi { get; set; }
         private PinAPI PinApi { get; set; }
-        public HomeViewModel(Context context, CategoryAPI categoryApi, PinAPI pinApi)
-            : base(context)
+        public HomeViewModel(Context context, Services.NavigationService ns, CategoryAPI categoryApi, PinAPI pinApi)
+            : base(context, ns)
         {
             CategoryApi = categoryApi;
             PinApi = pinApi;
             Title = "发现";
-            PinListViewModel = new PinListViewModel(context, GetData);
+            PinListViewModel = new PinListViewModel(context, ns, GetData);
             PinListViewModel.TargetName = "HomePage";
             CategoryList = Context.CategoryList;
             SelecterVisibility = Visibility.Collapsed;
@@ -47,9 +47,9 @@ namespace Huaban.UWP.ViewModels
             {
                 SetValue(ref _SelecterVisibility, value);
                 if (SelecterVisibility == Visibility.Visible)
-                    this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
+                    NavigationService.BackEvent += NavigationService_BackEvent;
                 else
-                    this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
+                    NavigationService.BackEvent -= NavigationService_BackEvent;
             }
         }
 
@@ -116,7 +116,7 @@ namespace Huaban.UWP.ViewModels
                 return _ToSearchCommand ?? (_ToSearchCommand = new DelegateCommand(
                 o =>
                 {
-                    this.Context.NavigationService.NavigateTo("Search", null, "Search");
+                    NavigationService.NavigateTo("Search", null, "Search");
                 }, o => true));
             }
         }

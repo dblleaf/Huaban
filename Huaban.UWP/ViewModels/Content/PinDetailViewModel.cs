@@ -12,13 +12,13 @@ namespace Huaban.UWP.ViewModels
     public class PinDetailViewModel : HBViewModel
     {
         private PinAPI PinApi { set; get; }
-        public PinDetailViewModel(Context context, PinAPI pinApi)
-            : base(context)
+        public PinDetailViewModel(Context context, Services.NavigationService ns, PinAPI pinApi)
+            : base(context, ns)
         {
             PinApi = pinApi;
-            BoardListViewModel = new BoardListViewModel(context, GetBoardList);
-            UserListViewModel = new UserListViewModel(context, GetLikeList);
-            RecommendListViewModel = new PinListViewModel(context, GetRecommendList);
+            BoardListViewModel = new BoardListViewModel(context, ns, GetBoardList);
+            UserListViewModel = new UserListViewModel(context, ns, GetLikeList);
+            RecommendListViewModel = new PinListViewModel(context, ns, GetRecommendList);
         }
         #region Properties
         public PinListViewModel RecommendListViewModel { set; get; }

@@ -3,6 +3,7 @@ using System.Windows.Input;
 
 namespace Huaban.UWP.Commands
 {
+    using Services;
 	public class ToUserCommand : ICommand
 	{
 		public event EventHandler CanExecuteChanged;
@@ -14,7 +15,7 @@ namespace Huaban.UWP.Commands
 
 		public void Execute(object parameter)
 		{
-			App.AppContext.NavigationService.NavigateTo("User", parameter);
+            ServiceLocator.Resolve<NavigationService>().NavigateTo("User", parameter);
 		}
 	}
 }

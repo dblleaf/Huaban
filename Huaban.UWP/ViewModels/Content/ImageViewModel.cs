@@ -22,18 +22,21 @@ namespace Huaban.UWP.ViewModels
     using Models;
     using Commands;
     using Api;
+    using Services;
     public class ImageViewModel : HBViewModel
     {
         private PinAPI PinAPI { get; set; }
         private BoardAPI BoardAPI { get; set; }
-        public ImageViewModel(Context context, PinAPI pinApi, BoardAPI boardApi)
-            : base(context)
+        
+        public ImageViewModel(Context context, NavigationService ns, PinAPI pinApi, BoardAPI boardApi)
+            : base(context, ns)
         {
             BoardList = Context.BoardListVM?.BoardList;
             SelecterVisibility = Visibility.Collapsed;
             CurrentBoardIndex = -1;
             PinAPI = pinApi;
             BoardAPI = boardApi;
+            
             QuickBoardChanged += (s, e) =>
             {
                 InitQuickBoard();
@@ -91,9 +94,9 @@ namespace Huaban.UWP.ViewModels
             {
                 SetValue(ref _SelecterVisibility, value);
                 if (SelecterVisibility == Visibility.Visible)
-                    this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
+                    NavigationService.BackEvent += NavigationService_BackEvent;
                 else
-                    this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
+                    NavigationService.BackEvent -= NavigationService_BackEvent;
             }
         }
 
@@ -189,7 +192,7 @@ namespace Huaban.UWP.ViewModels
                 return _HideCommand ?? (_HideCommand = new DelegateCommand(
                     obj =>
                     {
-                        Context.NavigationService.GoBack();
+                        NavigationService.GoBack();
                     }, o => true)
                 );
             }
@@ -413,7 +416,7 @@ namespace Huaban.UWP.ViewModels
 
         public override void Dispose()
         {
-            PinListViewModel = new PinListViewModel(Context, null);
+            PinListViewModel = new PinListViewModel(Context, NavigationService, null);
 
             base.Dispose();
         }

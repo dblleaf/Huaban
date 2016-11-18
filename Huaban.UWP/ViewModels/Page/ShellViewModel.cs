@@ -12,10 +12,11 @@ namespace Huaban.UWP.ViewModels
     using Models;
     using Commands;
     using Views;
+
     public class ShellViewModel : HBViewModel
     {
-        public ShellViewModel(Context context)
-            : base(context)
+        public ShellViewModel(Context context, NavigationService ns)
+            : base(context, ns)
         {
             NavList.Insert(3, UserItem);
             UserItem.Special = context.IsLogin;
@@ -47,9 +48,9 @@ namespace Huaban.UWP.ViewModels
             {
                 SetValue(ref _IsPaneOpen, value);
                 if (_IsPaneOpen)
-                    this.Context.NavigationService.BackEvent += NavigationService_BackEvent;
+                    NavigationService.BackEvent += NavigationService_BackEvent;
                 else
-                    this.Context.NavigationService.BackEvent -= NavigationService_BackEvent;
+                    NavigationService.BackEvent -= NavigationService_BackEvent;
             }
         }
 
@@ -140,16 +141,16 @@ namespace Huaban.UWP.ViewModels
                         }
                         if (item.Authorization && !Context.IsLogin)
                         {
-                            LoginViewModel login = new LoginViewModel(Context, token =>
+                            LoginViewModel login = new LoginViewModel(Context, NavigationService, token =>
                             {
                                 NotifyPropertyChanged("User");
                                 UserItem.Special = true;
-                                Context.NavigationService.MenuNavigateTo(item.DestinationPage);
+                                NavigationService.MenuNavigateTo(item.DestinationPage);
                             });
                             login.Show();
                         }
                         else
-                            Context.NavigationService.MenuNavigateTo(item.DestinationPage);
+                            NavigationService.MenuNavigateTo(item.DestinationPage);
                     },
                     o => !IsLoading)
                 );
@@ -187,11 +188,11 @@ namespace Huaban.UWP.ViewModels
                         {
                             token = await ServiceLocator.Resolve<Api.OAuthorAPI>().RefreshToken(token);
                         }
-                        App.AppContext.User = user;
+                        Context.User = user;
 
                         if (token != null && token.ExpiresIn > DateTime.Now)
                         {
-                            await App.AppContext.SetToken(token);
+                            await Context.SetToken(token);
                         }
 
                         DisplayTheme();

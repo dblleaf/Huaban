@@ -11,12 +11,12 @@ namespace Huaban.UWP.ViewModels
     {
         private CategoryAPI CategoryAPI { set; get; }
 
-        public MessageViewModel(Context context, CategoryAPI categoryAPI)
-            : base(context)
+        public MessageViewModel(Context context, Services.NavigationService ns, CategoryAPI categoryAPI)
+            : base(context, ns)
         {
             CategoryAPI = categoryAPI;
             Title = "消息";
-            PinListVM = new PinListViewModel(context, GetData);
+            PinListVM = new PinListViewModel(context, ns, GetData);
         }
 
         #region Properties
