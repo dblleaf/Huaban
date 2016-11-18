@@ -48,7 +48,7 @@ namespace Huaban.UWP.Services
         }
         public static void RegisterType<T>()
         {
-            Current.Container.RegisterType<T,T>();
+            Current.Container.RegisterType<T>();
         }
         public static T Resolve<T>()
         {
