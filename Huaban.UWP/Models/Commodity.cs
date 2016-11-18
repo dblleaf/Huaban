@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class Commodity
-	{
-		public bool isSelling;
-		public String mBoardId;
-		public String mCommodityId;
-		public String mLink;
-		public String mPinId;
-		public String mPrice;
-		public Commodity.STORE_TYPE mStore;
-		public String mTaobaoID;
-		public String mTitle;
-		public String mUserId;
-		
+    public class Commodity
+    {
+        public bool isSelling;
+        public String mBoardId;
+        public String mCommodityId;
+        public String mLink;
+        public String mPinId;
+        public String mPrice;
+        public Commodity.STORE_TYPE mStore;
+        public String mTaobaoID;
+        public String mTitle;
+        public String mUserId;
 
-		public enum STORE_TYPE
-		{
-			Taobao,
-			Tmall
-		}
-	}
+
+        public enum STORE_TYPE
+        {
+            Taobao,
+            Tmall
+        }
+    }
 }

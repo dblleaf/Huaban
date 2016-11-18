@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class Profile
-	{
-		public String about;
-		public String location;
-		
-		public String url;
-	}
+    public class Profile
+    {
+        public String about;
+        public String location;
+
+        public String url;
+    }
 }

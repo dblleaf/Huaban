@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class Unread
-	{
-		public int mUnreadFeeds;
-		public int mUnreadMentions;
-		
-	}
+    public class Unread
+    {
+        public int mUnreadFeeds;
+        public int mUnreadMentions;
+
+    }
 }

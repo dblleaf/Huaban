@@ -7,86 +7,86 @@ using Newtonsoft.Json.Linq;
 using static System.Net.WebUtility;
 namespace Huaban.UWP.Models
 {
-	using Base;
-	public class User : ObservableObject
-	{
-		public ImageFile avatar { set; get; }
-		public int board_count { set; get; }
-		public List<Board> boards { set; get; }
-		public String created_at { set; get; }
-		public String email { set; get; }
-		public int follower_count { set; get; }
-		public List<User> followers { set; get; }
+    using Base;
+    public class User : ObservableObject
+    {
+        public ImageFile avatar { set; get; }
+        public int board_count { set; get; }
+        public List<Board> boards { set; get; }
+        public String created_at { set; get; }
+        public String email { set; get; }
+        public int follower_count { set; get; }
+        public List<User> followers { set; get; }
 
-		private bool _following;
-		public bool following
-		{
-			get { return _following; }
-			set { SetValue(ref _following, value); }
-		}
-		public int following_count { set; get; }
-		public List<User> followings { set; get; }
-		public int like_count { set; get; }
-		public List<Pin> likes { set; get; }
-		public Bindings mBindings { set; get; }
-		public int pin_count { set; get; }
-		public List<Pin> pins { set; get; }
-		public Profile profile { set; get; }
-		public int seq { set; get; }
+        private bool _following;
+        public bool following
+        {
+            get { return _following; }
+            set { SetValue(ref _following, value); }
+        }
+        public int following_count { set; get; }
+        public List<User> followings { set; get; }
+        public int like_count { set; get; }
+        public List<Pin> likes { set; get; }
+        public Bindings mBindings { set; get; }
+        public int pin_count { set; get; }
+        public List<Pin> pins { set; get; }
+        public Profile profile { set; get; }
+        public int seq { set; get; }
 
-		public String urlname { set; get; }
-		public String user_id { set; get; }
-		public String username { set; get; }
+        public String urlname { set; get; }
+        public String user_id { set; get; }
+        public String username { set; get; }
 
-		public static User Parse(string json)
-		{
-			JObject obj = JObject.Parse(json);
-			return User.Parse(json);
-		}
-		public static User Parse(JObject obj, bool deptParse = false)
-		{
-			if (obj == null)
-				return null;
-			User user = new User();
-			user.user_id = obj.GetObject<string>("user_id");
-			user.username = HtmlDecode(obj.GetObject<string>("username"));
-			user.created_at = obj.GetObject<string>("created_at");
-			user.urlname = obj.GetObject<string>("urlname");
-			user.avatar = ImageFile.Parse(obj["avatar"] as JObject)?? GetDefaultAvatar();
-			user.seq = obj.GetObject<int>("seq");
-			user.email = obj.GetObject<string>("email");
-			user.follower_count = obj.GetObject<int>("follower_count");
-			user.following_count = obj.GetObject<int>("following_count");
-			user.board_count = obj.GetObject<int>("board_count");
-			user.following = obj.GetObject<bool>("following");
-			user.like_count = obj.GetObject<int>("like_count");
-			user.pin_count = obj.GetObject<int>("pin_count");
+        public static User Parse(string json)
+        {
+            JObject obj = JObject.Parse(json);
+            return User.Parse(json);
+        }
+        public static User Parse(JObject obj, bool deptParse = false)
+        {
+            if (obj == null)
+                return null;
+            User user = new User();
+            user.user_id = obj.GetObject<string>("user_id");
+            user.username = HtmlDecode(obj.GetObject<string>("username"));
+            user.created_at = obj.GetObject<string>("created_at");
+            user.urlname = obj.GetObject<string>("urlname");
+            user.avatar = ImageFile.Parse(obj["avatar"] as JObject) ?? GetDefaultAvatar();
+            user.seq = obj.GetObject<int>("seq");
+            user.email = obj.GetObject<string>("email");
+            user.follower_count = obj.GetObject<int>("follower_count");
+            user.following_count = obj.GetObject<int>("following_count");
+            user.board_count = obj.GetObject<int>("board_count");
+            user.following = obj.GetObject<bool>("following");
+            user.like_count = obj.GetObject<int>("like_count");
+            user.pin_count = obj.GetObject<int>("pin_count");
 
-			user.boards = Board.ParseList(obj["boards"] as JArray);
+            user.boards = Board.ParseList(obj["boards"] as JArray);
 
-			return user;
-		}
-		public static ImageFile GetDefaultAvatar()
-		{
-			return new ImageFile()
-			{
-				width = 300,
-				height = 300,
-				key = "23a58517fb73f86bca85937f069724486b3e00a44caa-GMc99I"
-			};
-		}
-		public static List<User> ParseList(JArray arry, bool deptParse = false)
-		{
-			List<User> list = new List<User>();
-			if (arry == null)
-				return list;
-			foreach (JObject obj in arry)
-			{
-				var item = Parse(obj, deptParse);
-				if (item != null)
-					list.Add(item);
-			}
-			return list;
-		}
-	}
+            return user;
+        }
+        public static ImageFile GetDefaultAvatar()
+        {
+            return new ImageFile()
+            {
+                width = 300,
+                height = 300,
+                key = "23a58517fb73f86bca85937f069724486b3e00a44caa-GMc99I"
+            };
+        }
+        public static List<User> ParseList(JArray arry, bool deptParse = false)
+        {
+            List<User> list = new List<User>();
+            if (arry == null)
+                return list;
+            foreach (JObject obj in arry)
+            {
+                var item = Parse(obj, deptParse);
+                if (item != null)
+                    list.Add(item);
+            }
+            return list;
+        }
+    }
 }

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class SubCategory
-	{
-		public String mSubCategory;
-		public List<String> mSubCategoryTags;
-		
-	}
+    public class SubCategory
+    {
+        public String mSubCategory;
+        public List<String> mSubCategoryTags;
+
+    }
 }

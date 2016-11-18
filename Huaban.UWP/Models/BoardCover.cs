@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class BoardCover
-	{
-	}
+    public class BoardCover
+    {
+    }
 }

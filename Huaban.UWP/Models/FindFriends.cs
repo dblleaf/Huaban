@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-public	class FindFriends
-	{
-		public List<User> mBindedFriends;
-		public String mLoadFlag;
-		public Binding mMyBinding;
-		public String mScope;
-		public String mType;
-		public List<Binding> mUnBindedFriends;
-	}
+    public class FindFriends
+    {
+        public List<User> mBindedFriends;
+        public String mLoadFlag;
+        public Binding mMyBinding;
+        public String mScope;
+        public String mType;
+        public List<Binding> mUnBindedFriends;
+    }
 }

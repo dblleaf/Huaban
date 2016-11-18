@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class UserInfo
-	{
-		public String mAvatar;
-		public String mEmail;
-		public String mId;
-		public String mUserName;
-		
-	}
+    public class UserInfo
+    {
+        public String mAvatar;
+        public String mEmail;
+        public String mId;
+        public String mUserName;
+
+    }
 }

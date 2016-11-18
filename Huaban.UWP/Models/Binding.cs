@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class Binding
-	{
-		public String mBindId;
-		public long mCreatedAt;
-		public String mServiceName;
-		public SNSType mSnsType;
-		public String mUserId;
-		public UserInfo mUserInfo;
-		
-	}
+    public class Binding
+    {
+        public String mBindId;
+        public long mCreatedAt;
+        public String mServiceName;
+        public SNSType mSnsType;
+        public String mUserId;
+        public UserInfo mUserInfo;
+
+    }
 }

@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.Models
 {
-	public class ServerSetting
-	{
-		public String androidAdsImages;
-		public String androidAdsTargetUrl;
-		public String androidBindingDefaultMsg;
-		public String androidMsgSuffix;
-		public String androidNewTxt;
-		
-		public int status;
+    public class ServerSetting
+    {
+        public String androidAdsImages;
+        public String androidAdsTargetUrl;
+        public String androidBindingDefaultMsg;
+        public String androidMsgSuffix;
+        public String androidNewTxt;
 
-		public override String ToString()
-		{
-			return "";
-		}
-	}
+        public int status;
+
+        public override String ToString()
+        {
+            return "";
+        }
+    }
 }
