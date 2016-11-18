@@ -26,6 +26,7 @@ namespace Huaban.UWP.Services
                 MD = "com.huaban.android"
             };
             Container.RegisterInstance<IClient>(client);
+            
             Container.RegisterType<BoardAPI>();
             Container.RegisterType<CategoryAPI>();
             Container.RegisterType<OAuthorAPI>();
@@ -47,8 +48,7 @@ namespace Huaban.UWP.Services
         }
         public static void RegisterType<T>()
         {
-
-            Current.Container.RegisterType<T>();
+            Current.Container.RegisterType<T,T>();
         }
         public static T Resolve<T>()
         {

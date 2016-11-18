@@ -169,58 +169,58 @@ namespace Huaban.UWP.ViewModels
             }
         }
 
-        public async override void Inited()
+        public override void Inited()
         {
-            var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
-            var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
-            if (token != null)
-            {
-                token = await ServiceLocator.Resolve<Api.OAuthorAPI>().RefreshToken(token);
-            }
-            App.AppContext.User = user;
-            
-            if (token != null && token.ExpiresIn > DateTime.Now)
-            {
-                await App.AppContext.SetToken(token);
-            }
-
             base.Inited();
 
             NavCommand.Execute(NavList[0]);
 
-            await Task.Factory.StartNew(async () =>
-             {
-                 await ShellView.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
-                 {
-                     try
-                     {
-                         DisplayTheme();
+            Task.Factory.StartNew(async () =>
+            {
+                await ShellView.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+                {
+                    try
+                    {
+                        var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
+                        var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
+                        if (token != null)
+                        {
+                            token = await ServiceLocator.Resolve<Api.OAuthorAPI>().RefreshToken(token);
+                        }
+                        App.AppContext.User = user;
 
-                         if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_36")))
-                         {
-                             string msg = @"1.修复切换图片时喜欢图标不变的bug
+                        if (token != null && token.ExpiresIn > DateTime.Now)
+                        {
+                            await App.AppContext.SetToken(token);
+                        }
+
+                        DisplayTheme();
+
+                        if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_36")))
+                        {
+                            string msg = @"1.修复切换图片时喜欢图标不变的bug
 2.修复个人个人页面喜欢选项卡、关注页面关注的画板无限加载的bug
 3.修复登录失败的bug
 4.布局细节修改";
-                             var dialog = new MessageDialog(msg, "版本更新 v1.2.36");
+                            var dialog = new MessageDialog(msg, "版本更新 v1.2.36");
 
-                             dialog.Commands.Add(new UICommand("评价应用", async o =>
-                             {
-                                 await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
-                             }));
-                             dialog.Commands.Add(new UICommand("不想评价"));
+                            dialog.Commands.Add(new UICommand("评价应用", async o =>
+                            {
+                                await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
+                            }));
+                            dialog.Commands.Add(new UICommand("不想评价"));
 
-                             await dialog.ShowAsync();
-                             StorageHelper.SaveSetting("v1_2_36", "1");
-                         }
+                            await dialog.ShowAsync();
+                            StorageHelper.SaveSetting("v1_2_36", "1");
+                        }
 
-                     }
-                     catch (Exception ex)
-                     {
-                         string aaa = ex.Message;
-                     }
-                 });
-             });
+                    }
+                    catch (Exception ex)
+                    {
+                        string aaa = ex.Message;
+                    }
+                });
+            });
         }
 
 
@@ -260,6 +260,11 @@ namespace Huaban.UWP.ViewModels
 
                     string aaa = ex.Message;
                 }
+            }
+            else if (e.PropertyName == "IsLogin")
+            {
+                UserItem.Special = Context.IsLogin;
+                NotifyPropertyChanged("User");
             }
         }
 

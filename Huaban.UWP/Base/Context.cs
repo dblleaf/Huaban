@@ -74,7 +74,7 @@ namespace Huaban.UWP.Base
         public async Task SetToken(AuthToken token)
         {
             ServiceLocator.RegisterInstance(token);
-            ServiceLocator.Resolve<UserAPI>();
+
             var user = await ServiceLocator.Resolve<UserAPI>().GetSelf();
             BoardListVM = new BoardListViewModel(this, GetBoardList);
             User = user;

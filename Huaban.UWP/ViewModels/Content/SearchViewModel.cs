@@ -16,6 +16,7 @@ namespace Huaban.UWP.ViewModels
         public SearchViewModel(Context context, PinAPI pinApi)
             : base(context)
         {
+            PinApi = pinApi;
             LeftHeaderVisibility = Windows.UI.Xaml.Visibility.Collapsed;
             PinListViewModel = new PinListViewModel(context, GetData);
             KeyWord = "";
