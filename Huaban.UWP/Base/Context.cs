@@ -6,138 +6,140 @@ using Windows.UI.Core;
 
 namespace Huaban.UWP.Base
 {
-    using Models;
-    using Services;
-    using ViewModels;
-    using Api;
-    public class Context : ObservableObject
-    {
-        public Context()
-        {
-            CategoryList = new IncrementalLoadingList<Category>(GetCategoryList);
-            Categories = new ObservableCollection<Category>();
-        }
-        #region Properties
+	using Models;
+	using Services;
+	using ViewModels;
+	using Api;
+	public class Context : ObservableObject
+	{
+		public NavigationService NavigationService { get; set; }
 
-        private User _User;
-        public User User
-        {
-            get { return _User; }
-            set { SetValue(ref _User, value); }
-        }
+		public Context()
+		{
+			CategoryList = new IncrementalLoadingList<Category>(GetCategoryList);
+			Categories = new ObservableCollection<Category>();
+		}
+		#region Properties
 
-        private bool _IsLogin;
-        public bool IsLogin
-        {
-            get { return _IsLogin; }
-            set { SetValue(ref _IsLogin, value); }
-        }
+		private User _User;
+		public User User
+		{
+			get { return _User; }
+			set { SetValue(ref _User, value); }
+		}
 
-        public IncrementalLoadingList<Category> CategoryList { get; private set; }
+		private bool _IsLogin;
+		public bool IsLogin
+		{
+			get { return _IsLogin; }
+			set { SetValue(ref _IsLogin, value); }
+		}
 
-        private ObservableCollection<Category> _Categories;
-        public ObservableCollection<Category> Categories
-        {
-            get { return _Categories; }
-            set { SetValue(ref _Categories, value); }
-        }
+		public IncrementalLoadingList<Category> CategoryList { get; private set; }
 
-        private BoardListViewModel _BoardList;
-        public BoardListViewModel BoardListVM
-        {
-            get { return _BoardList; }
-            set { SetValue(ref _BoardList, value); }
-        }
+		private ObservableCollection<Category> _Categories;
+		public ObservableCollection<Category> Categories
+		{
+			get { return _Categories; }
+			set { SetValue(ref _Categories, value); }
+		}
 
-        private string _Message;
-        public string Message
-        {
-            get { return _Message; }
-            private set { SetValue(ref _Message, value); }
-        }
+		private BoardListViewModel _BoardList;
+		public BoardListViewModel BoardListVM
+		{
+			get { return _BoardList; }
+			set { SetValue(ref _BoardList, value); }
+		}
 
-        private AppViewBackButtonVisibility _AppViewBackButtonVisibility;
-        public AppViewBackButtonVisibility AppViewBackButtonVisibility
-        {
-            get { return _AppViewBackButtonVisibility; }
-            set { SetValue(ref _AppViewBackButtonVisibility, value); }
-        }
+		private string _Message;
+		public string Message
+		{
+			get { return _Message; }
+			private set { SetValue(ref _Message, value); }
+		}
 
-        #endregion
+		private AppViewBackButtonVisibility _AppViewBackButtonVisibility;
+		public AppViewBackButtonVisibility AppViewBackButtonVisibility
+		{
+			get { return _AppViewBackButtonVisibility; }
+			set { SetValue(ref _AppViewBackButtonVisibility, value); }
+		}
 
-        #region Commands
-        #endregion
+		#endregion
 
-        #region Methods
-        public async Task SetToken(AuthToken token)
-        {
-            ServiceLocator.RegisterInstance(token);
+		#region Commands
+		#endregion
 
-            var user = await ServiceLocator.Resolve<UserAPI>().GetSelf();
-            BoardListVM = new BoardListViewModel(this, null, GetBoardList);
-            User = user;
-            IsLogin = true;
+		#region Methods
+		public async Task SetToken(AuthToken token)
+		{
+			ServiceLocator.Resolve<IClient>().SetToken(token);
 
-            await StorageHelper.SaveLocal(token);
-            await StorageHelper.SaveLocal(user);
-        }
+			var user = await ServiceLocator.Resolve<UserAPI>().GetSelf();
+			BoardListVM = new BoardListViewModel(this, GetBoardList);
+			User = user;
+			IsLogin = true;
 
-        public async Task ClearToken()
-        {
-            /////API.SetToken(null);
-            IsLogin = false;
-            User = null;
-            ShellViewModel.UserItem.Special = false;
-            await StorageHelper.DeleteLocal($"{typeof(AuthToken).Name}.json");
-            await StorageHelper.DeleteLocal($"{typeof(User).Name}.json");
-        }
-        private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
-        {
-            BoardListVM.BoardList.NoMore();
+			await StorageHelper.SaveLocal(token);
+			await StorageHelper.SaveLocal(user);
+		}
 
-            List<Board> list = new List<Board>();
-            try
-            {
-                list = await ServiceLocator.Resolve<UserAPI>().GetBoards(User.user_id, BoardListVM.GetMaxSeq());
-                if (list.Count == 0)
-                    BoardListVM.BoardList.NoMore();
-                else
-                    BoardListVM.BoardList.HasMore();
-                return list;
-            }
-            catch (Exception ex)
-            {
-            }
+		public async Task ClearToken()
+		{
+			ServiceLocator.Resolve<IClient>().SetToken(null);
+			IsLogin = false;
+			User = null;
+			ShellViewModel.UserItem.Special = false;
+			await StorageHelper.DeleteLocal($"{typeof(AuthToken).Name}.json");
+			await StorageHelper.DeleteLocal($"{typeof(User).Name}.json");
+		}
+		private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
+		{
+			BoardListVM.BoardList.NoMore();
 
-            return list;
-        }
+			List<Board> list = new List<Board>();
+			try
+			{
+				list = await ServiceLocator.Resolve<UserAPI>().GetBoards(User.user_id, BoardListVM.GetMaxSeq());
+				if (list.Count == 0)
+					BoardListVM.BoardList.NoMore();
+				else
+					BoardListVM.BoardList.HasMore();
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
 
-        private async Task<IEnumerable<Category>> GetCategoryList(uint startIndex, int page)
-        {
-            try
-            {
-                var list = await ServiceLocator.Resolve<CategoryAPI>().GetCategoryList();
-                foreach (var item in list)
-                {
-                    Categories.Add(item);
-                }
-                list.Insert(0, new Category() { name = "最热", nav_link = "/popular/" });
-                list.Insert(0, new Category() { name = "最新", nav_link = "/all/" });
+			return list;
+		}
 
-                CategoryList.NoMore();
-                return list;
-            }
-            catch (Exception ex)
-            {
-            }
+		private async Task<IEnumerable<Category>> GetCategoryList(uint startIndex, int page)
+		{
+			try
+			{
+				var list = await ServiceLocator.Resolve<CategoryAPI>().GetCategoryList();
+				foreach (var item in list)
+				{
+					Categories.Add(item);
+				}
+				list.Insert(0, new Category() { name = "最热", nav_link = "/popular/" });
+				list.Insert(0, new Category() { name = "最新", nav_link = "/all/" });
 
-            return null;
-        }
-        public void ShowTip(string msg)
-        {
-            Message = msg;
-        }
+				CategoryList.NoMore();
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
 
-        #endregion
-    }
+			return null;
+		}
+		public void ShowTip(string msg)
+		{
+			Message = msg;
+		}
+
+		#endregion
+	}
 }

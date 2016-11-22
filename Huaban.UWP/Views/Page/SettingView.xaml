@@ -16,13 +16,38 @@
 			<ToggleSwitch Margin="12 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
 			<ToggleSwitch Margin="12 6" Header="直接退出" IsEnabled="False" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
 			<ToggleSwitch Margin="12 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
+			
 			<Button Style="{StaticResource SettingButton}" Command="{Binding ClearCacheCommand}">
-				<Grid HorizontalAlignment="Stretch">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
 					<TextBlock VerticalAlignment="Center">缓存大小：<Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/></TextBlock>
-					<TextBlock VerticalAlignment="Center" HorizontalAlignment="Right" Padding="12 0"><Run FontFamily="{StaticResource SymbolThemeFontFamily}" Text=""></Run>清理</TextBlock>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+						<SymbolIcon Symbol="Delete"/>
+						<TextBlock Margin="6 0 0 0">清理</TextBlock>
+					</StackPanel>
+				</Grid>
+			</Button>
+			
+			
+			<Button Style="{StaticResource SettingButton}" Command="{Binding SelectePathCommand}">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					<TextBlock VerticalAlignment="Center">下载目录：<Run Text="{Binding Setting.SavePath.Path}"/></TextBlock>
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+						<SymbolIcon Symbol="OpenLocal"/>
+						<TextBlock Margin="6 0 0 0">选择</TextBlock>
+					</StackPanel>
 				</Grid>
 				
 			</Button>
+			<Button Background="{StaticResource InkToolbarAccentColorThemeBrush}" RequestedTheme="Dark"
+				Style="{StaticResource SettingButton}" Command="{Binding OpenPathCommand}" Content="打开下载目录"/>
 			<Button Background="{StaticResource InkToolbarAccentColorThemeBrush}" RequestedTheme="Dark"
 				Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="五星评价"/>
 			<Button Background="{StaticResource InkToolbarAccentColorThemeBrush}" RequestedTheme="Dark"

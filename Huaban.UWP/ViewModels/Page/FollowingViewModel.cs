@@ -4,100 +4,103 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Base;
-    using Models;
-    using Api;
-    public class FollowingViewModel : HBViewModel
-    {
-        private UserAPI UserAPI { set; get; }
-        private BoardAPI BoardAPI { set; get; }
-        public FollowingViewModel(Context context, Services.NavigationService ns, UserAPI userApi, BoardAPI boardApi)
-            : base(context, ns)
-        {
-            UserAPI = userApi;
-            BoardAPI = boardApi;
-            Title = "";
-            PinListViewModel = new PinListViewModel(context, ns, GetPinList);
-            BoardListViewModel = new BoardListViewModel(context, ns, GetBoardList);
-        }
+	using Base;
+	using Models;
+	using Api;
+	public class FollowingViewModel : HBViewModel
+	{
+		public FollowingViewModel(Context context, UserAPI userApi, BoardAPI boardApi)
+			: base(context)
+		{
+			UserAPI = userApi;
+			BoardAPI = boardApi;
+			Title = "";
+			PinListViewModel = new PinListViewModel(context, GetPinList);
+			BoardListViewModel = new BoardListViewModel(context, GetBoardList);
+		}
 
-        #region Properties
+		#region Properties
+		private UserAPI UserAPI { set; get; }
+		private BoardAPI BoardAPI { set; get; }
 
-        public BoardListViewModel BoardListViewModel { set; get; }
+		public BoardListViewModel BoardListViewModel { set; get; }
 
-        public PinListViewModel PinListViewModel { set; get; }
+		public PinListViewModel PinListViewModel { set; get; }
 
-        #endregion
+		#endregion
 
-        #region Commands
+		#region Commands
 
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        private async Task<IEnumerable<Pin>> GetPinList(uint startIndex, int page)
-        {
-            IsLoading = true;
+		private async Task<IEnumerable<Pin>> GetPinList(uint startIndex, int page)
+		{
+			IsLoading = true;
 
-            List<Pin> list = new List<Pin>();
-            try
-            {
-                list = await UserAPI.GetFollowing(PinListViewModel.GetMaxPinID());
-                foreach (var item in list)
-                {
-                    item.Width = PinListViewModel.ColumnWidth;
-                    if (item.file != null)
-                        item.Height = ((PinListViewModel.ColumnWidth - 0.8) * item.file.height / item.file.width);
-                }
+			List<Pin> list = new List<Pin>();
+			try
+			{
+				list = await UserAPI.GetFollowing(PinListViewModel.GetMaxPinID());
+				foreach (var item in list)
+				{
+					item.Width = PinListViewModel.ColumnWidth;
+					if (item.file != null)
+						item.Height = ((PinListViewModel.ColumnWidth - 0.8) * item.file.height / item.file.width);
+				}
 
-                if (list.Count == 0)
-                    PinListViewModel.PinList.NoMore();
-                else
-                    PinListViewModel.PinList.HasMore();
+				if (list.Count == 0)
+					PinListViewModel.PinList.NoMore();
+				else
+					PinListViewModel.PinList.HasMore();
 
-                return list;
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-            return list;
-        }
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			return list;
+		}
 
-        private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
-        {
-            IsLoading = true;
-            BoardListViewModel.BoardList.NoMore();
+		private async Task<IEnumerable<Board>> GetBoardList(uint startIndex, int page)
+		{
+			IsLoading = true;
+			BoardListViewModel.BoardList.NoMore();
 
-            List<Board> list = new List<Board>();
-            try
-            {
-                list = await UserAPI.GetFollowingBoardList(Context.User.urlname, page);
-                if (list.Count == 0)
-                    BoardListViewModel.BoardList.NoMore();
-                else
-                    BoardListViewModel.BoardList.HasMore();
-                return list;
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-            return list;
-        }
+			List<Board> list = new List<Board>();
+			try
+			{
+				list = await UserAPI.GetFollowingBoardList(Context.User.urlname, page);
+				if (list.Count == 0)
+					BoardListViewModel.BoardList.NoMore();
+				else
+					BoardListViewModel.BoardList.HasMore();
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			return list;
+		}
 
-        public async override void Inited()
-        {
-            base.Inited();
-            await PinListViewModel.ClearAndReload();
-        }
-        #endregion
-    }
+		public override void Inited()
+		{
+			base.Inited();
+			Task.Factory.StartNew(async () =>
+			{
+				await PinListViewModel.ClearAndReload();
+			});
+		}
+		#endregion
+	}
 }

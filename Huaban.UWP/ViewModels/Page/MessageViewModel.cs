@@ -4,58 +4,58 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Base;
-    using Models;
-    using Api;
-    public class MessageViewModel : HBViewModel
-    {
-        private CategoryAPI CategoryAPI { set; get; }
+	using Base;
+	using Models;
+	using Api;
+	public class MessageViewModel : HBViewModel
+	{
+		private CategoryAPI CategoryAPI { set; get; }
 
-        public MessageViewModel(Context context, Services.NavigationService ns, CategoryAPI categoryAPI)
-            : base(context, ns)
-        {
-            CategoryAPI = categoryAPI;
-            Title = "消息";
-            PinListVM = new PinListViewModel(context, ns, GetData);
-        }
+		public MessageViewModel(Context context, CategoryAPI categoryAPI)
+			: base(context)
+		{
+			CategoryAPI = categoryAPI;
+			Title = "消息";
+			PinListVM = new PinListViewModel(context, GetData);
+		}
 
-        #region Properties
+		#region Properties
 
-        public PinListViewModel PinListVM { get; set; }
+		public PinListViewModel PinListVM { get; set; }
 
-        #endregion
+		#endregion
 
-        #region Commands
+		#region Commands
 
 
-        #endregion
+		#endregion
 
-        #region Methods
+		#region Methods
 
-        private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
-        {
-            PinListVM.PinList.HasMore();
+		private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
+		{
+			PinListVM.PinList.HasMore();
 
-            IsLoading = true;
-            try
-            {
-                var list = await CategoryAPI.GetCategoryPinList("/all/", 20, PinListVM.GetMaxPinID());
-                if (list?.Count == 0)
-                    PinListVM.PinList.NoMore();
-                else
-                    PinListVM.PinList.HasMore();
-                return list;
-            }
-            catch (Exception ex)
-            {
-            }
-            finally
-            {
-                IsLoading = false;
-            }
-            return null;
-        }
+			IsLoading = true;
+			try
+			{
+				var list = await CategoryAPI.GetCategoryPinList("/all/", 20, PinListVM.GetMaxPinID());
+				if (list?.Count == 0)
+					PinListVM.PinList.NoMore();
+				else
+					PinListVM.PinList.HasMore();
+				return list;
+			}
+			catch (Exception ex)
+			{
+			}
+			finally
+			{
+				IsLoading = false;
+			}
+			return null;
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
