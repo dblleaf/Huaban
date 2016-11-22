@@ -108,7 +108,7 @@ namespace Huaban.UWP
 		public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream)
 		{
 			StorageFolder saveFolder = Models.Setting.Current.SavePath;
-			
+
 			var storageFile = await saveFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
 			using (IRandomAccessStream outputStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))
 			{
