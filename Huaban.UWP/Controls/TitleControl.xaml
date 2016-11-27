@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	x:Name="TitleRoot"
     mc:Ignorable="d">
-	<Grid Padding="12 0" MinHeight="48" RequestedTheme="Dark" Background="{ThemeResource InkToolbarAccentColorThemeBrush}">
+	<Grid Padding="12 0" MinHeight="48" RequestedTheme="Dark" Background="{ThemeResource SystemControlBackgroundAccentBrush}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="Auto"/>
 			<ColumnDefinition Width="Auto"/>

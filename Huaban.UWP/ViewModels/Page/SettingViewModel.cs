@@ -4,6 +4,8 @@ using Windows.UI.Xaml.Navigation;
 using Windows.Storage.Pickers;
 using Windows.Storage;
 using Windows.Storage.AccessCache;
+using Windows.UI.Xaml;
+using Windows.Foundation.Metadata;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -20,6 +22,14 @@ namespace Huaban.UWP.ViewModels
 			Title = "设置";
 			Setting = Setting.Current;
 
+			if (!ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+			{
+				PCVisibility = Visibility.Visible;
+			}
+			else
+			{
+				PCVisibility = Visibility.Collapsed;
+			}
 			Setting.PropertyChanged += (s, e) =>
 			{
 				NotifyPropertyChanged(e.PropertyName);
@@ -36,6 +46,12 @@ namespace Huaban.UWP.ViewModels
 
 		public Setting Setting { private set; get; }
 
+		private Visibility _PCVisibility;
+		public Visibility PCVisibility
+		{
+			get { return _PCVisibility; }
+			set { SetValue(ref _PCVisibility, value); }
+		}
 		#endregion
 
 		#region Commands

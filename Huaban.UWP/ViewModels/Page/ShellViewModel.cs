@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Popups;
+using Windows.UI.ViewManagement;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -23,6 +24,8 @@ namespace Huaban.UWP.ViewModels
 			NavFootList.Insert(0, ThemeModeItem);
 
 			Context.PropertyChanged += Context_PropertyChanged;
+			NavigationService.ButtonVisibilityChanged += NavigationService_ButtonVisibilityChanged;
+			
 			FirstBackVisibility = Visibility.Collapsed;
 			Setting.Current.PropertyChanged += (s, e) =>
 			{
@@ -30,6 +33,14 @@ namespace Huaban.UWP.ViewModels
 					DisplayTheme();
 			};
 
+		}
+
+		private void NavigationService_ButtonVisibilityChanged(object sender, ButtonVisibilityChangedEventArgs e)
+		{
+			if (UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse)
+				BackButtonVisibility = e.Visibility;
+			else
+				BackButtonVisibility = Visibility.Collapsed;
 		}
 
 		#region Properties
@@ -197,22 +208,22 @@ namespace Huaban.UWP.ViewModels
 
 						DisplayTheme();
 
-						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_36")))
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_39")))
 						{
-							string msg = @"1.修复切换图片时喜欢图标不变的bug
-2.修复个人个人页面喜欢选项卡、关注页面关注的画板无限加载的bug
-3.修复登录失败的bug
-4.布局细节修改";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.36");
+							string msg = @"1.修复习惯性闪退的bug
+2.配色改为和系统设置一致
+3.PC端可以在“设置”中设置下载目录
+4.图片详情可以折叠显示图片文字说明";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.39");
 
-							dialog.Commands.Add(new UICommand("评价应用", async o =>
-							{
-								await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
-							}));
-							dialog.Commands.Add(new UICommand("不想评价"));
+							//dialog.Commands.Add(new UICommand("评价应用", async o =>
+							//{
+							//	await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
+							//}));
+							dialog.Commands.Add(new UICommand("我知道了"));
 
 							await dialog.ShowAsync();
-							StorageHelper.SaveSetting("v1_2_36", "1");
+							StorageHelper.SaveSetting("v1_2_39", "1");
 						}
 
 					}
@@ -247,21 +258,7 @@ namespace Huaban.UWP.ViewModels
 					string aaa = ex.Message;
 				}
 			}
-			else if (e.PropertyName == "AppViewBackButtonVisibility")
-			{
-				try
-				{
-					await ShellView.Current.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
-					{
-						SetAppViewBackButtonVisibility(Context.AppViewBackButtonVisibility == Windows.UI.Core.AppViewBackButtonVisibility.Visible ? Visibility.Visible : Visibility.Collapsed);
-					});
-				}
-				catch (Exception ex)
-				{
 
-					string aaa = ex.Message;
-				}
-			}
 			else if (e.PropertyName == "IsLogin")
 			{
 				UserItem.Special = Context.IsLogin;
@@ -289,10 +286,6 @@ namespace Huaban.UWP.ViewModels
 			timer.Tick -= Timer_Tick;
 		}
 
-		private void SetAppViewBackButtonVisibility(Visibility visibility)
-		{
-			BackButtonVisibility = visibility;
-		}
 		private void ChangeTheme()
 		{
 			Setting.Current.DarkMode = !Setting.Current.DarkMode;

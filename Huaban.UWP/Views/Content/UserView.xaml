@@ -15,7 +15,7 @@
 				<RowDefinition Height="Auto"></RowDefinition>
 				<RowDefinition Height="*"></RowDefinition>
 			</Grid.RowDefinitions>
-			<Grid Background="{ThemeResource InkToolbarAccentColorThemeBrush}" x:Name="header">
+			<Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}" x:Name="header">
 				<StackPanel Padding="0 12 0 0" VerticalAlignment="Bottom" x:Name="headerInner">
 					<Ellipse Width="60" Height="60" VerticalAlignment="Top" HorizontalAlignment="Center">
 						<Ellipse.Fill>
@@ -25,7 +25,7 @@
 					<TextBlock Text="{Binding User.username}" HorizontalAlignment="Center" RequestedTheme="Dark"></TextBlock>
 				</StackPanel>
 			</Grid>
-			<Grid Grid.Row="1" VerticalAlignment="Top" Background="{ThemeResource InkToolbarAccentColorThemeBrush}" Height="48"></Grid>
+			<Grid Grid.Row="1" VerticalAlignment="Top" Background="{ThemeResource SystemControlBackgroundAccentBrush}" Height="48"></Grid>
 			<Pivot Grid.Row="1" Style="{StaticResource PivotHeaderCenterStyle}" x:Name="pivot" SelectionChanged="pivot_SelectionChanged">
 				<PivotItem>
 					<PivotItem.Header>

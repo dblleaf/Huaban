@@ -20,18 +20,16 @@
 				<HB:IncrementalLoadingFlipView.ItemTemplate>
 					<DataTemplate>
 						<Grid>
-                            <ScrollViewer Tapped="Grid_Tapped" x:Name="scrollViewer" MinZoomFactor="1" ZoomMode="Enabled" 
+							<ScrollViewer Tapped="Grid_Tapped" x:Name="scrollViewer" MinZoomFactor="1" ZoomMode="Enabled" 
 								VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Enabled"
 								HorizontalScrollBarVisibility="Hidden" HorizontalScrollMode="Enabled"
 								SizeChanged="scrollView_SizeChanged">
-                                <Grid>
-                                    <controls:ImageView Name="imgView" MaxWidth="{Binding file.width}" UriSource="{Binding file.Orignal}" Stretch="Uniform"/>
-                                    <ProgressRing IsActive="{Binding ElementName=imgView,Path=IsLoading}"/>
-
-                                </Grid>
-                            </ScrollViewer>
-                            
-                        </Grid>
+								<Grid>
+									<controls:ImageView Name="imgView" MaxWidth="{Binding file.width}" UriSource="{Binding file.Orignal}" Stretch="Uniform"/>
+									<ProgressRing IsActive="{Binding ElementName=imgView,Path=IsLoading}"/>
+								</Grid>
+							</ScrollViewer>
+						</Grid>
 					</DataTemplate>
 				</HB:IncrementalLoadingFlipView.ItemTemplate>
 			</HB:IncrementalLoadingFlipView>
@@ -40,22 +38,22 @@
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+		
 					</Grid.RowDefinitions>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="*"/>
-					</Grid.ColumnDefinitions>
-					<StackPanel Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Padding="0 6" Background="Transparent">
-						<Interactivity:Interaction.Behaviors>
-							<Core:EventTriggerBehavior EventName="Tapped">
-								<Core:InvokeCommandAction Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem}"></Core:InvokeCommandAction>
-							</Core:EventTriggerBehavior>
-						</Interactivity:Interaction.Behaviors>
+					<Interactivity:Interaction.Behaviors>
+						<Core:EventTriggerBehavior EventName="Tapped">
+							<Core:InvokeCommandAction Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem}"></Core:InvokeCommandAction>
+						</Core:EventTriggerBehavior>
+					</Interactivity:Interaction.Behaviors>
+					<Grid Visibility="{Binding RawTextVisibility}">
 						<RichTextBlock Visibility="{Binding PinListViewModel.SelectedItem.raw_text,Converter={StaticResource ObjectToVisibilityConverter}}" Padding="12 6" Grid.Row="2" TextWrapping="Wrap">
 							<Paragraph>
 								<Run Text="{Binding PinListViewModel.SelectedItem.raw_text}"></Run>
 							</Paragraph>
 						</RichTextBlock>
+					</Grid>
+					<Grid Grid.Row="1">
 						<StackPanel  Orientation="Horizontal" Padding="0 6 0 0">
 							<Border Margin="12 0 0 0" Padding="10 1" CornerRadius="12" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 								<TextBlock FontSize="12">
@@ -73,8 +71,15 @@
 								<Run Text="{Binding PinListViewModel.SelectedItem.like_count}" FontSize="16"></Run></TextBlock>
 							</Border>
 						</StackPanel>
-					</StackPanel>
-					<StackPanel Grid.Row="1">
+						<Button Style="{StaticResource SettingButton}" Padding="3" Margin="0 0 16 0" Background="#55AAAAAA" FontFamily="{ThemeResource SymbolThemeFontFamily}" Content="{Binding ButtonChar}" x:Name="ToggleRowText" HorizontalAlignment="Right">
+							<Interactivity:Interaction.Behaviors>
+								<Core:EventTriggerBehavior EventName="Tapped">
+									<Core:InvokeCommandAction Command="{Binding ToggleRowTextCommand}"></Core:InvokeCommandAction>
+								</Core:EventTriggerBehavior>
+							</Interactivity:Interaction.Behaviors>
+						</Button>
+					</Grid>
+					<StackPanel Grid.Row="2">
 						<StackPanel Visibility="{Binding PinListViewModel.SelectedItem.user,Converter={StaticResource ObjectToVisibilityConverter}}"
 							Padding="12 6" 
 							Orientation="Horizontal" HorizontalAlignment="Stretch" 
@@ -109,13 +114,7 @@
 							</StackPanel>
 						</StackPanel>
 					</StackPanel>
-					<Grid Grid.Row="1" Grid.Column="1" Background="Transparent">
-						<Interactivity:Interaction.Behaviors>
-							<Core:EventTriggerBehavior EventName="Tapped">
-								<Core:InvokeCommandAction Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem}"></Core:InvokeCommandAction>
-							</Core:EventTriggerBehavior>
-						</Interactivity:Interaction.Behaviors>
-					</Grid>
+					
 				</Grid>
 				<CommandBar VerticalAlignment="Bottom">
 					<AppBarButton Label="下载" Icon="Save" Command="{Binding DownLoadCommand}"></AppBarButton>
@@ -142,13 +141,11 @@
 					Visibility="{Binding CanQuick,Converter={StaticResource ObjectToVisibilityConverter}}">
 					<StackPanel
 						Padding="12"
-						Background="{StaticResource InkToolbarAccentColorThemeBrush}">
+						Background="{StaticResource SystemControlBackgroundAccentBrush}">
 						<TextBlock>快速采集到：<Run Text="{Binding QuickBoardName}"/></TextBlock>
 					</StackPanel>
-					<Polygon HorizontalAlignment="Right" Width="94" Height="12" Points="0,0 24,0 12,12" Fill="{StaticResource InkToolbarAccentColorThemeBrush}"/>
+					<Polygon HorizontalAlignment="Right" Width="94" Height="12" Points="0,0 24,0 12,12" Fill="{StaticResource SystemControlBackgroundAccentBrush}"/>
 				</StackPanel>
-				
-				
 			</Grid>
 			<HB:BoardSelecter Visibility="{Binding SelecterVisibility}"></HB:BoardSelecter>
 		</Grid>

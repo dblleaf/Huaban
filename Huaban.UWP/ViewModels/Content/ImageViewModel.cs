@@ -26,7 +26,8 @@ namespace Huaban.UWP.ViewModels
 			CurrentBoardIndex = -1;
 			PinAPI = pinApi;
 			BoardAPI = boardApi;
-
+			RawTextVisibility = Visibility.Visible;
+			ButtonChar = '';
 			QuickBoardChanged += (s, e) =>
 			{
 				InitQuickBoard();
@@ -121,6 +122,18 @@ namespace Huaban.UWP.ViewModels
 			set { SetValue(ref _NewBoardName, value); }
 		}
 
+		private Visibility _RawTextVisibility;
+		public Visibility RawTextVisibility
+		{
+			get { return _RawTextVisibility; }
+			set { SetValue(ref _RawTextVisibility, value); }
+		}
+		private char _ButtonChar;
+		public char ButtonChar
+		{
+			get { return _ButtonChar; }
+			set { SetValue(ref _ButtonChar, value); }
+		}
 		#endregion
 
 		#region Commands
@@ -370,6 +383,34 @@ namespace Huaban.UWP.ViewModels
 				{
 					await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huaban.com/pins/{Pin?.pin_id}"));
 				}, o => true));
+			}
+		}
+
+		private DelegateCommand _ToggleRowTextCommand;
+		public DelegateCommand ToggleRowTextCommand
+		{
+			get
+			{
+				return _ToggleRowTextCommand ?? (_ToggleRowTextCommand = new DelegateCommand(
+					o =>
+					{
+						
+						var ooo = o as TappedRoutedEventArgs;
+						if (ooo != null)
+							ooo.Handled = true;
+
+						if (RawTextVisibility == Visibility.Visible)
+						{
+							RawTextVisibility = Visibility.Collapsed;
+							ButtonChar = '';//E010
+						}
+						else
+						{
+							RawTextVisibility = Visibility.Visible;
+							ButtonChar = '';//E011
+						}
+					}, o => true)
+				);
 			}
 		}
 		#endregion

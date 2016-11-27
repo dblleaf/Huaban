@@ -2,14 +2,24 @@
 using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace Huaban.UWP.Services
 {
 	using Huaban.UWP.Controls;
 	using Base;
+	public class ButtonVisibilityChangedEventArgs : EventArgs
+	{
+		public Visibility Visibility { get; set; }
+		public ButtonVisibilityChangedEventArgs(Visibility visibility)
+		{
+			Visibility = visibility;
+		}
+	}
 	public class NavigationService
 	{
 		public event EventHandler<BackRequestedEventArgs> BackEvent;
+		public event EventHandler<ButtonVisibilityChangedEventArgs> ButtonVisibilityChanged;
 		private HBFrame HBFrame { get; set; }
 		private Frame Frame { get; set; }
 		private Context Context { get; set; }
@@ -20,7 +30,6 @@ namespace Huaban.UWP.Services
 
 		private void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
 		{
-
 			BackEvent?.Invoke(sender, e);
 			bool handled = e.Handled;
 
@@ -116,7 +125,8 @@ namespace Huaban.UWP.Services
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 			else
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-			Context.AppViewBackButtonVisibility = SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility;
+
+			ButtonVisibilityChanged?.Invoke(SystemNavigationManager.GetForCurrentView(), new ButtonVisibilityChangedEventArgs(CanGoBack ? Visibility.Visible : Visibility.Collapsed));
 		}
 		private Type GetPageType(string pageName)
 		{

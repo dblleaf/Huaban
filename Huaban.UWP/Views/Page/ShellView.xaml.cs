@@ -2,6 +2,7 @@
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.ApplicationModel.Core;
+using Windows.UI.Xaml;
 
 namespace Huaban.UWP.Views
 {
@@ -19,10 +20,15 @@ namespace Huaban.UWP.Views
 			{
 				InitLayout();
 			};
+			Window.Current.SizeChanged += (s, e) =>
+			{
+				InitLayout();
+			};
+
 			var navigationService = ServiceLocator.Resolve<NavigationService>();
 			if (navigationService != null)
 			{
-                navigationService.SetFrame(MainFrame, DetailFrame);
+				navigationService.SetFrame(MainFrame, DetailFrame);
 			}
 
 		}
@@ -30,9 +36,11 @@ namespace Huaban.UWP.Views
 
 		private void InitLayout()
 		{
-			if (!ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+			var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+			if (UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse)
 			{
-				var coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+				extendTitle.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
 				coreTitleBar.ExtendViewIntoTitleBar = true;
 
 				var titleBar = ApplicationView.GetForCurrentView().TitleBar;
@@ -49,6 +57,11 @@ namespace Huaban.UWP.Views
 				titleBar.ForegroundColor = Colors.White;
 				titleBar.InactiveBackgroundColor = Colors.Transparent;
 				titleBar.InactiveForegroundColor = Colors.White;
+			}
+			else
+			{
+				extendTitle.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
+				coreTitleBar.ExtendViewIntoTitleBar = false;
 			}
 		}
 	}

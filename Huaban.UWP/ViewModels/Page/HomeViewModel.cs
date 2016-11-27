@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
+using Windows.Foundation;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -23,6 +24,7 @@ namespace Huaban.UWP.ViewModels
 			PinListViewModel.TargetName = "HomePage";
 			CategoryList = Context.CategoryList;
 			SelecterVisibility = Visibility.Collapsed;
+			LeftHeaderVisibility = Visibility.Collapsed;
 		}
 
 		#region Properties
@@ -126,6 +128,11 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
+		public override Size ArrangeOverride(Size finalSize)
+		{
+			LeftHeaderVisibility = Visibility.Collapsed;
+			return finalSize;
+		}
 
 		public async override void Inited()
 		{

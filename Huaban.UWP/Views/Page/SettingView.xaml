@@ -30,9 +30,7 @@
 					</StackPanel>
 				</Grid>
 			</Button>
-			
-			
-			<Button Style="{StaticResource SettingButton}" Command="{Binding SelectePathCommand}">
+			<Button Style="{StaticResource SettingButton}" Command="{Binding SelectePathCommand}" Visibility="{Binding PCVisibility}">
 				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition/>
@@ -46,11 +44,11 @@
 				</Grid>
 				
 			</Button>
-			<Button Background="{StaticResource InkToolbarAccentColorThemeBrush}" RequestedTheme="Dark"
+			<Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark" Visibility="{Binding PCVisibility}"
 				Style="{StaticResource SettingButton}" Command="{Binding OpenPathCommand}" Content="打开下载目录"/>
-			<Button Background="{StaticResource InkToolbarAccentColorThemeBrush}" RequestedTheme="Dark"
+			<Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
 				Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="五星评价"/>
-			<Button Background="{StaticResource InkToolbarAccentColorThemeBrush}" RequestedTheme="Dark"
+			<Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
 				Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
 				Style="{StaticResource SettingButton}" Content="退出登录"
 				Command="{Binding LogoutCommand}"></Button>
