@@ -360,8 +360,8 @@
   <ProductReservedInfo>
     <MainPackageIdentityName>807song-zhaoli.UWP</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>9ef548 1e9660 爱花瓣UWP</ReservedName>
       <ReservedName>爱花瓣UWP</ReservedName>
+      <ReservedName>爱花瓣</ReservedName>
     </ReservedNames>
   </ProductReservedInfo>
   <AccountPackageIdentityNames>

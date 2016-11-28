@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="807song-zhaoli.UWP" Publisher="CN=v-zhaso" Version="1.2.37.0" />
+  <Identity Name="807song-zhaoli.UWP" Publisher="CN=5875BCA4-CAAB-47CB-8D31-34FF173FD4B5" Version="1.2.39.0" />
   <mp:PhoneIdentity PhoneProductId="59af9af8-78b2-423d-baa5-e30bac25ed17" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>爱花瓣UWP</DisplayName>
@@ -22,7 +22,7 @@
             <uap:ShowOn Tile="wide310x150Logo" />
           </uap:ShowNameOnTiles>
         </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="transparent" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#ec6e52" />
       </uap:VisualElements>
     </Application>
   </Applications>

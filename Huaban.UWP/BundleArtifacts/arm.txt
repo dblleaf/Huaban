@@ -1,3 +1,7 @@
-MainPackage=D:\Projects\UWP\Huaban\Huaban.UWP\bin\ARM\Debug\Huaban.UWP_1.2.37.0_ARM_Debug.appx
-SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.37.0_Debug_Test\Huaban.UWP_1.2.37.0_ARM_Debug.appxsym
-ResourcePack=D:\Projects\UWP\Huaban\Huaban.UWP\bin\ARM\Debug\Huaban.UWP_1.2.37.0_language-zh-hans.appx
+MainPackage=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.39.0_ARM.appx
+SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.39.0_Test\Huaban.UWP_1.2.39.0_ARM.appxsym
+ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.39.0_language-zh-hans.appx
+ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.39.0_scale-100.appx
+ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.39.0_scale-125.appx
+ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.39.0_scale-150.appx
+ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.39.0_scale-400.appx

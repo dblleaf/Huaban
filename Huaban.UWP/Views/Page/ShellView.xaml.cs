@@ -24,7 +24,6 @@ namespace Huaban.UWP.Views
 			{
 				InitLayout();
 			};
-
 			var navigationService = ServiceLocator.Resolve<NavigationService>();
 			if (navigationService != null)
 			{

@@ -68,7 +68,7 @@
 					<SplitView.Pane>
 						<Grid Background="{ThemeResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark">
 							<ListView Grid.Row="1" ItemsSource="{Binding NavList}"
-								Background="#55AAAAAA"
+								Background="#55AAAAAA" Padding="0 48 0 0"
 								Style="{StaticResource NavListStyle}"
 								ItemTemplate="{StaticResource NavigationListTemplate}">
 								<Interactivity:Interaction.Behaviors>
@@ -76,12 +76,7 @@
 										<Core:InvokeCommandAction Command="{Binding NavCommand}"></Core:InvokeCommandAction>
 									</Core:EventTriggerBehavior>
 								</Interactivity:Interaction.Behaviors>
-								<ListView.Header>
-									<ToggleButton x:Name="TogglePaneButton" Width="48" Height="48" 
-										HorizontalAlignment="Left"
-										IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
-										Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
-								</ListView.Header>
+								
 								<ListView.Footer>
 									<ListView ItemsSource="{Binding NavFootList}"
 										Style="{StaticResource NavListStyle}"
@@ -101,7 +96,10 @@
 						<Frame x:Name="MainFrame" RequestedTheme="{Binding Theme}"></Frame>
 					</SplitView.Content>
 				</HB:SwipeableSplitView>
-				
+				<ToggleButton x:Name="TogglePaneButton" Width="48" Height="48" 
+					HorizontalAlignment="Left" VerticalAlignment="Top" RequestedTheme="Dark"
+					IsChecked="{Binding IsSwipeablePaneOpen, ElementName=RootSplitView, Mode=TwoWay}"
+					Style="{StaticResource SplitViewTogglePaneButtonStyle}"></ToggleButton>
 			</Grid>
 			<HB:HBFrame x:Name="DetailFrame" Visibility="Collapsed"></HB:HBFrame>
 			<Grid Visibility="{Binding FirstBackVisibility}" RequestedTheme="Dark" Height="48" HorizontalAlignment="Center" Padding="24 12" Background="{ThemeResource SystemControlBackgroundAccentBrush}" CornerRadius="2">

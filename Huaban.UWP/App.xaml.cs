@@ -21,24 +21,36 @@ namespace Huaban.UWP
 		public App()
 		{
 			this.InitializeComponent();
-			this.InitLocator();
+			
 			this.Suspending += OnSuspending;
 		}
-		private void InitLocator()
-		{
-			ServiceLocator.BuildLocator();
-			
-            var config = new ImageConfig.Builder()
-                .LimitedStorageCache(ApplicationData.Current.LocalCacheFolder, "cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
-                .NewApi(false)
-                .AddDecoder<GifDecoder>()
-                .Build();
-            ImageLoader.Initialize(config);
-        }
 
 		//加载数据
 		private async Task LoadData()
 		{
+			ServiceLocator.BuildLocator();
+
+			var config = new ImageConfig.Builder()
+				.LimitedStorageCache(ApplicationData.Current.LocalCacheFolder, "cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
+				.NewApi(false)
+				.AddDecoder<GifDecoder>()
+				.Build();
+			ImageLoader.Initialize(config);
+
+			var context = ServiceLocator.Resolve<Context>();
+			var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
+			var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
+			if (token != null)
+			{
+				token = await ServiceLocator.Resolve<Api.OAuthorAPI>().RefreshToken(token);
+			}
+			context.User = user;
+
+			if (token != null && token.ExpiresIn > DateTime.Now)
+			{
+				await context.SetToken(token);
+			}
+
 			//var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
 			//var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
 			//if (token != null)
@@ -79,7 +91,7 @@ namespace Huaban.UWP
 				{
 					rootFrame.Navigate(typeof(Views.ShellView), e.Arguments);
 				}
-				
+
 				Window.Current.Activate();
 			}
 		}

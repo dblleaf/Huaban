@@ -193,24 +193,14 @@ namespace Huaban.UWP.ViewModels
 				{
 					try
 					{
-						var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));
-						var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
-						if (token != null)
-						{
-							token = await ServiceLocator.Resolve<Api.OAuthorAPI>().RefreshToken(token);
-						}
-						Context.User = user;
-
-						if (token != null && token.ExpiresIn > DateTime.Now)
-						{
-							await Context.SetToken(token);
-						}
-
 						DisplayTheme();
 
 						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_39")))
 						{
-							string msg = @"1.修复习惯性闪退的bug
+							string msg = @"这次更新比以往来的要晚些，让大家久等了，由于平时还要上班，只能下班或者周末抽时间来写，作者并没有停更，还有很多功能需要等着去开发。如果您有更好的建议或者意见请在“关于”中任意联系方式找到本人，谢谢您对此APP的大力支持！
+
+这次更新内容有：
+1.修复习惯性闪退的bug
 2.配色改为和系统设置一致
 3.PC端可以在“设置”中设置下载目录
 4.图片详情可以折叠显示图片文字说明";

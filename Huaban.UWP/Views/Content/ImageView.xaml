@@ -41,11 +41,7 @@
 						<RowDefinition Height="Auto"/>
 		
 					</Grid.RowDefinitions>
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="Tapped">
-							<Core:InvokeCommandAction Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem}"></Core:InvokeCommandAction>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
+					
 					<Grid Visibility="{Binding RawTextVisibility}">
 						<RichTextBlock Visibility="{Binding PinListViewModel.SelectedItem.raw_text,Converter={StaticResource ObjectToVisibilityConverter}}" Padding="12 6" Grid.Row="2" TextWrapping="Wrap">
 							<Paragraph>
@@ -54,7 +50,12 @@
 						</RichTextBlock>
 					</Grid>
 					<Grid Grid.Row="1">
-						<StackPanel  Orientation="Horizontal" Padding="0 6 0 0">
+						<Interactivity:Interaction.Behaviors>
+							<Core:EventTriggerBehavior EventName="Tapped">
+								<Core:InvokeCommandAction Command="{Binding ToPinDetailCommand}" CommandParameter="{Binding PinListViewModel.SelectedItem}"></Core:InvokeCommandAction>
+							</Core:EventTriggerBehavior>
+						</Interactivity:Interaction.Behaviors>
+						<StackPanel  Orientation="Horizontal" Padding="0 6 0 0" Background="Transparent">
 							<Border Margin="12 0 0 0" Padding="10 1" CornerRadius="12" BorderThickness="1" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
 								<TextBlock FontSize="12">
 								<Run Text="  " FontFamily="{StaticResource SymbolThemeFontFamily}"></Run>
@@ -71,7 +72,7 @@
 								<Run Text="{Binding PinListViewModel.SelectedItem.like_count}" FontSize="16"></Run></TextBlock>
 							</Border>
 						</StackPanel>
-						<Button Style="{StaticResource SettingButton}" Padding="3" Margin="0 0 16 0" Background="#55AAAAAA" FontFamily="{ThemeResource SymbolThemeFontFamily}" Content="{Binding ButtonChar}" x:Name="ToggleRowText" HorizontalAlignment="Right">
+						<Button Style="{StaticResource SettingButton}" Padding="12 3" Margin="0 0 12 0" Background="#55AAAAAA" FontFamily="{ThemeResource SymbolThemeFontFamily}" Content="{Binding ButtonChar}" x:Name="ToggleRowText" HorizontalAlignment="Right">
 							<Interactivity:Interaction.Behaviors>
 								<Core:EventTriggerBehavior EventName="Tapped">
 									<Core:InvokeCommandAction Command="{Binding ToggleRowTextCommand}"></Core:InvokeCommandAction>

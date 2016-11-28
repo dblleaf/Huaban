@@ -1,2 +1,2 @@
-MainPackage=D:\Projects\UWP\Huaban\Huaban.UWP\bin\x64\Debug\Huaban.UWP_1.2.37.0_x64_Debug.appx
-SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.37.0_Debug_Test\Huaban.UWP_1.2.37.0_x64_Debug.appxsym
+MainPackage=D:\projects\UWP\huaban-master\Huaban.UWP\bin\x64\Release\Huaban.UWP_1.2.39.0_x64.appx
+SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.39.0_Test\Huaban.UWP_1.2.39.0_x64.appxsym

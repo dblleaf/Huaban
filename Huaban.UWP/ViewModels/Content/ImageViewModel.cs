@@ -161,12 +161,19 @@ namespace Huaban.UWP.ViewModels
 							type = "gif";
 						else
 							type = "jpg";
+						try
+						{
+							var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
 
-						var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
+							await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img);
 
-						await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img);
+							Context.ShowTip("下载成功");
+						}
+						catch
+						{
+							Context.ShowTip("发生异常，请重新尝试此操作！");
+						}
 
-						Context.ShowTip("下载成功");
 					}, o => true)
 				);
 			}
@@ -394,7 +401,7 @@ namespace Huaban.UWP.ViewModels
 				return _ToggleRowTextCommand ?? (_ToggleRowTextCommand = new DelegateCommand(
 					o =>
 					{
-						
+
 						var ooo = o as TappedRoutedEventArgs;
 						if (ooo != null)
 							ooo.Handled = true;

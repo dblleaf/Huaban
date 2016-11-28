@@ -128,12 +128,6 @@ namespace Huaban.UWP.ViewModels
 
 		#region Methods
 
-		public override Size ArrangeOverride(Size finalSize)
-		{
-			LeftHeaderVisibility = Visibility.Collapsed;
-			return finalSize;
-		}
-
 		public async override void Inited()
 		{
 			base.Inited();
