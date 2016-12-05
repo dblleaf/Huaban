@@ -40,10 +40,7 @@ namespace Huaban.UWP.Models
 
 		private Setting()
 		{
-			Task.Factory.StartNew(async() =>
-			{
-				await LoadData();
-			});
+			LoadData();
 
 			this.PropertyChanged += Setting_PropertyChanged;
 		}
@@ -87,7 +84,7 @@ namespace Huaban.UWP.Models
 				{
 					SavePath = await StorageFolder.GetFolderFromPathAsync(savePath);
 				}
-				catch(Exception ex)
+				catch (Exception ex)
 				{
 					SavePath = await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
 				}

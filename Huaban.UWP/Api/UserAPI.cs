@@ -82,7 +82,7 @@ namespace Huaban.UWP.Api
 		{
 			if (page <= 0)
 				page = 1;
-			string uri = $"{Client.API_USER}following/boards/?page={page}&per_page=20&wfl=1";
+			string uri = $"{Client.API_MAIN}{userID}/following/boards/?page={page}&per_page=20&wfl=1";
 			string json = await Get(uri);
 			JObject obj = JObject.Parse(json);
 			var list = Board.ParseList(obj["boards"] as JArray);

@@ -169,7 +169,7 @@ namespace Huaban.UWP.ViewModels
 
 							Context.ShowTip("下载成功");
 						}
-						catch
+						catch(Exception ex)
 						{
 							Context.ShowTip("发生异常，请重新尝试此操作！");
 						}
