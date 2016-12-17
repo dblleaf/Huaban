@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -9,18 +10,16 @@ namespace Huaban.UWP.ViewModels
 	using Api;
 	public class MessageViewModel : HBViewModel
 	{
-		private CategoryAPI CategoryAPI { set; get; }
-
-		public MessageViewModel(Context context, CategoryAPI categoryAPI)
+		public MessageViewModel(Context context)
 			: base(context)
 		{
-			CategoryAPI = categoryAPI;
 			Title = "消息";
 			PinListVM = new PinListViewModel(context, GetData);
 		}
 
 		#region Properties
-
+		[Dependency]
+		public CategoryAPI CategoryAPI { set; get; }
 		public PinListViewModel PinListVM { get; set; }
 
 		#endregion

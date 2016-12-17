@@ -6,9 +6,6 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using Windows.Storage;
-using ImageLib;
-using ImageLib.Cache.Storage;
-using ImageLib.Gif;
 
 namespace Huaban.UWP
 {
@@ -29,13 +26,6 @@ namespace Huaban.UWP
 		private async Task LoadData()
 		{
 			ServiceLocator.BuildLocator();
-
-			var config = new ImageConfig.Builder()
-				.LimitedStorageCache(ApplicationData.Current.LocalCacheFolder, "cache", new SHA1CacheGenerator(), 1024 * 1024 * 1024)
-				.NewApi(false)
-				.AddDecoder<GifDecoder>()
-				.Build();
-			ImageLoader.Initialize(config);
 
 			var context = ServiceLocator.Resolve<Context>();
 			var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));

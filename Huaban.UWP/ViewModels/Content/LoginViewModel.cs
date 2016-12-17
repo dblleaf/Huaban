@@ -184,13 +184,18 @@ namespace Huaban.UWP.ViewModels
 						var args = o as NotifyEventArgs;
 						string href = args?.Value;
 
-
-						if (href?.IndexOf("assets/test.html#", StringComparison.CurrentCultureIgnoreCase) > 0)
+						try
 						{
-							var token = AuthToken.Parse(href, true);
-							await SetToken(token);
+							if (href?.IndexOf("assets/test.html#", StringComparison.CurrentCultureIgnoreCase) > 0)
+							{
+								var token = AuthToken.Parse(href, true);
+								await SetToken(token);
+							}
 						}
+						catch (Exception ex)
+						{
 
+						}
 					},
 					o => true)
 				);

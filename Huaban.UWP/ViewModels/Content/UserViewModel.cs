@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -10,11 +11,9 @@ namespace Huaban.UWP.ViewModels
 	using Api;
 	public class UserViewModel : HBViewModel
 	{
-		private UserAPI UserApi { set; get; }
-		public UserViewModel(Context context, UserAPI userApi)
+		public UserViewModel(Context context)
 			: base(context)
 		{
-			UserApi = userApi;
 			MyPinListViewModel = new PinListViewModel(context, GetPinList);
 			LikePinListViewModel = new PinListViewModel(context, GetLikePinList);
 			BoardListViewModel = new BoardListViewModel(context, GetBoardList);
@@ -24,6 +23,8 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		#region Properties
+		[Dependency]
+		public UserAPI UserApi { set; get; }
 
 		private User _User;
 		public User User

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.Foundation;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -14,11 +15,9 @@ namespace Huaban.UWP.ViewModels
 	public class HomeViewModel : HBViewModel
 	{
 
-		public HomeViewModel(Context context, CategoryAPI categoryApi, PinAPI pinApi)
+		public HomeViewModel(Context context)
 			: base(context)
 		{
-			CategoryApi = categoryApi;
-			PinApi = pinApi;
 			Title = "发现";
 			PinListViewModel = new PinListViewModel(context, GetData);
 			PinListViewModel.TargetName = "HomePage";
@@ -28,8 +27,10 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		#region Properties
-		private CategoryAPI CategoryApi { get; set; }
-		private PinAPI PinApi { get; set; }
+		[Dependency]
+		public CategoryAPI CategoryApi { get; set; }
+		[Dependency]
+		public PinAPI PinApi { get; set; }
 
 		private Category _CurrentCategory;
 		public Category CurrentCategory
@@ -78,7 +79,15 @@ namespace Huaban.UWP.ViewModels
 				return _ChangeCategoryCommand ?? (_ChangeCategoryCommand = new DelegateCommand(
 					async (Object obj) =>
 					{
-						await PinListViewModel.ClearAndReload();
+						try
+						{
+							await PinListViewModel.ClearAndReload();
+						}
+						catch (Exception ex)
+						{
+
+						}
+
 					},
 					(Object obj) => true)
 				);
@@ -119,7 +128,15 @@ namespace Huaban.UWP.ViewModels
 				return _ToSearchCommand ?? (_ToSearchCommand = new DelegateCommand(
 				o =>
 				{
-					NavigationService.NavigateTo("Search", null, "Search");
+					try
+					{
+						NavigationService.NavigateTo("Search", null, "Search");
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}

@@ -32,12 +32,12 @@ namespace Huaban.UWP.Services
 			Container.RegisterInstance(context);
 			Container.RegisterInstance(context.NavigationService);
 			Container.RegisterInstance<IClient>(client);
-			
-			Container.RegisterType<BoardAPI>();
-			Container.RegisterType<CategoryAPI>();
-			Container.RegisterType<OAuthorAPI>();
-			Container.RegisterType<PinAPI>();
-			Container.RegisterType<UserAPI>();
+
+			Container.RegisterType<BoardAPI, BoardAPI>();
+			Container.RegisterType<CategoryAPI, CategoryAPI>();
+			Container.RegisterType<OAuthorAPI, OAuthorAPI>();
+			Container.RegisterType<PinAPI, PinAPI>();
+			Container.RegisterType<UserAPI, UserAPI>();
 		}
 		public static ServiceLocator BuildLocator()
 		{

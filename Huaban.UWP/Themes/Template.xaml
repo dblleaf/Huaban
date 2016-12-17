@@ -41,30 +41,7 @@
 			</RichTextBlock>
 		</StackPanel>
 	</DataTemplate>
-	<!--瀑布流列表-->
-	<DataTemplate x:Key="ImageGridTemplate">
-		<Grid Height="{Binding}">
-		
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition Height="Auto"></RowDefinition>
-			</Grid.RowDefinitions>
-			<Grid MaxHeight="500">
-				<Grid Visibility="{Binding Path=IsLoaded,Converter={StaticResource ReverseVisbilityConverter}}" 
-					Width="{Binding Width}" Height="{Binding Height}" 
-					Background="{Binding Converter={StaticResource ColorConverter}}"></Grid>
-				<Image HorizontalAlignment="Stretch" Source="{Binding file.FW236}" VerticalAlignment="Top" x:Name="img">
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="ImageOpened">
-							<Core:InvokeCommandAction Command="{StaticResource PinImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
-				</Image>
-			</Grid>
-			
-			<TextBlock TextWrapping="Wrap" FontSize="13" LineHeight="18" MaxHeight="36" Visibility="{Binding Path=raw_text,Converter={StaticResource ObjectToVisibilityConverter}}" Grid.Row="1" Margin="6" Text="{Binding raw_text}" HorizontalAlignment="Left"/>
-		</Grid>
-	</DataTemplate>
+	
 	<!--画板列表-->
 	<DataTemplate x:Key="BoardGridTemplate">
 		<Grid x:Name="itemGrid" Width="{Binding ElementName=gridView,Path=PinWidth}" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" CornerRadius="2" VerticalAlignment="Stretch">

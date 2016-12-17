@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -13,11 +14,10 @@ namespace Huaban.UWP.ViewModels
 	using Services;
 	public class SearchViewModel : HBViewModel
 	{
-		private PinAPI PinApi { get; set; }
-		public SearchViewModel(Context context, PinAPI pinApi)
+
+		public SearchViewModel(Context context)
 			: base(context)
 		{
-			PinApi = pinApi;
 			LeftHeaderVisibility = Windows.UI.Xaml.Visibility.Collapsed;
 			PinListViewModel = new PinListViewModel(context, GetData);
 			KeyWord = "";
@@ -25,7 +25,8 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		#region Properties
-
+		[Dependency]
+		public PinAPI PinApi { get; set; }
 		public PinListViewModel PinListViewModel { set; get; }
 
 		private string KeyWord { set; get; }
@@ -42,12 +43,20 @@ namespace Huaban.UWP.ViewModels
 				return _QueryCommand ?? (_QueryCommand = new DelegateCommand(
 				async o =>
 				{
-					var e = o as AutoSuggestBoxQuerySubmittedEventArgs;
-					if (string.IsNullOrEmpty(e?.QueryText))
-						return;
-					KeyWord = e.QueryText;
+					try
+					{
+						var e = o as AutoSuggestBoxQuerySubmittedEventArgs;
+						if (string.IsNullOrEmpty(e?.QueryText))
+							return;
+						KeyWord = e.QueryText;
 
-					await PinListViewModel.ClearAndReload();
+						await PinListViewModel.ClearAndReload();
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}

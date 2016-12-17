@@ -8,6 +8,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml.Input;
 using Windows.ApplicationModel.DataTransfer;
 using System.Threading;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -19,13 +20,11 @@ namespace Huaban.UWP.ViewModels
 	using Services;
 	public class ImageViewModel : HBViewModel
 	{
-		public ImageViewModel(Context context, PinAPI pinApi, BoardAPI boardApi)
+		public ImageViewModel(Context context)
 			: base(context)
 		{
 			SelecterVisibility = Visibility.Collapsed;
 			CurrentBoardIndex = -1;
-			PinAPI = pinApi;
-			BoardAPI = boardApi;
 			RawTextVisibility = Visibility.Visible;
 			ButtonChar = '';
 			QuickBoardChanged += (s, e) =>
@@ -36,8 +35,10 @@ namespace Huaban.UWP.ViewModels
 		}
 
 		#region Properties
-		private PinAPI PinAPI { get; set; }
-		private BoardAPI BoardAPI { get; set; }
+		[Dependency]
+		public PinAPI PinAPI { get; set; }
+		[Dependency]
+		public BoardAPI BoardAPI { get; set; }
 
 		public IncrementalLoadingList<Board> BoardList { get { return Context.BoardListVM?.BoardList; } }
 
@@ -51,13 +52,6 @@ namespace Huaban.UWP.ViewModels
 		public Pin Pin
 		{
 			get { return PinListViewModel.SelectedItem; }
-		}
-
-		private bool _ImageLoaded;
-		public bool ImageLoaded
-		{
-			get { return _ImageLoaded; }
-			set { SetValue(ref _ImageLoaded, value); }
 		}
 
 		private IconElement _Icon = new FontIcon() { Glyph = "" };
@@ -163,13 +157,13 @@ namespace Huaban.UWP.ViewModels
 							type = "jpg";
 						try
 						{
-							var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
+							//var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
 
-							await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img);
+							//await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img);
 
 							Context.ShowTip("下载成功");
 						}
-						catch(Exception ex)
+						catch (Exception ex)
 						{
 							Context.ShowTip("发生异常，请重新尝试此操作！");
 						}
@@ -188,56 +182,19 @@ namespace Huaban.UWP.ViewModels
 				return _LikeCommand ?? (_LikeCommand = new DelegateCommand(
 					async o =>
 					{
-						string str = await PinAPI.Like(Pin.pin_id, !Pin.liked);
+						try
+						{
+							string str = await PinAPI.Like(Pin.pin_id, !Pin.liked);
 
-						Liked = (str != "{}");
+							Liked = (str != "{}");
 
-						Context.ShowTip(Liked ? "已设置为喜欢" : "已取消喜欢");
-					}, o => true)
-				);
-			}
-		}
+							Context.ShowTip(Liked ? "已设置为喜欢" : "已取消喜欢");
+						}
+						catch (Exception ex)
+						{
 
-		//返回主界面
-		private DelegateCommand _HideCommand;
-		public DelegateCommand HideCommand
-		{
-			get
-			{
-				return _HideCommand ?? (_HideCommand = new DelegateCommand(
-					obj =>
-					{
-						NavigationService.GoBack();
-					}, o => true)
-				);
-			}
-		}
+						}
 
-		private DelegateCommand _LoadingStartedCommand;
-		public DelegateCommand LoadingStartedCommand
-		{
-			get
-			{
-				return _LoadingStartedCommand ?? (_LoadingStartedCommand = new DelegateCommand(
-					o =>
-					{
-						IsLoading = true;
-						ImageLoaded = true;
-					}, o => true)
-				);
-			}
-		}
-		//图片加载完毕
-		private DelegateCommand _LoadedCommand;
-		public DelegateCommand LoadedCommand
-		{
-			get
-			{
-				return _LoadedCommand ?? (_LoadedCommand = new DelegateCommand(
-					o =>
-					{
-						IsLoading = false;
-						ImageLoaded = true;
 					}, o => true)
 				);
 			}
@@ -280,19 +237,27 @@ namespace Huaban.UWP.ViewModels
 				return _SelectBoardCommand ?? (_SelectBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					var args = o as ItemClickEventArgs;
-					var item = o as Board;
-					if (args == null && item == null)
-						return;
+					try
+					{
+						var args = o as ItemClickEventArgs;
+						var item = o as Board;
+						if (args == null && item == null)
+							return;
 
-					if (args != null)
-						item = args.ClickedItem as Board;
+						if (args != null)
+							item = args.ClickedItem as Board;
 
-					var pin = await PinAPI.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
-					if (item.cover == null)
-						item.cover = pin;
-					Context.ShowTip($"采集到了画板：{item.title}");
-					QuickBoard = item;
+						var pin = await PinAPI.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
+						if (item.cover == null)
+							item.cover = pin;
+						Context.ShowTip($"采集到了画板：{item.title}");
+						QuickBoard = item;
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}
@@ -305,22 +270,30 @@ namespace Huaban.UWP.ViewModels
 				return _NewBoardCommand ?? (_NewBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					if (string.IsNullOrEmpty(NewBoardName))
-						return;
-					string boardName = NewBoardName;
-					NewBoardName = "";
-					var board = await BoardAPI.add(boardName);
-
-					if (board != null)
+					try
 					{
-						var list = Context.BoardListVM.BoardList;
-						list.Add(board);
-						var pin = await PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
-						board.pins.Add(pin);
-						board.cover = pin;
-						Context.ShowTip($"采集到了画板：{board.title}");
-						QuickBoard = board;
+						if (string.IsNullOrEmpty(NewBoardName))
+							return;
+						string boardName = NewBoardName;
+						NewBoardName = "";
+						var board = await BoardAPI.add(boardName);
+
+						if (board != null)
+						{
+							var list = Context.BoardListVM.BoardList;
+							list.Add(board);
+							var pin = await PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
+							board.pins.Add(pin);
+							board.cover = pin;
+							Context.ShowTip($"采集到了画板：{board.title}");
+							QuickBoard = board;
+						}
 					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}
@@ -333,14 +306,21 @@ namespace Huaban.UWP.ViewModels
 				return _BoardKeyDownCommand ?? (_BoardKeyDownCommand = new DelegateCommand(
 				o =>
 				{
-					var e = o as KeyRoutedEventArgs;
-
-					if (e?.Key == Windows.System.VirtualKey.Enter)
+					try
 					{
-						var txt = e.OriginalSource as TextBox;
-						NewBoardName = txt.Text;
-						NewBoardCommand.Execute(e.OriginalSource);
-						SelecterVisibility = Visibility.Collapsed;
+						var e = o as KeyRoutedEventArgs;
+
+						if (e?.Key == Windows.System.VirtualKey.Enter)
+						{
+							var txt = e.OriginalSource as TextBox;
+							NewBoardName = txt.Text;
+							NewBoardCommand.Execute(e.OriginalSource);
+							SelecterVisibility = Visibility.Collapsed;
+						}
+					}
+					catch (Exception ex)
+					{
+
 					}
 
 				}, o => true));
@@ -401,21 +381,28 @@ namespace Huaban.UWP.ViewModels
 				return _ToggleRowTextCommand ?? (_ToggleRowTextCommand = new DelegateCommand(
 					o =>
 					{
-
-						var ooo = o as TappedRoutedEventArgs;
-						if (ooo != null)
-							ooo.Handled = true;
-
-						if (RawTextVisibility == Visibility.Visible)
+						try
 						{
-							RawTextVisibility = Visibility.Collapsed;
-							ButtonChar = '';//E010
+							var ooo = o as TappedRoutedEventArgs;
+							if (ooo != null)
+								ooo.Handled = true;
+
+							if (RawTextVisibility == Visibility.Visible)
+							{
+								RawTextVisibility = Visibility.Collapsed;
+								ButtonChar = '';//E010
+							}
+							else
+							{
+								RawTextVisibility = Visibility.Visible;
+								ButtonChar = '';//E011
+							}
 						}
-						else
+						catch (Exception ex)
 						{
-							RawTextVisibility = Visibility.Visible;
-							ButtonChar = '';//E011
+
 						}
+
 					}, o => true)
 				);
 			}

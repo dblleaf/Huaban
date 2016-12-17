@@ -7,6 +7,16 @@
 *.userosscache
 *.sln.docstates
 
+# UWP fuck files
+_language-zh-hans.appx
+_pkginfo.txt
+_scale-100.appx
+_scale-125.appx
+_scale-150.appx
+_scale-400.appx
+
+
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 

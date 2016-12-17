@@ -1,5 +1,5 @@
-MainPackage=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Upload\Huaban.UWP_1.2.39.0_ARM.appx
-SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.39.0\Huaban.UWP_1.2.39.0_ARM.appxsym
+MainPackage=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Upload\Huaban.UWP_1.2.42.0_ARM.appx
+SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.42.0\Huaban.UWP_1.2.42.0_ARM.appxsym
 ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\_language-zh-hans.appx
 ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\_scale-100.appx
 ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\_scale-125.appx

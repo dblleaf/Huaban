@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using Windows.UI.Xaml;
 using Windows.Foundation;
 using Windows.UI.Popups;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -16,17 +17,19 @@ namespace Huaban.UWP.ViewModels
 	using Services;
 	public class BoardDetailViewModel : HBViewModel
 	{
-		private BoardAPI BoardAPI { get; set; }
-		public BoardDetailViewModel(Context context, BoardAPI boardApi)
+		public BoardDetailViewModel(Context context)
 			: base(context)
 		{
 			LeftHeaderVisibility = Visibility.Collapsed;
 			Title = "编辑画板";
 			CategoryList = Context.Categories;
-			BoardAPI = boardApi;
 		}
 
 		#region Properties
+
+		[Dependency]
+		public BoardAPI BoardAPI { get; set; }
+
 		public ObservableCollection<Category> CategoryList { get; private set; }
 		private Board _Board;
 		public Board Board
@@ -55,23 +58,28 @@ namespace Huaban.UWP.ViewModels
 				return _DeleteBoardCommand ?? (_DeleteBoardCommand = new DelegateCommand(
 				async o =>
 				{
-
-					var dialog = new MessageDialog("确定要删除这个画板吗？删除后这个画板内的所有采集都会被删除。", "提示");
-					UICommand yes = new UICommand("删除", async c =>
+					try
 					{
-						await BoardAPI.delete(Board);//远程服务器删除
-						Context.ShowTip("删除成功！");
+						var dialog = new MessageDialog("确定要删除这个画板吗？删除后这个画板内的所有采集都会被删除。", "提示");
+						UICommand yes = new UICommand("删除", async c =>
+						{
+							await BoardAPI.delete(Board);//远程服务器删除
+							Context.ShowTip("删除成功！");
 
-						Context.BoardListVM.BoardList.Remove(Board);//从自己的画板列表中删除
-						NavigationService.GoBack();
+							Context.BoardListVM.BoardList.Remove(Board);//从自己的画板列表中删除
+							NavigationService.GoBack();
 
-					});
-					UICommand no = new UICommand("取消");
-					dialog.Commands.Add(yes);
-					dialog.Commands.Add(no);
+						});
+						UICommand no = new UICommand("取消");
+						dialog.Commands.Add(yes);
+						dialog.Commands.Add(no);
 
-					await dialog.ShowAsync();
+						await dialog.ShowAsync();
+					}
+					catch (Exception ex)
+					{
 
+					}
 				}, o => true));
 			}
 		}
@@ -84,11 +92,19 @@ namespace Huaban.UWP.ViewModels
 				return _UpdateBoardCommand ?? (_UpdateBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					Board.category_id = CurrentCategory?.id;
+					try
+					{
+						Board.category_id = CurrentCategory?.id;
 
-					await BoardAPI.edit(Board);
+						await BoardAPI.edit(Board);
 
-					Context.ShowTip("编辑成功！");
+						Context.ShowTip("编辑成功！");
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}

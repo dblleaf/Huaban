@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.Foundation;
 using Windows.ApplicationModel.DataTransfer;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -14,19 +15,20 @@ namespace Huaban.UWP.ViewModels
 	using Api;
 	public class BoardPinsViewModel : HBViewModel
 	{
-		private BoardAPI BoardAPI { set; get; }
-		private PinAPI PinAPI { set; get; }
-		public BoardPinsViewModel(Context context, BoardAPI boardAPI, PinAPI pinApi)
+
+		public BoardPinsViewModel(Context context)
 			: base(context)
 		{
-			BoardAPI = boardAPI;
-			PinAPI = pinApi;
 			PinListViewModel = new PinListViewModel(context, GetData);
 			Title = "画板";
 			LeftHeaderVisibility = Visibility.Collapsed;
 		}
 
 		#region Properties
+		[Dependency]
+		public BoardAPI BoardAPI { set; get; }
+		[Dependency]
+		public PinAPI PinAPI { set; get; }
 
 		public PinListViewModel PinListViewModel { set; get; }
 
@@ -68,12 +70,20 @@ namespace Huaban.UWP.ViewModels
 				return _FollowBoardCommand ?? (_FollowBoardCommand = new DelegateCommand(
 				async o =>
 				{
-					string str = await BoardAPI.follow(CurrentBoard.board_id, !CurrentBoard.following);
+					try
+					{
+						string str = await BoardAPI.follow(CurrentBoard.board_id, !CurrentBoard.following);
 
-					CurrentBoard.following = (str != "{}");
+						CurrentBoard.following = (str != "{}");
 
-					SetVisibility();
-					Context.ShowTip(CurrentBoard.following ? "关注成功" : "已取消关注");
+						SetVisibility();
+						Context.ShowTip(CurrentBoard.following ? "关注成功" : "已取消关注");
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}
@@ -87,11 +97,19 @@ namespace Huaban.UWP.ViewModels
 				return _CopyLinkCommmand ?? (_CopyLinkCommmand = new DelegateCommand(
 				o =>
 				{
-					DataPackage dp = new DataPackage();
-					dp.SetText($"http://huaban.com/boards/{CurrentBoard.board_id}");
-					Clipboard.SetContent(dp);
+					try
+					{
+						DataPackage dp = new DataPackage();
+						dp.SetText($"http://huaban.com/boards/{CurrentBoard.board_id}");
+						Clipboard.SetContent(dp);
 
-					Context.ShowTip("地址已复制到剪贴板！");
+						Context.ShowTip("地址已复制到剪贴板！");
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}

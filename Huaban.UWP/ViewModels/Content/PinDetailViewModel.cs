@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -11,16 +12,18 @@ namespace Huaban.UWP.ViewModels
 	using Api;
 	public class PinDetailViewModel : HBViewModel
 	{
-		private PinAPI PinApi { set; get; }
-		public PinDetailViewModel(Context context, PinAPI pinApi)
+		
+		public PinDetailViewModel(Context context)
 			: base(context)
 		{
-			PinApi = pinApi;
 			BoardListViewModel = new BoardListViewModel(context, GetBoardList);
 			UserListViewModel = new UserListViewModel(context, GetLikeList);
 			RecommendListViewModel = new PinListViewModel(context, GetRecommendList);
 		}
 		#region Properties
+		[Dependency]
+		public PinAPI PinApi { set; get; }
+
 		public PinListViewModel RecommendListViewModel { set; get; }
 
 		public BoardListViewModel BoardListViewModel { set; get; }

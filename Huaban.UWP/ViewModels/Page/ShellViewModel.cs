@@ -25,7 +25,7 @@ namespace Huaban.UWP.ViewModels
 
 			Context.PropertyChanged += Context_PropertyChanged;
 			NavigationService.ButtonVisibilityChanged += NavigationService_ButtonVisibilityChanged;
-			
+
 			FirstBackVisibility = Visibility.Collapsed;
 			Setting.Current.PropertyChanged += (s, e) =>
 			{
@@ -145,23 +145,31 @@ namespace Huaban.UWP.ViewModels
 
 						if (args != null)
 							item = args.ClickedItem as NavItemModel;
-						if (string.IsNullOrEmpty(item.DestinationPage))
+						try
 						{
-							ChangeTheme();
-							return;
-						}
-						if (item.Authorization && !Context.IsLogin)
-						{
-							LoginViewModel login = new LoginViewModel(Context, token =>
+							if (string.IsNullOrEmpty(item.DestinationPage))
 							{
-								NotifyPropertyChanged("User");
-								UserItem.Special = true;
+								ChangeTheme();
+								return;
+							}
+							if (item.Authorization && !Context.IsLogin)
+							{
+								LoginViewModel login = new LoginViewModel(Context, token =>
+								{
+									NotifyPropertyChanged("User");
+									UserItem.Special = true;
+									NavigationService.MenuNavigateTo(item.DestinationPage);
+								});
+								login.Show();
+							}
+							else
 								NavigationService.MenuNavigateTo(item.DestinationPage);
-							});
-							login.Show();
 						}
-						else
-							NavigationService.MenuNavigateTo(item.DestinationPage);
+						catch (Exception ex)
+						{
+
+						}
+
 					},
 					o => !IsLoading)
 				);

@@ -1,4 +1,5 @@
-﻿namespace Huaban.UWP.ViewModels
+﻿using System;
+namespace Huaban.UWP.ViewModels
 {
 	using Base;
 	using Controls;
@@ -20,14 +21,22 @@
 				return _LoadedCommand ?? (_LoadedCommand = new DelegateCommand(
 				o =>
 				{
-					var vm = o as UserViewModel;
-
-					vm?.OnNavigatedTo(new HBNavigationEventArgs()
+					try
 					{
-						NavigationMode = Windows.UI.Xaml.Navigation.NavigationMode.New,
-						Parameter = Context.User
-					});
-					_UserViewModel = vm;
+						var vm = o as UserViewModel;
+
+						vm?.OnNavigatedTo(new HBNavigationEventArgs()
+						{
+							NavigationMode = Windows.UI.Xaml.Navigation.NavigationMode.New,
+							Parameter = Context.User
+						});
+						_UserViewModel = vm;
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}

@@ -16,9 +16,8 @@
 			<converters:OwnerVisiblityConverter x:Key="OwnerVisiblityConverter"/>
 			<converters:LoginVisiblityConverter x:Key="LoginVisiblityConverter"/>
 			<converters:LikeColorConverter x:Key="LikeColorConverter"/>
-            <commands:PinSImageLoadCommand x:Key="PinSImageLoadCommand"/>
+			<commands:PinSImageLoadCommand x:Key="PinSImageLoadCommand"/>
 			<commands:PinImageLoadCommand x:Key="PinImageLoadCommand"/>
-			<commands:PinImageLoadingCommand x:Key="PinImageLoadingCommand"/>
 			<commands:FollowBoardCommand x:Key="FollowBoardCommand"/>
 			<commands:ToBoardPinsCommand x:Key="ToBoardPinsCommand"/>
 			<commands:ToBoardDetailCommand x:Key="ToBoardDetailCommand"/>

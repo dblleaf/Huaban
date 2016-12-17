@@ -79,18 +79,26 @@ namespace Huaban.UWP.ViewModels
 				return _ClearCacheCommand ?? (_ClearCacheCommand = new DelegateCommand(
 					async o =>
 					{
-						IsLoading = true;
-						ClearCacheCommand.RaiseCanExecuteChanged();
-						CacheSize = "清理中...";
-						await Task.Delay(1500);
-						await StorageHelper.ClearCache();
+						try
+						{
+							IsLoading = true;
+							ClearCacheCommand.RaiseCanExecuteChanged();
+							CacheSize = "清理中...";
+							await Task.Delay(1500);
+							await StorageHelper.ClearCache();
 
-						await Task.Delay(500);
+							await Task.Delay(500);
 
-						CacheSize = GetFormatSize(await StorageHelper.GetCacheFolderSize());
-						IsLoading = false;
-						ClearCacheCommand.RaiseCanExecuteChanged();
-						Context.ShowTip("清理完成");
+							CacheSize = GetFormatSize(await StorageHelper.GetCacheFolderSize());
+							IsLoading = false;
+							ClearCacheCommand.RaiseCanExecuteChanged();
+							Context.ShowTip("清理完成");
+						}
+						catch (Exception ex)
+						{
+
+						}
+
 					},
 					o => !IsLoading)
 				);
@@ -105,9 +113,17 @@ namespace Huaban.UWP.ViewModels
 				return _LogoutCommand ?? (_LogoutCommand = new DelegateCommand(
 					async o =>
 					{
-						await Context.ClearToken();
-						Context.ShowTip("已经退出");
-						LogoutCommand.RaiseCanExecuteChanged();
+						try
+						{
+							await Context.ClearToken();
+							Context.ShowTip("已经退出");
+							LogoutCommand.RaiseCanExecuteChanged();
+						}
+						catch (Exception ex)
+						{
+
+						}
+
 					},
 					o => Context.IsLogin)
 				);
@@ -121,18 +137,25 @@ namespace Huaban.UWP.ViewModels
 			{
 				return _SelectePathCommand ?? (_SelectePathCommand = new DelegateCommand(async o =>
 				{
-					FolderPicker fp = new FolderPicker();
-					fp.FileTypeFilter.Add(".jpg");
-					fp.ViewMode = PickerViewMode.List;
-					fp.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-					var folder = await fp.PickSingleFolderAsync();
-
-					if (folder != null)
+					try
 					{
-						StorageApplicationPermissions.FutureAccessList.Add(folder);
-						this.Setting.SavePath = folder;
+						FolderPicker fp = new FolderPicker();
+						fp.FileTypeFilter.Add(".jpg");
+						fp.ViewMode = PickerViewMode.List;
+						fp.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+						var folder = await fp.PickSingleFolderAsync();
+
+						if (folder != null)
+						{
+							StorageApplicationPermissions.FutureAccessList.Add(folder);
+							this.Setting.SavePath = folder;
+						}
 					}
-					//await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huaban.com/pins/{Pin?.pin_id}"));
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}
@@ -144,7 +167,15 @@ namespace Huaban.UWP.ViewModels
 			{
 				return _OpenPathCommand ?? (_OpenPathCommand = new DelegateCommand(async o =>
 				{
-					await Windows.System.Launcher.LaunchFolderAsync(Setting.SavePath);
+					try
+					{
+						await Windows.System.Launcher.LaunchFolderAsync(Setting.SavePath);
+					}
+					catch (Exception ex)
+					{
+
+					}
+
 				}, o => true));
 			}
 		}
