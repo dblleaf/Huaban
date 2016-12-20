@@ -3,6 +3,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
+using Windows.UI;
+
 namespace Huaban.UWP.Views
 {
 	using Controls;
@@ -13,6 +15,7 @@ namespace Huaban.UWP.Views
 		public ImageView()
 		{
 			this.InitializeComponent();
+			
 		}
 		public HBViewModel HBVM
 		{

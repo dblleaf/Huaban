@@ -8,7 +8,7 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	
+	Margin="{Binding Margin}"
 	xmlns:commands="using:Huaban.UWP.Commands"
     mc:Ignorable="d">
 	<Grid x:Name="rootGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

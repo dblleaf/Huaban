@@ -93,16 +93,16 @@ namespace Huaban.UWP
 			return "";
 		}
 
-		public static async Task SaveImage(byte[] bytes, string fileName, string folderName = "")
+		public static async Task SaveImage(byte[] bytes, string fileName)
 		{
-			var folder = KnownFolders.PicturesLibrary;
-			StorageFolder saveFolder = folder;
-			if (!string.IsNullOrEmpty(folderName))
+			StorageFolder saveFolder = Models.Setting.Current.SavePath;
+			try
 			{
-				saveFolder = await folder.CreateFolderAsync(folderName, CreationCollisionOption.OpenIfExists);
+				var file = await saveFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+				await FileIO.WriteBytesAsync(file, bytes);
 			}
-			var file = await saveFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
-			await FileIO.WriteBytesAsync(file, bytes);
+			catch { }
+			
 		}
 
 		public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream)

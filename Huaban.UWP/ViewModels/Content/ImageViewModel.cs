@@ -9,6 +9,8 @@ using Windows.UI.Xaml.Input;
 using Windows.ApplicationModel.DataTransfer;
 using System.Threading;
 using Microsoft.Practices.Unity;
+using Windows.Foundation.Metadata;
+using Windows.UI.ViewManagement;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -27,6 +29,23 @@ namespace Huaban.UWP.ViewModels
 			CurrentBoardIndex = -1;
 			RawTextVisibility = Visibility.Visible;
 			ButtonChar = '';
+
+			double marginTop = 0;
+			if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewTitleBar"))
+			{
+				marginTop = -32;
+				if (!Setting.Current.DarkMode)
+				{
+					
+					
+				}
+				else
+				{
+					ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.White;
+				}
+			}
+			Margin = new Thickness(0, marginTop, 0, 0);
+
 			QuickBoardChanged += (s, e) =>
 			{
 				InitQuickBoard();
@@ -39,6 +58,13 @@ namespace Huaban.UWP.ViewModels
 		public PinAPI PinAPI { get; set; }
 		[Dependency]
 		public BoardAPI BoardAPI { get; set; }
+
+		private Thickness _Margin;
+		public Thickness Margin
+		{
+			get { return _Margin; }
+			set { SetValue(ref _Margin, value); }
+		}
 
 		public IncrementalLoadingList<Board> BoardList { get { return Context.BoardListVM?.BoardList; } }
 
@@ -159,7 +185,7 @@ namespace Huaban.UWP.ViewModels
 						{
 							//var img = await ImageLib.ImageLoader.Instance.LoadImageStream(new Uri(Pin.file.Orignal), new CancellationTokenSource(TimeSpan.FromMilliseconds(1000 * 10)));
 
-							//await StorageHelper.SaveAsync($"{DateTime.Now.Ticks}.{type}", img);
+							await StorageHelper.SaveImage(buffer, $"{DateTime.Now.Ticks}.{type}");
 
 							Context.ShowTip("下载成功");
 						}
@@ -429,6 +455,7 @@ namespace Huaban.UWP.ViewModels
 
 		public override bool OnNavigatingFrom(HBNavigatingCancelEventArgs e)
 		{
+
 			if (PinListViewModel != null)
 				PinListViewModel.OnSelectedChanged -= PinListViewModel_OnSelectedChanged;
 			return base.OnNavigatingFrom(e);
