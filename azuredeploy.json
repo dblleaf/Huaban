@@ -1,0 +1,291 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "type": "string",
+      "metadata": {
+        "description": "虚拟机登录用户名."
+      }
+    },
+    "adminPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "虚拟机登录密码."
+      }
+    },
+    "mySqlPassword": {
+      "type": "securestring",
+      "metadata": {
+        "description": "MySQL root密码."
+      }
+    },
+    "dnsNamePrefix": {
+      "type": "string",
+      "metadata": {
+        "description": "虚拟机DNS名称前缀, 要求: 小写, 且满足正则表达式规则: ^[a-z][a-z0-9-]{1,61}[a-z0-9]$ 否则会报错."
+      }
+    },
+    "sizeOfDataDiskInGB": {
+      "type": "int",
+      "minValue": 1,
+      "maxValue": 1023,
+      "defaultValue": 100,
+      "metadata": {
+        "description": "每块数据磁盘大小, 数值范围1~1023, 使用2块数据磁盘组成RAID0以提升性能."
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_A2",
+      "allowedValues": [
+        "Standard_A2",
+        "Standard_A3",
+        "Standard_A4",
+        "Standard_A5",
+        "Standard_A6",
+        "Standard_A7",
+        "Standard_D2",
+        "Standard_D3",
+        "Standard_D4",
+        "Standard_D11",
+        "Standard_D12",
+        "Standard_D13",
+        "Standard_D14"
+      ],
+      "metadata": {
+        "description": "虚拟机大小."
+      }
+    },
+    "CentOSVersion": {
+      "type": "string",
+      "defaultValue": "7.0",
+      "allowedValues": [
+        "6.5",
+        "6.6",
+        "6.7",
+        "7.0",
+        "7.1",
+        "7.2"		
+      ],
+      "metadata": {
+        "description": "虚拟机CentOS操作系统版本."
+      }
+    },
+    "zabbixServerIPAddress": {
+      "type": "string",
+      "defaultValue": "Null",
+      "metadata": {
+	    "description": "Zabbix服务器IP地址(用来监控LAMP虚拟机). Null或者空表示未提供Zabbix服务器IP地址."
+	  }
+	}
+  },
+  "variables": {
+    "imagePublisher": "OpenLogic",
+    "imageOffer": "CentOS",
+    "OSDiskName": "osdiskforlinuxsimple",
+    "namespace": "lamp-",
+    "nicName": "[concat(variables('namespace'), 'myVMNic')]",
+    "addressPrefix": "10.0.0.0/16",
+    "subnetName": "[concat(variables('namespace'), 'Subnet')]",
+    "subnetPrefix": "10.0.0.0/24",
+    "storageAccountType": "Standard_LRS",
+    "publicIPAddressName": "[concat(variables('namespace'), 'myPublicIP')]",
+    "publicIPAddressType": "Dynamic",
+    "vmStorageAccountContainerName": "vhds",
+    "vmName": "[concat(variables('namespace'), 'MyCentOSVM')]",
+    "virtualNetworkName": "[concat(variables('namespace'), 'MyVNET')]",
+    "vnetID": "[resourceId('Microsoft.Network/virtualNetworks',variables('virtualNetworkName'))]",
+    "subnetRef": "[concat(variables('vnetID'),'/subnets/',variables('subnetName'))]",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'standardsa')]",
+    "apiVersion": "2015-06-15"
+  },
+  "resources": [
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Storage/storageAccounts",
+      "name": "[variables('storageAccountName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "accountType": "[variables('storageAccountType')]"
+      }
+    },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[variables('publicIPAddressName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('dnsNamePrefix')]"
+        }
+      }
+    },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Network/virtualNetworks",
+      "name": "[variables('virtualNetworkName')]",
+      "location": "[resourceGroup().location]",
+      "properties": {
+        "addressSpace": {
+          "addressPrefixes": [
+            "[variables('addressPrefix')]"
+          ]
+        },
+        "subnets": [
+          {
+            "name": "[variables('subnetName')]",
+            "properties": {
+              "addressPrefix": "[variables('subnetPrefix')]"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Network/networkInterfaces",
+      "name": "[variables('nicName')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
+        "[concat('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
+      ],
+      "properties": {
+        "ipConfigurations": [
+          {
+            "name": "ipconfig1",
+            "properties": {
+              "privateIPAllocationMethod": "Dynamic",
+              "publicIPAddress": {
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+              },
+              "subnet": {
+                "id": "[variables('subnetRef')]"
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "apiVersion": "[variables('apiVersion')]",
+      "type": "Microsoft.Compute/virtualMachines",
+      "name": "[variables('vmName')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))]",
+        "[concat('Microsoft.Network/networkInterfaces/', variables('nicName'))]"
+      ],
+      "properties": {
+        "hardwareProfile": {
+          "vmSize": "[parameters('vmSize')]"
+        },
+        "osProfile": {
+          "computerName": "[variables('vmName')]",
+          "adminUsername": "[parameters('adminUsername')]",
+          "adminPassword": "[parameters('adminPassword')]"
+        },
+        "storageProfile": {
+          "imageReference": {
+            "publisher": "[variables('imagePublisher')]",
+            "offer": "[variables('imageOffer')]",
+            "sku": "[parameters('CentOSVersion')]",
+            "version": "latest"
+          },
+          "dataDisks": [ 
+             { 
+               "name": "datadisk1", 
+               "diskSizeGB": "[parameters('sizeOfDataDiskInGB')]", 
+               "lun": 0, 
+               "vhd": { 
+                 "Uri": "[concat('http://', variables('storageAccountName'),'.blob.core.chinacloudapi.cn/vhds/', 'datadisk1.vhd')]" 
+               }, 
+               "createOption": "Empty",
+               "caching": "ReadWrite"			   
+             }, 
+             { 
+               "name": "datadisk2", 
+               "diskSizeGB": "[parameters('sizeOfDataDiskInGB')]", 
+               "lun": 1, 
+               "vhd": { 
+                 "Uri": "[concat('http://', variables('storageAccountName'),'.blob.core.chinacloudapi.cn/vhds/', 'datadisk2.vhd')]" 
+               }, 
+               "caching": "ReadWrite",
+               "createOption": "Empty" 
+             }
+           ], 
+          "osDisk": {
+            "name": "osdisk",
+            "vhd": {
+              "uri": "[concat('http://',variables('storageAccountName'),'.blob.core.chinacloudapi.cn/',variables('vmStorageAccountContainerName'),'/',variables('OSDiskName'),'.vhd')]"
+            },
+            "caching": "ReadWrite",
+            "createOption": "FromImage"
+          }
+        },
+        "networkProfile": {
+          "networkInterfaces": [
+            {
+              "id": "[resourceId('Microsoft.Network/networkInterfaces',variables('nicName'))]"
+            }
+          ],
+          "inputEndpoints": [ 
+             { 
+               "enableDirectServerReturn": "False", 
+               "endpointName": "SSH", 
+               "privatePort": 22, 
+               "publicPort": 22, 
+               "protocol": "tcp" 
+             },
+             { 
+               "enableDirectServerReturn": "False", 
+               "endpointName": "HTTP", 
+               "privatePort": 80, 
+               "publicPort": 80, 
+               "protocol": "tcp" 
+             },
+             { 
+               "enableDirectServerReturn": "False", 
+               "endpointName": "zabbix1", 
+               "privatePort": 10050, 
+               "publicPort": 10050, 
+               "protocol": "tcp" 
+             },
+             { 
+               "enableDirectServerReturn": "False", 
+               "endpointName": "zabbix2", 
+               "privatePort": 10051, 
+               "publicPort": 10051, 
+               "protocol": "tcp" 
+             }
+          ]
+        }
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(variables('vmName'),'/newuserscript')]",
+      "apiVersion": "[variables('apiVersion')]",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.OSTCExtensions",
+        "type": "CustomScriptForLinux",
+        "typeHandlerVersion": "1.4",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "fileUris": [
+            "http://msmirrors.blob.core.chinacloudapi.cn/single-lamp/install_single_lamp.sh"
+          ]
+        },
+        "protectedSettings": {
+          "commandToExecute": "[concat('bash install_single_lamp.sh ', parameters('mySqlPassword'), ' ', parameters('adminUsername'), ' ', parameters('zabbixServerIPAddress'))]"
+        }
+      }
+    }
+  ]
+}
