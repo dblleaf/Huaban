@@ -203,16 +203,10 @@ namespace Huaban.UWP.ViewModels
 					{
 						DisplayTheme();
 
-						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_39")))
+						if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_50")))
 						{
-							string msg = @"这次更新比以往来的要晚些，让大家久等了，由于平时还要上班，只能下班或者周末抽时间来写，作者并没有停更，还有很多功能需要等着去开发。如果您有更好的建议或者意见请在“关于”中任意联系方式找到本人，谢谢您对此APP的大力支持！
-
-这次更新内容有：
-1.修复习惯性闪退的bug
-2.配色改为和系统设置一致
-3.PC端可以在“设置”中设置下载目录
-4.图片详情可以折叠显示图片文字说明";
-							var dialog = new MessageDialog(msg, "版本更新 v1.2.39");
+							string msg = @"这次更新内容主要是解决闪退的问题，主要是后端代码优化，UI新功能并没有大的变化。为了迎接下一次更新，请大家在“设置”中清除缓存，无法清除的也可以卸载重新安装，卸载后遇到不能安装的情况，请重启设备或者过一段时间后重新安装。";
+							var dialog = new MessageDialog(msg, "版本更新 v1.2.50");
 
 							//dialog.Commands.Add(new UICommand("评价应用", async o =>
 							//{
@@ -221,7 +215,7 @@ namespace Huaban.UWP.ViewModels
 							dialog.Commands.Add(new UICommand("我知道了"));
 
 							await dialog.ShowAsync();
-							StorageHelper.SaveSetting("v1_2_39", "1");
+							StorageHelper.SaveSetting("v1_2_50", "1");
 						}
 
 					}

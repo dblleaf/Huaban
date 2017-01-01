@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI;
@@ -7,10 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Core;
 using Windows.UI.Xaml.Input;
 using Windows.ApplicationModel.DataTransfer;
-using System.Threading;
 using Microsoft.Practices.Unity;
-using Windows.Foundation.Metadata;
-using Windows.UI.ViewManagement;
 
 namespace Huaban.UWP.ViewModels
 {
@@ -30,21 +26,14 @@ namespace Huaban.UWP.ViewModels
 			RawTextVisibility = Visibility.Visible;
 			ButtonChar = '';
 
-			double marginTop = 0;
-			if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationViewTitleBar"))
-			{
-				marginTop = -32;
-				if (!Setting.Current.DarkMode)
-				{
-					
-					
-				}
-				else
-				{
-					ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.White;
-				}
-			}
-			Margin = new Thickness(0, marginTop, 0, 0);
+			//double marginTop = 0;
+			//if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+			//{
+			//	marginTop = -32;
+
+			//	StatusBar.GetForCurrentView().ForegroundColor = Setting.Current.DarkMode ? Colors.White : Colors.Black;
+			//}
+			//Margin = new Thickness(0, marginTop, 0, 0);
 
 			QuickBoardChanged += (s, e) =>
 			{
