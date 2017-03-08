@@ -2,11 +2,11 @@
 
 namespace Huaban.UWP.Controls
 {
-	public sealed partial class CategorySelecter : UserControl
-	{
-		public CategorySelecter()
-		{
-			this.InitializeComponent();
-		}
-	}
+    public sealed partial class CategorySelecter : UserControl
+    {
+        public CategorySelecter()
+        {
+            this.InitializeComponent();
+        }
+    }
 }

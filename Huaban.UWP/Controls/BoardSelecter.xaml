@@ -8,55 +8,55 @@
     mc:Ignorable="d"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
-	x:Name="RootControl"
+    x:Name="RootControl"
     >
-	<Grid Background="#88000000">
-		<Interactivity:Interaction.Behaviors>
-			<Core:EventTriggerBehavior EventName="Tapped">
-				<Core:InvokeCommandAction Command="{Binding HideSelectCommand}"></Core:InvokeCommandAction>
-			</Core:EventTriggerBehavior>
-		</Interactivity:Interaction.Behaviors>
-		<Grid BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"
+    <Grid Background="#88000000">
+        <Interactivity:Interaction.Behaviors>
+            <Core:EventTriggerBehavior EventName="Tapped">
+                <Core:InvokeCommandAction Command="{Binding HideSelectCommand}"></Core:InvokeCommandAction>
+            </Core:EventTriggerBehavior>
+        </Interactivity:Interaction.Behaviors>
+        <Grid BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}"
               VerticalAlignment="Bottom" MaxHeight="420" 
               Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
               HorizontalAlignment="Stretch">
-			<Grid.RowDefinitions>
-				<RowDefinition></RowDefinition>
-				<RowDefinition></RowDefinition>
-			</Grid.RowDefinitions>
-			<ScrollViewer>
-				<ListView x:Name="lvBoard" IsItemClickEnabled="True" 
-					ScrollViewer.VerticalScrollMode="Disabled"
-					ItemsSource="{Binding BoardList}" SelectedIndex="-1">
-					<ListView.ItemTemplate>
-						<DataTemplate>
-							<TextBlock Margin="6 3" Text="{Binding title}"></TextBlock>
-						</DataTemplate>
-					</ListView.ItemTemplate>
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="ItemClick">
-							<Core:InvokeCommandAction Command="{Binding SelectBoardCommand}"></Core:InvokeCommandAction>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
-				</ListView>
-			</ScrollViewer>
-			<StackPanel Grid.Row="1" Padding="6 6 6 48" BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
-				<TextBlock>新画板：</TextBlock>
-				<TextBox x:Name="boardName"
-					Visibility="{Binding ElementName=RootControl,Path=Visibility}"
-					BorderThickness="1" Margin="0 6"
-					Text="{Binding NewBoardName,Mode=TwoWay}"
-					HorizontalAlignment="Stretch">
-					<Interactivity:Interaction.Behaviors>
-						<Core:EventTriggerBehavior EventName="KeyDown">
-							<Core:InvokeCommandAction Command="{Binding BoardKeyDownCommand}"></Core:InvokeCommandAction>
-						</Core:EventTriggerBehavior>
-					</Interactivity:Interaction.Behaviors>
-				</TextBox>
-			</StackPanel>
-		</Grid>
-		<CommandBar VerticalAlignment="Bottom">
-			<AppBarButton Icon="Accept" Command="{Binding NewBoardCommand}"></AppBarButton>
-		</CommandBar>
-	</Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <ScrollViewer>
+                <ListView x:Name="lvBoard" IsItemClickEnabled="True" 
+                    ScrollViewer.VerticalScrollMode="Disabled"
+                    ItemsSource="{Binding BoardList}" SelectedIndex="-1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Margin="6 3" Text="{Binding title}"></TextBlock>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="ItemClick">
+                            <Core:InvokeCommandAction Command="{Binding SelectBoardCommand}"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </ListView>
+            </ScrollViewer>
+            <StackPanel Grid.Row="1" Padding="6 6 6 48" BorderThickness="0 1 0 0" BorderBrush="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+                <TextBlock>新画板：</TextBlock>
+                <TextBox x:Name="boardName"
+                    Visibility="{Binding ElementName=RootControl,Path=Visibility}"
+                    BorderThickness="1" Margin="0 6"
+                    Text="{Binding NewBoardName,Mode=TwoWay}"
+                    HorizontalAlignment="Stretch">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="KeyDown">
+                            <Core:InvokeCommandAction Command="{Binding BoardKeyDownCommand}"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+        </Grid>
+        <CommandBar VerticalAlignment="Bottom">
+            <AppBarButton Icon="Accept" Command="{Binding NewBoardCommand}"></AppBarButton>
+        </CommandBar>
+    </Grid>
 </UserControl>

@@ -1,58 +1,59 @@
 ﻿<HB:HBPage
-	x:Class="Huaban.UWP.Views.SettingView"
-	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	xmlns:HB="using:Huaban.UWP.Controls"
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	mc:Ignorable="d">
-	<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="48"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
-		<HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
-		<StackPanel Padding="12 12" Grid.Row="1">
-			<ToggleSwitch Margin="12 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
-			<ToggleSwitch Margin="12 6" Header="直接退出" IsEnabled="False" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
-			<ToggleSwitch Margin="12 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
-			
-			<Button Style="{StaticResource SettingButton}" Command="{Binding ClearCacheCommand}">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition Width="Auto"/>
-					</Grid.ColumnDefinitions>
-					<TextBlock VerticalAlignment="Center">缓存大小：<Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/></TextBlock>
-					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
-						<SymbolIcon Symbol="Delete"/>
-						<TextBlock Margin="6 0 0 0">清理</TextBlock>
-					</StackPanel>
-				</Grid>
-			</Button>
-			<Button Style="{StaticResource SettingButton}" Command="{Binding SelectePathCommand}" Visibility="{Binding PCVisibility}">
-				<Grid>
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition/>
-						<ColumnDefinition Width="Auto"/>
-					</Grid.ColumnDefinitions>
-					<TextBlock VerticalAlignment="Center">下载目录：<Run Text="{Binding Setting.SavePath.Path}"/></TextBlock>
-					<StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
-						<SymbolIcon Symbol="OpenLocal"/>
-						<TextBlock Margin="6 0 0 0">选择</TextBlock>
-					</StackPanel>
-				</Grid>
-				
-			</Button>
-			<Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark" Visibility="{Binding PCVisibility}"
-				Style="{StaticResource SettingButton}" Command="{Binding OpenPathCommand}" Content="打开下载目录"/>
-			<Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
-				Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="五星评价"/>
-			<Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
-				Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
-				Style="{StaticResource SettingButton}" Content="退出登录"
-				Command="{Binding LogoutCommand}"></Button>
-		</StackPanel>
-		<ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
-	</Grid>
+    x:Class="Huaban.UWP.Views.SettingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:HB="using:Huaban.UWP.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+    <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
+        <StackPanel Padding="12 12" Grid.Row="1">
+            <ToggleSwitch Margin="12 6" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
+            <ToggleSwitch Margin="12 6" Header="图片显示文字" IsOn="{Binding Setting.RawTextVisible,Mode=TwoWay}"></ToggleSwitch>
+            <ToggleSwitch Margin="12 6" Header="直接退出" IsEnabled="False" IsOn="{Binding Setting.DirectExit,Mode=TwoWay}"></ToggleSwitch>
+            <ToggleSwitch Margin="12 6" Header="自定义小尾巴" IsEnabled="False"></ToggleSwitch>
+            
+            <Button Style="{StaticResource SettingButton}" Command="{Binding ClearCacheCommand}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center">缓存大小：<Run Text="{Binding CacheSize,TargetNullValue='计算中...'}"/></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                        <SymbolIcon Symbol="Delete"/>
+                        <TextBlock Margin="6 0 0 0">清理</TextBlock>
+                    </StackPanel>
+                </Grid>
+            </Button>
+            <Button Style="{StaticResource SettingButton}" Command="{Binding SelectePathCommand}" Visibility="{Binding PCVisibility}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock VerticalAlignment="Center">下载目录：<Run Text="{Binding Setting.SavePath.Path}"/></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="1">
+                        <SymbolIcon Symbol="OpenLocal"/>
+                        <TextBlock Margin="6 0 0 0">选择</TextBlock>
+                    </StackPanel>
+                </Grid>
+                
+            </Button>
+            <Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark" Visibility="{Binding PCVisibility}"
+                Style="{StaticResource SettingButton}" Command="{Binding OpenPathCommand}" Content="打开下载目录"/>
+            <Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
+                Style="{StaticResource SettingButton}" Command="{Binding ReViewCommand}" Content="五星评价"/>
+            <Button Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
+                Visibility="{Binding Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}"
+                Style="{StaticResource SettingButton}" Content="退出登录"
+                Command="{Binding LogoutCommand}"></Button>
+        </StackPanel>
+        <ProgressRing IsActive="{Binding IsLoading}"></ProgressRing>
+    </Grid>
 </HB:HBPage>

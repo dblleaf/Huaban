@@ -2,11 +2,11 @@
 
 namespace Huaban.UWP.Controls
 {
-	public sealed partial class BoardSelecter : UserControl
-	{
-		public BoardSelecter()
-		{
-			this.InitializeComponent();
-		}
-	}
+    public sealed partial class BoardSelecter : UserControl
+    {
+        public BoardSelecter()
+        {
+            this.InitializeComponent();
+        }
+    }
 }

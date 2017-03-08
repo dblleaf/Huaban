@@ -2,12 +2,12 @@
 
 namespace Huaban.UWP.Controls
 {
-	public class PageBase : Page
-	{
-		public PageBase()
-		{
+    public class PageBase : Page
+    {
+        public PageBase()
+        {
 
-		}
-		
-	}
+        }
+        
+    }
 }

@@ -9,27 +9,27 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:HB="using:Huaban.UWP.Controls"
     mc:Ignorable="d">
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-		<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"></RowDefinition>
-				<RowDefinition Height="*"></RowDefinition>
-			</Grid.RowDefinitions>
-			<HB:TitleControl>
-				<HB:TitleControl.Content>
-					<AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QuerySubmitted="searchBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
-						<Interactivity:Interaction.Behaviors>
-							<Core:EventTriggerBehavior EventName="QuerySubmitted">
-								<Core:InvokeCommandAction Command="{Binding QueryCommand}" CommandParameter="{Binding Pin.user}"></Core:InvokeCommandAction>
-							</Core:EventTriggerBehavior>
-						</Interactivity:Interaction.Behaviors>
-					</AutoSuggestBox>
-				</HB:TitleControl.Content>
-			</HB:TitleControl>
-			<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:PinGrid>
-			<!--<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:ImageGrid>-->
-			<ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>
-		</Grid>
-	</Grid>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <HB:TitleControl>
+                <HB:TitleControl.Content>
+                    <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QuerySubmitted="searchBox_QuerySubmitted" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="QuerySubmitted">
+                                <Core:InvokeCommandAction Command="{Binding QueryCommand}" CommandParameter="{Binding Pin.user}"></Core:InvokeCommandAction>
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </AutoSuggestBox>
+                </HB:TitleControl.Content>
+            </HB:TitleControl>
+            <HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:PinGrid>
+            <!--<HB:ImageGrid Grid.Row="1" ListModel="{Binding PinListViewModel}"></HB:ImageGrid>-->
+            <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>
+        </Grid>
+    </Grid>
 </HB:HBControl>
 

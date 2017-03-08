@@ -10,41 +10,41 @@
     mc:Ignorable="d"
     d:DesignHeight="768"
     d:DesignWidth="432">
-	<Grid>
-		<HB:ExtendGridView x:Name="gridView" Padding="3"
-			ItemsSource="{Binding UserList}"
-			ItemTemplate="{StaticResource UserGridTemplate}">
-			<HB:ExtendGridView.Resources>
-				<Style TargetType="GridViewItem">
-					<Setter Property="Padding" Value="0"/>
-					<Setter Property="Margin" Value="3"/>
-					<Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
-					<Setter Property="Template">
-						<Setter.Value>
-							<ControlTemplate TargetType="GridViewItem">
-								<Grid Background="{TemplateBinding Background}">
-									<VisualStateManager.VisualStateGroups>
-										<VisualStateGroup>
-											<!--缺省样式-->
-											<VisualState x:Name="Normal" />
-										</VisualStateGroup>
-									</VisualStateManager.VisualStateGroups>
-									<Grid x:Name="ContentBackground">
-										<ContentPresenter
-											Content="{TemplateBinding Content}"
-											Margin="{TemplateBinding Padding}" />
-									</Grid>
-								</Grid>
-							</ControlTemplate>
-						</Setter.Value>
-					</Setter>
-				</Style>
-			</HB:ExtendGridView.Resources>
-			<HB:ExtendGridView.Header>
-				<ContentControl x:Name="HeaderContent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ContentControl>
-			</HB:ExtendGridView.Header>
-		
-		</HB:ExtendGridView>
-		
-	</Grid>
+    <Grid>
+        <HB:ExtendGridView x:Name="gridView" Padding="3"
+            ItemsSource="{Binding UserList}"
+            ItemTemplate="{StaticResource UserGridTemplate}">
+            <HB:ExtendGridView.Resources>
+                <Style TargetType="GridViewItem">
+                    <Setter Property="Padding" Value="0"/>
+                    <Setter Property="Margin" Value="3"/>
+                    <Setter Property="Background" Value="{ThemeResource ApplicationPageBackgroundThemeBrush}"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="GridViewItem">
+                                <Grid Background="{TemplateBinding Background}">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup>
+                                            <!--缺省样式-->
+                                            <VisualState x:Name="Normal" />
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Grid x:Name="ContentBackground">
+                                        <ContentPresenter
+                                            Content="{TemplateBinding Content}"
+                                            Margin="{TemplateBinding Padding}" />
+                                    </Grid>
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </HB:ExtendGridView.Resources>
+            <HB:ExtendGridView.Header>
+                <ContentControl x:Name="HeaderContent" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch"></ContentControl>
+            </HB:ExtendGridView.Header>
+        
+        </HB:ExtendGridView>
+        
+    </Grid>
 </UserControl>

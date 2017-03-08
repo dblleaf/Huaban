@@ -9,45 +9,45 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
-	<Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
-		<VisualStateManager.VisualStateGroups>
-			<VisualStateGroup>
-				<VisualState>
-					<VisualState.StateTriggers>
-						<AdaptiveTrigger MinWindowHeight="480" />
-					</VisualState.StateTriggers>
-					<VisualState.Setters>
-						<Setter Target="commandBar.ClosedDisplayMode" Value="Compact" />
-					</VisualState.Setters>
-				</VisualState>
-				<VisualState>
-					<VisualState.StateTriggers>
-						<AdaptiveTrigger MinWindowHeight="0" />
-					</VisualState.StateTriggers>
-					<VisualState.Setters>
-						<Setter Target="commandBar.ClosedDisplayMode" Value="Minimal" />
-					</VisualState.Setters>
-				</VisualState>
-			</VisualStateGroup>
-		</VisualStateManager.VisualStateGroups>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-			
-		</Grid.RowDefinitions>
-		<HB:TitleControl></HB:TitleControl>
-		<HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
-			<HB:PinGrid.Footer>
-				<Grid DataContext="{x:Bind ViewModel}">
-					<CommandBar Grid.Row="1" x:Name="commandBar" VerticalAlignment="Bottom">
-						<AppBarButton Label="搜索" Icon="Find" Command="{Binding ToSearchCommand}"/>
-						<AppBarButton Label="分类" Icon="List" Command="{Binding ShowSelectCommand}"/>
-					</CommandBar>
-				</Grid>
-			</HB:PinGrid.Footer>
-		</HB:PinGrid>
-		
-		<HB:CategorySelecter Grid.Row="1" Visibility="{Binding SelecterVisibility}"></HB:CategorySelecter>
-		<ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>
-	</Grid>
+    <Grid Background="{ThemeResource SystemControlBackgroundBaseLowBrush}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="480" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="commandBar.ClosedDisplayMode" Value="Compact" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowHeight="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="commandBar.ClosedDisplayMode" Value="Minimal" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            
+        </Grid.RowDefinitions>
+        <HB:TitleControl></HB:TitleControl>
+        <HB:PinGrid Grid.Row="1" ListModel="{Binding PinListViewModel}">
+            <HB:PinGrid.Footer>
+                <Grid DataContext="{x:Bind ViewModel}">
+                    <CommandBar Grid.Row="1" x:Name="commandBar" VerticalAlignment="Bottom">
+                        <AppBarButton Label="搜索" Icon="Find" Command="{Binding ToSearchCommand}"/>
+                        <AppBarButton Label="分类" Icon="List" Command="{Binding ShowSelectCommand}"/>
+                    </CommandBar>
+                </Grid>
+            </HB:PinGrid.Footer>
+        </HB:PinGrid>
+        
+        <HB:CategorySelecter Grid.Row="1" Visibility="{Binding SelecterVisibility}"></HB:CategorySelecter>
+        <ProgressRing Grid.RowSpan="2" IsActive="{Binding IsLoading}"></ProgressRing>
+    </Grid>
 </HB:HBPage>
