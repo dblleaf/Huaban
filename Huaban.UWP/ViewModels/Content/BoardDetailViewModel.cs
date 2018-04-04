@@ -1,20 +1,21 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using Windows.UI.Xaml;
 using Windows.Foundation;
 using Windows.UI.Popups;
-using Microsoft.Practices.Unity;
+using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Models;
-    using Controls;
+    using Api;
     using Base;
     using Commands;
-    using Api;
+    using Controls;
+    using Models;
     using Services;
+    using Unity.Attributes;
+
     public class BoardDetailViewModel : HBViewModel
     {
         public BoardDetailViewModel(Context context)

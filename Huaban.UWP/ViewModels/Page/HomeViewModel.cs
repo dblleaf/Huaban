@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using Windows.UI.Core;
-using Windows.Foundation;
-using Microsoft.Practices.Unity;
+using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Base;
-    using Models;
-    using Commands;
     using Api;
+    using Base;
+    using Commands;
+    using Models;
+    using Unity.Attributes;
+
     public class HomeViewModel : HBViewModel
     {
 

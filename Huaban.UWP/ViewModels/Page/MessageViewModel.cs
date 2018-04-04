@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
+    using Api;
     using Base;
     using Models;
-    using Api;
+    using Unity.Attributes;
+
     public class MessageViewModel : HBViewModel
     {
         public MessageViewModel(Context context)

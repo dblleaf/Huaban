@@ -1,21 +1,22 @@
 ﻿using System;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
-using Windows.UI;
-using Windows.UI.Xaml;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Input;
 using Windows.ApplicationModel.DataTransfer;
-using Microsoft.Practices.Unity;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 namespace Huaban.UWP.ViewModels
 {
+    using Api;
     using Base;
+    using Commands;
     using Controls;
     using Models;
-    using Commands;
-    using Api;
     using Services;
+    using Unity.Attributes;
+
     public class ImageViewModel : HBViewModel
     {
         public ImageViewModel(Context context)

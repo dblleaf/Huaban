@@ -1,11 +1,12 @@
 ﻿using System;
-using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.Services
 {
-    using Models;
     using Api;
     using Base;
+    using Models;
+    using Unity;
+
     public class ServiceLocator
     {
         private static ServiceLocator Current { get; set; }

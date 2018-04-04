@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.UI.Xaml;
-using Windows.Foundation;
 using Windows.ApplicationModel.DataTransfer;
-using Microsoft.Practices.Unity;
+using Windows.Foundation;
+using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Models;
-    using Controls;
+    using Api;
     using Base;
     using Commands;
-    using Api;
+    using Controls;
+    using Models;
+    using Unity.Attributes;
+
     public class BoardPinsViewModel : HBViewModel
     {
 

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.UI.Xaml.Controls;
-using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
+    using Api;
     using Base;
     using Commands;
     using Models;
-    using Api;
-    using Services;
+    using Unity.Attributes;
+
     public class SearchViewModel : HBViewModel
     {
 

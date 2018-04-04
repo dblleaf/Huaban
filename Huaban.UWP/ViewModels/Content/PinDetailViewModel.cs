@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Navigation;
-using Microsoft.Practices.Unity;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Models;
+    using Api;
     using Base;
     using Controls;
-    using Api;
+    using Models;
+    using Unity.Attributes;
+
     public class PinDetailViewModel : HBViewModel
     {
         
