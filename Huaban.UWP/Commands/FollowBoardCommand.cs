@@ -3,10 +3,9 @@ using System.Windows.Input;
 
 namespace Huaban.UWP.Commands
 {
+    using Base;
     using Models;
     using Services;
-    using Api;
-    using Base;
     public class FollowBoardCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
@@ -22,7 +21,7 @@ namespace Huaban.UWP.Commands
             {
                 Board board = parameter as Board;
 
-                string str = await ServiceLocator.Resolve<BoardAPI>().follow(board.board_id, !board.following);
+                string str = await ServiceLocator.Resolve<BoardService>().follow(board.board_id, !board.following);
                 board.following = (str != "{}");
                 ServiceLocator.Resolve<Context>()?.ShowTip(board.following ? "关注成功" : "已取消关注");
             }

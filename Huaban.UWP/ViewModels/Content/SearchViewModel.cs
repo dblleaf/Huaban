@@ -6,9 +6,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Commands;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -26,7 +26,7 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public PinAPI PinApi { get; set; }
+        public PinService PinService { get; set; }
         public PinListViewModel PinListViewModel { set; get; }
 
         private string KeyWord { set; get; }
@@ -76,7 +76,7 @@ namespace Huaban.UWP.ViewModels
             try
             {
 
-                var list = await PinApi.Search(KeyWord, page);
+                var list = await PinService.Search(KeyWord, page);
                 foreach (var item in list)
                 {
                     item.Width = PinListViewModel.ColumnWidth;

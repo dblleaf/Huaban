@@ -1,25 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
-namespace Huaban.UWP.Api
+namespace Huaban.UWP.Services
 {
     using Models;
 
-    public class UserAPI : APIBase
+    public class UserService : ServiceBase
     {
         private const string API_SIGNUP = "http://api.huaban.com/signup/";
 
-        public UserAPI(IClient client)
+        public UserService(IClient client)
             : base(client) { }
 
         public async Task<User> GetSelf()
         {
-            return await Get(Client.API_ME, o => SerializeExtension.JsonDeserlialize<User>(o));
+            return await Get(Constants.API_ME, o => SerializeExtension.JsonDeserlialize<User>(o));
         }
         public async Task<User> GetUser(string userID)
         {
-            string uri = $"{Client.API_USER}{userID}";
+            string uri = $"{Constants.API_USER}{userID}";
             string json = await Get(uri);
             var obj = JObject.Parse(json);
             var user = User.Parse(obj);
@@ -31,7 +31,7 @@ namespace Huaban.UWP.Api
             string maxBoardID = "&max=" + max.ToString();
             if (max <= 0)
                 maxBoardID = "";
-            string uri = $"{Client.API_USER}{userID}/boards/?limit=20{maxBoardID}";
+            string uri = $"{Constants.API_USER}{userID}/boards/?limit=20{maxBoardID}";
             string json = await Get(uri);
 
             var obj = JObject.Parse(json);
@@ -45,7 +45,7 @@ namespace Huaban.UWP.Api
             string maxPin = "";
             if (max > 0)
                 maxPin = "&max=" + max;
-            string uri = $"{Client.API_Follow}?limit=20{maxPin}";
+            string uri = $"{Constants.API_Follow}?limit=20{maxPin}";
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
             var list = Pin.ParseList(obj["pins"] as JArray);
@@ -58,7 +58,7 @@ namespace Huaban.UWP.Api
             if (max > 0)
                 maxPin = "&max=" + max;
 
-            string uri = $"{Client.API_USER}{userID}/pins/?limit=20{maxPin}";
+            string uri = $"{Constants.API_USER}{userID}/pins/?limit=20{maxPin}";
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
             var list = Pin.ParseList(obj["pins"] as JArray);
@@ -71,7 +71,7 @@ namespace Huaban.UWP.Api
             if (max > 0)
                 maxPin = "&max=" + max;
 
-            string uri = $"{Client.API_USER}{userID}/likes/?limit=20{maxPin}";
+            string uri = $"{Constants.API_USER}{userID}/likes/?limit=20{maxPin}";
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
             var list = Pin.ParseList(obj["pins"] as JArray);
@@ -82,7 +82,7 @@ namespace Huaban.UWP.Api
         {
             if (page <= 0)
                 page = 1;
-            string uri = $"{Client.API_MAIN}{userID}/following/boards/?page={page}&per_page=20&wfl=1";
+            string uri = $"{Constants.API_MAIN}{userID}/following/boards/?page={page}&per_page=20&wfl=1";
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
             var list = Board.ParseList(obj["boards"] as JArray);
@@ -96,7 +96,7 @@ namespace Huaban.UWP.Api
             if (max > 0)
                 maxUser = "&max=" + max;
 
-            string uri = $"{Client.API_USER}{userID}/followers/?limit={limit}{maxUser}&wfl=1";
+            string uri = $"{Constants.API_USER}{userID}/followers/?limit={limit}{maxUser}&wfl=1";
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
             var list = User.ParseList(obj["users"] as JArray);
@@ -110,7 +110,7 @@ namespace Huaban.UWP.Api
             if (max > 0)
                 maxUser = "&max=" + max;
 
-            string uri = $"{Client.API_USER}{userID}/following/?limit={limit}{maxUser}&wfl=1";
+            string uri = $"{Constants.API_USER}{userID}/following/?limit={limit}{maxUser}&wfl=1";
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
             var list = User.ParseList(obj["users"] as JArray);
@@ -120,7 +120,7 @@ namespace Huaban.UWP.Api
         public async Task<string> follow(string userID, bool follow)
         {
             string action = follow ? "follow" : "unfollow";
-            string uri = $"{Client.API_USER}{userID}/{action}/";
+            string uri = $"{Constants.API_USER}{userID}/{action}/";
             return await Post(uri);
         }
     }

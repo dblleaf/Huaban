@@ -6,9 +6,9 @@ using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Commands;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -28,9 +28,9 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public CategoryAPI CategoryApi { get; set; }
+        public CategoryService CategoryService { get; set; }
         [Dependency]
-        public PinAPI PinApi { get; set; }
+        public PinService PinService { get; set; }
 
         private Category _CurrentCategory;
         public Category CurrentCategory
@@ -174,7 +174,7 @@ namespace Huaban.UWP.ViewModels
             IsLoading = true;
             try
             {
-                var list = await CategoryApi.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
+                var list = await CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
                 foreach (var item in list)
                 {
                     item.Width = PinListViewModel.ColumnWidth;

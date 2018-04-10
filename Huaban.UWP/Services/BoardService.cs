@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
-namespace Huaban.UWP.Api
+namespace Huaban.UWP.Services
 {
     using Models;
-    public class BoardAPI : APIBase
+    public class BoardService : ServiceBase
     {
-        public BoardAPI(IClient client)
+        public BoardService(IClient client)
             : base(client) { }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Huaban.UWP.Api
             else
                 paramList.Add(new KeyValuePair<string, string>("category", category));
 
-            string json = await Post(Client.API_BOARDS, paramList.ToArray());
+            string json = await Post(Constants.API_BOARDS, paramList.ToArray());
             JObject obj = JObject.Parse(json);
             var board = Board.Parse(obj["board"] as JObject);
             return board;
@@ -43,7 +43,7 @@ namespace Huaban.UWP.Api
             paramList.Add(new KeyValuePair<string, string>("title", board.title));
             paramList.Add(new KeyValuePair<string, string>("description", board.description));
             paramList.Add(new KeyValuePair<string, string>("category", board.category_id));
-            string json = await Post($"{Client.API_BOARDS}{board.board_id}", paramList.ToArray());
+            string json = await Post($"{Constants.API_BOARDS}{board.board_id}", paramList.ToArray());
             return board;
         }
 
@@ -56,7 +56,7 @@ namespace Huaban.UWP.Api
         {
             List<KeyValuePair<string, string>> paramList = new List<KeyValuePair<string, string>>();
             paramList.Add(new KeyValuePair<string, string>("_method", "DELETE"));
-            string json = await Post($"{Client.API_BOARDS}{board.board_id}", paramList.ToArray());
+            string json = await Post($"{Constants.API_BOARDS}{board.board_id}", paramList.ToArray());
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Huaban.UWP.Api
         public async Task<string> follow(string boadID, bool follow)
         {
             string action = follow ? "follow" : "unfollow";
-            string uri = $"{Client.API_BOARDS}{boadID}/{action}/";
+            string uri = $"{Constants.API_BOARDS}{boadID}/{action}/";
             return await Post(uri);
         }
 
@@ -77,7 +77,7 @@ namespace Huaban.UWP.Api
             string maxStr = "";
             if (max > 0)
                 maxStr = "&max=" + max;
-            string uri = $"{Client.API_BOARDS}{boardID}/pins/?limit={limit}{maxStr}";
+            string uri = $"{Constants.API_BOARDS}{boardID}/pins/?limit={limit}{maxStr}";
 
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
@@ -90,7 +90,7 @@ namespace Huaban.UWP.Api
             string maxStr = "";
             if (max > 0)
                 maxStr = "&max=" + max;
-            string uri = $"{Client.API_BOARDS}{boardID}/?iiyjjrxz&limit={limit}{maxStr}&wfl=1";
+            string uri = $"{Constants.API_BOARDS}{boardID}/?iiyjjrxz&limit={limit}{maxStr}&wfl=1";
 
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);
@@ -103,7 +103,7 @@ namespace Huaban.UWP.Api
         public async Task<Board> GetBoard(string boardID)
         {
 
-            string uri = $"{Client.API_BOARDS}{boardID}";
+            string uri = $"{Constants.API_BOARDS}{boardID}";
 
             string json = await Get(uri);
             JObject obj = JObject.Parse(json);

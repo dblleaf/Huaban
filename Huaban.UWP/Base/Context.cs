@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using Windows.UI.Core;
 
 namespace Huaban.UWP.Base
@@ -9,7 +9,6 @@ namespace Huaban.UWP.Base
     using Models;
     using Services;
     using ViewModels;
-    using Api;
     public class Context : ObservableObject
     {
         public NavigationService NavigationService { get; set; }
@@ -75,7 +74,7 @@ namespace Huaban.UWP.Base
         {
             ServiceLocator.Resolve<IClient>().SetToken(token);
 
-            var user = await ServiceLocator.Resolve<UserAPI>().GetSelf();
+            var user = await ServiceLocator.Resolve<UserService>().GetSelf();
             BoardListVM = new BoardListViewModel(this, GetBoardList);
             User = user;
             IsLogin = true;
@@ -100,7 +99,7 @@ namespace Huaban.UWP.Base
             List<Board> list = new List<Board>();
             try
             {
-                list = await ServiceLocator.Resolve<UserAPI>().GetBoards(User.user_id, BoardListVM.GetMaxSeq());
+                list = await ServiceLocator.Resolve<UserService>().GetBoards(User.user_id, BoardListVM.GetMaxSeq());
                 if (list.Count == 0)
                     BoardListVM.BoardList.NoMore();
                 else
@@ -118,7 +117,7 @@ namespace Huaban.UWP.Base
         {
             try
             {
-                var list = await ServiceLocator.Resolve<CategoryAPI>().GetCategoryList();
+                var list = await ServiceLocator.Resolve<CategoryService>().GetCategoryList();
                 foreach (var item in list)
                 {
                     Categories.Add(item);

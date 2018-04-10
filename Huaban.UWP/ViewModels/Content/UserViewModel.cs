@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Controls;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -25,7 +25,7 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public UserAPI UserApi { set; get; }
+        public UserService UserService { set; get; }
 
         private User _User;
         public User User
@@ -60,7 +60,7 @@ namespace Huaban.UWP.ViewModels
             List<Pin> list = new List<Pin>();
             try
             {
-                list = await UserApi.GetPins(User?.user_id, MyPinListViewModel.GetMaxPinID());
+                list = await UserService.GetPins(User?.user_id, MyPinListViewModel.GetMaxPinID());
                 foreach (var item in list)
                 {
                     item.Width = MyPinListViewModel.ColumnWidth;
@@ -92,7 +92,7 @@ namespace Huaban.UWP.ViewModels
             List<Pin> list = new List<Pin>();
             try
             {
-                list = await UserApi.GetLikePins(User?.user_id, LikePinListViewModel.GetMaxSeq());
+                list = await UserService.GetLikePins(User?.user_id, LikePinListViewModel.GetMaxSeq());
                 foreach (var item in list)
                 {
                     item.Width = LikePinListViewModel.ColumnWidth;
@@ -125,7 +125,7 @@ namespace Huaban.UWP.ViewModels
             try
             {
                 await Task.Delay(300);
-                list = await UserApi.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
+                list = await UserService.GetBoards(User?.user_id, BoardListViewModel.GetMaxSeq());
 
                 if (list.Count == 0)
                     BoardListViewModel.BoardList.NoMore();
@@ -152,7 +152,7 @@ namespace Huaban.UWP.ViewModels
             try
             {
                 await Task.Delay(300);
-                list = await UserApi.GetFollowerList(User?.user_id, FollowerListViewModel.GetMaxSeq());
+                list = await UserService.GetFollowerList(User?.user_id, FollowerListViewModel.GetMaxSeq());
 
                 if (list.Count == 0)
                     FollowerListViewModel.UserList.NoMore();
@@ -180,7 +180,7 @@ namespace Huaban.UWP.ViewModels
             try
             {
                 await Task.Delay(300);
-                list = await UserApi.GetFollowingUserList(User?.user_id, FollowingListViewModel.GetMaxSeq());
+                list = await UserService.GetFollowingUserList(User?.user_id, FollowingListViewModel.GetMaxSeq());
 
                 if (list.Count == 0)
                     FollowingListViewModel.UserList.NoMore();
@@ -214,7 +214,7 @@ namespace Huaban.UWP.ViewModels
                 }
 
                 else
-                    User = await UserApi.GetUser(user.user_id);
+                    User = await UserService.GetUser(user.user_id);
 
             }
             catch { }

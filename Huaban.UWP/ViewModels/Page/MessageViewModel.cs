@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -20,7 +20,7 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public CategoryAPI CategoryAPI { set; get; }
+        public CategoryService CategoryService { set; get; }
         public PinListViewModel PinListVM { get; set; }
 
         #endregion
@@ -39,7 +39,7 @@ namespace Huaban.UWP.ViewModels
             IsLoading = true;
             try
             {
-                var list = await CategoryAPI.GetCategoryPinList("/all/", 20, PinListVM.GetMaxPinID());
+                var list = await CategoryService.GetCategoryPinList("/all/", 20, PinListVM.GetMaxPinID());
                 if (list?.Count == 0)
                     PinListVM.PinList.NoMore();
                 else

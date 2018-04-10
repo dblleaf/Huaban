@@ -1,19 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using static System.Net.WebUtility;
 
-namespace Huaban.UWP.Api
+namespace Huaban.UWP.Services
 {
     using Models;
-    public class PinAPI : APIBase
+    public class PinService : ServiceBase
     {
-        public PinAPI(IClient client)
+        public PinService(IClient client)
             : base(client) { }
 
         public async Task<Pin> GetPin(string PinID)
         {
-            string uri = $"{Client.API_PIN}{PinID}/";
+            string uri = $"{Constants.API_PIN}{PinID}/";
             string json = await Get(uri);
             var obj = JObject.Parse(json);
             return Models.Pin.Parse(obj["pin"] as JObject, true);
@@ -27,7 +27,7 @@ namespace Huaban.UWP.Api
         public async Task<string> Like(string PinID, bool liked)
         {
             string action = liked ? "like" : "unlike";
-            string uri = $"{Client.API_PIN}{PinID}/{action}/";
+            string uri = $"{Constants.API_PIN}{PinID}/{action}/";
             return await Post(uri);
         }
 
@@ -37,7 +37,7 @@ namespace Huaban.UWP.Api
         /// <returns></returns>
         public async Task<Models.Pin> Pin(string PinID, string BoardID, string text = "")
         {
-            var json = await Post(Client.API_PIN,
+            var json = await Post(Constants.API_PIN,
                         new KeyValuePair<string, string>("board_id", BoardID),
                         new KeyValuePair<string, string>("text", text),
                         new KeyValuePair<string, string>("via", PinID),
@@ -54,7 +54,7 @@ namespace Huaban.UWP.Api
             string maxBoardID = "&max=" + max.ToString();
             if (max <= 0)
                 maxBoardID = "";
-            string uri = $"{Client.API_PIN}{PinID}/relatedboards/?limit=12{maxBoardID}";
+            string uri = $"{Constants.API_PIN}{PinID}/relatedboards/?limit=12{maxBoardID}";
             string json = await Get(uri);
             if (json == "[]")
                 return new List<Board>();
@@ -66,7 +66,7 @@ namespace Huaban.UWP.Api
 
         public async Task<List<Pin>> Search(string keyword, int page = 1, int per_page = 20)
         {
-            string uri = $"{Client.API_SEARCH_PIN}?q={UrlEncode(keyword)}&ijlhlz49&page={page}&per_page={per_page}&wfl=1";
+            string uri = $"{Constants.API_SEARCH_PIN}?q={UrlEncode(keyword)}&ijlhlz49&page={page}&per_page={per_page}&wfl=1";
 
             string json = await Get(uri);
             var obj = JObject.Parse(json);
@@ -78,7 +78,7 @@ namespace Huaban.UWP.Api
             string maxStr = "&max=" + max.ToString();
             if (max <= 0)
                 maxStr = "";
-            string uri = $"{Client.API_PIN}{PinID}/likes/?limit={limit}{maxStr}";
+            string uri = $"{Constants.API_PIN}{PinID}/likes/?limit={limit}{maxStr}";
             string json = await Get(uri);
 
             var obj = JObject.Parse(json);
@@ -89,7 +89,7 @@ namespace Huaban.UWP.Api
         //推荐的采集
         public async Task<List<Pin>> GetRecommendList(string PinID, int page = 1, int per_page = 10)
         {
-            string uri = $"{Client.API_PIN}{PinID}/recommend/?ijzu3ifx&page={page}&per_page={per_page}&wfl=1";
+            string uri = $"{Constants.API_PIN}{PinID}/recommend/?ijzu3ifx&page={page}&per_page={per_page}&wfl=1";
 
             string json = await Get(uri);
             var arr = JArray.Parse(json);

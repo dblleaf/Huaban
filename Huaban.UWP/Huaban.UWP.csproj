@@ -102,12 +102,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\APIBase.cs" />
-    <Compile Include="Api\BoardAPI.cs" />
-    <Compile Include="Api\CategoryAPI.cs" />
-    <Compile Include="Api\OAuthorAPI.cs" />
-    <Compile Include="Api\PinAPI.cs" />
-    <Compile Include="Api\UserAPI.cs" />
+    <Compile Include="Services\Constants.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -203,6 +198,12 @@
     <Compile Include="Models\WeeklyDetail.cs" />
     <Compile Include="Models\WeeklyHotBoardImg.cs" />
     <Compile Include="Models\WeeklyTopicBoardImg.cs" />
+    <Compile Include="Services\BoardService.cs" />
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\OAuthorService.cs" />
+    <Compile Include="Services\PinService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\BoardListViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardDetailViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardPinsViewModel.cs" />
@@ -429,6 +430,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Api\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

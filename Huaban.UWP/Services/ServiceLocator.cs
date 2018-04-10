@@ -2,7 +2,6 @@
 
 namespace Huaban.UWP.Services
 {
-    using Api;
     using Base;
     using Models;
     using Unity;
@@ -34,11 +33,11 @@ namespace Huaban.UWP.Services
             Container.RegisterInstance(context.NavigationService);
             Container.RegisterInstance<IClient>(client);
 
-            Container.RegisterType<BoardAPI, BoardAPI>();
-            Container.RegisterType<CategoryAPI, CategoryAPI>();
-            Container.RegisterType<OAuthorAPI, OAuthorAPI>();
-            Container.RegisterType<PinAPI, PinAPI>();
-            Container.RegisterType<UserAPI, UserAPI>();
+            Container.RegisterType<BoardService, BoardService>();
+            Container.RegisterType<CategoryService, CategoryService>();
+            Container.RegisterType<OAuthorService, OAuthorService>();
+            Container.RegisterType<PinService, PinService>();
+            Container.RegisterType<UserService, UserService>();
         }
         public static ServiceLocator BuildLocator()
         {

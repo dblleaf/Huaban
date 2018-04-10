@@ -1,21 +1,21 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 
-namespace Huaban.UWP.Api
+namespace Huaban.UWP.Services
 {
     using Models;
-    public class CategoryAPI : APIBase
+    public class CategoryService : ServiceBase
     {
-        public CategoryAPI(IClient client)
+        public CategoryService(IClient client)
             : base(client) { }
 
         public async Task<List<Category>> GetCategoryList()
         {
             try
             {
-                string json = await Get(Client.API_CATEGORY);
+                string json = await Get(Constants.API_CATEGORY);
                 var obj = JObject.Parse(json);
                 return Category.ParseList(obj["categories"] as JArray);
             }
@@ -39,7 +39,7 @@ namespace Huaban.UWP.Api
             if (max <= 0)
                 maxStr = "";
             nav_link = nav_link.TrimStart('/');
-            return await Get($"{Client.API_MAIN}{nav_link}?limit={limit}&max={maxStr}");
+            return await Get($"{Constants.API_MAIN}{nav_link}?limit={limit}&max={maxStr}");
         }
     }
 }

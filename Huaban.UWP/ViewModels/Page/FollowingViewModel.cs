@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -21,9 +21,9 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public UserAPI UserAPI { set; get; }
+        public UserService UserService { set; get; }
         [Dependency]
-        public BoardAPI BoardAPI { set; get; }
+        public BoardService BoardService { set; get; }
 
         public BoardListViewModel BoardListViewModel { set; get; }
 
@@ -45,7 +45,7 @@ namespace Huaban.UWP.ViewModels
             List<Pin> list = new List<Pin>();
             try
             {
-                list = await UserAPI.GetFollowing(PinListViewModel.GetMaxPinID());
+                list = await UserService.GetFollowing(PinListViewModel.GetMaxPinID());
                 foreach (var item in list)
                 {
                     item.Width = PinListViewModel.ColumnWidth;
@@ -78,7 +78,7 @@ namespace Huaban.UWP.ViewModels
             List<Board> list = new List<Board>();
             try
             {
-                list = await UserAPI.GetFollowingBoardList(Context.User.urlname, page);
+                list = await UserService.GetFollowingBoardList(Context.User.urlname, page);
                 if (list.Count == 0)
                     BoardListViewModel.BoardList.NoMore();
                 else

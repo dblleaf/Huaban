@@ -8,12 +8,11 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Commands;
-    using Views;
     using Base;
+    using Commands;
     using Models;
-    using Api;
     using Services;
+    using Views;
     public class LoginViewModel : HBViewModel
     {
         public LoginViewModel(Context context, Action<AuthToken> successAction)
@@ -96,7 +95,7 @@ namespace Huaban.UWP.ViewModels
                         IsLoading = true;
                         try
                         {
-                            var token = await Services.ServiceLocator.Resolve<OAuthorAPI>().GetToken(UserName, Password);
+                            var token = await Services.ServiceLocator.Resolve<OAuthorService>().GetToken(UserName, Password);
                             await SetToken(token);
                         }
                         catch (Exception ex)
