@@ -96,6 +96,7 @@ namespace Dblleaf.UWP.Huaban.Services
                 else if (Frame.CanGoBack)
                     Frame.GoBack();
 
+
                 DisplayBackButton();
             }
             catch (Exception ex)
