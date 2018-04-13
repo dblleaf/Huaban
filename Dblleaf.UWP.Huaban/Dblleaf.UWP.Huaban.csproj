@@ -99,7 +99,6 @@
     <Compile Include="Controls\HBFrame.cs" />
     <Compile Include="Controls\HBNavigatingCancelEventArgs.cs" />
     <Compile Include="Controls\HBNavigationEventArgs.cs" />
-    <Compile Include="Helpers\ControlHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Helpers\HbHttpHelper.cs" />
     <Compile Include="MainPage.xaml.cs">
