@@ -95,15 +95,10 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HBControl.cs" />
-    <Compile Include="Controls\HBFrame.cs" />
-    <Compile Include="Controls\HBNavigatingCancelEventArgs.cs" />
-    <Compile Include="Controls\HBNavigationEventArgs.cs" />
+    <Compile Include="Controls\HbPage.cs" />
+    <Compile Include="Helpers\TitleBarHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Helpers\HbHttpHelper.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\AuthToken.cs" />
     <Compile Include="Models\Binding.cs" />
     <Compile Include="Models\Bindings.cs" />
@@ -147,18 +142,22 @@
     <Compile Include="Services\PinService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
+    <Compile Include="Services\ThemeService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\BoardListViewModel.cs" />
     <Compile Include="ViewModels\HBViewModel.cs" />
     <Compile Include="ViewModels\Context.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Dblleaf.UWP.Huaban_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -175,9 +174,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +195,9 @@
       <Project>{58320142-247b-4d27-b5c6-95db5c366136}</Project>
       <Name>Dblleaf.UWP</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Device-PC\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

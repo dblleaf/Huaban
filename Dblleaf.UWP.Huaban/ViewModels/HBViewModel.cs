@@ -17,12 +17,10 @@ namespace Dblleaf.UWP.Huaban.ViewModels
         {
             Context = context;
             LeftHeaderVisibility = Visibility.Visible;
-
         }
         #region Properties
 
         protected Context Context { get; private set; }
-        protected NavigationService NavigationService { get { return Context.NavigationService; } }
         public bool IsLogin { get { return Context.IsLogin; } }
 
         private Visibility _LeftHeaderVisibility;
@@ -62,104 +60,6 @@ namespace Dblleaf.UWP.Huaban.ViewModels
 
         #endregion
 
-        #region Commands
-
-        private DelegateCommand _ToBoardPinsCommand;
-        public DelegateCommand ToBoardPinsCommand
-        {
-            get
-            {
-                return _ToBoardPinsCommand ?? (_ToBoardPinsCommand = new DelegateCommand(
-                    (Object obj) =>
-                    {
-                        var args = obj as ItemClickEventArgs;
-                        var item = obj as Board;
-                        if (args == null && item == null)
-                            return;
-
-                        if (args != null)
-                            item = args.ClickedItem as Board;
-                        if (item != null)
-                        {
-                            NavigationService.NavigateTo("BoardPins", item);
-                        }
-                    },
-                    (Object obj) => !IsLoading)
-                );
-            }
-        }
-
-        //ToPinDetailCommand
-        private DelegateCommand _ToPinDetailCommand;
-        public DelegateCommand ToPinDetailCommand
-        {
-            get
-            {
-                return _ToPinDetailCommand ?? (_ToPinDetailCommand = new DelegateCommand(
-                    (Object obj) =>
-                    {
-                        var args = obj as ItemClickEventArgs;
-                        var item = obj as Pin;
-                        if (args == null && item == null)
-                            return;
-
-                        if (args != null)
-                            item = args.ClickedItem as Pin;
-
-                        NavigationService.NavigateTo("PinDetail", item);
-                    },
-                    (Object obj) => !IsLoading)
-                );
-            }
-        }
-        //ToImageViewCommand
-        private DelegateCommand _ToImageViewCommand;
-        public DelegateCommand ToImageViewCommand
-        {
-            get
-            {
-                return _ToImageViewCommand ?? (_ToImageViewCommand = new DelegateCommand(
-                    (Object obj) =>
-                    {
-                        PinListViewModel model = obj as PinListViewModel;
-
-                        if (model == null)
-                            return;
-
-                        NavigationService.NavigateTo("Image", model);
-                    },
-                    (Object obj) => !IsLoading)
-                );
-            }
-        }
-
-        //ToPinDetailCommand
-        private DelegateCommand _ToUserPageCommand;
-        public DelegateCommand ToUserPageCommand
-        {
-            get
-            {
-                return _ToUserPageCommand ?? (_ToUserPageCommand = new DelegateCommand(
-                    (Object obj) =>
-                    {
-                        var args = obj as ItemClickEventArgs;
-                        var item = obj as User;
-                        if (args == null && item == null)
-                            return;
-
-                        if (args != null)
-                            item = args.ClickedItem as User;
-
-                        if (item != null)
-                        {
-                            NavigationService.NavigateTo("User", item);
-                        }
-                    },
-                    (Object obj) => !IsLoading)
-                );
-            }
-        }
-        #endregion
 
         #region Methods
 

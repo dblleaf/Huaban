@@ -17,10 +17,11 @@ namespace Dblleaf.UWP.Huaban.ViewModels
         private CategoryService CategoryService { set; get; }
         private IClient Client { set; get; }
         private UserService UserService { set; get; }
-        public Context(CategoryService categoryService, UserService userService, IClient client)
+        public Context(CategoryService categoryService, UserService userService, NavigationService navigationService, IClient client)
         {
             CategoryService = categoryService;
             UserService = userService;
+            NavigationService = navigationService;
             Client = client;
         }
         #region Properties

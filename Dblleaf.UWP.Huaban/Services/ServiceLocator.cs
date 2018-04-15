@@ -30,17 +30,11 @@ namespace Dblleaf.UWP.Huaban.Services
             Container.RegisterType<OAuthorService>();
             Container.RegisterType<PinService>();
             Container.RegisterType<UserService>();
+            Container.RegisterSingleton<Context>();
+            Container.RegisterSingleton<NavigationService>();
 
 
-
-            Container.RegisterInstance(context);
-            Container.RegisterInstance(context.NavigationService);
-            Container.RegisterInstance<IClient>(client);
-
-            var context = new Context();
-            Container.RegisterSingleton(context);
-            context.NavigationService = new NavigationService(context);
-
+            var context = Container.Resolve<Context>();
         }
         public static ServiceLocator BuildLocator()
         {

@@ -283,7 +283,7 @@ namespace Dblleaf.UWP.Huaban.ViewModels
                         item = args.ClickedItem as Pin;
                     SelectedItem = item;
                     SelecterVisibility = Visibility.Visible;
-                    NavigationService.BackEvent += NavigationService_BackEvent;
+                    Context.NavigationService.BackEvent += NavigationService_BackEvent;
                     CurrentBoardIndex = -1;
 
                 }, o => true));
@@ -300,7 +300,7 @@ namespace Dblleaf.UWP.Huaban.ViewModels
                 o =>
                 {
                     SelecterVisibility = Visibility.Collapsed;
-                    NavigationService.BackEvent -= NavigationService_BackEvent;
+                    Context.NavigationService.BackEvent -= NavigationService_BackEvent;
                 }, o => true));
             }
         }

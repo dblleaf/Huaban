@@ -12,19 +12,6 @@ namespace Dblleaf.UWP.Huaban.ViewModels
 
         #region base
 
-        public virtual void OnNavigatedTo(HBNavigationEventArgs e) { }
-
-        public virtual void OnNavigatedFrom(HBNavigationEventArgs e)
-        {
-            _LoadingCount = 0;
-            NotifyPropertyChanged("IsLoading");
-        }
-
-        public virtual bool OnNavigatingFrom(HBNavigatingCancelEventArgs e)
-        {
-            Dispose();
-            return true;
-        }
         public virtual Size ArrangeOverride(Size finalSize)
         {
             return finalSize;

@@ -6,7 +6,6 @@ using Windows.UI.Xaml.Controls;
 
 namespace Dblleaf.UWP.Huaban.Services
 {
-    using Dblleaf.UWP.Huaban.Controls;
     using Dblleaf.UWP.Huaban.ViewModels;
 
     public class ButtonVisibilityChangedEventArgs : EventArgs
@@ -21,7 +20,7 @@ namespace Dblleaf.UWP.Huaban.Services
     {
         public event EventHandler<BackRequestedEventArgs> BackEvent;
         public event EventHandler<ButtonVisibilityChangedEventArgs> ButtonVisibilityChanged;
-        private HBFrame HBFrame { get; set; }
+
         private Frame Frame { get; set; }
         private Context Context { get; set; }
         public NavigationService(Context context)
@@ -68,12 +67,6 @@ namespace Dblleaf.UWP.Huaban.Services
             }
         }
 
-        public void SetFrame(Frame MainFrame, HBFrame detailFrame)
-        {
-            Frame = MainFrame;
-            HBFrame = detailFrame;
-            SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService_BackRequested;
-        }
 
         public void MenuNavigateTo(Type sourcePageType, object parameter = null)
         {
@@ -83,7 +76,7 @@ namespace Dblleaf.UWP.Huaban.Services
 
         public void NavigateTo(Type sourcePageType, object parameter = null, string targetName = null)
         {
-            HBFrame.Navigate(sourcePageType, parameter, targetName);
+            //HBFrame.Navigate(sourcePageType, parameter, targetName);
             DisplayBackButton();
         }
 
@@ -91,10 +84,10 @@ namespace Dblleaf.UWP.Huaban.Services
         {
             try
             {
-                if (HBFrame.CanGoBack)
-                    HBFrame.GoBack();
-                else if (Frame.CanGoBack)
-                    Frame.GoBack();
+                //if (HBFrame.CanGoBack)
+                //    HBFrame.GoBack();
+                //else if (Frame.CanGoBack)
+                //    Frame.GoBack();
 
 
                 DisplayBackButton();
@@ -109,7 +102,7 @@ namespace Dblleaf.UWP.Huaban.Services
         {
             get
             {
-                return HBFrame.CanGoBack || Frame.CanGoBack;
+                return false;// HBFrame.CanGoBack || Frame.CanGoBack;
             }
         }
         public void DisplayBackButton()
