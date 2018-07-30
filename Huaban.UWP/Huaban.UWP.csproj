@@ -21,9 +21,12 @@
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>90958D1EAD49D10151100B4C4A33CE1F21CE34EB</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>97A32B141373660DB7490F70718A4D6AF9252C44</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
+    <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+    <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
+    <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -99,6 +102,8 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Huaban.UWP_StoreKey.pfx" />
+    <None Include="Huaban.UWP_TemporaryKey.pfx" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>

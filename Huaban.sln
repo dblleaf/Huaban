@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2018
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huaban.UWP", "Huaban.UWP\Huaban.UWP.csproj", "{A77FD625-12E9-467D-A49E-5916FD36DB1F}"
 EndProject
@@ -9,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{6C3724AE-091
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App1", "App1\App1.csproj", "{C3FAA3A5-A411-4566-87F1-491290CB241A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,8 +46,31 @@ Global
 		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.ActiveCfg = Release|x86
 		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.Build.0 = Release|x86
 		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.Deploy.0 = Release|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|ARM.ActiveCfg = Debug|ARM
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|ARM.Build.0 = Debug|ARM
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|ARM.Deploy.0 = Debug|ARM
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|x64.ActiveCfg = Debug|x64
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|x64.Build.0 = Debug|x64
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|x64.Deploy.0 = Debug|x64
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|x86.ActiveCfg = Debug|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|x86.Build.0 = Debug|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Debug|x86.Deploy.0 = Debug|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|Any CPU.ActiveCfg = Release|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|ARM.ActiveCfg = Release|ARM
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|ARM.Build.0 = Release|ARM
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|ARM.Deploy.0 = Release|ARM
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|x64.ActiveCfg = Release|x64
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|x64.Build.0 = Release|x64
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|x64.Deploy.0 = Release|x64
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|x86.ActiveCfg = Release|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|x86.Build.0 = Release|x86
+		{C3FAA3A5-A411-4566-87F1-491290CB241A}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFE12F65-0DED-4183-936F-3B8706C9234B}
 	EndGlobalSection
 EndGlobal

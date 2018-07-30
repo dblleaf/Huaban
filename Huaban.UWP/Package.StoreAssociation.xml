@@ -2,6 +2,7 @@
 <StoreAssociation xmlns="http://schemas.microsoft.com/appx/2010/storeassociation">
   <Publisher>CN=5875BCA4-CAAB-47CB-8D31-34FF173FD4B5</Publisher>
   <PublisherDisplayName>song-zhaoli</PublisherDisplayName>
+  <DeveloperAccountType>MSA</DeveloperAccountType>
   <GeneratePackageHash>http://www.w3.org/2001/04/xmlenc#sha256</GeneratePackageHash>
   <SupportedLocales>
     <Language Code="af" InMinimumRequirementSet="true" />

@@ -203,20 +203,20 @@ namespace Huaban.UWP.ViewModels
                     {
                         DisplayTheme();
 
-                        if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_50")))
-                        {
-                            string msg = @"这次更新内容主要是解决闪退的问题，主要是后端代码优化，UI新功能并没有大的变化。为了迎接下一次更新，请大家在“设置”中清除缓存，无法清除的也可以卸载重新安装，卸载后遇到不能安装的情况，请重启设备或者过一段时间后重新安装。";
-                            var dialog = new MessageDialog(msg, "版本更新 v1.2.50");
+                        //if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_52")))
+                        //{
+                        //    string msg = @"这次更新内容主要是解决闪退的问题，主要是后端代码优化，UI新功能并没有大的变化。为了迎接下一次更新，请大家在“设置”中清除缓存，无法清除的也可以卸载重新安装，卸载后遇到不能安装的情况，请重启设备或者过一段时间后重新安装。";
+                        //    var dialog = new MessageDialog(msg, "版本更新 v1.2.50");
 
-                            //dialog.Commands.Add(new UICommand("评价应用", async o =>
-                            //{
-                            //    await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
-                            //}));
-                            dialog.Commands.Add(new UICommand("我知道了"));
+                        //    //dialog.Commands.Add(new UICommand("评价应用", async o =>
+                        //    //{
+                        //    //    await Windows.System.Launcher.LaunchUriAsync(new Uri("ms-windows-store://review/?ProductId=9NBLGGH5FWXP"));
+                        //    //}));
+                        //    dialog.Commands.Add(new UICommand("我知道了"));
 
-                            await dialog.ShowAsync();
-                            StorageHelper.SaveSetting("v1_2_50", "1");
-                        }
+                        //    await dialog.ShowAsync();
+                        //    StorageHelper.SaveSetting("v1_2_50", "1");
+                        //}
 
                     }
                     catch (Exception ex)

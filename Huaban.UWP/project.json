@@ -1,9 +1,9 @@
 ﻿{
   "dependencies": {
-    "Microsoft.NETCore.UniversalWindowsPlatform": "6.0.8",
+    "Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5",
     "Microsoft.Xaml.Behaviors.Uwp.Managed": "2.0.0",
     "Newtonsoft.Json": "11.0.2",
-    "Unity": "5.8.4"
+    "Unity": "5.8.6"
   },
   "frameworks": {
     "uap10.0.14393": {}
