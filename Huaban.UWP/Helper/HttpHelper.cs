@@ -72,7 +72,6 @@ namespace Huaban.UWP
 
         public async Task<T> Post<T>(string uri, Func<string, T> func, params KeyValuePair<string, string>[] valueNameConnection)
         {
-            HttpRequestMessage requestMessage = CreateRequest(HttpMethod.Post, new Uri(uri), valueNameConnection);
             var result = await Post(uri);
             return func(result);
         }
