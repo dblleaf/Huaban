@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="iHuaban.App.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:iHuaban.App"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid>
+        <Pivot Style="{ThemeResource CenterHeaderPivot}">
+            <PivotItem>
+                <PivotItem.Header>
+                    <StackPanel HorizontalAlignment="Center" Padding="0 0 0 4">
+                        <TextBlock FontSize="14" Padding="0 0 0 4">手机</TextBlock>
+                        <FontIcon FontSize="24" FontFamily="Segoe MDL2 Assets" Glyph="&#xE8EA;"/>
+                    </StackPanel>
+                </PivotItem.Header>
+                <PivotItem.Content>
+                    <Grid></Grid>
+                </PivotItem.Content>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <StackPanel HorizontalAlignment="Center" Padding="0 0 0 4">
+                        <TextBlock FontSize="14" Padding="0 0 0 4">电脑</TextBlock>
+                        <FontIcon FontSize="24" FontFamily="Segoe MDL2 Assets" Glyph="&#xE770;"/>
+                    </StackPanel>
+                </PivotItem.Header>
+                <PivotItem.Content>
+                    <Grid></Grid>
+                </PivotItem.Content>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+</Page>
