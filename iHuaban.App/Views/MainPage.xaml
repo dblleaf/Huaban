@@ -6,14 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid>
-        <Pivot Style="{ThemeResource CenterHeaderPivot}">
+    <Page.Background>
+        <AcrylicBrush BackgroundSource="HostBackdrop" TintOpacity="0.8"/>
+    </Page.Background>
+    <Grid  Padding="0 32 0 0">
+        <Pivot>
             <PivotItem>
                 <PivotItem.Header>
-                    <StackPanel HorizontalAlignment="Center" Padding="0 0 0 4">
-                        <TextBlock FontSize="14" Padding="0 0 0 4">手机</TextBlock>
-                        <FontIcon FontSize="24" FontFamily="Segoe MDL2 Assets" Glyph="&#xE8EA;"/>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8EA;"/>
+                        <TextBlock FontSize="14" Padding="8 0 0 0">手机</TextBlock>
+
                     </StackPanel>
                 </PivotItem.Header>
                 <PivotItem.Content>
@@ -22,9 +25,34 @@
             </PivotItem>
             <PivotItem>
                 <PivotItem.Header>
-                    <StackPanel HorizontalAlignment="Center" Padding="0 0 0 4">
-                        <TextBlock FontSize="14" Padding="0 0 0 4">电脑</TextBlock>
-                        <FontIcon FontSize="24" FontFamily="Segoe MDL2 Assets" Glyph="&#xE770;"/>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE770;"/>
+                        <TextBlock  FontSize="14" Padding="8 0 0 0">电脑</TextBlock>
+
+                    </StackPanel>
+                </PivotItem.Header>
+                <PivotItem.Content>
+                    <Grid></Grid>
+                </PivotItem.Content>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;"/>
+                        <TextBlock  FontSize="14" Padding="8 0 0 0">发现</TextBlock>
+
+                    </StackPanel>
+                </PivotItem.Header>
+                <PivotItem.Content>
+                    <Grid></Grid>
+                </PivotItem.Content>
+            </PivotItem>
+            <PivotItem>
+                <PivotItem.Header>
+                    <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;"/>
+                        <TextBlock  FontSize="14" Padding="8 0 0 0">我的</TextBlock>
+
                     </StackPanel>
                 </PivotItem.Header>
                 <PivotItem.Content>
