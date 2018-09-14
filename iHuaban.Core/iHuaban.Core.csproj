@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{58320142-247B-4D27-B5C6-95DB5C366136}</ProjectGuid>
+    <ProjectGuid>{9AEC12D5-AFDA-4E9E-ACAE-708179B2B260}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dblleaf.UWP</RootNamespace>
-    <AssemblyName>Dblleaf.UWP</AssemblyName>
+    <RootNamespace>iHuaban.Core</RootNamespace>
+    <AssemblyName>iHuaban.Core</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
@@ -106,25 +106,27 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="HttpHelper.cs" />
-    <Compile Include="Controls\ExtendGridView.cs" />
-    <Compile Include="DelegateCommand.cs" />
-    <Compile Include="IncrementalLoadingList.cs" />
-    <Compile Include="ObservableObject.cs" />
+    <Compile Include="Commands\DelegateCommand.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Helpers\HttpHelper.cs" />
+    <Compile Include="Helpers\IHttpHelper.cs" />
+    <Compile Include="IPage.cs" />
+    <Compile Include="Models\IncrementalLoadingList.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\Dblleaf.UWP.rd.xml" />
+    <EmbeddedResource Include="Properties\iHuaban.Core.rd.xml" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>2.0.0</Version>
+      <Version>6.1.7</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>11.0.2</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}</ProjectGuid>
+    <ProjectGuid>{EBBC3CEE-CF70-4072-B954-6FDE07D446BE}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dblleaf.UWP.Huaban</RootNamespace>
-    <AssemblyName>Dblleaf.UWP.Huaban</AssemblyName>
+    <RootNamespace>iHuaban.App</RootNamespace>
+    <AssemblyName>iHuaban.App</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17134.0</TargetPlatformVersion>
@@ -17,7 +17,7 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
-    <PackageCertificateKeyFile>Dblleaf.UWP.Huaban_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>iHuaban.App_TemporaryKey.pfx</PackageCertificateKeyFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -95,70 +95,28 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\HbPage.cs" />
-    <Compile Include="Helpers\TitleBarHelper.cs" />
-    <Compile Include="Helpers\StorageHelper.cs" />
-    <Compile Include="Helpers\HbHttpHelper.cs" />
-    <Compile Include="Models\AuthToken.cs" />
-    <Compile Include="Models\Binding.cs" />
-    <Compile Include="Models\Bindings.cs" />
-    <Compile Include="Models\Board.cs" />
-    <Compile Include="Models\BoardCover.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Channel.cs" />
-    <Compile Include="Models\ChannelType.cs" />
-    <Compile Include="Models\Client.cs" />
-    <Compile Include="Models\Comment.cs" />
-    <Compile Include="Models\Commodity.cs" />
-    <Compile Include="Models\Content.cs" />
-    <Compile Include="Models\Feed.cs" />
-    <Compile Include="Models\FindFriends.cs" />
-    <Compile Include="Models\IClient.cs" />
-    <Compile Include="Models\ImageFile.cs" />
-    <Compile Include="Models\JsonExtension.cs" />
-    <Compile Include="Models\Message.cs" />
-    <Compile Include="Models\NavItemModel.cs" />
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Pin.cs" />
-    <Compile Include="Models\Profile.cs" />
-    <Compile Include="Models\Search.cs" />
-    <Compile Include="Models\ServerSetting.cs" />
-    <Compile Include="Models\Setting.cs" />
-    <Compile Include="Models\SNSType.cs" />
-    <Compile Include="Models\SubCategory.cs" />
-    <Compile Include="Models\Unread.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserInfo.cs" />
-    <Compile Include="Models\Weekly.cs" />
-    <Compile Include="Models\WeeklyBoard.cs" />
-    <Compile Include="Models\WeeklyDetail.cs" />
-    <Compile Include="Models\WeeklyHotBoardImg.cs" />
-    <Compile Include="Models\WeeklyTopicBoardImg.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\PinCollection.cs" />
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CategoryService.cs" />
-    <Compile Include="Services\Constants.cs" />
-    <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\Navigation\IPageWithViewModel.cs" />
-    <Compile Include="Services\OAuthorService.cs" />
-    <Compile Include="Services\PinService.cs" />
-    <Compile Include="Services\ServiceBase.cs" />
-    <Compile Include="Services\ServiceLocator.cs" />
-    <Compile Include="Services\ThemeService.cs" />
-    <Compile Include="Services\UserService.cs" />
-    <Compile Include="ViewModels\BoardListViewModel.cs" />
-    <Compile Include="ViewModels\HBViewModel.cs" />
-    <Compile Include="ViewModels\Context.cs" />
+    <Compile Include="Services\PinsResultService.cs" />
+    <Compile Include="Services\IHbService.cs" />
+    <Compile Include="Services\IPinsResultService.cs" />
+    <Compile Include="TemplateSelectors\MainPagePivotDataTemplateSelector.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
-    <Compile Include="ViewModels\ViewModelBase.cs" />
-    <Compile Include="Views\MainView.xaml.cs">
-      <DependentUpon>MainView.xaml</DependentUpon>
+    <Compile Include="Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="iHuaban.App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />
@@ -175,30 +133,29 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\MainView.xaml">
+    <Page Include="Themes\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
-      <Version>6.0.8</Version>
-    </PackageReference>
-    <PackageReference Include="Newtonsoft.Json">
-      <Version>11.0.2</Version>
-    </PackageReference>
-    <PackageReference Include="Unity">
-      <Version>5.8.5</Version>
+      <Version>6.1.7</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Dblleaf.UWP\Dblleaf.UWP.csproj">
-      <Project>{58320142-247b-4d27-b5c6-95db5c366136}</Project>
-      <Name>Dblleaf.UWP</Name>
+    <ProjectReference Include="..\iHuaban.Core\iHuaban.Core.csproj">
+      <Project>{9aec12d5-afda-4e9e-acae-708179b2b260}</Project>
+      <Name>iHuaban.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Device-PC\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
