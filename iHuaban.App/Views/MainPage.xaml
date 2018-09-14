@@ -5,60 +5,25 @@
     xmlns:local="using:iHuaban.App"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:s="using:iHuaban.App.TemplateSelectors"
+    RequestedTheme="Dark"
+    DataContext="{x:Bind ViewModel}"
     mc:Ignorable="d">
+    <Page.Resources>
+        <s:MainPagePivotDataTemplateSelector
+            PinListTemplate="{StaticResource PinListTemplate}"
+            FindTemplate="{StaticResource FindTemplate}"
+            MineTemplate="{StaticResource MineTemplate}"
+            x:Key="MainPagePivotDataTemplateSelector">
+        </s:MainPagePivotDataTemplateSelector>
+    </Page.Resources>
     <Page.Background>
-        <AcrylicBrush BackgroundSource="HostBackdrop" TintOpacity="0.8"/>
+        <AcrylicBrush BackgroundSource="HostBackdrop" TintColor="#FF000000" TintOpacity="0.6"/>
     </Page.Background>
-    <Grid  Padding="0 32 0 0">
-        <Pivot>
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE8EA;"/>
-                        <TextBlock FontSize="14" Padding="8 0 0 0">手机</TextBlock>
-
-                    </StackPanel>
-                </PivotItem.Header>
-                <PivotItem.Content>
-                    <Grid></Grid>
-                </PivotItem.Content>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE770;"/>
-                        <TextBlock  FontSize="14" Padding="8 0 0 0">电脑</TextBlock>
-
-                    </StackPanel>
-                </PivotItem.Header>
-                <PivotItem.Content>
-                    <Grid></Grid>
-                </PivotItem.Content>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE721;"/>
-                        <TextBlock  FontSize="14" Padding="8 0 0 0">发现</TextBlock>
-
-                    </StackPanel>
-                </PivotItem.Header>
-                <PivotItem.Content>
-                    <Grid></Grid>
-                </PivotItem.Content>
-            </PivotItem>
-            <PivotItem>
-                <PivotItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE77B;"/>
-                        <TextBlock  FontSize="14" Padding="8 0 0 0">我的</TextBlock>
-
-                    </StackPanel>
-                </PivotItem.Header>
-                <PivotItem.Content>
-                    <Grid></Grid>
-                </PivotItem.Content>
-            </PivotItem>
+    <Grid Padding="0 32 0 0">
+        <Pivot ItemsSource="{Binding Path=Menu}"
+            HeaderTemplate="{StaticResource MainPagePivotHeaderTemplate}"
+            ItemTemplateSelector="{StaticResource MainPagePivotDataTemplateSelector}">
         </Pivot>
     </Grid>
 </Page>

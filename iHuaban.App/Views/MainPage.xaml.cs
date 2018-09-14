@@ -1,16 +1,20 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using iHuaban.App.ViewModels;
+using iHuaban.Core;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.Views
 {
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, IPage<MainViewModel>
     {
         public MainPage()
         {
             this.InitializeComponent();
         }
-        protected override void OnApplyTemplate()
+
+        private MainViewModel vm;
+        public MainViewModel ViewModel
         {
-            base.OnApplyTemplate();
+            get => vm ?? (vm = new MainViewModel());
         }
     }
 }

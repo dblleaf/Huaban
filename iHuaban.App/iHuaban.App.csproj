@@ -95,6 +95,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\File.cs" />
+    <Compile Include="Models\Menu.cs" />
+    <Compile Include="Models\Pin.cs" />
+    <Compile Include="Models\PinCollection.cs" />
+    <Compile Include="Services\BoardService.cs" />
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\PinsResultService.cs" />
+    <Compile Include="Services\IHbService.cs" />
+    <Compile Include="Services\IPinsResultService.cs" />
+    <Compile Include="TemplateSelectors\MainPagePivotDataTemplateSelector.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\PinListViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -125,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Themes\Templates.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -135,7 +151,12 @@
       <Version>6.1.7</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\iHuaban.Core\iHuaban.Core.csproj">
+      <Project>{9aec12d5-afda-4e9e-acae-708179b2b260}</Project>
+      <Name>iHuaban.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

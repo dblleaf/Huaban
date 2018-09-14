@@ -107,11 +107,14 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Constrants.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\IHttpHelper.cs" />
-    <Compile Include="Model\ViewModelBase.cs" />
-    <Compile Include="Model\ObservableObject.cs" />
+    <Compile Include="IPage.cs" />
+    <Compile Include="Models\IncrementalLoadingList.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\iHuaban.Core.rd.xml" />
   </ItemGroup>

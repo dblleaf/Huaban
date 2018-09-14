@@ -1,0 +1,26 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:iHuaban.App">
+    <DataTemplate x:Key="PinListTemplate">
+        <Grid Margin="8">
+            <TextBlock>PinList</TextBlock>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="FindTemplate">
+        <Grid Margin="8">
+            <TextBlock>Find</TextBlock>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="MineTemplate">
+        <Grid Margin="8">
+            <TextBlock>Mine</TextBlock>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="MainPagePivotHeaderTemplate">
+        <StackPanel Orientation="Horizontal">
+            <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding Path=Icon}"/>
+            <TextBlock FontSize="14" Padding="8 0 0 0" Text="{Binding Path=Title}"></TextBlock>
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>
