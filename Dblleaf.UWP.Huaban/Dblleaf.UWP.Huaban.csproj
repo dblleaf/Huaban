@@ -138,6 +138,7 @@
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\Constants.cs" />
     <Compile Include="Services\NavigationService.cs" />
+    <Compile Include="Services\Navigation\IPageWithViewModel.cs" />
     <Compile Include="Services\OAuthorService.cs" />
     <Compile Include="Services\PinService.cs" />
     <Compile Include="Services\ServiceBase.cs" />
