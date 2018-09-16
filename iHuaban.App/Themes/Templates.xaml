@@ -23,4 +23,10 @@
             <TextBlock FontSize="14" Padding="8 0 0 0" Text="{Binding Path=Title}"></TextBlock>
         </StackPanel>
     </DataTemplate>
+
+    <DataTemplate x:Key="PinListItemTemplate">
+        <Grid>
+            
+        </Grid>
+    </DataTemplate>
 </ResourceDictionary>

@@ -13,7 +13,6 @@ namespace iHuaban.App.Models
         public string Title { set; get; }
         public string Icon { set; get; }
         public string Template { set; get; }
-        public string ApiBoard { set; get; }
         public ViewModelBase ViewModel { set; get; }
     }
 }

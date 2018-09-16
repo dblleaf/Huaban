@@ -25,9 +25,8 @@ namespace iHuaban.App.ViewModels
             get { return _IsLoading; }
             set { SetValue(ref _IsLoading, value); }
         }
-        public PinListViewModel(string board, IPinsResultService pinsResultService)
+        public PinListViewModel(IPinsResultService pinsResultService)
         {
-            Board = board;
             PinsResultService = pinsResultService;
             PinList = new IncrementalLoadingList<Pin>(GetData);
         }
