@@ -14,7 +14,7 @@ namespace iHuaban.App.ViewModels
         private string Board { set; get; }
         private IPinsResultService PinsResultService { set; get; }
         private IncrementalLoadingList<Pin> _PinList;
-        public IncrementalLoadingList<Pin> PinList
+        public IncrementalLoadingList<Pin> Data
         {
             get { return _PinList; }
             set { SetValue(ref _PinList, value); }
@@ -28,23 +28,24 @@ namespace iHuaban.App.ViewModels
         public PinListViewModel(IPinsResultService pinsResultService)
         {
             PinsResultService = pinsResultService;
-            PinList = new IncrementalLoadingList<Pin>(GetData);
+            Data = new IncrementalLoadingList<Pin>(GetData);
         }
 
         private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
         {
-            if (Board == null)
+            if (IsLoading)
+            {
                 return new List<Pin>();
-
+            }
             IsLoading = true;
             try
             {
                 var list = await PinsResultService.GetPinsAsync(20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
                 if (list.Count() == 0)
-                    PinList.NoMore();
+                    Data.NoMore();
                 else
-                    PinList.HasMore();
+                    Data.HasMore();
                 return list;
             }
             catch (Exception ex)
@@ -59,7 +60,15 @@ namespace iHuaban.App.ViewModels
 
         private long GetMaxId()
         {
-            return PinList[PinList.Count - 1].PinId;
+            if (Data?.Count > 0)
+            {
+                return Data[Data.Count - 1].PinId;
+            }
+            else
+            {
+                return 0;
+            }
+
         }
     }
 }

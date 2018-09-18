@@ -14,7 +14,7 @@ namespace iHuaban.App.Services
 
         public override string GetApiPinsUrl()
         {
-            return GetApiUrl() + ResourceName;
+            return GetApiUrl() + ResourceName + "/pins";
         }
     }
 }

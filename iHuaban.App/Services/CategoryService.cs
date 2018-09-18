@@ -4,7 +4,7 @@ namespace iHuaban.App.Services
 {
     public class CategoryService : PinsResultService
     {
-        public CategoryService(string categoryName) 
+        public CategoryService(string categoryName)
             : base(categoryName)
         { }
 
@@ -15,7 +15,7 @@ namespace iHuaban.App.Services
 
         public override string GetApiPinsUrl()
         {
-            return GetApiUrl() + ResourceName;
+            return GetApiUrl() + ResourceName + "/pins/";
         }
     }
 }

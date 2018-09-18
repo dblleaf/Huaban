@@ -108,11 +108,13 @@
   <ItemGroup>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\ExtendGridView.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\IHttpHelper.cs" />
     <Compile Include="IPage.cs" />
     <Compile Include="Models\IncrementalLoadingList.cs" />
+    <Compile Include="Models\ScaleSize.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

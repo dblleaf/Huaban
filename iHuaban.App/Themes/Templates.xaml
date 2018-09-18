@@ -1,23 +1,75 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:control="using:iHuaban.Core.Controls"
+    xmlns:m="using:iHuaban.Core.Models"
     xmlns:local="using:iHuaban.App">
-    <DataTemplate x:Key="PinListTemplate">
-        <Grid Margin="8">
-            <TextBlock>PinList</TextBlock>
+    <DataTemplate x:Key="TemplatePhone">
+        <Grid 
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=PinWidth}"
+            Height="{Binding ElementName=gridView,Path=PinHeight}">
+            <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="FindTemplate">
+    <DataTemplate x:Key="TemplatePC">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=PinWidth}"
+            Height="{Binding ElementName=gridView,Path=PinHeight}">
+            <Image Source="{Binding file.FW554}" Stretch="UniformToFill"/>
+        </Grid>
+    </DataTemplate>
+    <DataTemplate x:Key="TemplateGrid">
+        <Grid>
+            <control:ExtendGridView x:Name="gridView"
+                ScaleSize="{Binding ScaleSize}"
+                Padding="6" PinMinWidth="{Binding PinMinWidth}"
+                ItemsSource="{Binding ViewModel.Data}"
+                ItemTemplate="{Binding ItemTemplate}">
+                <control:ExtendGridView.Resources>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Padding" Value="0"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewItem">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <!--缺省样式-->
+                                                <VisualState x:Name="Normal" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid x:Name="ContentBackground">
+                                            <ContentPresenter
+                                            Content="{TemplateBinding Content}"
+                                            Margin="{TemplateBinding Padding}" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </control:ExtendGridView.Resources>
+            </control:ExtendGridView>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateFind">
         <Grid Margin="8">
             <TextBlock>Find</TextBlock>
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="MineTemplate">
+    <DataTemplate x:Key="TemplateMine">
         <Grid Margin="8">
             <TextBlock>Mine</TextBlock>
         </Grid>
     </DataTemplate>
-    <DataTemplate x:Key="MainPagePivotHeaderTemplate">
+    <DataTemplate x:Key="TemplateMainPagePivotHeader">
         <StackPanel Orientation="Horizontal">
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding Path=Icon}"/>
             <TextBlock FontSize="14" Padding="8 0 0 0" Text="{Binding Path=Title}"></TextBlock>
@@ -26,7 +78,7 @@
 
     <DataTemplate x:Key="PinListItemTemplate">
         <Grid>
-            
+
         </Grid>
     </DataTemplate>
 </ResourceDictionary>

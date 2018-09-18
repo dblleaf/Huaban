@@ -23,7 +23,7 @@ namespace iHuaban.App.Models
         public int like_count { set; get; }
         public int comment_count { set; get; }
         public int repin_count { set; get; }
-        public long PinId { set; get; }
+        public long PinId => pin_id;
 
         public File file { set; get; }
     }

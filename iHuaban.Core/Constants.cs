@@ -19,8 +19,11 @@
         public const string MenuFind = "发现";
         public const string MenuMine = "我的";
 
-        public const string TemplatePinList = "PinListTemplate";
-        public const string TemplateFind = "FindTemplate";
-        public const string TemplateMine = "MineTemplate";
+        public const string TemplateGrid = "TemplateGrid";
+        public const string TemplateFind = "TemplateFind";
+        public const string TemplateMine = "TemplateMine";
+
+        public const string TemplatePhone = "TemplatePhone";
+        public const string TemplatePC = "TemplatePC";
     }
 }

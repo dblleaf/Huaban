@@ -10,9 +10,9 @@
     mc:Ignorable="d">
     <Page.Resources>
         <s:MainPagePivotDataTemplateSelector
-            PinListTemplate="{StaticResource PinListTemplate}"
-            FindTemplate="{StaticResource FindTemplate}"
-            MineTemplate="{StaticResource MineTemplate}"
+            TemplateGrid="{StaticResource TemplateGrid}"
+            TemplateFind="{StaticResource TemplateFind}"
+            TemplateMine="{StaticResource TemplateMine}"
             x:Key="MainPagePivotDataTemplateSelector">
         </s:MainPagePivotDataTemplateSelector>
     </Page.Resources>
@@ -21,7 +21,7 @@
     </Page.Background>
     <Grid Padding="0 32 0 0">
         <Pivot ItemsSource="{Binding Path=Menu}"
-            HeaderTemplate="{StaticResource MainPagePivotHeaderTemplate}"
+            HeaderTemplate="{StaticResource TemplateMainPagePivotHeader}"
             ItemTemplateSelector="{StaticResource MainPagePivotDataTemplateSelector}">
         </Pivot>
     </Grid>

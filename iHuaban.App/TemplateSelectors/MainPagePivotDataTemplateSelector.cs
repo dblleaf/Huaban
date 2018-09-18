@@ -12,23 +12,24 @@ namespace iHuaban.App.TemplateSelectors
 {
     public class MainPagePivotDataTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate PinListTemplate { set; get; }
-        public DataTemplate FindTemplate { set; get; }
-        public DataTemplate MineTemplate { set; get; }
+        public DataTemplate TemplateGrid { set; get; }
+
+        public DataTemplate TemplateFind { set; get; }
+        public DataTemplate TemplateMine { set; get; }
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
             var menu = item as Menu;
-            if (menu?.Template == Constants.TemplatePinList)
+            if (menu?.Template == Constants.TemplateGrid)
             {
-                return PinListTemplate;
+                return TemplateGrid;
             }
             else if (menu?.Template == Constants.TemplateFind)
             {
-                return FindTemplate;
+                return TemplateFind;
             }
             else if (menu?.Template == Constants.TemplateMine)
             {
-                return MineTemplate;
+                return TemplateMine;
             }
             return base.SelectTemplateCore(item, container);
         }

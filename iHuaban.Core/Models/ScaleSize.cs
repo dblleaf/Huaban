@@ -1,0 +1,4 @@
+﻿namespace iHuaban.Core.Models
+{
+    
+}
