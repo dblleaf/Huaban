@@ -8,39 +8,41 @@ using System.Text;
 using System.Threading.Tasks;
 using iHuaban.Core;
 using iHuaban.App.Services;
+using iHuaban.Core.Helpers;
 
 namespace iHuaban.App.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        public ObservableCollection<Menu> Menu { set; get; } = new ObservableCollection<Menu>
+        private HttpHelper httpHelper => new HttpHelper();
+        public ObservableCollection<Menu> Menu => new ObservableCollection<Menu>
         {
             new Menu
             {
                 Title = Constants.MenuPhone,
                 Icon = "\uE8EA",
                 Template = Constants.TemplateGrid,
-                PinMinWidth = 236,
+                CellMinWidth = 236,
                 ScaleSize = "750:1334",
                 ItemTemplateName = Constants.TemplatePhone,
-                ViewModel = new PinListViewModel(new BoardService(Constants.ApiPhoneBoard))
+                ViewModel = new PinListViewModel(new BoardService(Constants.ApiPhoneBoard, httpHelper))
             },
             new Menu
             {
                 Title = Constants.MenuPC,
                 Icon = "\uE770",
                 Template = Constants.TemplateGrid,
-                PinMinWidth = 360,
+                CellMinWidth = 360,
                 ScaleSize = "1920:1080",
                 ItemTemplateName = Constants.TemplatePC,
-                ViewModel = new PinListViewModel(new BoardService(Constants.ApiPCBoard))
+                ViewModel = new PinListViewModel(new BoardService(Constants.ApiPCBoard, httpHelper))
             },
             new Menu
             {
                 Title = Constants.MenuFind,
                 Icon = "\uE721",
                 Template = Constants.TemplateFind,
-                ViewModel = new SearchViewModel()
+                ViewModel = new SearchViewModel(),
             },
             new Menu
             {

@@ -14,7 +14,7 @@ namespace iHuaban.App.Models
         public string Title { set; get; }
         public string Icon { set; get; }
         public string Template { set; get; }
-        public double PinMinWidth { set; get; }
+        public double CellMinWidth { set; get; }
         public string ScaleSize { set; get; }
         public string ItemTemplateName { set; get; }
         public ViewModelBase ViewModel { set; get; }

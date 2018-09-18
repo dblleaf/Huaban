@@ -1,20 +1,13 @@
-﻿using iHuaban.Core;
+﻿using iHuaban.App.Models;
+using iHuaban.Core;
+using iHuaban.Core.Helpers;
 
 namespace iHuaban.App.Services
 {
-    public class BoardService : PinsResultService
+    public class BoardService : PinsResultService<Board>
     {
-        public BoardService(string boardName) : base(boardName)
+        public BoardService(string boardName, HttpHelper httpHelper)
+            : base($"{Constants.ApiBoardsName}/{boardName}/", httpHelper)
         { }
-
-        public override string GetApiUrl()
-        {
-            return Constants.ApiBoards;
-        }
-
-        public override string GetApiPinsUrl()
-        {
-            return GetApiUrl() + ResourceName + "/pins";
-        }
     }
 }

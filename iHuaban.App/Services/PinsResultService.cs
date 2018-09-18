@@ -9,32 +9,23 @@ using iHuaban.Core.Helpers;
 
 namespace iHuaban.App.Services
 {
-    public abstract class PinsResultService : IPinsResultService
+    public abstract class PinsResultService<T> : HbService<T>, IPinsResultService<T> where T : new()
     {
-        public string ResourceName { set; get; }
-        private HttpHelper helper { set; get; } = new HttpHelper();
-
-        public PinsResultService(string resourceName)
+        private HbService<PinCollection> PinResultService { set; get; }
+        public PinsResultService(string resourceName, HttpHelper helper)
+            : base(resourceName, helper)
         {
-            ResourceName = resourceName;
+            PinResultService = new HbService<PinCollection>($"{resourceName}{Constants.ApiPinsName}/", helper);
         }
-        public abstract string GetApiUrl();
-        public abstract string GetApiPinsUrl();
 
-        public IEnumerable<Pin> GetPins(int limit = 0, long max = 0)
+        public PinCollection GetPins(int limit = 0, long max = 0)
         {
             return GetPinsAsync(limit, max).Result;
         }
 
-        public async Task<IEnumerable<Pin>> GetPinsAsync(int limit = 20, long max = 0)
+        public async Task<PinCollection> GetPinsAsync(int limit = 20, long max = 0)
         {
-            List<KeyValuePair<string, long>> param = new List<KeyValuePair<string, long>>()
-            {
-                new KeyValuePair<string, long>("limit", limit),
-                new KeyValuePair<string, long>("max", max)
-            };
-            var result = await helper.GetAsync<PinCollection>(GetApiPinsUrl() + param.ToQueryString());
-            return result.Pins;
+            return await PinResultService.GetAsync(limit, max);
         }
     }
 }

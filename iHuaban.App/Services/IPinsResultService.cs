@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
-    public interface IPinsResultService
+    public interface IPinsResultService<T> : IHbService<T> where T : new()
     {
-        IEnumerable<Pin> GetPins(int limit = 0, long max = 0);
-        Task<IEnumerable<Pin>> GetPinsAsync(int limit = 0, long max = 0);
+        PinCollection GetPins(int limit = 0, long max = 0);
+        Task<PinCollection> GetPinsAsync(int limit = 0, long max = 0);
     }
 }

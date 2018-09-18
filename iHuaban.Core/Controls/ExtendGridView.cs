@@ -29,7 +29,7 @@ namespace iHuaban.Core.Controls
 
                 double width = e.NewSize.Width - this.Padding.Left - this.Padding.Right;
 
-                double col = Math.Floor(width / PinMinWidth);
+                double col = Math.Floor(width / CellMinWidth);
 
                 //if (col <= 1)
                 //    col = 2;
@@ -38,10 +38,10 @@ namespace iHuaban.Core.Controls
                 //if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
                 //    w = 6.1;
 
-                PinWidth = (double)Math.Floor((width) / col);
+                CellWidth = (double)Math.Floor((width) / col);
                 if (scaleSize?.Count == 2)
                 {
-                    PinHeight = PinWidth * scaleSize[1] / scaleSize[0];
+                    CellHeight = CellWidth * scaleSize[1] / scaleSize[0];
                 }
             }
             catch (Exception ex)
@@ -68,26 +68,26 @@ namespace iHuaban.Core.Controls
                 typeof(ExtendGridView),
                 new PropertyMetadata(string.Empty));
 
-        public double PinMinWidth
+        public double CellMinWidth
         {
             get
             {
-                return (double)this.GetValue(PinMinWidthProperty);
+                return (double)this.GetValue(CellMinWidthProperty);
             }
             set
             {
-                this.SetValue(PinMinWidthProperty, value);
+                this.SetValue(CellMinWidthProperty, value);
             }
         }
 
-        public static readonly DependencyProperty PinMinWidthProperty
+        public static readonly DependencyProperty CellMinWidthProperty
             = DependencyProperty.Register(
-                "PinMinWidth",
+                "CellMinWidth",
                 typeof(double),
                 typeof(ExtendGridView),
                 new PropertyMetadata(240));
 
-        public double PinWidth
+        public double CellWidth
         {
             get
             {
@@ -101,12 +101,12 @@ namespace iHuaban.Core.Controls
 
         public static readonly DependencyProperty PinWidthProperty
             = DependencyProperty.Register(
-                "PinWidth",
+                "CellWidth",
                 typeof(double),
                 typeof(ExtendGridView),
                 new PropertyMetadata(235));
 
-        public double PinHeight
+        public double CellHeight
         {
             get
             {
@@ -120,7 +120,7 @@ namespace iHuaban.Core.Controls
 
         public static readonly DependencyProperty PinHeightProperty
             = DependencyProperty.Register(
-                "PinHeight",
+                "CellHeight",
                 typeof(double),
                 typeof(ExtendGridView),
                 new PropertyMetadata(double.NaN));

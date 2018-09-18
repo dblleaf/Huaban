@@ -7,16 +7,16 @@
     <DataTemplate x:Key="TemplatePhone">
         <Grid 
             Padding="{Binding ElementName=gridView,Path=Padding}"
-            Width="{Binding ElementName=gridView,Path=PinWidth}"
-            Height="{Binding ElementName=gridView,Path=PinHeight}">
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplatePC">
         <Grid
             Padding="{Binding ElementName=gridView,Path=Padding}"
-            Width="{Binding ElementName=gridView,Path=PinWidth}"
-            Height="{Binding ElementName=gridView,Path=PinHeight}">
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Image Source="{Binding file.FW554}" Stretch="UniformToFill"/>
         </Grid>
     </DataTemplate>
@@ -24,7 +24,7 @@
         <Grid>
             <control:ExtendGridView x:Name="gridView"
                 ScaleSize="{Binding ScaleSize}"
-                Padding="6" PinMinWidth="{Binding PinMinWidth}"
+                Padding="6" CellMinWidth="{Binding CellMinWidth}"
                 ItemsSource="{Binding ViewModel.Data}"
                 ItemTemplate="{Binding ItemTemplate}">
                 <control:ExtendGridView.Resources>

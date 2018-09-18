@@ -2,6 +2,11 @@
 {
     public class Constants
     {
+        public const string ApiBase = "http://api.huaban.com/";
+        public const string ApiBoardsName = "boards";
+        public const string ApiCategoriesName = "categories";
+        public const string ApiFavoriteName = "favorite";
+        public const string ApiPinsName = "pins";
         public const string ApiBoards = "http://api.huaban.com/boards/";
         public const string ApiCategories = "http://api.huaban.com/categories/";
         public const string ApiFavorite = "http://api.huaban.com/favorite/";

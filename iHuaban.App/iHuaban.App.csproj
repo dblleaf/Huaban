@@ -95,16 +95,20 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Class1.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Pin.cs" />
     <Compile Include="Models\PinCollection.cs" />
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\HbService.cs" />
     <Compile Include="Services\PinsResultService.cs" />
     <Compile Include="Services\IHbService.cs" />
     <Compile Include="Services\IPinsResultService.cs" />
     <Compile Include="TemplateSelectors\MainPagePivotDataTemplateSelector.cs" />
+    <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />

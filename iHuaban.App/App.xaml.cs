@@ -87,6 +87,8 @@ namespace iHuaban.App
             titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             titleBar.ButtonForegroundColor = Colors.White;
             titleBar.ButtonInactiveForegroundColor = Colors.White;
+            titleBar.ButtonHoverBackgroundColor = Color.FromArgb(255, 50, 50, 50);
+            titleBar.ButtonHoverForegroundColor = Colors.White;
         }
         /// <summary>
         /// Invoked when Navigation to a certain page fails
