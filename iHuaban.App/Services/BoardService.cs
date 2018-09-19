@@ -4,7 +4,7 @@ using iHuaban.Core.Helpers;
 
 namespace iHuaban.App.Services
 {
-    public class BoardService : PinsResultService<Board>
+    public class BoardService : PinsResultService<BoardCollection>
     {
         public BoardService(string boardName, HttpHelper httpHelper)
             : base($"{Constants.ApiBoardsName}/{boardName}/", httpHelper)

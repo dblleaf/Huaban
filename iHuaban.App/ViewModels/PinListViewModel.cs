@@ -9,18 +9,26 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
 {
-    public class PinListViewModel : ListViewModel<Pin> 
+    public class PinListViewModel<T, T2> : ListViewModel<T, T2>
+        where T : IModelCollection<T2>, new()
+        where T2 : IModel, new()
     {
-        private IPinsResultService<Pin> PinsResultService { set; get; }
+        private IPinsResultService<T> PinsResultService { set; get; }
+        private IncrementalLoadingList<Pin> _PinsData;
+        public IncrementalLoadingList<Pin> PinsData
+        {
+            get { return _PinsData; }
+            set { SetValue(ref _PinsData, value); }
+        }
 
-        public PinListViewModel(IPinsResultService<Pin> pinsResultService)
+        public PinListViewModel(IPinsResultService<T> pinsResultService)
             : base(pinsResultService)
         {
             PinsResultService = pinsResultService;
-            Data = new IncrementalLoadingList<Pin>(GetData);
+            PinsData = new IncrementalLoadingList<Pin>(GetPinsData);
         }
 
-        private async Task<IEnumerable<Pin>> GetData(uint startIndex, int page)
+        private async Task<IEnumerable<Pin>> GetPinsData(uint startIndex, int page)
         {
             if (IsLoading)
             {
@@ -29,13 +37,13 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                var list = await PinsResultService.GetPinsAsync(20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
+                var list = await PinsResultService.GetPinsAsync(20, GetMaxPinId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
-                if (list.Pins.Count() == 0)
-                    Data.NoMore();
+                if (list.Data.Count() == 0)
+                    PinsData.NoMore();
                 else
-                    Data.HasMore();
-                return list.Pins;
+                    PinsData.HasMore();
+                return list.Data;
             }
             catch (Exception ex)
             {
@@ -47,17 +55,16 @@ namespace iHuaban.App.ViewModels
             return null;
         }
 
-        private long GetMaxId()
+        private long GetMaxPinId()
         {
-            if (Data?.Count > 0)
+            if (PinsData?.Count > 0 && long.TryParse(PinsData?[PinsData.Count - 1].KeyId, out long maxId))
             {
-                return Data[Data.Count - 1].PinId;
+                return maxId;
             }
             else
             {
                 return 0;
             }
-
         }
     }
 }

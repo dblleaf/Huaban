@@ -9,16 +9,18 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
 {
-    public class ListViewModel<T> : ViewModelBase where T : new()
+    public class ListViewModel<T, T2> : ViewModelBase
+        where T : IModelCollection<T2>, new()
+        where T2 : IModel, new()
     {
         private IHbService<T> Service { set; get; }
         public ListViewModel(IHbService<T> service)
         {
             Service = service;
-            Data = new IncrementalLoadingList<T>(GetData);
+            Data = new IncrementalLoadingList<T2>(GetData);
         }
-        private IncrementalLoadingList<T> _Data;
-        public IncrementalLoadingList<T> Data
+        private IncrementalLoadingList<T2> _Data;
+        public IncrementalLoadingList<T2> Data
         {
             get { return _Data; }
             set { SetValue(ref _Data, value); }
@@ -30,22 +32,25 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _IsLoading, value); }
         }
 
-        private async Task<T> GetData(uint startIndex, int page)
+        public int Count => throw new NotImplementedException();
+
+
+        private async Task<IEnumerable<T2>> GetData(uint startIndex, int page)
         {
             if (IsLoading)
             {
-                return new T();
+                return null;
             }
             IsLoading = true;
             try
             {
                 var list = await Service.GetAsync(20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
-                if (list.Count() == 0)
+                if (list.Count == 0)
                     Data.NoMore();
                 else
                     Data.HasMore();
-                return list.Pins;
+                return list.Data;
             }
             catch (Exception ex)
             {
@@ -54,14 +59,14 @@ namespace iHuaban.App.ViewModels
             {
                 IsLoading = false;
             }
-            return new T();
+            return null;
         }
 
         private long GetMaxId()
         {
-            if (Data?.Count > 0)
+            if (Data?.Count > 0 && long.TryParse(Data?[Data.Count - 1].KeyId, out long maxId))
             {
-                return Data[Data.Count - 1].PinId;
+                return maxId;
             }
             else
             {

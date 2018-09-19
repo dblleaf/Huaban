@@ -25,7 +25,7 @@
             <control:ExtendGridView x:Name="gridView"
                 ScaleSize="{Binding ScaleSize}"
                 Padding="6" CellMinWidth="{Binding CellMinWidth}"
-                ItemsSource="{Binding ViewModel.Data}"
+                ItemsSource="{Binding ViewModel.PinsData}"
                 ItemTemplate="{Binding ItemTemplate}">
                 <control:ExtendGridView.Resources>
                     <Style TargetType="GridViewItem">

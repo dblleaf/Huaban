@@ -1,4 +1,5 @@
-﻿using iHuaban.Core;
+﻿using iHuaban.App.Models;
+using iHuaban.Core;
 using iHuaban.Core.Helpers;
 using System;
 using System.Collections.Generic;

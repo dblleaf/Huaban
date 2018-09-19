@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.Models
 {
-    public class Board
+    public class Board : IModel
     {
         public string board_id { set; get; }
         public string user_id { set; get; }
@@ -22,5 +22,6 @@ namespace iHuaban.App.Models
         public int seq { set; get; }
         public double Width { set; get; }
 
+        public string KeyId => board_id;
     }
 }

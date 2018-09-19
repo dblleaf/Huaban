@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.Models
 {
-    public class Pin
+    public class Pin : IModel
     {
         public long pin_id { set; get; }
         public long user_id { set; get; }
@@ -26,5 +26,7 @@ namespace iHuaban.App.Models
         public long PinId => pin_id;
 
         public File file { set; get; }
+
+        public string KeyId => pin_id.ToString();
     }
 }
