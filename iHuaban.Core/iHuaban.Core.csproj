@@ -107,7 +107,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\DelegateCommand.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="Controls\ExtendGridView.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />

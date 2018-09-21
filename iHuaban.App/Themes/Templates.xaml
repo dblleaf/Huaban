@@ -122,8 +122,14 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplateMine">
-        <Grid Margin="8">
-            <TextBlock>Mine</TextBlock>
+        <Grid>
+            <Grid Padding="6">
+                <RelativePanel x:Name="Avatar" Height="64" Width="64">
+                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="32">
+                        <Image Source="/Assets/636600940587887521.jpg"/>
+                    </Border>
+                </RelativePanel>
+            </Grid>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplateMainPagePivotHeader">

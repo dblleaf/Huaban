@@ -22,5 +22,14 @@
             HeaderTemplate="{StaticResource TemplateMainPagePivotHeader}"
             ItemTemplateSelector="{StaticResource MainPagePivotDataTemplateSelector}">
         </Pivot>
+        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+            <AppBarButton Height="48" Content="设置" Icon="Setting" />
+            <AppBarButton Height="48" Content="关于">
+                <AppBarButton.Icon>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE9CE;"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </StackPanel>
     </Grid>
+
 </Page>

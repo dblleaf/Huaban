@@ -19,7 +19,7 @@ namespace iHuaban.App.ViewModels
         {
             new Menu
             {
-                Title = Constants.MenuPhone,
+                Title = Constants.TextPhone,
                 Icon = "\uE8EA",
                 Template = Constants.TemplateGrid,
                 CellMinWidth = 236,
@@ -29,8 +29,8 @@ namespace iHuaban.App.ViewModels
             },
             new Menu
             {
-                Title = Constants.MenuPC,
-                Icon = "\uE770",
+                Title = Constants.TextPC,
+                Icon = "\uE977",
                 Template = Constants.TemplateGrid,
                 CellMinWidth = 360,
                 ScaleSize = "1920:1080",
@@ -39,7 +39,7 @@ namespace iHuaban.App.ViewModels
             },
             new Menu
             {
-                Title = Constants.MenuFind,
+                Title = Constants.TextFind,
                 Icon = "\uE721",
                 CellMinWidth = 236,
                 Template = Constants.TemplateFind,
@@ -48,7 +48,7 @@ namespace iHuaban.App.ViewModels
             },
             new Menu
             {
-                Title = Constants.MenuMine,
+                Title = Constants.TextMine,
                 Icon = "\uE77B",
                 Template = Constants.TemplateMine,
                 ViewModel = new MineViewModel()
