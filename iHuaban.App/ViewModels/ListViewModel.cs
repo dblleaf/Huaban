@@ -14,9 +14,11 @@ namespace iHuaban.App.ViewModels
         where T2 : IModel, new()
     {
         private IHbService<T> Service { set; get; }
-        public ListViewModel(IHbService<T> service)
+        private bool ISupportIncrementalLoading { set; get; }
+        public ListViewModel(IHbService<T> service, bool isSpportIncrementalLoading = true)
         {
             Service = service;
+            ISupportIncrementalLoading = isSpportIncrementalLoading;
             Data = new IncrementalLoadingList<T2>(GetData);
         }
         private IncrementalLoadingList<T2> _Data;
@@ -46,10 +48,10 @@ namespace iHuaban.App.ViewModels
             {
                 var list = await Service.GetAsync(20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
-                if (list.Count == 0)
-                    Data.NoMore();
-                else
+                if (ISupportIncrementalLoading && list?.Count > 0)
                     Data.HasMore();
+                else
+                    Data.NoMore();
                 return list.Data;
             }
             catch (Exception ex)

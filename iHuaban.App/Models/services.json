@@ -1,0 +1,1308 @@
+﻿{
+  "Services": {
+    "virtual-machines-windows": {
+      "Name": "虚拟机 - Windows",
+      "Types": [
+        {
+          "Name": "基本",
+          "Features": [
+            {
+              "Name": "default",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A0",
+                  "Description": "1个（共用）内核，0.75 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.11"
+                },
+                {
+                  "Name": "A1",
+                  "Description": "1个内核 ，1.75 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.31"
+                },
+                {
+                  "Name": "A2",
+                  "Description": "2个内核，3.5 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.82"
+                },
+                {
+                  "Name": "A3",
+                  "Description": "4个内核，7 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.64"
+                },
+                {
+                  "Name": "A4",
+                  "Description": "8个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.28"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "标准",
+          "Features": [
+            {
+              "Name": "A 系列",
+              "Description": "A 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A0",
+                  "Description": "1个（共用）内核，0.75GiB RAM，20GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.13"
+                },
+                {
+                  "Name": "A1",
+                  "Description": "1个内核，1.75GiB RAM，70GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.36"
+                },
+                {
+                  "Name": "A2",
+                  "Description": "2个内核，3.5GiB RAM，135GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.94"
+                },
+                {
+                  "Name": "A3",
+                  "Description": "4个内核，7GiB RAM，285GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.88"
+                },
+                {
+                  "Name": "A4",
+                  "Description": "8个内核，14GiB RAM，605GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.76"
+                },
+                {
+                  "Name": "A5",
+                  "Description": "2个内核，14GiB RAM，135GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.71"
+                },
+                {
+                  "Name": "A6",
+                  "Description": "4个内核，28GiB RAM，285GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.43"
+                },
+                {
+                  "Name": "A7",
+                  "Description": "8个内核，56GiB RAM，605GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "6.85"
+                }
+              ]
+            },
+            {
+              "Name": "B 系列/BS 系列",
+              "Description": "B 系列/BS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "B1/BS1",
+                  "Description": "1个内核，1GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.018"
+                },
+                {
+                  "Name": "B2/BS2",
+                  "Description": "2个内核，4GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.066"
+                }
+              ]
+            },
+            {
+              "Name": "B 系列 / BS 系列",
+              "Description": "B 系列/BS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "B1m/BS1m",
+                  "Description": "1个内核，2GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.032"
+                },
+                {
+                  "Name": "B2m/BS2m",
+                  "Description": "2个内核，8GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.122"
+                },
+                {
+                  "Name": "B4m/BS4m",
+                  "Description": "4个内核，16GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.23"
+                },
+                {
+                  "Name": "B8m/BS8m",
+                  "Description": "8个内核，32GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.438"
+                }
+              ]
+            },
+            {
+              "Name": "Av2 系列",
+              "Description": "Av2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A1 v2",
+                  "Description": "1个内核，2GiB RAM，10GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.5405"
+                },
+                {
+                  "Name": "A2 v2",
+                  "Description": "2个内核，4GiB RAM，20GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.0810"
+                },
+                {
+                  "Name": "A4 v2",
+                  "Description": "4个内核，8GiB RAM，40GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.1620"
+                },
+                {
+                  "Name": "A8 v2",
+                  "Description": "8个内核，16GiB RAM，80GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.3355"
+                }
+              ]
+            },
+            {
+              "Name": "Av2系列",
+              "Description": "Av2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A2m v2",
+                  "Description": "2个内核，16GiB RAM，20GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.9665"
+                },
+                {
+                  "Name": "A4m v2",
+                  "Description": "4个内核，32GiB RAM，40GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.9394"
+                },
+                {
+                  "Name": "A8m v2",
+                  "Description": "8个内核，64GiB RAM，80GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "7.8775"
+                }
+              ]
+            },
+            {
+              "Name": "Dv3 系列/DSv3 系列",
+              "Description": "Dv3 系列/DSv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D2 v3/DS2 v3",
+                  "Description": "2个内核，8GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.25"
+                },
+                {
+                  "Name": "D4 v3/DS4 v3",
+                  "Description": "4个内核，16GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.52"
+                },
+                {
+                  "Name": "D8 v3/DS8 v3",
+                  "Description": "8个内核，32GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "5.04"
+                }
+              ]
+            },
+            {
+              "Name": "Dv3 系列 / DSv3 系列",
+              "Description": "Dv3 系列/DSv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D16 v3/DS16 v3",
+                  "Description": "16个内核，64GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "10.08"
+                },
+                {
+                  "Name": "D32 v3/DS32 v3",
+                  "Description": "32个内核，128GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "20.15"
+                },
+                {
+                  "Name": "D64 v3/DS64 v3",
+                  "Description": "64个内核，256GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "40.3"
+                }
+              ]
+            },
+            {
+              "Name": "D 系列/DS 系列",
+              "Description": "D 系列/DS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D1/DS1",
+                  "Description": "1个内核，3.5 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.48"
+                },
+                {
+                  "Name": "D2/DS2",
+                  "Description": "2个内核，7 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1"
+                },
+                {
+                  "Name": "D3/DS3",
+                  "Description": "4个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.01"
+                },
+                {
+                  "Name": "D4/DS4",
+                  "Description": "8个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.05"
+                }
+              ]
+            },
+            {
+              "Name": "D 系列 / DS 系列",
+              "Description": "D 系列/DS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D11/DS11",
+                  "Description": "2个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.7"
+                },
+                {
+                  "Name": "D12/DS12",
+                  "Description": "4个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.41"
+                },
+                {
+                  "Name": "D13/DS13",
+                  "Description": "8个内核，56 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "6.83"
+                },
+                {
+                  "Name": "D14/DS14",
+                  "Description": "16个内核，112 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "13.67"
+                }
+              ]
+            },
+            {
+              "Name": "Ev3 系列/ESv3 系列",
+              "Description": "Ev3 系列/ESv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "E2 v3/E2s v3",
+                  "Description": "2个内核，16GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.6"
+                },
+                {
+                  "Name": "E4 v3/E4s v3",
+                  "Description": "4个内核，32GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.21"
+                },
+                {
+                  "Name": "E8 v3/E8s v3",
+                  "Description": "8个内核，64GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "6.41"
+                },
+                {
+                  "Name": "E16 v3/E16s v3",
+                  "Description": "16个内核，128GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "12.84"
+                }
+              ]
+            },
+            {
+              "Name": "Ev3 系列 / ESv3 系列",
+              "Description": "Ev3 系列/ESv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "E32 v3/E32s v3",
+                  "Description": "32个内核，256GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "25.66"
+                },
+                {
+                  "Name": "E64i v3/E64is v3",
+                  "Description": "64个内核，432GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "51.33"
+                },
+                {
+                  "Name": "E64 v3/E64s v3",
+                  "Description": "64个内核，432GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "51.33"
+                }
+              ]
+            },
+            {
+              "Name": "Dv2系列/DSv2系列",
+              "Description": "Dv2系列/DSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D1 v2/DS1 v2",
+                  "Description": "1个内核，3.5 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.53"
+                },
+                {
+                  "Name": "D2 v2/DS2 v2",
+                  "Description": "2个内核，7 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.11"
+                },
+                {
+                  "Name": "D3 v2/DS3 v2",
+                  "Description": "4个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.22"
+                },
+                {
+                  "Name": "D4 v2/DS4 v2",
+                  "Description": "8个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.45"
+                }
+              ]
+            },
+            {
+              "Name": "Dv2 系列 / DSv2 系列",
+              "Description": "Dv2系列/DSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D5 v2/DS5 v2",
+                  "Description": "16个内核，56 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "8.56"
+                },
+                {
+                  "Name": "D11 v2/DS11 v2",
+                  "Description": "2个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.88"
+                },
+                {
+                  "Name": "D12 v2/DS12 v2",
+                  "Description": "4个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.76"
+                }
+              ]
+            },
+            {
+              "Name": "Dv2系列 / DSv2系列",
+              "Description": "Dv2系列/DSv2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D13 v2/DS13 v2",
+                  "Description": "8个内核，56 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "7.51"
+                },
+                {
+                  "Name": "D14 v2/DS14 v2",
+                  "Description": "16个内核，112 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "15.03"
+                },
+                {
+                  "Name": "D15 v2/DS15 v2",
+                  "Description": "20个内核，140 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "18.79"
+                }
+              ]
+            },
+            {
+              "Name": "Fv2系列/FSv2系列",
+              "Description": "Fv2系列/FSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F2 v2/FS2 v2",
+                  "Description": "2 vCPU，4 GiB RAM，16 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.166"
+                },
+                {
+                  "Name": "F4 v2/FS4 v2",
+                  "Description": "4 vCPU，8 GiB RAM，32 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.332"
+                },
+                {
+                  "Name": "F8 v2/FS8 v2",
+                  "Description": "8 vCPU，16 GiB RAM，64 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "8.664"
+                }
+              ]
+            },
+            {
+              "Name": "Fv2系列 / FSv2系列",
+              "Description": "Fv2系列 / FSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F16 v2/FS16 v2",
+                  "Description": "16 vCPU，32 GiB RAM，128 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "17.328"
+                },
+                {
+                  "Name": "F32 v2/FS32 v2",
+                  "Description": "32 vCPU，64 GiB RAM，256 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "34.656"
+                }
+              ]
+            },
+            {
+              "Name": "Fv2 系列/FSv2 系列",
+              "Description": "Fv2 系列/FSv2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F64 v2/FS64 v2",
+                  "Description": "64 vCPU，128 GiB RAM，512 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "69.312"
+                },
+                {
+                  "Name": "F72 v2/FS72 v2",
+                  "Description": "72 vCPU，144 GiB RAM，576 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "138.624"
+                }
+              ]
+            },
+            {
+              "Name": "F 系列/FS 系列",
+              "Description": "F 系列/FS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F1/FS1",
+                  "Description": "1个内核，2 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.46"
+                },
+                {
+                  "Name": "F2/FS2",
+                  "Description": "2个内核，4 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.97"
+                },
+                {
+                  "Name": "F4/FS4",
+                  "Description": "4个内核，8 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.95"
+                },
+                {
+                  "Name": "F8/FS8",
+                  "Description": "8个内核，16 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.91"
+                },
+                {
+                  "Name": "F16/FS16",
+                  "Description": "16个内核，32 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "7.53"
+                }
+              ]
+            },
+            {
+              "Name": "NCsv3 系列",
+              "Description": "NCsv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "NC6s v3",
+                  "Description": "6 个核心，112 GiB RAM，336 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "26.16"
+                },
+                {
+                  "Name": "NC12s v3",
+                  "Description": "12 个核心，224 GiB RAM，672 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "52.32"
+                },
+                {
+                  "Name": "NC24s v3",
+                  "Description": "24 个核心，448 GiB RAM，1344 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "104.65"
+                },
+                {
+                  "Name": "NC24rs v3",
+                  "Description": "24 个核心，448 GiB RAM，1344 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "115.11"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "virtual-machines-linux": {
+      "Name": "虚拟机 - Linux",
+      "Types": [
+        {
+          "Name": "基本",
+          "Features": [
+            {
+              "Name": "default",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A0",
+                  "Description": "1个（共用）内核，0.75 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.11"
+                },
+                {
+                  "Name": "A1",
+                  "Description": "1个内核 ，1.75 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.25"
+                },
+                {
+                  "Name": "A2",
+                  "Description": "2个内核，3.5 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.66"
+                },
+                {
+                  "Name": "A3",
+                  "Description": "4个内核，7 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.31"
+                },
+                {
+                  "Name": "A4",
+                  "Description": "8个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.62"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "Name": "标准",
+          "Features": [
+            {
+              "Name": "A 系列",
+              "Description": "A 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A0",
+                  "Description": "1个（共用）内核，0.75GiB RAM，20GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.13"
+                },
+                {
+                  "Name": "A1",
+                  "Description": "1个内核，1.75GiB RAM，70GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.29"
+                },
+                {
+                  "Name": "A2",
+                  "Description": "2个内核，3.5GiB RAM，135GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.75"
+                },
+                {
+                  "Name": "A3",
+                  "Description": "4个内核，7GiB RAM，285GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.51"
+                },
+                {
+                  "Name": "A4",
+                  "Description": "8个内核，14GiB RAM，605GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.01"
+                },
+                {
+                  "Name": "A5",
+                  "Description": "2个内核，14GiB RAM，135GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.62"
+                },
+                {
+                  "Name": "A6",
+                  "Description": "4个内核，28GiB RAM，285GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.25"
+                },
+                {
+                  "Name": "A7",
+                  "Description": "8个内核，56GiB RAM，605GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "6.49"
+                }
+              ]
+            },
+            {
+              "Name": "B 系列/BS 系列",
+              "Description": "B 系列/BS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "B1/BS1",
+                  "Description": "1个内核，1GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.012"
+                },
+                {
+                  "Name": "B2/BS2",
+                  "Description": "2个内核，4GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.048"
+                }
+              ]
+            },
+            {
+              "Name": "B系列 / BS系列",
+              "Description": "B 系列/BS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "B1m/BS1m",
+                  "Description": "1个内核，2GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.024"
+                },
+                {
+                  "Name": "B2m/BS2m",
+                  "Description": "2个内核，8GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.122"
+                },
+                {
+                  "Name": "B4m/BS4m",
+                  "Description": "4个内核，16GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.23"
+                },
+                {
+                  "Name": "B8m/BS8m",
+                  "Description": "8个内核，32GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.376"
+                }
+              ]
+            },
+            {
+              "Name": "Av2 系列",
+              "Description": "Av2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A1 v2",
+                  "Description": "1个内核，2GiB RAM，10GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.4370"
+                },
+                {
+                  "Name": "A2 v2",
+                  "Description": "2个内核，4GiB RAM，20GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.8625"
+                },
+                {
+                  "Name": "A4 v2",
+                  "Description": "4个内核，8GiB RAM，40GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.7365"
+                },
+                {
+                  "Name": "A8 v2",
+                  "Description": "8个内核，16GiB RAM，80GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.4615"
+                }
+              ]
+            },
+            {
+              "Name": "Av2系列",
+              "Description": "Av2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "A2m v2",
+                  "Description": "2个内核，16GiB RAM，20GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.8630"
+                },
+                {
+                  "Name": "A4m v2",
+                  "Description": "4个内核，32GiB RAM，40GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.7338"
+                },
+                {
+                  "Name": "A8m v2",
+                  "Description": "8个内核，64GiB RAM，80GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "7.4635"
+                }
+              ]
+            },
+            {
+              "Name": "Dv3 系列 / DSv3 系列",
+              "Description": "Dv3 系列 / DSv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D2 v3/DS2 v3",
+                  "Description": "2个内核，8GiB RAM，50GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.14"
+                },
+                {
+                  "Name": "D4 v3/DS4 v3",
+                  "Description": "4个内核，16GiB RAM，100GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.29"
+                },
+                {
+                  "Name": "D8 v3/DS8 v3",
+                  "Description": "8个内核，32GiB RAM，200GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.58"
+                }
+              ]
+            },
+            {
+              "Name": "Dv3系列/DSv3系列",
+              "Description": "Dv3 系列 / DSv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D16 v3/DS16 v3",
+                  "Description": "16个内核，64GiB RAM，400GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "9.16"
+                },
+                {
+                  "Name": "D32 v3/DS32 v3",
+                  "Description": "32个内核，128GiB RAM，800GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "18.32"
+                },
+                {
+                  "Name": "D64 v3/DS64 v3",
+                  "Description": "64个内核，256GiB RAM，1,600GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "36.64"
+                }
+              ]
+            },
+            {
+              "Name": "D 系列/DS 系列",
+              "Description": "D 系列/DS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D1/DS1",
+                  "Description": "1个内核，3.5 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.44"
+                },
+                {
+                  "Name": "D2/DS2",
+                  "Description": "2个内核，7 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.92"
+                },
+                {
+                  "Name": "D3/DS3",
+                  "Description": "4个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.85"
+                },
+                {
+                  "Name": "D4/DS4",
+                  "Description": "8个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.73"
+                }
+              ]
+            },
+            {
+              "Name": "D系列 / DS系列",
+              "Description": "D 系列/DS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D11/DS11",
+                  "Description": "2个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.57"
+                },
+                {
+                  "Name": "D12/DS12",
+                  "Description": "4个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.14"
+                },
+                {
+                  "Name": "D13/DS13",
+                  "Description": "8个内核，56 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "6.29"
+                },
+                {
+                  "Name": "D14/DS14",
+                  "Description": "16个内核，112 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "12.58"
+                }
+              ]
+            },
+            {
+              "Name": "Ev3 系列 / ESv3 系列",
+              "Description": "Ev3 系列 / ESv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "E2 v3/E2s v3",
+                  "Description": "2个内核，16GiB RAM，50GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.45"
+                },
+                {
+                  "Name": "E4 v3/E4s v3",
+                  "Description": "4个内核，32GiB RAM，100GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.92"
+                },
+                {
+                  "Name": "E8 v3/E8s v3",
+                  "Description": "8个内核，64GiB RAM，200GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "5.83"
+                },
+                {
+                  "Name": "E16 v3/E16s v3",
+                  "Description": "16个内核，128GiB RAM，400GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "11.67"
+                }
+              ]
+            },
+            {
+              "Name": "Ev3 系列/ESv3 系列",
+              "Description": "Ev3 系列 / ESv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "E32 v3/E32s v3",
+                  "Description": "32个内核，256GiB RAM，800GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "23.33"
+                },
+                {
+                  "Name": "E64 v3/E64is v3",
+                  "Description": "64个内核，432GiB RAM，1,600GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "46.66"
+                },
+                {
+                  "Name": "E64 v3/E64s v3",
+                  "Description": "64个内核，432GiB RAM，1,600GiB 临时存储",
+                  "PriceTier": "-2",
+                  "PricePerTier": "46.66"
+                }
+              ]
+            },
+            {
+              "Name": "Dv2系列/DSv2系列",
+              "Description": "Dv2系列/DSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D1 v2/DS1 v2",
+                  "Description": "1个内核，3.5 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.49"
+                },
+                {
+                  "Name": "D2 v2/DS2 v2",
+                  "Description": "2个内核，7 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.02"
+                },
+                {
+                  "Name": "D3 v2/DS3 v2",
+                  "Description": "4个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.04"
+                },
+                {
+                  "Name": "D4 v2/DS4 v2",
+                  "Description": "8个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.1"
+                }
+              ]
+            },
+            {
+              "Name": "Dv2 系列 / DSv2 系列",
+              "Description": "Dv2 系列 / DSv2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D5 v2/DS5 v2",
+                  "Description": "16个内核，56 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "8.17"
+                },
+                {
+                  "Name": "D11 v2/DS11 v2",
+                  "Description": "2个内核，14 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.73"
+                },
+                {
+                  "Name": "D12 v2/DS12 v2",
+                  "Description": "4个内核，28 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.46"
+                }
+              ]
+            },
+            {
+              "Name": "Dv2系列 /DSv2系列 ",
+              "Description": "Dv2系列/DSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "D13 v2/DS13 v2",
+                  "Description": "8个内核，56 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "6.92"
+                },
+                {
+                  "Name": "D14 v2/DS14 v2",
+                  "Description": "16个内核，112 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "13.83"
+                },
+                {
+                  "Name": "D15 v2/DS15 v2",
+                  "Description": "20个内核，140 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "17.29"
+                }
+              ]
+            },
+            {
+              "Name": "Fv2系列/FSv2系列",
+              "Description": "Fv2系列/FSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F2 v2/FS2 v2",
+                  "Description": "2 vCPU，4 GiB RAM，16 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.083"
+                },
+                {
+                  "Name": "F4 v2/FS4 v2",
+                  "Description": "4 vCPU，8 GiB RAM，32 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "2.166"
+                },
+                {
+                  "Name": "F8 v2/FS8 v2",
+                  "Description": "8 vCPU，16 GiB RAM，64 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "4.332"
+                }
+              ]
+            },
+            {
+              "Name": "Fv2系列 / FSv2系列",
+              "Description": "Fv2系列/FSv2系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F16 v2/FS16 v2",
+                  "Description": "16 vCPU，32 GiB RAM，128 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "8.664"
+                },
+                {
+                  "Name": "F32 v2/FS32 v2",
+                  "Description": "32 vCPU，64 GiB RAM，256 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "17.328"
+                }
+              ]
+            },
+            {
+              "Name": "Fv2 系列/FSv2 系列",
+              "Description": "Fv2 系列/FSv2 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F64 v2/FS64 v2",
+                  "Description": "64 vCPU，128 GiB RAM，512 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "34.656"
+                },
+                {
+                  "Name": "F72 v2/FS72 v2",
+                  "Description": "72 vCPU，144 GiB RAM，576 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "69.312"
+                }
+              ]
+            },
+            {
+              "Name": "F 系列/FS 系列",
+              "Description": "F 系列/FS 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "F1/FS1",
+                  "Description": "1个内核，2 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.43"
+                },
+                {
+                  "Name": "F2/FS2",
+                  "Description": "2个内核，4 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "0.9"
+                },
+                {
+                  "Name": "F4/FS4",
+                  "Description": "4个内核，8 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "1.8"
+                },
+                {
+                  "Name": "F8/FS8",
+                  "Description": "8个内核，16 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "3.61"
+                },
+                {
+                  "Name": "F16/FS16",
+                  "Description": "16个内核，32 GiB RAM",
+                  "PriceTier": "-2",
+                  "PricePerTier": "7.19"
+                }
+              ]
+            },
+            {
+              "Name": "NCsv3 系列",
+              "Description": "NCsv3 系列",
+              "PricePeriod": "0",
+              "PriceUnit": "台",
+              "MinUnit": "0",
+              "MaxUnit": "100",
+              "Sizes": [
+                {
+                  "Name": "NC6s v3",
+                  "Description": "6 个核心，112 GiB RAM，336 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "23.35"
+                },
+                {
+                  "Name": "NC12s v3",
+                  "Description": "12 个核心，224 GiB RAM，672 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "46.71"
+                },
+                {
+                  "Name": "NC24s v3",
+                  "Description": "24 个核心，448 GiB RAM，1344 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "93.42"
+                },
+                {
+                  "Name": "NC24rs v3",
+                  "Description": "24 个核心，448 GiB RAM，1344 GiB 临时存储空间",
+                  "PriceTier": "-2",
+                  "PricePerTier": "102.76"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

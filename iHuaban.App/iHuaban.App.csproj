@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BoardCollection.cs" />
+    <Compile Include="Models\CategoryCollection.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Board.cs" />
@@ -115,7 +116,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
-    <Compile Include="ViewModels\SearchViewModel.cs" />
+    <Compile Include="ViewModels\FindViewModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -126,6 +127,7 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="iHuaban.App_TemporaryKey.pfx" />
+    <None Include="Models\services.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Properties\Default.rd.xml" />

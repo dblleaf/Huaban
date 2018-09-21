@@ -41,8 +41,10 @@ namespace iHuaban.App.ViewModels
             {
                 Title = Constants.MenuFind,
                 Icon = "\uE721",
+                CellMinWidth = 236,
                 Template = Constants.TemplateFind,
-                ViewModel = new SearchViewModel(),
+                ItemTemplateName = Constants.TemplateCategory,
+                ViewModel = new FindViewModel(new HbService<CategoryCollection>(Constants.ApiCategoriesName, httpHelper)),
             },
             new Menu
             {

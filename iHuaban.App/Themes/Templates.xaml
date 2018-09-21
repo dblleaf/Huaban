@@ -20,6 +20,20 @@
             <Image Source="{Binding file.FW554}" Stretch="UniformToFill"/>
         </Grid>
     </DataTemplate>
+
+    <DataTemplate x:Key="TemplateCategory">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}">
+            <Border
+                Background="{StaticResource AppControlAcrylicBrush}"
+                VerticalAlignment="Center"
+                Padding="8">
+                <TextBlock Text="{Binding name}"></TextBlock>
+            </Border>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="TemplateGrid">
         <Grid>
             <control:ExtendGridView x:Name="gridView"
@@ -60,8 +74,51 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateFind">
-        <Grid Margin="8">
-            <TextBlock>Find</TextBlock>
+        <Grid>
+            <control:ExtendGridView x:Name="gridView"
+                ScaleSize="{Binding ScaleSize}"
+                Padding="6" CellMinWidth="{Binding CellMinWidth}"
+                ItemsSource="{Binding ViewModel.Data}"
+                ItemTemplate="{Binding ItemTemplate}">
+                <control:ExtendGridView.Resources>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Padding" Value="0"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewItem">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <!--缺省样式-->
+                                                <VisualState x:Name="Normal" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid x:Name="ContentBackground">
+                                            <ContentPresenter
+                                            Content="{TemplateBinding Content}"
+                                            Margin="{TemplateBinding Padding}" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </control:ExtendGridView.Resources>
+                <control:ExtendGridView.Header>
+                    <Grid>
+                        <Grid Margin="6" Padding="8"
+                                HorizontalAlignment="Stretch"
+                                Background="{StaticResource AppControlAcrylicBrush}">
+                            <TextBlock>搜索</TextBlock>
+                            <SymbolIcon Symbol="Find" HorizontalAlignment="Right"></SymbolIcon>
+                        </Grid>
+                    </Grid>
+                </control:ExtendGridView.Header>
+            </control:ExtendGridView>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplateMine">

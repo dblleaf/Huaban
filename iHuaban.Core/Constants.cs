@@ -30,5 +30,6 @@
 
         public const string TemplatePhone = "TemplatePhone";
         public const string TemplatePC = "TemplatePC";
+        public const string TemplateCategory = "TemplateCategory";
     }
 }

@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="using:iHuaban.App.TemplateSelectors"
     DataContext="{x:Bind ViewModel}"
+    Background="{StaticResource AppBackgroundAcrylicBrush}"
     mc:Ignorable="d">
     <Page.Resources>
         <s:MainPagePivotDataTemplateSelector
@@ -16,9 +17,6 @@
             x:Key="MainPagePivotDataTemplateSelector">
         </s:MainPagePivotDataTemplateSelector>
     </Page.Resources>
-    <Page.Background>
-        <AcrylicBrush BackgroundSource="HostBackdrop" TintColor="#FF000000" TintOpacity="0.6"/>
-    </Page.Background>
     <Grid Padding="0 32 0 0">
         <Pivot ItemsSource="{Binding Path=Menu}"
             HeaderTemplate="{StaticResource TemplateMainPagePivotHeader}"
