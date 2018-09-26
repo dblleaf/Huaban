@@ -122,14 +122,25 @@
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplateMine">
-        <Grid>
-            <Grid Padding="6">
-                <RelativePanel x:Name="Avatar" Height="64" Width="64">
-                    <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CornerRadius="32">
-                        <Image Source="/Assets/636600940587887521.jpg"/>
-                    </Border>
-                </RelativePanel>
+        <Grid DataContext="{Binding ViewModel}">
+            <Grid Visibility="{Binding MeVisibility}" Padding="6">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Border Margin="6" Height="60" Width="60" CornerRadius="30">
+                    <Image Source="{Binding Me.avatar.Orignal}"/>
+                </Border>
+                <StackPanel Grid.Column="1">
+                    <TextBlock Margin="6" FontWeight="SemiBold" Text="{Binding Me.username}"></TextBlock>
+                    <TextBlock Margin="6"><Run Text="{Binding Me.follower_count}"/> 粉丝</TextBlock>
+                </StackPanel>
             </Grid>
+            <Grid Visibility="{Binding LoginVisibility}" Background="{ThemeResource AppBackgroundAcrylicBrush}"></Grid>
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplateMainPagePivotHeader">

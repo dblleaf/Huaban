@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace iHuaban.App.Models
+﻿namespace iHuaban.App.Models
 {
     public class Pin : IModel
     {
@@ -24,9 +18,7 @@ namespace iHuaban.App.Models
         public int comment_count { set; get; }
         public int repin_count { set; get; }
         public long PinId => pin_id;
-
         public File file { set; get; }
-
         public string KeyId => pin_id.ToString();
     }
 }

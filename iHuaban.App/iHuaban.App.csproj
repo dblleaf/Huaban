@@ -106,6 +106,8 @@
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Pin.cs" />
     <Compile Include="Models\PinCollection.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserCollection.cs" />
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\HbService.cs" />
