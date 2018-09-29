@@ -98,6 +98,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
+    <Compile Include="Models\SNSType.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Board.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="Services\IPinsResultService.cs" />
     <Compile Include="TemplateSelectors\MainPagePivotDataTemplateSelector.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />
     <Compile Include="ViewModels\PinListViewModel.cs" />
@@ -134,6 +136,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\636600940587887521.jpg" />
+    <Content Include="Assets\douban_50px.png" />
+    <Content Include="Assets\huaban.svg" />
+    <Content Include="Assets\qq_50px.png" />
+    <Content Include="Assets\renren_50px.png" />
+    <Content Include="Assets\sina_weibo_50px.png" />
+    <Content Include="Assets\auth.html" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -167,6 +175,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>4.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

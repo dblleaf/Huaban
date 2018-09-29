@@ -6,6 +6,7 @@ namespace iHuaban.App.ViewModels
 {
     public class MineViewModel : ViewModelBase
     {
+        public LoginViewModel LoginViewModel { get; } = new LoginViewModel();
         public MineViewModel()
         {
             HasLogged = false;

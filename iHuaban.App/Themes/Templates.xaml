@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="using:iHuaban.Core.Controls"
     xmlns:m="using:iHuaban.Core.Models"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:iHuaban.App">
     <DataTemplate x:Key="TemplatePhone">
         <Grid 
@@ -140,7 +142,8 @@
                     <TextBlock Margin="6"><Run Text="{Binding Me.follower_count}"/> 粉丝</TextBlock>
                 </StackPanel>
             </Grid>
-            <Grid Visibility="{Binding LoginVisibility}" Background="{ThemeResource AppBackgroundAcrylicBrush}"></Grid>
+            <ContentPresenter ContentTemplate="{StaticResource TemplateLogin}"/>
+
         </Grid>
     </DataTemplate>
     <DataTemplate x:Key="TemplateMainPagePivotHeader">
@@ -155,4 +158,120 @@
 
         </Grid>
     </DataTemplate>
+
+    <DataTemplate x:Key="TemplateLogin">
+        <Grid DataContext="{Binding LoginViewModel}" Visibility="{Binding LoginVisibility}" Background="{ThemeResource AppBackgroundAcrylicBrush}">
+            <Pivot SelectedIndex="{Binding PivotIndex,Mode=TwoWay}">
+                <PivotItem>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用社交账号登录</TextBlock>
+                        <ListBox Margin="12" Grid.Row="1" ItemsSource="{Binding SnsTypes}" Background="Transparent">
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <Core:InvokeCommandAction Command="{Binding ShowWebViewCommand}"></Core:InvokeCommandAction>
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                            <ListBox.Resources>
+                                <Style TargetType="ListBoxItem">
+                                    <Setter Property="Padding" Value="6"/>
+                                    <Setter Property="Margin" Value="0"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ListBoxItem">
+                                                <Grid Background="Transparent">
+                                                    <VisualStateManager.VisualStateGroups>
+                                                        <VisualStateGroup>
+                                                            <!--缺省样式-->
+                                                            <VisualState x:Name="Normal" />
+                                                        </VisualStateGroup>
+                                                    </VisualStateManager.VisualStateGroups>
+                                                    <Grid x:Name="ContentBackground">
+                                                        <ContentPresenter
+                                                            Content="{TemplateBinding Content}"
+                                                            Margin="{TemplateBinding Padding}" />
+                                                    </Grid>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </ListBox.Resources>
+                            <ListBox.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Ellipse Width="48" Height="48" Margin="1" Fill="White"/>
+                                        <Image Width="50" Height="50" Source="{Binding Icon}"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Margin="12" Grid.Row="2" Style="{StaticResource ButtonLogin}"
+                            Background="{ThemeResource SystemControlBackgroundAccentBrush}"
+                            Content=" 社交账号登录 &gt;"
+                            Command="{Binding SetPivotIndexCommand}"
+                            CommandParameter="1"/>
+                    </Grid>
+                </PivotItem>
+                <PivotItem>
+                    <Grid MaxWidth="400">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock
+                            Grid.ColumnSpan="3"
+                            HorizontalAlignment="Center"
+                            Margin="6"
+                            FontSize="18">使用花瓣账号登录</TextBlock>
+                        <TextBox
+                            Grid.Row="1"
+                            Grid.ColumnSpan="3"
+                            Margin="6"
+                            BorderThickness="0 0 0 1"
+                            PlaceholderText="用户名/邮箱地址"
+                            Text="{Binding UserName, Mode=TwoWay}"></TextBox>
+                        <PasswordBox
+                            Grid.Row="2"
+                            Grid.ColumnSpan="3"
+                            Margin="6"
+                            BorderThickness="0 0 0 1"
+                            PlaceholderText="密码"
+                            Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
+                        <Button
+                            Grid.Row="3"
+                            Grid.Column="0"
+                            Margin="6"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding SetPivotIndexCommand}"
+                            CommandParameter="0">取消</Button>
+                        <Button
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Margin="6"
+                            HorizontalAlignment="Stretch">登录</Button>
+
+                    </Grid>
+                </PivotItem>
+            </Pivot>
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>
