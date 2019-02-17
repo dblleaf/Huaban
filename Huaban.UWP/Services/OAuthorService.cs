@@ -15,7 +15,7 @@ namespace Huaban.UWP.Services
 
         public string RequestToken(SNSType type)
         {
-            String url = $"https://huaban.com/oauth/{type.strType}/?auth_callback={Client.OAuthCallback}&client_id={Client.ClientID}&md={Client.MD}";
+            String url = $"https://huabanpro.com/oauth/{type.strType}/?auth_callback={Client.OAuthCallback}&client_id={Client.ClientID}&md={Client.MD}";
             return url;
         }
 

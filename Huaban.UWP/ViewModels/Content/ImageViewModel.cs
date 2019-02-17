@@ -366,7 +366,7 @@ namespace Huaban.UWP.ViewModels
                 o =>
                 {
                     DataPackage dp = new DataPackage();
-                    dp.SetText($"http://huaban.com/pins/{Pin?.pin_id}");
+                    dp.SetText($"http://huabanpro.com/pins/{Pin?.pin_id}");
                     Clipboard.SetContent(dp);
 
                     Context.ShowTip("地址已复制到剪贴板！");
@@ -383,7 +383,7 @@ namespace Huaban.UWP.ViewModels
                 return _OpenInBrowser ?? (_OpenInBrowser = new DelegateCommand(
                 async o =>
                 {
-                    await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huaban.com/pins/{Pin?.pin_id}"));
+                    await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huabanpro.com/pins/{Pin?.pin_id}"));
                 }, o => true));
             }
         }

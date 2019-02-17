@@ -18,7 +18,6 @@ namespace Huaban.UWP.Services
             var request = new HttpRequestMessage(method, uri);
             request.Headers.Add("User-Agent", "Apache-HttpClient/UNAVAILABLE (java 1.4)");
             request.Headers.Add(Constants.X_Client_ID, Client.ClientID);
-            request.Headers.Add("Host", "api.huaban.com");
 
             if (!string.IsNullOrEmpty(Client.Token?.access_token))
                 request.Headers.Add(Constants.Authorization, Client.Token.token_type + " " + Client.Token.access_token);

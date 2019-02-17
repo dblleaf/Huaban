@@ -8,7 +8,7 @@ namespace Huaban.UWP.Services
 
     public class UserService : ServiceBase
     {
-        private const string API_SIGNUP = "http://api.huaban.com/signup/";
+        private const string API_SIGNUP = "http://api.huabanpro.com/signup/";
 
         public UserService(IClient client)
             : base(client) { }

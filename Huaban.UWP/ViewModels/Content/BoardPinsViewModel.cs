@@ -101,7 +101,7 @@ namespace Huaban.UWP.ViewModels
                     try
                     {
                         DataPackage dp = new DataPackage();
-                        dp.SetText($"http://huaban.com/boards/{CurrentBoard.board_id}");
+                        dp.SetText($"http://huabanpro.com/boards/{CurrentBoard.board_id}");
                         Clipboard.SetContent(dp);
 
                         Context.ShowTip("地址已复制到剪贴板！");
@@ -124,7 +124,7 @@ namespace Huaban.UWP.ViewModels
                 return _OpenInBrowser ?? (_OpenInBrowser = new DelegateCommand(
                 async o =>
                 {
-                    await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huaban.com/boards/{CurrentBoard.board_id}"));
+                    await Windows.System.Launcher.LaunchUriAsync(new Uri($"http://huabanpro.com/boards/{CurrentBoard.board_id}"));
                 }, o => true));
             }
         }
