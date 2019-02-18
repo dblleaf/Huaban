@@ -98,6 +98,7 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
+    <Compile Include="Models\ModelCollection.cs" />
     <Compile Include="Models\SNSType.cs" />
     <Compile Include="Models\IModel.cs" />
     <Compile Include="Models\Category.cs" />
