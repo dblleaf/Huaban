@@ -48,7 +48,7 @@ namespace Dblleaf.UWP.Huaban.Services
             return pin;
         }
 
-        //http://api.huaban.com/pins/552897183/relatedboards/?max=38
+        //http://api.huabanpro.com/pins/552897183/relatedboards/?max=38
         //转采的画板（cover是封面）
         public async Task<List<Board>> GetRelatedBoards(string PinID, long max)
         {

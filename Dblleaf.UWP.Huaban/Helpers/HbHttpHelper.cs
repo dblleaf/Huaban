@@ -20,7 +20,7 @@ namespace Dblleaf.UWP.Huaban.Helpers
             var request = new HttpRequestMessage(method, uri);
             request.Headers.Add("User-Agent", "Apache-HttpClient/UNAVAILABLE (java 1.4)");
             request.Headers.Add(Constants.X_Client_ID, Client.ClientID);
-            request.Headers.Add("Host", "api.huaban.com");
+
             request.Headers.Add(Constants.X_Client_ID, Client.ClientInfo);
             request.Headers.Add(Constants.Authorization, "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Client.ClientInfo)));
 

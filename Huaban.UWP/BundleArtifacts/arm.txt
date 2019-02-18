@@ -1,7 +1,7 @@
-MainPackage=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.49.0_ARM.appx
-SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.49.0_Test\Huaban.UWP_1.2.49.0_ARM.appxsym
-ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.49.0_language-zh-hans.appx
-ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.49.0_scale-100.appx
-ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.49.0_scale-125.appx
-ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.49.0_scale-150.appx
-ResourcePack=D:\projects\UWP\huaban-master\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.49.0_scale-400.appx
+MainPackage=D:\Projects\uwp\Huaban\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.56.0_ARM.appx
+SymbolPackage=D:\AppPackages\huaban\Huaban.UWP_1.2.56.0_Test\Huaban.UWP_1.2.56.0_ARM.appxsym
+ResourcePack=D:\Projects\uwp\Huaban\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.56.0_language-zh-hans.appx
+ResourcePack=D:\Projects\uwp\Huaban\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.56.0_scale-100.appx
+ResourcePack=D:\Projects\uwp\Huaban\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.56.0_scale-125.appx
+ResourcePack=D:\Projects\uwp\Huaban\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.56.0_scale-150.appx
+ResourcePack=D:\Projects\uwp\Huaban\Huaban.UWP\bin\ARM\Release\Huaban.UWP_1.2.56.0_scale-400.appx
