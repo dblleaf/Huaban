@@ -15,10 +15,10 @@ namespace iHuaban.App.ViewModels
     {
         public List<SNSType> SnsTypes => new List<SNSType>
         {
-            new SNSType { strName = "微博", strType = "weibo", Icon = "/Assets/sina_weibo_50px.png", Url = "http://huaban.com/oauth/weibo/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
-            new SNSType { strName = "QQ", strType = "qzone", Icon = "/Assets/qq_50px.png", Url = "http://huaban.com/oauth/qzone/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
-            new SNSType { strName = "豆瓣", strType = "douban", Icon = "/Assets/douban_50px.png", Url = "https://huaban.com/oauth/douban/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
-            new SNSType { strName = "人人", strType = "renren", Icon = "/Assets/renren_50px.png", Url = "https://huaban.com/oauth/renren/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" }
+            new SNSType { strName = "微博", strType = "weibo", Icon = "/Assets/sina_weibo_50px.png", Url = "http://huabanpro.com/oauth/weibo/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
+            new SNSType { strName = "QQ", strType = "qzone", Icon = "/Assets/qq_50px.png", Url = "http://huabanpro.com/oauth/qzone/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
+            new SNSType { strName = "豆瓣", strType = "douban", Icon = "/Assets/douban_50px.png", Url = "https://huabanpro.com/oauth/douban/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
+            new SNSType { strName = "人人", strType = "renren", Icon = "/Assets/renren_50px.png", Url = "https://huabanpro.com/oauth/renren/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" }
         };
 
         private int _PivotIndex;

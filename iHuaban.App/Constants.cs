@@ -3,18 +3,18 @@
     public class Constants
     {
         #region Api
-        public const string ApiBase = "http://api.huaban.com/";
+        public const string ApiBase = "http://api.huabanpro.com/";
         public const string ApiBoardsName = "boards";
         public const string ApiCategoriesName = "categories";
         public const string ApiFavoriteName = "favorite";
         public const string ApiPinsName = "pins";
-        public const string ApiBoards = "http://api.huaban.com/boards/";
-        public const string ApiCategories = "http://api.huaban.com/categories/";
-        public const string ApiFavorite = "http://api.huaban.com/favorite/";
+        public const string ApiBoards = "http://api.huabanpro.com/boards/";
+        public const string ApiCategories = "http://api.huabanpro.com/categories/";
+        public const string ApiFavorite = "http://api.huabanpro.com/favorite/";
 
-        public const string Apifeeds = "http://api.huaban.com/feeds/";
-        public const string ApiFollow = "http://api.huaban.com/following/";
-        public const string ApiFriends = "http://api.huaban.com/friends/";
+        public const string Apifeeds = "http://api.huabanpro.com/feeds/";
+        public const string ApiFollow = "http://api.huabanpro.com/following/";
+        public const string ApiFriends = "http://api.huabanpro.com/friends/";
 
         public const string ApiMyId = "reug0n58lq";
         public const string ApiPhoneBoard = "47136014";
