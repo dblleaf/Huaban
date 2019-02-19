@@ -9,7 +9,7 @@ namespace iHuaban.App.Services
 {
     public interface IHbService<T> where T : new()
     {
-        T Get(int limit = 0, long max = 0);
-        Task<T> GetAsync(int limit = 0, long max = 0);
+        IModelCollection<T> Get(int limit = 0, long max = 0);
+        Task<IModelCollection<T>> GetAsync(int limit = 0, long max = 0);
     }
 }
