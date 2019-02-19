@@ -122,8 +122,8 @@ namespace Huaban.UWP.Base
                 {
                     Categories.Add(item);
                 }
-                list.Insert(0, new Category() { name = "最热", nav_link = "/popular/" });
-                list.Insert(0, new Category() { name = "最新", nav_link = "/all/" });
+                list.Add(new Category() { name = "最热", nav_link = "/popular/" });
+                list.Add(new Category() { name = "最新", nav_link = "/all/" });
 
                 CategoryList.NoMore();
                 return list;

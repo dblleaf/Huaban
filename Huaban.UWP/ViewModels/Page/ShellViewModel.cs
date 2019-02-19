@@ -203,10 +203,10 @@ namespace Huaban.UWP.ViewModels
                     {
                         DisplayTheme();
 
-                        if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_50")))
+                        if (string.IsNullOrEmpty(StorageHelper.GetSetting("v1_2_57")))
                         {
-                            string msg = @"这次更新内容主要是解决闪退的问题，主要是后端代码优化，UI新功能并没有大的变化。为了迎接下一次更新，请大家在“设置”中清除缓存，无法清除的也可以卸载重新安装，卸载后遇到不能安装的情况，请重启设备或者过一段时间后重新安装。";
-                            var dialog = new MessageDialog(msg, "版本更新 v1.2.50");
+                            string msg = @"主要修复花瓣网域名变更 App 不能正常使用的 bug 。";
+                            var dialog = new MessageDialog(msg, "版本更新 v1.2.57");
 
                             //dialog.Commands.Add(new UICommand("评价应用", async o =>
                             //{
@@ -215,7 +215,7 @@ namespace Huaban.UWP.ViewModels
                             dialog.Commands.Add(new UICommand("我知道了"));
 
                             await dialog.ShowAsync();
-                            StorageHelper.SaveSetting("v1_2_50", "1");
+                            StorageHelper.SaveSetting("v1_2_57", "1");
                         }
 
                     }

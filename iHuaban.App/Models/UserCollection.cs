@@ -2,10 +2,9 @@
 
 namespace iHuaban.App.Models
 {
-    public class UserCollection: IModelCollection<User>
+    public class UserCollection: ModelCollection<User>
     {
         public List<User> Users { set; get; }
-        public int Count => Users.Count;
-        public IEnumerable<User> Data => Users;
+        public override IEnumerable<User> Data => Users;
     }
 }

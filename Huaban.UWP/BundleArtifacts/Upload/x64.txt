@@ -1,1 +1,1 @@
-MainPackage=D:\Projects\uwp\Huaban\Huaban.UWP\bin\x64\Release\Upload\Huaban.UWP_1.2.56.0_x64.appx
+MainPackage=D:\Projects\uwp\Huaban\Huaban.UWP\bin\x64\Release\Upload\Huaban.UWP_1.2.57.0_x64.appx

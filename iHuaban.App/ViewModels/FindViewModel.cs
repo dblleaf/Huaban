@@ -3,9 +3,9 @@ using iHuaban.App.Services;
 
 namespace iHuaban.App.ViewModels
 {
-    public class FindViewModel : ListViewModel<CategoryCollection, Category>
+    public class FindViewModel : ListViewModel<Category>
     {
-        public FindViewModel(IHbService<CategoryCollection> pinsResultService)
+        public FindViewModel(IHbService<ModelCollection<Category>> pinsResultService)
            : base(pinsResultService, false)
         {
         }

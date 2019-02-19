@@ -2,10 +2,9 @@
 
 namespace iHuaban.App.Models
 {
-    public class PinCollection : IModelCollection<Pin>
+    public class PinCollection : ModelCollection<Pin>
     {
         public List<Pin> Pins { set; get; }
-        public int Count => Pins.Count;
-        public IEnumerable<Pin> Data => Pins;
+        public override IEnumerable<Pin> Data => Pins;
     }
 }

@@ -2,10 +2,9 @@
 
 namespace iHuaban.App.Models
 {
-    public class CategoryCollection : IModelCollection<Category>
+    public class CategoryCollection : ModelCollection<Category>
     {
         public List<Category> Categories { set; get; }
-        public int Count => Categories.Count;
-        public IEnumerable<Category> Data => Categories;
+        public override IEnumerable<Category> Data => Categories;
     }
 }

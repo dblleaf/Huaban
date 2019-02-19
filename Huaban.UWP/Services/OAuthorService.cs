@@ -23,6 +23,7 @@ namespace Huaban.UWP.Services
         {
             var request = base.CreateRequest(method, uri, valueNameConnection);
             request.Headers.Add(Constants.X_Client_ID, Client.ClientInfo);
+            request.Headers.Add("host", "huabanpro.com");
             request.Headers.Add(Constants.Authorization, "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(Client.ClientInfo)));
             return request;
         }

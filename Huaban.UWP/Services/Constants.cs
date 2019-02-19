@@ -22,7 +22,7 @@
         public const string API_SEARCH_PEOPLE = "http://api.huabanpro.com/search/people/";
         public const string API_SEARCH_PIN = "http://api.huabanpro.com/search/";
         public const string API_SHARE = "http://api.huabanpro.com/share/";
-        public const string API_TOKEN = "https://huabanpro.com/oauth/access_token/";
+        public const string API_TOKEN = "http://huabanpro.com/oauth/access_token/";
         public const string API_USER = "http://api.huabanpro.com/users/";
         public const string API_WEEKLY = "http://api.huabanpro.com/weekly/";
         public const string Authorization = "Authorization";
