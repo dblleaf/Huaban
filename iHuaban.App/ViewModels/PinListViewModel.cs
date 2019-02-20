@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
 {
-    public class PinListViewModel<T> : ListViewModel<T>
-        where T : IModel, new()
+    public class PinListViewModel<T, T2> : ListViewModel<T, T2>
+        where T : IModelCollection<T2>, new()
+        where T2 : IModel, new()
     {
-        private IPinsResultService<ModelCollection<T>> PinsResultService { set; get; }
+        private IPinsResultService<T> PinsResultService { set; get; }
         private IncrementalLoadingList<Pin> _PinsData;
         public IncrementalLoadingList<Pin> PinsData
         {
@@ -20,7 +21,7 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _PinsData, value); }
         }
 
-        public PinListViewModel(IPinsResultService<ModelCollection<T>> pinsResultService)
+        public PinListViewModel(IPinsResultService<T> pinsResultService)
             : base(pinsResultService)
         {
             PinsResultService = pinsResultService;

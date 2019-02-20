@@ -24,18 +24,18 @@ namespace iHuaban.App.Services
             return $"{Constants.ApiBase}{ResourceName}";
         }
 
-        public async Task<IModelCollection<T>> GetAsync(int limit = 0, long max = 0)
+        public async Task<T> GetAsync(int limit = 0, long max = 0)
         {
             List<KeyValuePair<string, long>> param = new List<KeyValuePair<string, long>>()
             {
                 new KeyValuePair<string, long>("limit", limit),
                 new KeyValuePair<string, long>("max", max)
             };
-            var result = await Helper.GetAsync<IModelCollection<T>>(GetApiUrl() + param.ToQueryString());
+            var result = await Helper.GetAsync<T>(GetApiUrl() + param.ToQueryString());
             return result;
         }
 
-        public IModelCollection<T> Get(int limit = 0, long max = 0)
+        public T Get(int limit = 0, long max = 0)
         {
             return GetAsync(limit, max).Result;
         }

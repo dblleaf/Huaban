@@ -9,19 +9,20 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
 {
-    public class ListViewModel<T> : ViewModelBase
-        where T : IModel, new()
+    public class ListViewModel<T, T2> : ViewModelBase
+        where T : IModelCollection<T2>, new()
+        where T2 : IModel, new()
     {
-        private IHbService<ModelCollection<T>> Service { set; get; }
+        private IHbService<T> Service { set; get; }
         private bool ISupportIncrementalLoading { set; get; }
-        public ListViewModel(IHbService<ModelCollection<T>> service, bool isSpportIncrementalLoading = true)
+        public ListViewModel(IHbService<T> service, bool isSpportIncrementalLoading = true)
         {
             Service = service;
             ISupportIncrementalLoading = isSpportIncrementalLoading;
-            Data = new IncrementalLoadingList<T>(GetData);
+            Data = new IncrementalLoadingList<T2>(GetData);
         }
-        private IncrementalLoadingList<T> _Data;
-        public IncrementalLoadingList<T> Data
+        private IncrementalLoadingList<T2> _Data;
+        public IncrementalLoadingList<T2> Data
         {
             get { return _Data; }
             set { SetValue(ref _Data, value); }
@@ -36,7 +37,7 @@ namespace iHuaban.App.ViewModels
         public int Count => throw new NotImplementedException();
 
 
-        private async Task<IEnumerable<T>> GetData(uint startIndex, int page)
+        private async Task<IEnumerable<T2>> GetData(uint startIndex, int page)
         {
             if (IsLoading)
             {

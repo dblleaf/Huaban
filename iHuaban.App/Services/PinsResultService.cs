@@ -11,19 +11,19 @@ namespace iHuaban.App.Services
 {
     public abstract class PinsResultService<T> : HbService<T>, IPinsResultService<T> where T : new()
     {
-        private HbService<Pin> PinResultService { set; get; }
+        private HbService<PinCollection> PinResultService { set; get; }
         public PinsResultService(string resourceName, HttpHelper helper)
             : base(resourceName, helper)
         {
-            PinResultService = new HbService<Pin>($"{resourceName}{Constants.ApiPinsName}/", helper);
+            PinResultService = new HbService<PinCollection>($"{resourceName}{Constants.ApiPinsName}/", helper);
         }
 
-        public IModelCollection<Pin> GetPins(int limit = 0, long max = 0)
+        public PinCollection GetPins(int limit = 0, long max = 0)
         {
             return GetPinsAsync(limit, max).Result;
         }
 
-        public async Task<IModelCollection<Pin>> GetPinsAsync(int limit = 20, long max = 0)
+        public async Task<PinCollection> GetPinsAsync(int limit = 20, long max = 0)
         {
             return await PinResultService.GetAsync(limit, max);
         }

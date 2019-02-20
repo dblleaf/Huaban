@@ -25,7 +25,7 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 236,
                 ScaleSize = "750:1334",
                 ItemTemplateName = Constants.TemplatePhone,
-                ViewModel = new PinListViewModel<Board>(new BoardService(Constants.ApiPhoneBoard, httpHelper))
+                ViewModel = new PinListViewModel<BoardCollection,Board>(new BoardService(Constants.ApiPhoneBoard, httpHelper))
             },
             new Menu
             {
@@ -35,7 +35,7 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 360,
                 ScaleSize = "1920:1080",
                 ItemTemplateName = Constants.TemplatePC,
-                ViewModel = new PinListViewModel<Board>(new BoardService(Constants.ApiPCBoard, httpHelper))
+                ViewModel = new PinListViewModel<BoardCollection,Board>(new BoardService(Constants.ApiPCBoard, httpHelper))
             },
             new Menu
             {
