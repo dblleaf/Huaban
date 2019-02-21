@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 using iHuaban.Core;
 using iHuaban.App.Services;
 using iHuaban.Core.Helpers;
+using Windows.UI.Xaml;
+using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 
 namespace iHuaban.App.ViewModels
 {
@@ -25,7 +29,7 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 236,
                 ScaleSize = "750:1334",
                 ItemTemplateName = Constants.TemplatePhone,
-                ViewModel = new PinListViewModel<BoardCollection,Board>(new BoardService(Constants.ApiPhoneBoard, httpHelper))
+                ViewModel = new PinListViewModel<BoardCollection, Board>(new BoardService(Constants.ApiPhoneBoard, httpHelper))
             },
             new Menu
             {
@@ -35,7 +39,7 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 360,
                 ScaleSize = "1920:1080",
                 ItemTemplateName = Constants.TemplatePC,
-                ViewModel = new PinListViewModel<BoardCollection,Board>(new BoardService(Constants.ApiPCBoard, httpHelper))
+                ViewModel = new PinListViewModel<BoardCollection, Board>(new BoardService(Constants.ApiPCBoard, httpHelper))
             },
             new Menu
             {
@@ -54,5 +58,40 @@ namespace iHuaban.App.ViewModels
                 ViewModel = new MineViewModel()
             }
         };
+
+        private ElementTheme _RequestedTheme;
+        public ElementTheme RequestedTheme
+        {
+            get { return _RequestedTheme; }
+            set { SetValue(ref _RequestedTheme, value); }
+        }
+
+        public override async Task InitAsync()
+        {
+            ExtendAcrylicIntoTitleBar();
+            await Task.FromResult(0);
+        }
+
+        private void ExtendAcrylicIntoTitleBar()
+        {
+            RequestedTheme = ElementTheme.Dark;
+
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+            Color color = Colors.White;
+            Color bgColor = Color.FromArgb(255, 50, 50, 50);
+            if (RequestedTheme == ElementTheme.Light)
+            {
+                color = Colors.Black;
+                bgColor = Color.FromArgb(255, 205, 205, 205);
+            }
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.BackgroundColor = Colors.Transparent;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+            titleBar.ButtonForegroundColor = color;
+            titleBar.ButtonInactiveForegroundColor = color;
+            titleBar.ButtonHoverBackgroundColor = bgColor;
+            titleBar.ButtonHoverForegroundColor = color;
+        }
     }
 }

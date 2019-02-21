@@ -31,7 +31,7 @@ namespace Huaban.UWP
             var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
             if (token != null)
             {
-                token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
+                //token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
             }
             context.User = user;
 

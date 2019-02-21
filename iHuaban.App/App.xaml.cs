@@ -74,22 +74,9 @@ namespace iHuaban.App
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
-                ExtendAcrylicIntoTitleBar();
             }
         }
-        private void ExtendAcrylicIntoTitleBar()
-        {
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
 
-            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.BackgroundColor = Colors.Transparent;
-            titleBar.ButtonBackgroundColor = Colors.Transparent;
-            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            titleBar.ButtonForegroundColor = Colors.White;
-            titleBar.ButtonInactiveForegroundColor = Colors.White;
-            titleBar.ButtonHoverBackgroundColor = Color.FromArgb(255, 50, 50, 50);
-            titleBar.ButtonHoverForegroundColor = Colors.White;
-        }
         /// <summary>
         /// Invoked when Navigation to a certain page fails
         /// </summary>

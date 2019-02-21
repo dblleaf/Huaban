@@ -22,7 +22,7 @@ namespace iHuaban.Core.Controls
             {
                 List<double> scaleSize = null;
 
-                if (string.IsNullOrEmpty(this.ScaleSize))
+                if (!string.IsNullOrEmpty(this.ScaleSize))
                 {
                     scaleSize = this.ScaleSize.Split(new char[] { ':' }, StringSplitOptions.RemoveEmptyEntries).Select(o => double.Parse(o)).ToList();
                 }
