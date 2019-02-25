@@ -5,7 +5,7 @@ namespace iHuaban.App.Services
 {
     public class CategoryService : Service<CategoryCollection>, ICategoryService
     {
-        public CategoryService(IHttpHelper httpHelper) : base(httpHelper)
+        public CategoryService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
     }

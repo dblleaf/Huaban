@@ -35,7 +35,7 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 236,
                 ScaleSize = "750:1334",
                 ItemTemplateName = Constants.TemplatePhone,
-                ViewModel = new PinListViewModel<BoardCollection, Board>(new BoardService(Constants.ApiPhoneBoard, httpHelper))
+                ViewModelType = typeof(PhoneViewModel),
             },
             new Menu
             {
@@ -45,7 +45,7 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 360,
                 ScaleSize = "1920:1080",
                 ItemTemplateName = Constants.TemplatePC,
-                ViewModel = new PinListViewModel<BoardCollection, Board>(new BoardService(Constants.ApiPCBoard, httpHelper))
+                ViewModelType = typeof(PCViewModel),
             },
             new Menu
             {
@@ -54,14 +54,14 @@ namespace iHuaban.App.ViewModels
                 CellMinWidth = 236,
                 Template = Constants.TemplateFind,
                 ItemTemplateName = Constants.TemplateCategory,
-                ViewModel = new FindViewModel(new HbService<CategoryCollection>(Constants.ApiCategoriesName, httpHelper)),
+                ViewModelType = typeof(FindViewModel),
             },
             new Menu
             {
                 Title = Constants.TextMine,
                 Icon = "\uE77B",
                 Template = Constants.TemplateMine,
-                ViewModel = new MineViewModel()
+                ViewModelType = typeof(MineViewModel),
             }
         };
 

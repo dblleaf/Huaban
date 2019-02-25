@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
-    public interface IBoardService: IService<BoardCollection>
+    public interface IBoardService : IService<BoardCollection>
     {
     }
 }

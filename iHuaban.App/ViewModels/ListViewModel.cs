@@ -9,19 +9,21 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
 {
-    public class ListViewModel<T> : ViewModelBase
-        where T : IModel, new()
+    public abstract class ListViewModel<TModel, TCollection> : ViewModelBase
+        where TModel : IModel, new()
+        where TCollection : IModelCollection<TModel>, new()
     {
-        private IService<ModelCollection<T>> Service { set; get; }
+        protected abstract string GetApiUrl();
+        protected Services.IServiceProvider ServiceProvider { set; get; }
         private bool ISupportIncrementalLoading { set; get; }
-        public ListViewModel(IService<ModelCollection<T>> service, bool isSpportIncrementalLoading = true)
+        public ListViewModel(Services.IServiceProvider service, bool isSpportIncrementalLoading = true)
         {
-            Service = service;
-            ISupportIncrementalLoading = isSpportIncrementalLoading;
-            Data = new IncrementalLoadingList<T>(GetData);
+            this.ServiceProvider = service;
+            this.ISupportIncrementalLoading = isSpportIncrementalLoading;
+            this.Data = new IncrementalLoadingList<TModel>(GetData);
         }
-        private IncrementalLoadingList<T> _Data;
-        public IncrementalLoadingList<T> Data
+        private IncrementalLoadingList<TModel> _Data;
+        public IncrementalLoadingList<TModel> Data
         {
             get { return _Data; }
             set { SetValue(ref _Data, value); }
@@ -33,17 +35,10 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _IsLoading, value); }
         }
 
-        private string _Url;
-        public string Url
-        {
-            get { return _Url; }
-            set { SetValue(ref _Url, value); }
-        }
-
         public int Count => throw new NotImplementedException();
 
 
-        private async Task<IEnumerable<T>> GetData(uint startIndex, int page)
+        private async Task<IEnumerable<TModel>> GetData(uint startIndex, int page)
         {
             if (IsLoading)
             {
@@ -52,7 +47,7 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                var list = await Service.GetAsync(this.Url, 20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
+                var list = await this.ServiceProvider.GetAsync<TCollection>(GetApiUrl(), 20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
                 if (ISupportIncrementalLoading && list?.Count > 0)
                     Data.HasMore();
@@ -60,7 +55,7 @@ namespace iHuaban.App.ViewModels
                     Data.NoMore();
                 return list.Data;
             }
-            catch (Exception ex)
+            catch
             {
             }
             finally

@@ -2,7 +2,7 @@
 
 namespace iHuaban.Core.Models
 {
-    public abstract class ViewModelBase : ObservableObject
+    public class ViewModelBase : ObservableObject
     {
         public ViewModelBase()
         {

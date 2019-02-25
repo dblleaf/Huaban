@@ -9,10 +9,8 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
 {
-    public class PinListViewModel<T> : ListViewModel<T>
-        where T : IModel, new()
+    public abstract class PinListViewModel : ListViewModel<Pin, PinCollection>
     {
-        private IService<T> PinsResultService { set; get; }
         private IncrementalLoadingList<Pin> _PinsData;
         public IncrementalLoadingList<Pin> PinsData
         {
@@ -20,10 +18,9 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _PinsData, value); }
         }
 
-        public PinListViewModel(IPinsResultService<T> pinsResultService)
-            : base(pinsResultService)
+        public PinListViewModel(Services.IServiceProvider serviceProvider)
+            : base(serviceProvider)
         {
-            PinsResultService = pinsResultService;
             PinsData = new IncrementalLoadingList<Pin>(GetPinsData);
         }
 
@@ -36,7 +33,7 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                var list = await PinsResultService.GetPinsAsync(20, GetMaxPinId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
+                var list = await this.ServiceProvider.GetAsync<PinCollection>(GetApiUrl(), 20, GetMaxPinId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
                 if (list.Data.Count() == 0)
                     PinsData.NoMore();
@@ -44,7 +41,7 @@ namespace iHuaban.App.ViewModels
                     PinsData.HasMore();
                 return list.Data;
             }
-            catch (Exception ex)
+            catch
             {
             }
             finally

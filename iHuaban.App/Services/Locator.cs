@@ -1,5 +1,6 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.ViewModels;
+using iHuaban.Core.Helpers;
 using System;
 using Unity;
 
@@ -39,13 +40,25 @@ namespace iHuaban.App.Services
         private void Register()
         {
             Container.RegisterInstance(Setting.Instance());
-            Container.RegisterType(typeof(IService<>), typeof(Service<>));
-            Container.RegisterType<MainViewModel>();
+            Container.RegisterType<IHttpHelper, HttpHelper>();
+            Container.RegisterType<IServiceProvider, ServiceProvider>();
+            Container.RegisterType<IPinService, PinService>();
+            Container.RegisterType<IBoardService, BoardService>();
+            Container.RegisterType<ICategoryService, CategoryService>();
+            Container.RegisterType<PhoneViewModel>();
+            Container.RegisterType<PCViewModel>();
+            Container.RegisterType<FindViewModel>();
+            Container.RegisterType<MineViewModel>();
         }
 
         public static T ResolveObject<T>()
         {
             return BuildLocator().Resolve<T>();
+        }
+
+        public static T ResolveObject<T>(Type type) where T : new()
+        {
+            return (T)BuildLocator().Resolve(type);
         }
     }
 }

@@ -5,7 +5,7 @@ namespace iHuaban.App.Services
 {
     public class PinService : Service<PinCollection>, IPinService
     {
-        public PinService(IHttpHelper httpHelper) : base(httpHelper)
+        public PinService(IServiceProvider serviceProvider) : base(serviceProvider)
         {
         }
     }

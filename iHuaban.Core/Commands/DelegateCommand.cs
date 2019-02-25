@@ -26,7 +26,7 @@ namespace iHuaban.Core.Commands
             {
                 this.MyExecute(parameter);
             }
-            catch (Exception ex)
+            catch
             {
             }
         }

@@ -5,20 +5,20 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
-    public class Service<T> : IService<T>
+    public class ServiceProvider : IServiceProvider
     {
         protected IHttpHelper HttpHelper { get; private set; }
-        public Service(IHttpHelper httpHelper)
+        public ServiceProvider(IHttpHelper httpHelper)
         {
             this.HttpHelper = httpHelper;
         }
 
-        public T Get(string uri, int limit = 0, long max = 0)
+        public T Get<T>(string uri, int limit = 0, long max = 0)
         {
-            return GetAsync(uri, limit, max).Result;
+            return GetAsync<T>(uri, limit, max).Result;
         }
 
-        public async Task<T> GetAsync(string uri, int limit = 0, long max = 0)
+        public async Task<T> GetAsync<T>(string uri, int limit = 0, long max = 0)
         {
             List<KeyValuePair<string, long>> param = new List<KeyValuePair<string, long>>()
             {
