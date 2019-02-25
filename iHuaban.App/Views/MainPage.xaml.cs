@@ -10,6 +10,10 @@ namespace iHuaban.App.Views
         public MainPage()
         {
             this.InitializeComponent();
+            this.Loaded += async (sender, e) =>
+            {
+                await ViewModel.InitAsync();
+            };
         }
 
         private MainViewModel vm;

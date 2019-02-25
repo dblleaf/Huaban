@@ -28,7 +28,7 @@
             Padding="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}">
             <Border
-                Background="{StaticResource SystemControlChromeHighAcrylicWindowMediumBrush}"
+                Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}"
                 VerticalAlignment="Center"
                 Padding="8">
                 <TextBlock Text="{Binding name}"></TextBlock>
@@ -114,7 +114,7 @@
                     <Grid>
                         <Grid Margin="6" Padding="8"
                                 HorizontalAlignment="Stretch"
-                                Background="{StaticResource SystemControlChromeHighAcrylicWindowMediumBrush}">
+                                Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
                             <TextBlock>搜索</TextBlock>
                             <SymbolIcon Symbol="Find" HorizontalAlignment="Right"></SymbolIcon>
                         </Grid>

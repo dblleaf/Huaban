@@ -74,6 +74,7 @@ namespace iHuaban.App.ViewModels
 
         public override async Task InitAsync()
         {
+            this.RequestedTheme = ElementTheme.Dark;
             ExtendAcrylicIntoTitleBar();
             await Task.FromResult(0);
         }

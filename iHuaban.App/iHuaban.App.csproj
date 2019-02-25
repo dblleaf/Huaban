@@ -120,11 +120,11 @@
     <Compile Include="Models\UserCollection.cs" />
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CategoryService.cs" />
-    <Compile Include="Services\IServiceProvider.cs" />
-    <Compile Include="Services\IBoardService.cs" />
-    <Compile Include="Services\ICategoryService.cs" />
-    <Compile Include="Services\IPinService.cs" />
-    <Compile Include="Services\IService.cs" />
+    <Compile Include="Services\Interfaces\IServiceProvider.cs" />
+    <Compile Include="Services\Interfaces\IBoardService.cs" />
+    <Compile Include="Services\Interfaces\ICategoryService.cs" />
+    <Compile Include="Services\Interfaces\IPinService.cs" />
+    <Compile Include="Services\Interfaces\IService.cs" />
     <Compile Include="Services\Locator.cs" />
     <Compile Include="Services\PinService.cs" />
     <Compile Include="Services\Service.cs" />
