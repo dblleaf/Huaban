@@ -31,13 +31,17 @@ namespace Huaban.UWP
             var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
             if (token != null)
             {
-                //token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
+                token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
             }
             context.User = user;
 
             if (token != null && token.ExpiresIn > DateTime.Now)
             {
                 await context.SetToken(token);
+            }
+            else
+            {
+                token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
             }
 
             //var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));

@@ -39,10 +39,10 @@ namespace Huaban.UWP.ViewModels
         protected Popup Popup { set; get; }
         private Action<AuthToken> SuccessAction;
         public List<SNSType> SnsTypes { private set; get; } = new List<SNSType>(new SNSType[] {
-            new SNSType { strName = "微博", strType = "weibo", Icon = "ms-appx:///Assets/sina_weibo_50px.png", Url = "http://huabanpro.com/oauth/weibo/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
-            new SNSType { strName = "QQ", strType = "qzone", Icon = "ms-appx:///Assets/qq_50px.png", Url = "http://huabanpro.com/oauth/qzone/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
-            //new SNSType { strName = "豆瓣", strType = "douban", Icon = "ms-appx:///Assets/douban_50px.png", Url = "https://huabanpro.com/oauth/douban/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
-            //new SNSType { strName = "人人", strType = "renren", Icon = "ms-appx:///Assets/renren_50px.png", Url = "https://huabanpro.com/oauth/renren/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" }
+            new SNSType { strName = "微博", strType = "weibo", Icon = "ms-appx:///Assets/sina_weibo_50px.png", Url = "http://huaban.com/oauth/weibo/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
+            new SNSType { strName = "QQ", strType = "qzone", Icon = "ms-appx:///Assets/qq_50px.png", Url = "http://huaban.com/oauth/qzone/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
+            //new SNSType { strName = "豆瓣", strType = "douban", Icon = "ms-appx:///Assets/douban_50px.png", Url = "https://huaban.com/oauth/douban/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
+            //new SNSType { strName = "人人", strType = "renren", Icon = "ms-appx:///Assets/renren_50px.png", Url = "https://huaban.com/oauth/renren/?auth_callback=ms-appx-web:///Assets/Test.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" }
         });
         private string _UserName;
         public string UserName

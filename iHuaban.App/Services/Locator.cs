@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.ViewModels;
 using System;
 using Unity;
 
@@ -38,6 +39,13 @@ namespace iHuaban.App.Services
         private void Register()
         {
             Container.RegisterInstance(Setting.Instance());
+            Container.RegisterType(typeof(IService<>), typeof(Service<>));
+            Container.RegisterType<MainViewModel>();
+        }
+
+        public static T ResolveObject<T>()
+        {
+            return BuildLocator().Resolve<T>();
         }
     }
 }

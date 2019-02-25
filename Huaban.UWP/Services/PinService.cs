@@ -47,7 +47,7 @@ namespace Huaban.UWP.Services
             return pin;
         }
 
-        //http://api.huabanpro.com/pins/552897183/relatedboards/?max=38
+        //http://api.huaban.com/pins/552897183/relatedboards/?max=38
         //转采的画板（cover是封面）
         public async Task<List<Board>> GetRelatedBoards(string PinID, long max)
         {

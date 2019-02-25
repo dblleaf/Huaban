@@ -3,10 +3,10 @@ using iHuaban.App.Services;
 
 namespace iHuaban.App.ViewModels
 {
-    public class FindViewModel : ListViewModel<CategoryCollection, Category>
+    public class FindViewModel : ListViewModel<Category>
     {
-        public FindViewModel(IHbService<CategoryCollection> pinsResultService)
-           : base(pinsResultService, false)
+        public FindViewModel(IService<ModelCollection<Category>> service)
+           : base(service, false)
         {
         }
     }

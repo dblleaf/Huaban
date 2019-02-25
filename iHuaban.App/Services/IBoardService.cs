@@ -7,9 +7,7 @@ using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
-    public interface IHbService<T> where T : new()
+    public interface IBoardService: IService<BoardCollection>
     {
-        T Get(int limit = 0, long max = 0);
-        Task<T> GetAsync(int limit = 0, long max = 0);
     }
 }

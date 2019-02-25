@@ -1,4 +1,5 @@
-﻿using iHuaban.App.ViewModels;
+﻿using iHuaban.App.Services;
+using iHuaban.App.ViewModels;
 using iHuaban.Core;
 using Windows.UI.Xaml.Controls;
 
@@ -14,7 +15,7 @@ namespace iHuaban.App.Views
         private MainViewModel vm;
         public MainViewModel ViewModel
         {
-            get => vm ?? (vm = new MainViewModel());
+            get => vm ?? (vm = Locator.ResolveObject<MainViewModel>());
         }
     }
 }

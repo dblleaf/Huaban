@@ -18,6 +18,12 @@ namespace iHuaban.App.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+
+        public MainViewModel()
+        {
+
+        }
+
         private HttpHelper httpHelper => new HttpHelper();
         public ObservableCollection<Menu> Menu => new ObservableCollection<Menu>
         {

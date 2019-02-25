@@ -15,7 +15,7 @@ namespace Huaban.UWP.Services
 
         public string RequestToken(SNSType type)
         {
-            String url = $"https://huabanpro.com/oauth/{type.strType}/?auth_callback={Client.OAuthCallback}&client_id={Client.ClientID}&md={Client.MD}";
+            String url = $"https://huaban.com/oauth/{type.strType}/?auth_callback={Client.OAuthCallback}&client_id={Client.ClientID}&md={Client.MD}";
             return url;
         }
 
@@ -23,7 +23,7 @@ namespace Huaban.UWP.Services
         {
             var request = base.CreateRequest(method, uri, valueNameConnection);
             request.Headers.Add(Constants.X_Client_ID, Client.ClientInfo);
-            request.Headers.Add("host", "huabanpro.com");
+            request.Headers.Add("host", "huaban.com");
 
             if (!request.Headers.Contains(Constants.Authorization))
             {
@@ -57,11 +57,14 @@ namespace Huaban.UWP.Services
                     Post(
                         Constants.API_TOKEN,
                         new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                        new KeyValuePair<string, string>("refresh_token", token.refresh_token)
+                        new KeyValuePair<string, string>("refresh_token", token.access_token)
                 );
                 return AuthToken.Parse(resphonse);
             }
-            catch { }
+            catch (Exception ex)
+            {
+                var aaa = ex;
+            }
             return null;
         }
     }

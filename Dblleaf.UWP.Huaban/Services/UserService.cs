@@ -10,7 +10,7 @@ namespace Dblleaf.UWP.Huaban.Services
 
     public class UserService : ServiceBase
     {
-        private const string API_SIGNUP = "http://api.huabanpro.com/signup/";
+        private const string API_SIGNUP = "http://api.huaban.com/signup/";
 
         public UserService(HbHttpHelper httpHelper)
             : base(httpHelper) { }
