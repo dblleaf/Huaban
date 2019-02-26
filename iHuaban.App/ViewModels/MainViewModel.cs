@@ -13,15 +13,28 @@ using Windows.UI.Xaml;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using iHuaban.Core.Commands;
+using Windows.UI.Xaml.Controls;
+using iHuaban.App.Views;
 
 namespace iHuaban.App.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
-        public MainViewModel()
+        private INavigationService navigationService;
+        public MainViewModel(INavigationService navigationService)
         {
+            this.Setting.DarkMode = false;
+            this.navigationService = navigationService;
+            this.Setting.PropertyChanged += Setting_PropertyChanged;
+        }
 
+        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "WindowActived" || e.PropertyName == "DarkMode")
+            {
+                ExtendAcrylicIntoTitleBar();
+            }
         }
 
         private HttpHelper httpHelper => new HttpHelper();
@@ -42,8 +55,8 @@ namespace iHuaban.App.ViewModels
                 Title = Constants.TextPC,
                 Icon = "\uE977",
                 Template = Constants.TemplateGrid,
-                CellMinWidth = 360,
-                ScaleSize = "1920:1080",
+                CellMinWidth = 256,
+                ScaleSize = "1920:1200",
                 ItemTemplateName = Constants.TemplatePC,
                 ViewModelType = typeof(PCViewModel),
             },
@@ -65,28 +78,20 @@ namespace iHuaban.App.ViewModels
             }
         };
 
-        private ElementTheme _RequestedTheme;
-        public ElementTheme RequestedTheme
-        {
-            get { return _RequestedTheme; }
-            set { SetValue(ref _RequestedTheme, value); }
-        }
-
         public override async Task InitAsync()
         {
-            this.RequestedTheme = ElementTheme.Dark;
+            this.Setting.RequestedTheme = ElementTheme.Light;
             ExtendAcrylicIntoTitleBar();
             await Task.FromResult(0);
         }
 
         private void ExtendAcrylicIntoTitleBar()
         {
-            RequestedTheme = ElementTheme.Dark;
-
+            this.Setting.RequestedTheme = Setting.WindowActived ? (Setting.DarkMode ? ElementTheme.Dark : ElementTheme.Light) : (Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light);
             CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
             Color color = Colors.White;
             Color bgColor = Color.FromArgb(255, 50, 50, 50);
-            if (RequestedTheme == ElementTheme.Light)
+            if (this.Setting.RequestedTheme == ElementTheme.Light)
             {
                 color = Colors.Black;
                 bgColor = Color.FromArgb(255, 205, 205, 205);
@@ -99,6 +104,28 @@ namespace iHuaban.App.ViewModels
             titleBar.ButtonInactiveForegroundColor = color;
             titleBar.ButtonHoverBackgroundColor = bgColor;
             titleBar.ButtonHoverForegroundColor = color;
+        }
+
+        private DelegateCommand _NavigateCommand;
+        public DelegateCommand NavigateCommand
+        {
+            get
+            {
+                return _NavigateCommand ?? (_NavigateCommand = new DelegateCommand(
+                o =>
+                {
+                    try
+                    {
+                        string page = o.ToString();
+                        navigationService.Navigate(page);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                }, o => true));
+            }
         }
     }
 }

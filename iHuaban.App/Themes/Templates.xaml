@@ -273,5 +273,15 @@
             </Pivot>
         </Grid>
     </DataTemplate>
-
+    <!--关于列表-->
+    <DataTemplate x:Key="TemplateAboutList">
+        <StackPanel>
+            <TextBlock Foreground="{ThemeResource SystemControlDisabledBaseLowBrush}" Text="{Binding Title}"></TextBlock>
+            <RichTextBlock TextWrapping="WrapWholeWords">
+                <Paragraph>
+                    <Run Text="{Binding Label}" />
+                </Paragraph>
+            </RichTextBlock>
+        </StackPanel>
+    </DataTemplate>
 </ResourceDictionary>

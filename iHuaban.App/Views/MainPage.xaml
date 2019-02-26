@@ -6,9 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:s="using:iHuaban.App.TemplateSelectors"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" 
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     DataContext="{x:Bind ViewModel}"
-    RequestedTheme="{Binding RequestedTheme}"
+    RequestedTheme="{Binding Setting.RequestedTheme}"
     Background="{StaticResource AppBackgroundAcrylicBrush}"
+    NavigationCacheMode="Required"
     mc:Ignorable="d">
     <Page.Resources>
         <s:MainPagePivotDataTemplateSelector
@@ -24,11 +27,22 @@
             ItemTemplateSelector="{StaticResource MainPagePivotDataTemplateSelector}">
         </Pivot>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <AppBarButton Height="48" Content="设置" Icon="Setting" />
+            <AppBarButton Height="48" Content="设置" Icon="Setting">
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="Tapped">
+                        <Core:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="Setting"></Core:InvokeCommandAction>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+            </AppBarButton>
             <AppBarButton Height="48" Content="关于">
                 <AppBarButton.Icon>
                     <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE9CE;"/>
                 </AppBarButton.Icon>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="Tapped">
+                        <Core:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="About"></Core:InvokeCommandAction>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
             </AppBarButton>
         </StackPanel>
     </Grid>

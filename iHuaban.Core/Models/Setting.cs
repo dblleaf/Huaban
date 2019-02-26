@@ -1,19 +1,12 @@
-﻿using iHuaban.Core.Models;
-using System.ComponentModel;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
-namespace iHuaban.App.Models
+namespace iHuaban.Core.Models
 {
     public class Setting : ObservableObject
     {
         private Setting()
         {
-            this.PropertyChanged += Setting_PropertyChanged;
-        }
-
-        private void Setting_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-
         }
 
         private bool _DarkMode;
@@ -40,5 +33,20 @@ namespace iHuaban.App.Models
         {
             await Task.FromResult(0);
         }
+
+        private bool _WindowActived;
+        public bool WindowActived
+        {
+            get { return _WindowActived; }
+            set { SetValue(ref _WindowActived, value); }
+        }
+
+        private ElementTheme _RequestedTheme;
+        public ElementTheme RequestedTheme
+        {
+            get { return _RequestedTheme; }
+            set { SetValue(ref _RequestedTheme, value); }
+        }
+
     }
 }

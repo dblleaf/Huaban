@@ -1,4 +1,6 @@
-﻿using iHuaban.App.Views;
+﻿using iHuaban.App.Models;
+using iHuaban.App.Views;
+using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -10,6 +12,7 @@ using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -99,6 +102,21 @@ namespace iHuaban.App
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        {
+            args.Window.Activated += Window_Activated;
+            base.OnWindowCreated(args);
+        }
+
+        private void Window_Activated(object sender, WindowActivatedEventArgs e)
+        {
+            try
+            {
+                Setting.Instance().WindowActived = !(e.WindowActivationState == CoreWindowActivationState.Deactivated);
+            }
+            catch { }
         }
     }
 }

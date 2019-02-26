@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using iHuaban.Core.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -97,7 +98,7 @@ namespace iHuaban.App.Helpers
         public static async Task SaveImage(byte[] bytes, string fileName)
         {
 
-            StorageFolder saveFolder = await StorageFolder.GetFolderFromPathAsync(Models.Setting.Instance().SavePath);
+            StorageFolder saveFolder = await StorageFolder.GetFolderFromPathAsync(Setting.Instance().SavePath);
             try
             {
                 var file = await saveFolder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
@@ -109,7 +110,7 @@ namespace iHuaban.App.Helpers
 
         public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream)
         {
-            StorageFolder saveFolder = await StorageFolder.GetFolderFromPathAsync(Models.Setting.Instance().SavePath);
+            StorageFolder saveFolder = await StorageFolder.GetFolderFromPathAsync(Setting.Instance().SavePath);
 
             var storageFile = await saveFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
             using (IRandomAccessStream outputStream = await storageFile.OpenAsync(FileAccessMode.ReadWrite))

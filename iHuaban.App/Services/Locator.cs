@@ -1,6 +1,7 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.ViewModels;
 using iHuaban.Core.Helpers;
+using iHuaban.Core.Models;
 using System;
 using Unity;
 
@@ -41,6 +42,7 @@ namespace iHuaban.App.Services
         {
             Container.RegisterInstance(Setting.Instance());
             Container.RegisterType<IHttpHelper, HttpHelper>();
+            Container.RegisterSingleton<INavigationService, NavigationService>();
             Container.RegisterType<IServiceProvider, ServiceProvider>();
             Container.RegisterType<IPinService, PinService>();
             Container.RegisterType<IBoardService, BoardService>();
@@ -49,6 +51,8 @@ namespace iHuaban.App.Services
             Container.RegisterType<PCViewModel>();
             Container.RegisterType<FindViewModel>();
             Container.RegisterType<MineViewModel>();
+            Container.RegisterType<AboutViewModel>();
+            Container.RegisterType<SettingViewModel>();
         }
 
         public static T ResolveObject<T>()

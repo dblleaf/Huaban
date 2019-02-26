@@ -114,6 +114,7 @@
     <Compile Include="IPage.cs" />
     <Compile Include="Models\IncrementalLoadingList.cs" />
     <Compile Include="Models\ScaleSize.cs" />
+    <Compile Include="Models\Setting.cs" />
     <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Models\ObservableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
