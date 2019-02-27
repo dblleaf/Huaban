@@ -5,9 +5,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Controls;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -23,7 +23,7 @@ namespace Huaban.UWP.ViewModels
         }
         #region Properties
         [Dependency]
-        public PinAPI PinApi { set; get; }
+        public PinService PinService { set; get; }
 
         public PinListViewModel RecommendListViewModel { set; get; }
 
@@ -65,7 +65,7 @@ namespace Huaban.UWP.ViewModels
             try
             {
 
-                list = await PinApi.GetRecommendList(Pin.pin_id, page);
+                list = await PinService.GetRecommendList(Pin.pin_id, page);
                 foreach (var item in list)
                 {
                     item.Width = RecommendListViewModel.ColumnWidth;
@@ -97,7 +97,7 @@ namespace Huaban.UWP.ViewModels
 
             try
             {
-                list = await PinApi.GetRelatedBoards(Pin?.pin_id, BoardListViewModel.GetMaxSeq());
+                list = await PinService.GetRelatedBoards(Pin?.pin_id, BoardListViewModel.GetMaxSeq());
 
                 if (list.Count == 0)
                     BoardListViewModel.BoardList.NoMore();
@@ -126,7 +126,7 @@ namespace Huaban.UWP.ViewModels
 
             try
             {
-                list = await PinApi.GetLikeList(Pin.pin_id, UserListViewModel.GetMaxID());
+                list = await PinService.GetLikeList(Pin.pin_id, UserListViewModel.GetMaxID());
 
                 if (list.Count == 0)
                     UserListViewModel.UserList.NoMore();
@@ -155,7 +155,7 @@ namespace Huaban.UWP.ViewModels
 
                 if (pin?.pin_id != Pin?.pin_id)
                 {
-                    Pin = await PinApi.GetPin(pin.pin_id);
+                    Pin = await PinService.GetPin(pin.pin_id);
                     await RecommendListViewModel.PinList.LoadMoreItemsAsync(0);
                     await Task.Delay(500);
                     await RecommendListViewModel.PinList.LoadMoreItemsAsync(0);

@@ -1,30 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Huaban.UWP.ViewModels
 {
     using Base;
     using Commands;
-    using Services;
     using Models;
-    using Api;
+    using Services;
     public delegate void SelectedChangedHandler(Pin args);
     public class PinListViewModel : HBViewModel
     {
-        private PinAPI PinAPI { set; get; }
-        private BoardAPI BoardAPI { set; get; }
+        private PinService PinService { set; get; }
+        private BoardService BoardService { set; get; }
         public PinListViewModel(Context context, Func<uint, int, Task<IEnumerable<Pin>>> _func)
             : base(context)
         {
-            PinAPI = ServiceLocator.Resolve<PinAPI>();
-            BoardAPI = ServiceLocator.Resolve<BoardAPI>();
+            PinService = ServiceLocator.Resolve<PinService>();
+            BoardService = ServiceLocator.Resolve<BoardService>();
             PinList = new IncrementalLoadingList<Pin>(_func);
             SelecterVisibility = Visibility.Collapsed;
 
@@ -129,7 +126,7 @@ namespace Huaban.UWP.ViewModels
                         if (args != null)
                             item = args.ClickedItem as Pin;
 
-                        string str = await PinAPI.Like(item.pin_id, !item.liked);
+                        string str = await PinService.Like(item.pin_id, !item.liked);
 
                         item.liked = (str != "{}");
 
@@ -158,13 +155,13 @@ namespace Huaban.UWP.ViewModels
                         return;
                     string boardName = NewBoardName;
                     NewBoardName = "";
-                    var board = await BoardAPI.add(boardName);
+                    var board = await BoardService.add(boardName);
 
                     if (board != null)
                     {
                         var list = Context.BoardListVM.BoardList;
                         list.Add(board);
-                        var pin = await PinAPI.Pin(SelectedItem.pin_id, board.board_id, SelectedItem.raw_text);
+                        var pin = await PinService.Pin(SelectedItem.pin_id, board.board_id, SelectedItem.raw_text);
                         board.pins.Add(pin);
                         board.cover = pin;
                         Context.ShowTip($"采集到了画板：{board.title}");
@@ -219,7 +216,7 @@ namespace Huaban.UWP.ViewModels
                     if (args != null)
                         item = args.ClickedItem as Board;
 
-                    var pin = await PinAPI.Pin(SelectedItem.pin_id, item.board_id, SelectedItem.raw_text);
+                    var pin = await PinService.Pin(SelectedItem.pin_id, item.board_id, SelectedItem.raw_text);
                     if (item.cover == null)
                         item.cover = pin;
                     Context.ShowTip($"采集到了画板：{item.title}");

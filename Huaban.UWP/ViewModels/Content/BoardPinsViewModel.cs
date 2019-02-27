@@ -7,10 +7,10 @@ using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Commands;
     using Controls;
+    using Huaban.UWP.Services;
     using Models;
     using Unity.Attributes;
 
@@ -27,9 +27,9 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public BoardAPI BoardAPI { set; get; }
+        public BoardService BoardService { set; get; }
         [Dependency]
-        public PinAPI PinAPI { set; get; }
+        public PinService PinService { set; get; }
 
         public PinListViewModel PinListViewModel { set; get; }
 
@@ -73,7 +73,7 @@ namespace Huaban.UWP.ViewModels
                 {
                     try
                     {
-                        string str = await BoardAPI.follow(CurrentBoard.board_id, !CurrentBoard.following);
+                        string str = await BoardService.follow(CurrentBoard.board_id, !CurrentBoard.following);
 
                         CurrentBoard.following = (str != "{}");
 
@@ -140,7 +140,7 @@ namespace Huaban.UWP.ViewModels
             IsLoading = true;
             try
             {
-                var list = await BoardAPI.GetPins(CurrentBoard.board_id, PinListViewModel.GetMaxPinID());
+                var list = await BoardService.GetPins(CurrentBoard.board_id, PinListViewModel.GetMaxPinID());
                 foreach (var item in list)
                 {
                     item.Width = PinListViewModel.ColumnWidth;
@@ -171,7 +171,7 @@ namespace Huaban.UWP.ViewModels
                 if (board == null || board == CurrentBoard)
                     return;
 
-                CurrentBoard = await BoardAPI.GetBoard(board.board_id);
+                CurrentBoard = await BoardService.GetBoard(board.board_id);
                 await PinListViewModel.ClearAndReload();
             }
             catch (Exception ex)

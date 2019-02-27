@@ -5,13 +5,12 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using Windows.Storage;
 
 namespace Huaban.UWP
 {
     using Base;
-    using Services;
     using Models;
+    using Services;
 
     sealed partial class App : Application
     {
@@ -32,13 +31,17 @@ namespace Huaban.UWP
             var token = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<AuthToken>(o));
             if (token != null)
             {
-                token = await ServiceLocator.Resolve<Api.OAuthorAPI>().RefreshToken(token);
+                token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
             }
             context.User = user;
 
             if (token != null && token.ExpiresIn > DateTime.Now)
             {
                 await context.SetToken(token);
+            }
+            else
+            {
+                token = await ServiceLocator.Resolve<OAuthorService>().RefreshToken(token);
             }
 
             //var user = await StorageHelper.ReadLocal(o => SerializeExtension.JsonDeserlialize<User>(o));

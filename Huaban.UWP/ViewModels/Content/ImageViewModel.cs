@@ -9,7 +9,6 @@ using Windows.UI.Xaml.Media;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Commands;
     using Controls;
@@ -45,9 +44,9 @@ namespace Huaban.UWP.ViewModels
 
         #region Properties
         [Dependency]
-        public PinAPI PinAPI { get; set; }
+        public PinService PinService { get; set; }
         [Dependency]
-        public BoardAPI BoardAPI { get; set; }
+        public BoardService BoardService { get; set; }
 
         private Thickness _Margin;
         public Thickness Margin
@@ -200,7 +199,7 @@ namespace Huaban.UWP.ViewModels
                     {
                         try
                         {
-                            string str = await PinAPI.Like(Pin.pin_id, !Pin.liked);
+                            string str = await PinService.Like(Pin.pin_id, !Pin.liked);
 
                             Liked = (str != "{}");
 
@@ -263,7 +262,7 @@ namespace Huaban.UWP.ViewModels
                         if (args != null)
                             item = args.ClickedItem as Board;
 
-                        var pin = await PinAPI.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
+                        var pin = await PinService.Pin(Pin.pin_id, item.board_id, Pin.raw_text);
                         if (item.cover == null)
                             item.cover = pin;
                         Context.ShowTip($"采集到了画板：{item.title}");
@@ -292,13 +291,13 @@ namespace Huaban.UWP.ViewModels
                             return;
                         string boardName = NewBoardName;
                         NewBoardName = "";
-                        var board = await BoardAPI.add(boardName);
+                        var board = await BoardService.add(boardName);
 
                         if (board != null)
                         {
                             var list = Context.BoardListVM.BoardList;
                             list.Add(board);
-                            var pin = await PinAPI.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
+                            var pin = await PinService.Pin(Pin.pin_id, board.board_id, Pin.raw_text);
                             board.pins.Add(pin);
                             board.cover = pin;
                             Context.ShowTip($"采集到了画板：{board.title}");

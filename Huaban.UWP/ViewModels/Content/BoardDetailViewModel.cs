@@ -8,7 +8,6 @@ using Windows.UI.Xaml;
 
 namespace Huaban.UWP.ViewModels
 {
-    using Api;
     using Base;
     using Commands;
     using Controls;
@@ -29,7 +28,7 @@ namespace Huaban.UWP.ViewModels
         #region Properties
 
         [Dependency]
-        public BoardAPI BoardAPI { get; set; }
+        public BoardService BoardService { get; set; }
 
         public ObservableCollection<Category> CategoryList { get; private set; }
         private Board _Board;
@@ -64,7 +63,7 @@ namespace Huaban.UWP.ViewModels
                         var dialog = new MessageDialog("确定要删除这个画板吗？删除后这个画板内的所有采集都会被删除。", "提示");
                         UICommand yes = new UICommand("删除", async c =>
                         {
-                            await BoardAPI.delete(Board);//远程服务器删除
+                            await BoardService.delete(Board);//远程服务器删除
                             Context.ShowTip("删除成功！");
 
                             Context.BoardListVM.BoardList.Remove(Board);//从自己的画板列表中删除
@@ -97,7 +96,7 @@ namespace Huaban.UWP.ViewModels
                     {
                         Board.category_id = CurrentCategory?.id;
 
-                        await BoardAPI.edit(Board);
+                        await BoardService.edit(Board);
 
                         Context.ShowTip("编辑成功！");
                     }

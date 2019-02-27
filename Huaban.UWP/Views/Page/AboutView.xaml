@@ -11,7 +11,7 @@
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <HB:TitleControl VerticalAlignment="Top"></HB:TitleControl>
+        <HB:TitleControl VerticalAlignment="Top" FontWeight="Bold" Margin="16 0"></HB:TitleControl>
         <ListView Grid.Row="1" ItemsSource="{Binding AboutList}" Style="{StaticResource AboutListStyle}"></ListView>
     </Grid>
 </HB:HBPage>

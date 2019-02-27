@@ -66,10 +66,10 @@
                         </ListBox>
                         <Border CornerRadius="2" HorizontalAlignment="Center" Background="Red" Margin="24"></Border>
                     </StackPanel>
-                    <Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content="&lt; 花瓣账号登录 " BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>
+                    <!--<Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content="&lt; 花瓣账号登录 " BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="1"></Button>-->
                 </Grid>
             </PivotItem>
-            <PivotItem>
+            <!--<PivotItem>
                 <Grid>
                     <StackPanel Width="260" HorizontalAlignment="Center">
                         <TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用花瓣账号登录</TextBlock>
@@ -89,7 +89,7 @@
                     </StackPanel>
                     <Button VerticalAlignment="Top" HorizontalAlignment="Center" Background="Red" Margin="0 200 0 0" Content=" 社交账号登录 &gt;" BorderThickness="0" Command="{Binding SetPivotIndexCommand}" CommandParameter="0"></Button>
                 </Grid>
-            </PivotItem>
+            </PivotItem>-->
         </Pivot>
         <Grid Visibility="{Binding WebViewVisibility}" Background="White">
             <WebView Source="{Binding LoginUri}" x:Name="wv">

@@ -1,13 +1,13 @@
 ﻿using System;
-using Windows.UI.Core;
-using Windows.UI.Xaml.Controls;
 using System.Threading.Tasks;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace Huaban.UWP.Services
 {
-    using Huaban.UWP.Controls;
     using Base;
+    using Huaban.UWP.Controls;
     public class ButtonVisibilityChangedEventArgs : EventArgs
     {
         public Visibility Visibility { get; set; }
