@@ -105,6 +105,7 @@
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
+    <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ModelCollection.cs" />
     <Compile Include="Models\SimpleModel.cs" />
     <Compile Include="Models\SNSType.cs" />
