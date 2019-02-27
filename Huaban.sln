@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27703.2018
+VisualStudioVersion = 15.0.27428.2015
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Huaban.UWP", "Huaban.UWP\Huaban.UWP.csproj", "{A77FD625-12E9-467D-A49E-5916FD36DB1F}"
 EndProject
@@ -9,6 +9,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{6C3724AE-091
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dblleaf.UWP", "Dblleaf.UWP\Dblleaf.UWP.csproj", "{58320142-247B-4D27-B5C6-95DB5C366136}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dblleaf.UWP.Huaban", "Dblleaf.UWP.Huaban\Dblleaf.UWP.Huaban.csproj", "{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,11 +48,47 @@ Global
 		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.ActiveCfg = Release|x86
 		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.Build.0 = Release|x86
 		{A77FD625-12E9-467D-A49E-5916FD36DB1F}.Release|x86.Deploy.0 = Release|x86
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|ARM.ActiveCfg = Debug|ARM
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|ARM.Build.0 = Debug|ARM
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|x64.ActiveCfg = Debug|x64
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|x64.Build.0 = Debug|x64
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|x86.ActiveCfg = Debug|x86
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Debug|x86.Build.0 = Debug|x86
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|ARM.ActiveCfg = Release|ARM
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|ARM.Build.0 = Release|ARM
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|x64.ActiveCfg = Release|x64
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|x64.Build.0 = Release|x64
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|x86.ActiveCfg = Release|x86
+		{58320142-247B-4D27-B5C6-95DB5C366136}.Release|x86.Build.0 = Release|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|ARM.ActiveCfg = Debug|ARM
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|ARM.Build.0 = Debug|ARM
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|ARM.Deploy.0 = Debug|ARM
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|x64.ActiveCfg = Debug|x64
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|x64.Build.0 = Debug|x64
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|x64.Deploy.0 = Debug|x64
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|x86.ActiveCfg = Debug|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|x86.Build.0 = Debug|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Debug|x86.Deploy.0 = Debug|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|Any CPU.ActiveCfg = Release|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|ARM.ActiveCfg = Release|ARM
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|ARM.Build.0 = Release|ARM
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|ARM.Deploy.0 = Release|ARM
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|x64.ActiveCfg = Release|x64
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|x64.Build.0 = Release|x64
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|x64.Deploy.0 = Release|x64
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|x86.ActiveCfg = Release|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|x86.Build.0 = Release|x86
+		{8A0AD57F-D839-4A69-AB85-75CDDFE207B9}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AFE12F65-0DED-4183-936F-3B8706C9234B}
+		SolutionGuid = {2516AC96-4395-41EB-A744-5C1682A5F3A3}
 	EndGlobalSection
 EndGlobal
