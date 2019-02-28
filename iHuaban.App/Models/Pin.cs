@@ -20,5 +20,7 @@
         public long PinId => pin_id;
         public File file { set; get; }
         public string KeyId => pin_id.ToString();
+
+        public string typeName => this.GetType().Name;
     }
 }

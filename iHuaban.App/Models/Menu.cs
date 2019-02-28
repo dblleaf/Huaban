@@ -2,6 +2,7 @@
 using iHuaban.Core.Models;
 using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.Models
 {
@@ -9,7 +10,7 @@ namespace iHuaban.App.Models
     {
         public string Title { set; get; }
         public string Icon { set; get; }
-        public string Template { set; get; }
+        public string TemplateName { set; get; }
         public double CellMinWidth { set; get; }
         public string ScaleSize { set; get; }
         public string ItemTemplateName { set; get; }
@@ -22,6 +23,7 @@ namespace iHuaban.App.Models
             }
         }
         public Type ViewModelType { get; set; }
-        public DataTemplate ItemTemplate => (DataTemplate)Application.Current.Resources[ItemTemplateName];
+
+        public DataTemplateSelector ItemTemplateSelector { get; set; }
     }
 }

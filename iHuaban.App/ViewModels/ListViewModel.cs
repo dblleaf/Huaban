@@ -28,12 +28,6 @@ namespace iHuaban.App.ViewModels
             get { return _Data; }
             set { SetValue(ref _Data, value); }
         }
-        private bool _IsLoading;
-        public bool IsLoading
-        {
-            get { return _IsLoading; }
-            set { SetValue(ref _IsLoading, value); }
-        }
 
         public int Count => throw new NotImplementedException();
 

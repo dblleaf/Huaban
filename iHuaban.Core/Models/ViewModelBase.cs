@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Windows.UI.Xaml;
 
 namespace iHuaban.Core.Models
 {
@@ -11,6 +10,13 @@ namespace iHuaban.Core.Models
         public virtual async Task InitAsync()
         {
             await Task.FromResult(0);
+        }
+
+        private bool _IsLoading;
+        public bool IsLoading
+        {
+            get { return _IsLoading; }
+            set { SetValue(ref _IsLoading, value); }
         }
     }
 }

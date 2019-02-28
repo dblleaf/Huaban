@@ -13,18 +13,11 @@
     Background="{StaticResource AppBackgroundAcrylicBrush}"
     NavigationCacheMode="Required"
     mc:Ignorable="d">
-    <Page.Resources>
-        <s:MainPagePivotDataTemplateSelector
-            TemplateGrid="{StaticResource TemplateGrid}"
-            TemplateFind="{StaticResource TemplateFind}"
-            TemplateMine="{StaticResource TemplateMine}"
-            x:Key="MainPagePivotDataTemplateSelector">
-        </s:MainPagePivotDataTemplateSelector>
-    </Page.Resources>
+
     <Grid Padding="0 32 0 0">
         <Pivot ItemsSource="{Binding Path=Menu}"
             HeaderTemplate="{StaticResource TemplateMainPagePivotHeader}"
-            ItemTemplateSelector="{StaticResource MainPagePivotDataTemplateSelector}">
+            ItemTemplateSelector="{x:Bind ViewModel.DataTemplateSelector}">
         </Pivot>
         <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
             <AppBarButton Height="48" Content="设置" Icon="Setting">

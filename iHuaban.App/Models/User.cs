@@ -14,5 +14,6 @@
         public int following_count { set; get; }
         public string KeyId => user_id;
         public File avatar { set; get; }
+        public string typeName => this.GetType().Name;
     }
 }

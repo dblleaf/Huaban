@@ -105,8 +105,12 @@
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
+    <Compile Include="Models\Cover.cs" />
+    <Compile Include="Models\Explore.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ModelCollection.cs" />
+    <Compile Include="Models\RecommendBoard.cs" />
+    <Compile Include="Models\RecommendUser.cs" />
     <Compile Include="Models\SimpleModel.cs" />
     <Compile Include="Models\SNSType.cs" />
     <Compile Include="Models\IModel.cs" />
@@ -121,7 +125,9 @@
     <Compile Include="Models\UserCollection.cs" />
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\HomeService.cs" />
     <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\Interfaces\IHomeService.cs" />
     <Compile Include="Services\Interfaces\IServiceProvider.cs" />
     <Compile Include="Services\Interfaces\IBoardService.cs" />
     <Compile Include="Services\Interfaces\ICategoryService.cs" />
@@ -132,7 +138,8 @@
     <Compile Include="Services\PinService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ServiceProvider.cs" />
-    <Compile Include="TemplateSelectors\MainPagePivotDataTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
+    <Compile Include="TemplateSelectors\MyDataTemplateSelector.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />

@@ -8,5 +8,7 @@
         public string urlname { set; get; }
 
         public string KeyId => id;
+
+        public string typeName => this.GetType().Name;
     }
 }

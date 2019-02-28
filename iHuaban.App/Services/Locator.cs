@@ -1,9 +1,11 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.TemplateSelectors;
 using iHuaban.App.ViewModels;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using Unity;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.Services
 {
@@ -47,6 +49,8 @@ namespace iHuaban.App.Services
             Container.RegisterType<IPinService, PinService>();
             Container.RegisterType<IBoardService, BoardService>();
             Container.RegisterType<ICategoryService, CategoryService>();
+            Container.RegisterType<IHomeService, HomeService>();
+            Container.RegisterType<DataTemplateSelector, SupperDataTemplateSelector>();
             Container.RegisterType<PhoneViewModel>();
             Container.RegisterType<PCViewModel>();
             Container.RegisterType<FindViewModel>();

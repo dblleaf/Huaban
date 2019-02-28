@@ -25,6 +25,7 @@
         public const string TemplateGrid = "TemplateGrid";
         public const string TemplateFind = "TemplateFind";
         public const string TemplateMine = "TemplateMine";
+        public const string TemplateHome = "TemplateHome";
 
         public const string TemplatePhone = "TemplatePhone";
         public const string TemplatePC = "TemplatePC";
@@ -40,6 +41,7 @@
         public const string TextAbout = "关于";
         public const string TextRefresh = "刷新";
         public const string TextAdd = "添加";
+        public const string TextHome = "首页";
 
         public const string IconPhone = "\uE8EA";
         public const string IconPC = "\uE977";
@@ -50,5 +52,6 @@
         public const string IconAbout = "\uE9CE";
         public const string IconRefesh = "\uE72C";
         public const string IconAdd = "\uE710";
+        public const string IconHome = "\uE80F";
     }
 }

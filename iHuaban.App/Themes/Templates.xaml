@@ -6,20 +6,23 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     xmlns:local="using:iHuaban.App">
-    <DataTemplate x:Key="TemplatePhone">
-        <Grid 
-            Padding="{Binding ElementName=gridView,Path=Padding}"
-            Width="{Binding ElementName=gridView,Path=CellWidth}"
-            Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
-        </Grid>
-    </DataTemplate>
-    <DataTemplate x:Key="TemplatePC">
+
+    <DataTemplate x:Key="TemplateHome">
         <Grid
             Padding="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Image Source="{Binding file.FW554}" Stretch="UniformToFill"/>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding typeName}"></TextBlock>
+
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplatePin">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
+            <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
         </Grid>
     </DataTemplate>
 
@@ -36,13 +39,55 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Key="TemplateRecommendBoard">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
+            <Image Source="{Binding RecommendCover.Sq235}"></Image>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateRecommendUser">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
+            <Grid Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Ellipse Fill="White"
+                    Grid.Row="1" Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                </Ellipse>
+                <Ellipse Margin="4" 
+                    Grid.Row="1" Grid.Column="1" 
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding RecommendCover.Sq140}"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="TemplateGrid">
         <Grid>
             <control:ExtendGridView x:Name="gridView"
                 ScaleSize="{Binding ScaleSize}"
                 Padding="6" CellMinWidth="{Binding CellMinWidth}"
                 ItemsSource="{Binding ViewModel.PinsData}"
-                ItemTemplate="{Binding ItemTemplate}">
+                ItemTemplateSelector="{Binding ItemTemplateSelector}">
                 <control:ExtendGridView.Resources>
                     <Style TargetType="GridViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -81,7 +126,7 @@
                 ScaleSize="{Binding ScaleSize}"
                 Padding="6" CellMinWidth="{Binding CellMinWidth}"
                 ItemsSource="{Binding ViewModel.Data}"
-                ItemTemplate="{Binding ItemTemplate}">
+                ItemTemplateSelector="{Binding ItemTemplateSelector}">
                 <control:ExtendGridView.Resources>
                     <Style TargetType="GridViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

@@ -1,31 +1,36 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
+using iHuaban.App.TemplateSelectors;
+using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using iHuaban.Core;
-using iHuaban.App.Services;
-using iHuaban.Core.Helpers;
-using Windows.UI.Xaml;
 using Windows.ApplicationModel.Core;
 using Windows.UI;
 using Windows.UI.ViewManagement;
-using iHuaban.Core.Commands;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using iHuaban.App.Views;
 
 namespace iHuaban.App.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-        public MainViewModel(INavigationService navigationService)
+        private bool IsInit = false;
+        public DataTemplateSelector DataTemplateSelector { get; private set; }
+        private ObservableCollection<Menu> _Menu;
+        public ObservableCollection<Menu> Menu
+        {
+            get { return _Menu; }
+            set { SetValue(ref _Menu, value); }
+        }
+        public MainViewModel(INavigationService navigationService, DataTemplateSelector dataTemplateSelector)
         {
             this.Setting.DarkMode = false;
             this.navigationService = navigationService;
+            this.DataTemplateSelector = dataTemplateSelector;
             this.Setting.PropertyChanged += Setting_PropertyChanged;
         }
 
@@ -37,52 +42,67 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        private HttpHelper httpHelper => new HttpHelper();
-        public ObservableCollection<Menu> Menu => new ObservableCollection<Menu>
-        {
-            new Menu
-            {
-                Title = Constants.TextPhone,
-                Icon = "\uE8EA",
-                Template = Constants.TemplateGrid,
-                CellMinWidth = 236,
-                ScaleSize = "750:1334",
-                ItemTemplateName = Constants.TemplatePhone,
-                ViewModelType = typeof(PhoneViewModel),
-            },
-            new Menu
-            {
-                Title = Constants.TextPC,
-                Icon = "\uE977",
-                Template = Constants.TemplateGrid,
-                CellMinWidth = 256,
-                ScaleSize = "1920:1200",
-                ItemTemplateName = Constants.TemplatePC,
-                ViewModelType = typeof(PCViewModel),
-            },
-            new Menu
-            {
-                Title = Constants.TextFind,
-                Icon = "\uE721",
-                CellMinWidth = 236,
-                Template = Constants.TemplateFind,
-                ItemTemplateName = Constants.TemplateCategory,
-                ViewModelType = typeof(FindViewModel),
-            },
-            new Menu
-            {
-                Title = Constants.TextMine,
-                Icon = "\uE77B",
-                Template = Constants.TemplateMine,
-                ViewModelType = typeof(MineViewModel),
-            }
-        };
-
         public override async Task InitAsync()
         {
+            if (IsInit)
+                return;
+            IsInit = true;
+
             this.Setting.RequestedTheme = ElementTheme.Light;
             ExtendAcrylicIntoTitleBar();
-            await Task.FromResult(0);
+
+            var list = new List<Menu>()
+            {
+                new Menu
+                {
+                    Title = Constants.TextHome,
+                    Icon = Constants.IconHome,
+                    TemplateName = Constants.TemplateGrid,
+                    CellMinWidth = 236,
+                    ScaleSize = "300:300",
+                    ItemTemplateSelector = new SupperDataTemplateSelector(),
+                    ViewModelType = typeof(HomeViewModel),
+                },
+                new Menu
+                {
+                    Title = Constants.TextPhone,
+                    Icon = Constants.IconPhone, // "\uE8EA",
+                    TemplateName = Constants.TemplateGrid,
+                    CellMinWidth = 236,
+                    ScaleSize = "750:1334",
+                    ItemTemplateSelector = new SupperDataTemplateSelector(),
+                    ViewModelType = typeof(PhoneViewModel),
+                },
+                new Menu
+                {
+                    Title = Constants.TextPC,
+                    Icon = Constants.IconPC, //"\uE977",
+                    TemplateName = Constants.TemplateGrid,
+                    CellMinWidth = 256,
+                    ScaleSize = "1920:1200",
+                    ItemTemplateSelector = new SupperDataTemplateSelector(),
+                    ViewModelType = typeof(PCViewModel),
+                },
+                new Menu
+                {
+                    Title = Constants.TextFind,
+                    Icon = Constants.IconFind, //"\uE721",
+                    CellMinWidth = 236,
+                    TemplateName = Constants.TemplateFind,
+                    ItemTemplateSelector = new SupperDataTemplateSelector(),
+                    ViewModelType = typeof(FindViewModel),
+                },
+                new Menu
+                {
+                    Title = Constants.TextMine,
+                    Icon = Constants.IconMine, //"\uE77B",
+                    TemplateName = Constants.TemplateMine,
+                    ViewModelType = typeof(MineViewModel),
+                }
+            };
+
+            Menu = new ObservableCollection<Menu>(list);
+            await Task.Delay(0);
         }
 
         private void ExtendAcrylicIntoTitleBar()

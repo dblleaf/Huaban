@@ -16,6 +16,9 @@
         public int seq { set; get; }
         public double Width { set; get; }
 
+        public virtual Pin cover { set; get; }
+
         public string KeyId => board_id;
+        public string typeName => this.GetType().Name;
     }
 }
