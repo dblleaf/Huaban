@@ -1,4 +1,0 @@
-﻿namespace iHuaban.Core.Models
-{
-    
-}
