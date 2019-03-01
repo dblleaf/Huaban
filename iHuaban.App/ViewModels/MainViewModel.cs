@@ -65,26 +65,6 @@ namespace iHuaban.App.ViewModels
                 },
                 new Menu
                 {
-                    Title = Constants.TextPhone,
-                    Icon = Constants.IconPhone, // "\uE8EA",
-                    TemplateName = Constants.TemplateGrid,
-                    CellMinWidth = 236,
-                    ScaleSize = "750:1334",
-                    ItemTemplateSelector = new SupperDataTemplateSelector(),
-                    ViewModelType = typeof(PhoneViewModel),
-                },
-                new Menu
-                {
-                    Title = Constants.TextPC,
-                    Icon = Constants.IconPC, //"\uE977",
-                    TemplateName = Constants.TemplateGrid,
-                    CellMinWidth = 256,
-                    ScaleSize = "1920:1200",
-                    ItemTemplateSelector = new SupperDataTemplateSelector(),
-                    ViewModelType = typeof(PCViewModel),
-                },
-                new Menu
-                {
                     Title = Constants.TextFind,
                     Icon = Constants.IconFind, //"\uE721",
                     CellMinWidth = 236,

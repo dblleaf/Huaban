@@ -126,7 +126,7 @@
     <Compile Include="Services\BoardService.cs" />
     <Compile Include="Services\CategoryService.cs" />
     <Compile Include="Services\HomeService.cs" />
-    <Compile Include="Services\INavigationService.cs" />
+    <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\IHomeService.cs" />
     <Compile Include="Services\Interfaces\IServiceProvider.cs" />
     <Compile Include="Services\Interfaces\IBoardService.cs" />
