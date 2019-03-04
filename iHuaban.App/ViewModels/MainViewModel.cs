@@ -70,7 +70,7 @@ namespace iHuaban.App.ViewModels
                     CellMinWidth = 236,
                     TemplateName = Constants.TemplateFind,
                     ItemTemplateSelector = new SupperDataTemplateSelector(),
-                    ViewModelType = typeof(FindViewModel),
+                    ViewModelType = typeof(CategoryViewModel),
                 },
                 new Menu
                 {

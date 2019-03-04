@@ -26,6 +26,7 @@
         #region Template
         public const string TemplateGrid = "TemplateGrid";
         public const string TemplateFind = "TemplateFind";
+        public const string TemplateCategories = "TemplateCategories";
         public const string TemplateMine = "TemplateMine";
         public const string TemplateHome = "TemplateHome";
 

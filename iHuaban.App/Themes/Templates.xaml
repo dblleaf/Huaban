@@ -154,7 +154,7 @@
         <Grid>
             <control:ExtendGridView x:Name="gridView"
                 ScaleSize="300:300"
-                Padding="6" CellMinWidth="320"
+                Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding ViewModel.PinsData}"
                 ItemTemplate="{StaticResource TemplatePin}">
                 <control:ExtendGridView.Resources>
