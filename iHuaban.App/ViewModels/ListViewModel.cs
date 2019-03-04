@@ -29,10 +29,16 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _Data, value); }
         }
 
-        public int Count => throw new NotImplementedException();
+        private TModel _SelectedItem;
+        public TModel SelectedItem
+        {
+            get { return _SelectedItem; }
+            set { SetValue(ref _SelectedItem, value); }
+        }
 
+        public int Count { get { return this.Data.Count; } }
 
-        private async Task<IEnumerable<TModel>> GetData(uint startIndex, int page)
+        protected virtual async Task<IEnumerable<TModel>> GetData(uint startIndex, int page)
         {
             if (IsLoading)
             {
@@ -44,7 +50,10 @@ namespace iHuaban.App.ViewModels
                 var list = await this.ServiceProvider.GetAsync<TCollection>(GetApiUrl(), 20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
 
                 if (ISupportIncrementalLoading && list?.Count > 0)
+                {
+                    this.SelectedItem = list.Data.FirstOrDefault();
                     Data.HasMore();
+                }
                 else
                     Data.NoMore();
                 return list.Data;

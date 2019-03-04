@@ -19,6 +19,8 @@
         public const string ApiMyId = "reug0n58lq";
         public const string ApiPhoneBoard = "47136014";
         public const string ApiPCBoard = "47136024";
+
+        public const string DefaultFavorite = "all";
         #endregion
 
         #region Template

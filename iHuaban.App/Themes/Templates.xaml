@@ -22,14 +22,16 @@
             Padding="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
+            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
+            </Grid>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateCategory">
         <Grid
-            Padding="{Binding ElementName=gridView,Path=Padding}"
-            Width="{Binding ElementName=gridView,Path=CellWidth}">
+            Padding="{Binding ElementName=categoryridView,Path=Padding}"
+            Width="{Binding ElementName=categoryridView,Path=CellWidth}">
             <Border
                 Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}"
                 VerticalAlignment="Center"
@@ -44,7 +46,9 @@
             Padding="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Image Source="{Binding RecommendCover.Sq235}"></Image>
+            <Grid Background="{ThemeResource SystemAltMediumColor}">
+                <Image Source="{Binding RecommendCover.Sq235}"></Image>
+            </Grid>
         </Grid>
     </DataTemplate>
 
@@ -53,10 +57,17 @@
             Padding="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Grid Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
+            <Image Source="{Binding RecommendCover.Sq140}" Stretch="UniformToFill"/>
+            <Rectangle>
+                <Rectangle.Fill>
+                    <AcrylicBrush TintOpacity="0.0" TintColor="{ThemeResource SystemAltMediumColor}" BackgroundSource="Backdrop"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
-                    <RowDefinition Height="2*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -66,11 +77,11 @@
                 </Grid.ColumnDefinitions>
 
                 <Ellipse Fill="White"
-                    Grid.Row="1" Grid.Column="1"
+                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                 </Ellipse>
                 <Ellipse Margin="4" 
-                    Grid.Row="1" Grid.Column="1" 
+                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                     <Ellipse.Fill>
                         <ImageBrush ImageSource="{Binding RecommendCover.Sq140}"></ImageBrush>
@@ -117,12 +128,103 @@
                     </Style>
                 </control:ExtendGridView.Resources>
             </control:ExtendGridView>
+            <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Border ToolTipService.ToolTip="Go to Top"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
+                </Border>
+
+                <Border ToolTipService.ToolTip="Refresh"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
+                </Border>
+            </StackPanel>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateFind">
         <Grid>
             <control:ExtendGridView x:Name="gridView"
+                ScaleSize="300:300"
+                Padding="6" CellMinWidth="320"
+                ItemsSource="{Binding ViewModel.PinsData}"
+                ItemTemplate="{StaticResource TemplatePin}">
+                <control:ExtendGridView.Resources>
+                    <Style TargetType="GridViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+                        <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
+                        <Setter Property="Padding" Value="0"></Setter>
+                        <Setter Property="Margin" Value="0"></Setter>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="GridViewItem">
+                                    <Grid Background="{TemplateBinding Background}">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <!--缺省样式-->
+                                                <VisualState x:Name="Normal" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid x:Name="ContentBackground">
+                                            <ContentPresenter
+                                            Content="{TemplateBinding Content}"
+                                            Margin="{TemplateBinding Padding}" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </control:ExtendGridView.Resources>
+            </control:ExtendGridView>
+
+            <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Border ToolTipService.ToolTip="Go to Top"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
+                </Border>
+
+                <Border ToolTipService.ToolTip="Refresh"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
+                </Border>
+
+                <Border ToolTipService.ToolTip="Category"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ViewModel.SetCategoryVisibilityCommand}" CommandParameter="true"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8FD;" />
+                </Border>
+            </StackPanel>
+
+            <control:ExtendGridView SelectedItem="{Binding ViewModel.SelectedItem,Mode=TwoWay}"
+                x:Name="categoryridView"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                Visibility="{Binding ViewModel.CategoryVisibility}"
                 ScaleSize="{Binding ScaleSize}"
                 Padding="6" CellMinWidth="{Binding CellMinWidth}"
                 ItemsSource="{Binding ViewModel.Data}"
@@ -155,16 +257,13 @@
                         </Setter>
                     </Style>
                 </control:ExtendGridView.Resources>
-                <control:ExtendGridView.Header>
-                    <Grid>
-                        <Grid Margin="6" Padding="8"
-                                HorizontalAlignment="Stretch"
-                                Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}">
-                            <TextBlock>搜索</TextBlock>
-                            <SymbolIcon Symbol="Find" HorizontalAlignment="Right"></SymbolIcon>
-                        </Grid>
-                    </Grid>
-                </control:ExtendGridView.Header>
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="Tapped">
+                        <Core:InvokeCommandAction Command="{Binding ViewModel.SetCategoryVisibilityCommand}" CommandParameter="false"></Core:InvokeCommandAction>
+                        <Core:InvokeCommandAction Command="{Binding ViewModel.ChangeCategoryCommand}"></Core:InvokeCommandAction>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
+                
             </control:ExtendGridView>
         </Grid>
     </DataTemplate>

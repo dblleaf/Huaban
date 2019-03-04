@@ -12,7 +12,7 @@
         public string raw_text { set; get; }
         public long via { set; get; }
         public long via_user_id { set; get; }
-        public long original { set; get; }
+        public long? original { set; get; }
         public long created_at { set; get; }
         public int like_count { set; get; }
         public int comment_count { set; get; }
