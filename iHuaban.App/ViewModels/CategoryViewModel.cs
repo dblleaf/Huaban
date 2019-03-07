@@ -1,5 +1,4 @@
 ﻿using iHuaban.App.Models;
-using iHuaban.App.Services;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
@@ -10,13 +9,16 @@ using Windows.UI.Xaml;
 
 namespace iHuaban.App.ViewModels
 {
-    public class FindViewModel : ListViewModel<Category, CategoryCollection>
+    public class CategoryViewModel : ListViewModel<Category, CategoryCollection>
     {
-        public FindViewModel(iHuaban.App.Services.IServiceProvider service)
+        public CategoryViewModel(iHuaban.App.Services.IServiceProvider service)
            : base(service, false)
         {
             this.CategoryVisibility = Visibility.Collapsed;
             this.PinsData = new IncrementalLoadingList<Pin>(GetPinsData);
+            this.Data.Add(Constants.CategoryAll);
+            this.Data.Add(Constants.CategoryHot);
+            this.SelectedItem = Constants.CategoryAll;
         }
 
         private Visibility _CategoryVisibility;
@@ -54,12 +56,12 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        private DelegateCommand _ChangeCategoryCommand;
-        public DelegateCommand ChangeCategoryCommand
+        private DelegateCommand _RefreshCommand;
+        public DelegateCommand RefreshCommand
         {
             get
             {
-                return _ChangeCategoryCommand ?? (_ChangeCategoryCommand = new DelegateCommand(
+                return _RefreshCommand ?? (_RefreshCommand = new DelegateCommand(
                 async o =>
                 {
                     try
@@ -84,10 +86,13 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                var list = await this.ServiceProvider.GetAsync<PinCollection>(GetCategoryPinsUrl(), 20, GetMaxPinId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
+                var list = await this.ServiceProvider.GetAsync<PinCollection>(GetCategoryPinsUrl(), 20, GetMaxPinId());
 
                 if (list.Data.Count() == 0)
+                {
+                    NoMoreVisibility = Visibility.Visible;
                     PinsData.NoMore();
+                }
                 else
                     PinsData.HasMore();
                 return list.Data;
@@ -100,13 +105,6 @@ namespace iHuaban.App.ViewModels
                 IsLoading = false;
             }
             return null;
-        }
-        protected override async Task<IEnumerable<Category>> GetData(uint startIndex, int page)
-        {
-            var list = await base.GetData(startIndex, page);
-            Data.Add(new Category() { name = "最热", nav_link = "/popular/" });
-            Data.Add(new Category() { name = "最新", nav_link = "/all/" });
-            return list;
         }
 
         private long GetMaxPinId()
@@ -123,12 +121,7 @@ namespace iHuaban.App.ViewModels
 
         private string GetCategoryPinsUrl()
         {
-            string categoryLink = Constants.DefaultFavorite;
-            if (SelectedItem != null)
-            {
-                categoryLink = SelectedItem.nav_link;
-            }
-            return Constants.ApiBase + categoryLink.TrimStart('/');
+            return Constants.ApiBase + SelectedItem.nav_link.TrimStart('/');
         }
 
         protected override string GetApiUrl()

@@ -1,6 +1,4 @@
-﻿using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
-using iHuaban.App.ViewModels;
+﻿using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
@@ -51,12 +49,6 @@ namespace iHuaban.App.Services
             Container.RegisterType<ICategoryService, CategoryService>();
             Container.RegisterType<IHomeService, HomeService>();
             Container.RegisterType<DataTemplateSelector, SupperDataTemplateSelector>();
-            Container.RegisterType<PhoneViewModel>();
-            Container.RegisterType<PCViewModel>();
-            Container.RegisterType<FindViewModel>();
-            Container.RegisterType<MineViewModel>();
-            Container.RegisterType<AboutViewModel>();
-            Container.RegisterType<SettingViewModel>();
         }
 
         public static T ResolveObject<T>()
