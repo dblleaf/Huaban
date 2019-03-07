@@ -57,7 +57,7 @@ namespace iHuaban.App.ViewModels
                 {
                     Title = Constants.TextHome,
                     Icon = Constants.IconHome,
-                    TemplateName = Constants.TemplateGrid,
+                    TemplateName = Constants.TemplateHome,
                     CellMinWidth = 236,
                     ScaleSize = "300:300",
                     ItemTemplateSelector = new SupperDataTemplateSelector(),
@@ -65,10 +65,10 @@ namespace iHuaban.App.ViewModels
                 },
                 new Menu
                 {
-                    Title = Constants.TextFind,
-                    Icon = Constants.IconFind, //"\uE721",
+                    Title = Constants.TextCategory,
+                    Icon = Constants.IconCategory, //"\uE721",
                     CellMinWidth = 236,
-                    TemplateName = Constants.TemplateFind,
+                    TemplateName = Constants.TemplateCategories,
                     ItemTemplateSelector = new SupperDataTemplateSelector(),
                     ViewModelType = typeof(CategoryViewModel),
                 },

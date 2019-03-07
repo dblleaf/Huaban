@@ -1,5 +1,4 @@
-﻿using iHuaban.App.Models;
-using iHuaban.Core.Models;
+﻿using iHuaban.Core.Models;
 
 namespace iHuaban.App.ViewModels
 {

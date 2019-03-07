@@ -1,10 +1,7 @@
 ﻿using iHuaban.App.Models;
-using iHuaban.App.Services;
 using iHuaban.Core.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace iHuaban.App.ViewModels
@@ -47,7 +44,7 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                var list = await this.ServiceProvider.GetAsync<TCollection>(GetApiUrl(), 20, GetMaxId());// CategoryService.GetCategoryPinList(CurrentCategory.nav_link, 20, PinListViewModel.GetMaxPinID());
+                var list = await this.ServiceProvider.GetAsync<TCollection>(GetApiUrl(), 20, GetMaxId());
 
                 if (ISupportIncrementalLoading && list?.Count > 0)
                 {

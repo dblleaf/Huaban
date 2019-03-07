@@ -1,9 +1,12 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.Services;
+using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Windows.UI.Xaml;
 
 namespace iHuaban.App.ViewModels
 {
@@ -25,6 +28,28 @@ namespace iHuaban.App.ViewModels
 
         public ObservableCollection<Explore> Explores { get; set; }
 
+        private DelegateCommand _RefreshCommand;
+        public DelegateCommand RefreshCommand
+        {
+            get
+            {
+                return _RefreshCommand ?? (_RefreshCommand = new DelegateCommand(
+                async o =>
+                {
+                    try
+                    {
+                        currentPage = 1;
+                        await this.PinsData.ClearAndReload();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
         private int currentPage = 1;
         private async Task<IEnumerable<IModel>> GetData(uint startIndex, int page)
         {
@@ -45,6 +70,7 @@ namespace iHuaban.App.ViewModels
                 if (home.Explores?.Count > 0 && !(Explores?.Count > 0))
                 {
                     Explores = new ObservableCollection<Explore>(home.Explores);
+                    NoMoreVisibility = Visibility.Visible;
                 }
 
                 return home.Recommends;
@@ -59,5 +85,6 @@ namespace iHuaban.App.ViewModels
 
             return null;
         }
+
     }
 }
