@@ -1,4 +1,6 @@
-﻿namespace iHuaban.App.Models
+﻿using System.Collections.Generic;
+
+namespace iHuaban.App.Models
 {
     public class Board : IModel
     {
@@ -15,9 +17,18 @@
         public bool following { set; get; }
         public int seq { set; get; }
         public double Width { set; get; }
-
-        public virtual Pin cover { set; get; }
-
+        public virtual File cover
+        {
+            get
+            {
+                if (pins?.Count > 0)
+                {
+                    return pins[0].file;
+                }
+                return null;
+            }
+        }
+        public List<Pin> pins { set; get; }
         public string KeyId => board_id;
         public string typeName => this.GetType().Name;
     }

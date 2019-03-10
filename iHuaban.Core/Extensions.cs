@@ -14,10 +14,7 @@ namespace iHuaban.Core
                 pairs = pairs.Where(o => o.Value > 0);
             }
             string query = string.Join("&", pairs.Select(o => $"{o.Key}={o.Value}").ToArray());
-            if (!string.IsNullOrWhiteSpace(query))
-            {
-                query = "?" + query;
-            }
+
             return query;
         }
     }

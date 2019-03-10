@@ -74,6 +74,16 @@ namespace iHuaban.App.ViewModels
                 },
                 new Menu
                 {
+                    Title = Constants.TextFind,
+                    Icon = Constants.IconFind, //"\uE721",
+                    CellMinWidth = 236,
+                    ScaleSize = "300:300",
+                    TemplateName = Constants.TemplateSearch,
+                    ItemTemplateSelector = new SupperDataTemplateSelector(),
+                    ViewModelType = typeof(SearchViewModel),
+                },
+                new Menu
+                {
                     Title = Constants.TextMine,
                     Icon = Constants.IconMine, //"\uE77B",
                     TemplateName = Constants.TemplateMine,

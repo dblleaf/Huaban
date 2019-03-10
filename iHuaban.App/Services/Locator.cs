@@ -43,10 +43,7 @@ namespace iHuaban.App.Services
             Container.RegisterInstance(Setting.Instance());
             Container.RegisterType<IHttpHelper, HttpHelper>();
             Container.RegisterSingleton<INavigationService, NavigationService>();
-            Container.RegisterType<IServiceProvider, ServiceProvider>();
-            Container.RegisterType<IPinService, PinService>();
-            Container.RegisterType<IBoardService, BoardService>();
-            Container.RegisterType<ICategoryService, CategoryService>();
+            Container.RegisterType<IService, Service>();
             Container.RegisterType<IHomeService, HomeService>();
             Container.RegisterType<DataTemplateSelector, SupperDataTemplateSelector>();
         }
