@@ -59,8 +59,8 @@
                 <control:ExtendGridView.Header>
                     <StackPanel Padding="6 0">
                         <TextBlock Text="{Binding ViewModel.SelectedCategory.name}" FontSize="30"></TextBlock>
-                        <GridView
-                            Height="44"
+                        <GridView Padding="0" Margin="0 6"
+                            ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
                             Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                             Visibility="{Binding ViewModel.DataTypesVisibility}"
                             ItemsSource="{Binding ViewModel.DataTypes}"
@@ -72,7 +72,7 @@
                             </GridView.ItemsPanel>
                             <GridView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Padding="12 0">
+                                    <Grid Padding="20 10">
                                         <TextBlock Text="{Binding Type}"></TextBlock>
                                     </Grid>
                                 </DataTemplate>
@@ -299,9 +299,10 @@
                         <ImageBrush ImageSource="{Binding user.avatar.Sq140}"></ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
-                <Grid Grid.Row="3" Grid.ColumnSpan="4" Padding="12">
+                <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Padding="0 0 6 0">
+                    <TextBlock Margin="6" FontWeight="Bold" TextAlignment="Center" Text="{Binding user.username}"></TextBlock>
                     <TextBlock Foreground="{ThemeResource ApplicationPressedForegroundThemeBrush}" TextAlignment="Center"><Run Text="{Binding user.pin_count}"/>采集  <Run Text="{Binding user.follower_count}"/>粉丝</TextBlock>
-                </Grid>
+                </StackPanel>
             </Grid>
         </Grid>
     </DataTemplate>
