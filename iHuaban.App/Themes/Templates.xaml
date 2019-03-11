@@ -59,7 +59,12 @@
                 <control:ExtendGridView.Header>
                     <StackPanel Padding="6 0">
                         <TextBlock Text="{Binding ViewModel.SelectedCategory.name}" FontSize="30"></TextBlock>
-                        <GridView Height="44" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" ItemsSource="{Binding ViewModel.DataTypes}" SelectedItem="{Binding ViewModel.DataType,Mode=TwoWay}">
+                        <GridView
+                            Height="44"
+                            Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                            Visibility="{Binding ViewModel.DataTypesVisibility}"
+                            ItemsSource="{Binding ViewModel.DataTypes}"
+                            SelectedItem="{Binding ViewModel.DataType,Mode=TwoWay}">
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <VirtualizingStackPanel Orientation="Horizontal"/>
@@ -157,8 +162,8 @@
                 ItemsSource="{Binding ViewModel.Data}"
                 ItemTemplateSelector="{Binding ItemTemplateSelector}">
                 <control:ExtendGridView.Header>
-                    <Grid Margin="8">
-                        <AutoSuggestBox MaxWidth="500" VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
+                    <Grid Margin="6">
+                        <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="QuerySubmitted">
                                     <Core:InvokeCommandAction Command="{Binding ViewModel.SearchCommand}"></Core:InvokeCommandAction>
@@ -258,7 +263,49 @@
             </Grid>
         </Grid>
     </DataTemplate>
-    
+
+    <DataTemplate x:Key="TemplatePUser">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
+            <Image Source="{Binding user.avatar.Sq140}" Stretch="UniformToFill"/>
+            <Rectangle>
+                <Rectangle.Fill>
+                    <AcrylicBrush TintOpacity="0.0" TintColor="{ThemeResource SystemAltMediumColor}" BackgroundSource="Backdrop"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Grid>
+                <Ellipse Fill="White"
+                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                </Ellipse>
+                <Ellipse Margin="4" 
+                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding user.avatar.Sq140}"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Grid Grid.Row="3" Grid.ColumnSpan="4" Padding="12">
+                    <TextBlock Foreground="{ThemeResource ApplicationPressedForegroundThemeBrush}" TextAlignment="Center"><Run Text="{Binding user.pin_count}"/>采集  <Run Text="{Binding user.follower_count}"/>粉丝</TextBlock>
+                </Grid>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="TemplateRecommendBoard">
         <Grid
             Padding="{Binding ElementName=gridView,Path=Padding}"
@@ -309,7 +356,6 @@
             </Grid>
         </Grid>
     </DataTemplate>
-
 
     <DataTemplate x:Key="TemplateMainPagePivotHeader">
         <StackPanel Orientation="Horizontal">

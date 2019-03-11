@@ -18,11 +18,12 @@ namespace iHuaban.App.ViewModels
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
+
             this.DataTypes = new ObservableCollection<DataType>()
             {
                 new DataType("采集", Constants.ApiBase, LoaderAsync<PinCollection ,Pin>),
-                new DataType("画板", Constants.ApiBoards, LoaderAsync<BoardCollection, Board>),
-                new DataType("用户", Constants.ApiUsers, LoaderAsync<UserCollection, User>),
+                new DataType("推荐画板", Constants.ApiBoards, LoaderAsync<BoardCollection, Board>),
+                new DataType("推荐用户", Constants.ApiUsers, LoaderAsync<FavoriteUserCollection, PUser>),
             };
 
             this.Categories = new IncrementalLoadingList<Category>(GetCategoriesAsync);
@@ -32,6 +33,15 @@ namespace iHuaban.App.ViewModels
             this.Pins = new IncrementalLoadingList<IModel>(GetPinsAsync);
 
             this.DataType = DataTypes[0];
+        }
+
+
+
+        private Visibility _DataTypesVisibility;
+        public Visibility DataTypesVisibility
+        {
+            get { return _DataTypesVisibility; }
+            set { SetValue(ref _DataTypesVisibility, value); }
         }
 
         private Visibility _CategoryVisibility;
@@ -61,7 +71,15 @@ namespace iHuaban.App.ViewModels
         public Category SelectedCategory
         {
             get { return _SelectedCategory; }
-            set { SetValue(ref _SelectedCategory, value); }
+            set
+            {
+                DataTypesVisibility = (value == Constants.CategoryAll || value == Constants.CategoryHot) ? Visibility.Collapsed : Visibility.Visible;
+                if (DataTypesVisibility == Visibility.Collapsed)
+                {
+                    this.DataType = this.DataTypes[0];
+                }
+                SetValue(ref _SelectedCategory, value);
+            }
         }
 
         private IncrementalLoadingList<Category> _Categories;
@@ -145,7 +163,11 @@ namespace iHuaban.App.ViewModels
                     Pins.NoMore();
                 }
                 else
+                {
+                    NoMoreVisibility = Visibility.Collapsed;
                     Pins.HasMore();
+                }
+
                 return result;
             }
             catch { }
