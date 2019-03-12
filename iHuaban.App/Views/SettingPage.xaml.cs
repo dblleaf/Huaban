@@ -1,5 +1,4 @@
-﻿using iHuaban.App.Services;
-using iHuaban.App.ViewModels;
+﻿using iHuaban.App.ViewModels;
 using iHuaban.Core;
 using Windows.UI.Xaml.Controls;
 
@@ -12,10 +11,5 @@ namespace iHuaban.App.Views
             this.InitializeComponent();
         }
 
-        private SettingViewModel vm;
-        public SettingViewModel ViewModel
-        {
-            get => vm ?? (vm = Locator.ResolveObject<SettingViewModel>());
-        }
     }
 }

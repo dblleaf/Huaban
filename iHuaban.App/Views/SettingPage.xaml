@@ -6,22 +6,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    DataContext="{x:Bind ViewModel}"
-    RequestedTheme="{Binding Setting.RequestedTheme}"
-    Background="{StaticResource AppBackgroundAcrylicBrush}">
-    <Page.Transitions>
-        <TransitionCollection>
-            <AddDeleteThemeTransition/>
-        </TransitionCollection>
-    </Page.Transitions>
-    <Grid Margin="0 32 0 0">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Padding="0 32 0 0" Background="{ThemeResource AppBackgroundAcrylicBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <TextBlock Text="设置" VerticalAlignment="Center" FontWeight="Bold" Padding="16 0"></TextBlock>
         <StackPanel Grid.Row="1" Margin="0" Padding="8">
-            <ToggleSwitch Margin="8" Header="夜间模式" IsOn="{Binding Setting.DarkMode,Mode=TwoWay}"></ToggleSwitch>
+            <ToggleSwitch Margin="8" Header="夜间模式" IsOn="{Binding DarkMode,Mode=TwoWay}"></ToggleSwitch>
             <Button Margin="8" Background="{StaticResource SystemControlBackgroundAccentBrush}" RequestedTheme="Dark"
                 Content="退出登录"
                 Command="{Binding LogoutCommand}"></Button>

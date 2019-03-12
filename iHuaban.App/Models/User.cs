@@ -16,4 +16,15 @@
         public File avatar { set; get; }
         public string typeName => this.GetType().Name;
     }
+
+    public class PUser : IModel
+    {
+        public string user_id { get; set; }
+        public string category { get; set; }
+        public long updated_at { get; set; }
+        public string KeyId => updated_at.ToString();
+        public string typeName => this.GetType().Name;
+
+        public User user { get; set; }
+    }
 }

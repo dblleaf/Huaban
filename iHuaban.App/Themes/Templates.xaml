@@ -9,18 +9,18 @@
 
     <DataTemplate x:Key="TemplateHome">
         <Grid>
-            <control:ExtendGridView x:Name="gridView"
+            <control:ExtendedGridView x:Name="gridView"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 ScaleSize="{Binding ScaleSize}"
                 Padding="6" CellMinWidth="{Binding CellMinWidth}"
-                ItemsSource="{Binding ViewModel.PinsData}"
+                ItemsSource="{Binding ViewModel.Pins}"
                 ItemTemplateSelector="{Binding ItemTemplateSelector}">
-                <control:ExtendGridView.Footer>
+                <control:ExtendedGridView.Footer>
                     <Grid Margin="8" Visibility="{Binding ViewModel.NoMoreVisibility}">
                         <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
                     </Grid>
-                </control:ExtendGridView.Footer>
-            </control:ExtendGridView>
+                </control:ExtendedGridView.Footer>
+            </control:ExtendedGridView>
             <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Border ToolTipService.ToolTip="Go to Top"
                     CornerRadius="18"
@@ -50,23 +50,49 @@
 
     <DataTemplate x:Key="TemplateCategories">
         <Grid>
-            <control:ExtendGridView x:Name="gridView"
+            <control:ExtendedGridView x:Name="gridView"
                 ScaleSize="300:300"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
-                ItemsSource="{Binding ViewModel.PinsData}"
-                ItemTemplate="{StaticResource TemplatePin}">
-                <control:ExtendGridView.Header>
-                    <Grid Padding="8 0 8 4">
-                        <TextBlock Text="{Binding ViewModel.SelectedItem.name}" FontSize="30"></TextBlock>
-                    </Grid>
-                </control:ExtendGridView.Header>
-                <control:ExtendGridView.Footer>
+                ItemsSource="{Binding ViewModel.Pins}"
+                ItemTemplateSelector="{Binding ItemTemplateSelector}">
+                <control:ExtendedGridView.Header>
+                    <StackPanel Padding="6 0">
+                        <TextBlock Text="{Binding ViewModel.SelectedCategory.name}" FontSize="30"></TextBlock>
+                        <GridView Margin="0 6"
+                            ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
+                            Visibility="{Binding ViewModel.DataTypesVisibility}"
+                            ItemsSource="{Binding ViewModel.DataTypes}"
+                            SelectedItem="{Binding ViewModel.DataType,Mode=TwoWay}">
+                            <GridView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </GridView.ItemsPanel>
+                            <GridView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                                        BorderThickness="1"
+                                        Padding="20 10">
+                                        <TextBlock Text="{Binding Type}"></TextBlock>
+                                    </Border>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                        </GridView>
+                    </StackPanel>
+                </control:ExtendedGridView.Header>
+                <control:ExtendedGridView.Footer>
                     <Grid Margin="8" Visibility="{Binding ViewModel.NoMoreVisibility}">
                         <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
                     </Grid>
-                </control:ExtendGridView.Footer>
-            </control:ExtendGridView>
+                </control:ExtendedGridView.Footer>
+            </control:ExtendedGridView>
 
             <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Border ToolTipService.ToolTip="Go to Top"
@@ -107,14 +133,14 @@
                 </Border>
             </StackPanel>
 
-            <control:ExtendGridView SelectedItem="{Binding ViewModel.SelectedItem,Mode=TwoWay}"
+            <control:ExtendedGridView SelectedItem="{Binding ViewModel.SelectedCategory,Mode=TwoWay}"
                 x:Name="categoryridView"
                 ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 Visibility="{Binding ViewModel.CategoryVisibility}"
                 ScaleSize="{Binding ScaleSize}"
                 Padding="6" CellMinWidth="{Binding CellMinWidth}"
-                ItemsSource="{Binding ViewModel.Data}"
+                ItemsSource="{Binding ViewModel.Categories}"
                 ItemTemplateSelector="{Binding ItemTemplateSelector}">
 
                 <Interactivity:Interaction.Behaviors>
@@ -125,9 +151,62 @@
                         <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
                     </Core:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
-            </control:ExtendGridView>
+            </control:ExtendedGridView>
         </Grid>
     </DataTemplate>
+
+    <DataTemplate x:Key="TemplateSearch">
+        <Grid>
+            <control:ExtendedGridView x:Name="gridView"
+                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
+                ScaleSize="{Binding ScaleSize}"
+                Padding="6" CellMinWidth="{Binding CellMinWidth}"
+                ItemsSource="{Binding ViewModel.Data}"
+                ItemTemplateSelector="{Binding ItemTemplateSelector}">
+                <control:ExtendedGridView.Header>
+                    <Grid Margin="6">
+                        <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
+                            <Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="QuerySubmitted">
+                                    <Core:InvokeCommandAction Command="{Binding ViewModel.SearchCommand}"></Core:InvokeCommandAction>
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>
+                        </AutoSuggestBox>
+                    </Grid>
+                </control:ExtendedGridView.Header>
+                <control:ExtendedGridView.Footer>
+                    <Grid Margin="8" Visibility="{Binding ViewModel.NoMoreVisibility}">
+                        <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                    </Grid>
+                </control:ExtendedGridView.Footer>
+            </control:ExtendedGridView>
+            <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Border ToolTipService.ToolTip="Go to Top"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
+                </Border>
+
+                <Border ToolTipService.ToolTip="Refresh"
+                    CornerRadius="18"
+                    Width="36" Height="36" Margin="4"
+                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
+                    BorderThickness="2" HorizontalAlignment="Center"
+                    Background="{ThemeResource AppControlAcrylicBrush}">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
+                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
+                </Border>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
     <DataTemplate x:Key="TemplateMine">
         <Grid DataContext="{Binding ViewModel}">
             <Grid Visibility="{Binding MeVisibility}" Padding="6">
@@ -151,7 +230,7 @@
 
         </Grid>
     </DataTemplate>
-    
+
     <DataTemplate x:Key="TemplatePin">
         <Grid
             Padding="{Binding ElementName=gridView,Path=Padding}"
@@ -173,6 +252,60 @@
                 Padding="8">
                 <TextBlock Text="{Binding name}"></TextBlock>
             </Border>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateBoard">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
+            <Grid Background="{ThemeResource SystemAltMediumColor}">
+                <Image Source="{Binding cover.Sq235}"></Image>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplatePUser">
+        <Grid
+            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}">
+            <Image Source="{Binding user.avatar.Sq140}" Stretch="UniformToFill"/>
+            <Rectangle>
+                <Rectangle.Fill>
+                    <AcrylicBrush TintOpacity="0.0" TintColor="{ThemeResource SystemAltMediumColor}" BackgroundSource="Backdrop"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Grid>
+                <Ellipse Fill="White"
+                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                </Ellipse>
+                <Ellipse Margin="4" 
+                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding user.avatar.Sq140}"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Padding="0 0 6 0">
+                    <TextBlock Margin="6" FontWeight="Bold" TextAlignment="Center" Text="{Binding user.username}"></TextBlock>
+                    <TextBlock Foreground="{ThemeResource ApplicationPressedForegroundThemeBrush}" TextAlignment="Center"><Run Text="{Binding user.pin_count}"/>采集  <Run Text="{Binding user.follower_count}"/>粉丝</TextBlock>
+                </StackPanel>
+            </Grid>
         </Grid>
     </DataTemplate>
 
@@ -227,7 +360,6 @@
         </Grid>
     </DataTemplate>
 
-
     <DataTemplate x:Key="TemplateMainPagePivotHeader">
         <StackPanel Orientation="Horizontal">
             <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="{Binding Path=Icon}"/>
@@ -254,11 +386,11 @@
                         </Grid.RowDefinitions>
                         <TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用社交账号登录</TextBlock>
                         <ListBox Margin="12" Grid.Row="1" ItemsSource="{Binding SnsTypes}" Background="Transparent">
-                            <Interactivity:Interaction.Behaviors>
+                            <!--<Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="SelectionChanged">
                                     <Core:InvokeCommandAction Command="{Binding ShowWebViewCommand}"></Core:InvokeCommandAction>
                                 </Core:EventTriggerBehavior>
-                            </Interactivity:Interaction.Behaviors>
+                            </Interactivity:Interaction.Behaviors>-->
                             <ListBox.Resources>
                                 <Style TargetType="ListBoxItem">
                                     <Setter Property="Padding" Value="6"/>
@@ -301,7 +433,6 @@
                         <Button Margin="12" Grid.Row="2" Style="{StaticResource ButtonLogin}"
                             Background="{ThemeResource SystemControlBackgroundAccentBrush}"
                             Content=" 社交账号登录 &gt;"
-                            Command="{Binding SetPivotIndexCommand}"
                             CommandParameter="1"/>
                     </Grid>
                 </PivotItem>
@@ -342,7 +473,6 @@
                             Grid.Column="0"
                             Margin="6"
                             HorizontalAlignment="Stretch"
-                            Command="{Binding SetPivotIndexCommand}"
                             CommandParameter="0">取消</Button>
                         <Button
                             Grid.Row="3"

@@ -107,10 +107,12 @@
     <Compile Include="Models\CategoryCollection.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Explore.cs" />
+    <Compile Include="Models\ExtendedTheme.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\ModelCollection.cs" />
     <Compile Include="Models\RecommendBoard.cs" />
     <Compile Include="Models\RecommendUser.cs" />
+    <Compile Include="Models\SearchType.cs" />
     <Compile Include="Models\SimpleModel.cs" />
     <Compile Include="Models\SNSType.cs" />
     <Compile Include="Models\IModel.cs" />
@@ -123,44 +125,36 @@
     <Compile Include="Models\PinCollection.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserCollection.cs" />
-    <Compile Include="Services\BoardService.cs" />
-    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\Interfaces\IStorageService.cs" />
+    <Compile Include="Services\Interfaces\IThemeService.cs" />
+    <Compile Include="Services\StorageService.cs" />
     <Compile Include="Services\HomeService.cs" />
     <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\IHomeService.cs" />
-    <Compile Include="Services\Interfaces\IServiceProvider.cs" />
-    <Compile Include="Services\Interfaces\IBoardService.cs" />
-    <Compile Include="Services\Interfaces\ICategoryService.cs" />
-    <Compile Include="Services\Interfaces\IPinService.cs" />
     <Compile Include="Services\Interfaces\IService.cs" />
     <Compile Include="Services\Locator.cs" />
     <Compile Include="Services\NavigationService.cs" />
-    <Compile Include="Services\PinService.cs" />
     <Compile Include="Services\Service.cs" />
-    <Compile Include="Services\ServiceProvider.cs" />
+    <Compile Include="Services\ThemeService.cs" />
     <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
     <Compile Include="TemplateSelectors\MyDataTemplateSelector.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
-    <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />
+    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PageWithModel.cs" />
     <Compile Include="Views\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\SettingPage.xaml.cs">
       <DependentUpon>SettingPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ShellPage.xaml.cs">
-      <DependentUpon>ShellPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -267,10 +261,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ShellPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
@@ -289,6 +279,7 @@
       <Name>iHuaban.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

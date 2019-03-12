@@ -4,7 +4,7 @@ using System.Linq;
 namespace iHuaban.App.Models
 {
     public class ModelCollection<T> : IModelCollection<T>
-           where T : new()
+        where T : IModel
     {
         public virtual int Count => Data.Count();
 

@@ -7,10 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Core;
-using Windows.UI;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
@@ -28,18 +24,8 @@ namespace iHuaban.App.ViewModels
         }
         public MainViewModel(INavigationService navigationService, DataTemplateSelector dataTemplateSelector)
         {
-            this.Setting.DarkMode = false;
             this.navigationService = navigationService;
             this.DataTemplateSelector = dataTemplateSelector;
-            this.Setting.PropertyChanged += Setting_PropertyChanged;
-        }
-
-        private void Setting_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "WindowActived" || e.PropertyName == "DarkMode")
-            {
-                ExtendAcrylicIntoTitleBar();
-            }
         }
 
         public override async Task InitAsync()
@@ -47,9 +33,6 @@ namespace iHuaban.App.ViewModels
             if (IsInit)
                 return;
             IsInit = true;
-
-            this.Setting.RequestedTheme = ElementTheme.Light;
-            ExtendAcrylicIntoTitleBar();
 
             var list = new List<Menu>()
             {
@@ -74,6 +57,16 @@ namespace iHuaban.App.ViewModels
                 },
                 new Menu
                 {
+                    Title = Constants.TextFind,
+                    Icon = Constants.IconFind, //"\uE721",
+                    CellMinWidth = 236,
+                    ScaleSize = "300:300",
+                    TemplateName = Constants.TemplateSearch,
+                    ItemTemplateSelector = new SupperDataTemplateSelector(),
+                    ViewModelType = typeof(SearchViewModel),
+                },
+                new Menu
+                {
                     Title = Constants.TextMine,
                     Icon = Constants.IconMine, //"\uE77B",
                     TemplateName = Constants.TemplateMine,
@@ -83,27 +76,6 @@ namespace iHuaban.App.ViewModels
 
             Menu = new ObservableCollection<Menu>(list);
             await Task.Delay(0);
-        }
-
-        private void ExtendAcrylicIntoTitleBar()
-        {
-            this.Setting.RequestedTheme = Setting.WindowActived ? (Setting.DarkMode ? ElementTheme.Dark : ElementTheme.Light) : (Application.Current.RequestedTheme == ApplicationTheme.Dark ? ElementTheme.Dark : ElementTheme.Light);
-            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
-            Color color = Colors.White;
-            Color bgColor = Color.FromArgb(255, 50, 50, 50);
-            if (this.Setting.RequestedTheme == ElementTheme.Light)
-            {
-                color = Colors.Black;
-                bgColor = Color.FromArgb(255, 205, 205, 205);
-            }
-            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
-            titleBar.BackgroundColor = Colors.Transparent;
-            titleBar.ButtonBackgroundColor = Colors.Transparent;
-            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            titleBar.ButtonForegroundColor = color;
-            titleBar.ButtonInactiveForegroundColor = color;
-            titleBar.ButtonHoverBackgroundColor = bgColor;
-            titleBar.ButtonHoverForegroundColor = color;
         }
 
         private DelegateCommand _NavigateCommand;

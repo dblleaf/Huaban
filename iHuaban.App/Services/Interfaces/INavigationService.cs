@@ -8,8 +8,8 @@ namespace iHuaban.App.Services
 {
     public interface INavigationService
     {
-        void Navigate(string pageName);
-        void Navigate(Type pageType);
-        void Navigate<T>();
+        void Navigate(string pageName, object parameter = null);
+        void Navigate(Type pageType, object parameter = null);
+        void Navigate<T>(object parameter = null);
     }
 }

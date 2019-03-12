@@ -1,24 +1,47 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.Core.Commands;
+using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace iHuaban.App.ViewModels
 {
-    public class CategoryViewModel : ListViewModel<Category, CategoryCollection>
+    public class CategoryViewModel : ViewModelBase
     {
-        public CategoryViewModel(iHuaban.App.Services.IServiceProvider service)
-           : base(service, false)
+        private IHttpHelper HttpHelper { get; set; }
+        public CategoryViewModel(IHttpHelper httpHelper)
         {
+            this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
-            this.PinsData = new IncrementalLoadingList<Pin>(GetPinsData);
-            this.Data.Add(Constants.CategoryAll);
-            this.Data.Add(Constants.CategoryHot);
-            this.SelectedItem = Constants.CategoryAll;
+
+            this.DataTypes = new ObservableCollection<DataType>()
+            {
+                new DataType("采集", Constants.ApiBase, LoaderAsync<PinCollection ,Pin>),
+                new DataType("推荐画板", Constants.ApiBoards, LoaderAsync<BoardCollection, Board>),
+                new DataType("推荐用户", Constants.ApiUsers, LoaderAsync<FavoriteUserCollection, PUser>),
+            };
+
+            this.Categories = new IncrementalLoadingList<Category>(GetCategoriesAsync);
+            this.Categories.Add(Constants.CategoryAll);
+            this.Categories.Add(Constants.CategoryHot);
+            this.SelectedCategory = Constants.CategoryAll;
+            this.Pins = new IncrementalLoadingList<IModel>(GetPinsAsync);
+
+            this.DataType = DataTypes[0];
+        }
+
+
+
+        private Visibility _DataTypesVisibility;
+        public Visibility DataTypesVisibility
+        {
+            get { return _DataTypesVisibility; }
+            set { SetValue(ref _DataTypesVisibility, value); }
         }
 
         private Visibility _CategoryVisibility;
@@ -28,11 +51,42 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _CategoryVisibility, value); }
         }
 
-        private IncrementalLoadingList<Pin> _PinsData;
-        public IncrementalLoadingList<Pin> PinsData
+        private IncrementalLoadingList<IModel> _Pins;
+        public IncrementalLoadingList<IModel> Pins
         {
-            get { return _PinsData; }
-            set { SetValue(ref _PinsData, value); }
+            get { return _Pins; }
+            set { SetValue(ref _Pins, value); }
+        }
+
+        public ObservableCollection<DataType> DataTypes { get; }
+
+        private DataType _DataType;
+        public DataType DataType
+        {
+            get { return _DataType; }
+            set { SetValue(ref _DataType, value); }
+        }
+
+        private Category _SelectedCategory;
+        public Category SelectedCategory
+        {
+            get { return _SelectedCategory; }
+            set
+            {
+                DataTypesVisibility = (value == Constants.CategoryAll || value == Constants.CategoryHot) ? Visibility.Collapsed : Visibility.Visible;
+                if (DataTypesVisibility == Visibility.Collapsed)
+                {
+                    this.DataType = this.DataTypes[0];
+                }
+                SetValue(ref _SelectedCategory, value);
+            }
+        }
+
+        private IncrementalLoadingList<Category> _Categories;
+        public IncrementalLoadingList<Category> Categories
+        {
+            get { return _Categories; }
+            set { SetValue(ref _Categories, value); }
         }
 
         private DelegateCommand _SetCategoryVisibilityCommand;
@@ -66,7 +120,7 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
-                        await this.PinsData.ClearAndReload();
+                        await this.Pins.ClearAndReload();
                     }
                     catch (Exception ex)
                     {
@@ -77,25 +131,67 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        private async Task<IEnumerable<Pin>> GetPinsData(uint startIndex, int page)
+        private async Task<IEnumerable<IModel>> LoaderAsync<T, T2>(string url)
+            where T : ModelCollection<T2>
+            where T2 : IModel
+        {
+            var result = await this.HttpHelper.GetAsync<T>(url);
+            var data = result.Data;
+            List<IModel> list = new List<IModel>();
+            foreach (var item in data)
+            {
+                list.Add(item);
+            }
+
+            return list;
+        }
+
+        private async Task<IEnumerable<IModel>> GetPinsAsync(uint startIndex, int page)
         {
             if (IsLoading)
             {
-                return new List<Pin>();
+                return new List<IModel>();
             }
             IsLoading = true;
             try
             {
-                var list = await this.ServiceProvider.GetAsync<PinCollection>(GetCategoryPinsUrl(), 20, GetMaxPinId());
+                var result = await this.DataType.DataLoaderAsync(GetUrl());
 
-                if (list.Data.Count() == 0)
+                if (result.Count() == 0)
                 {
                     NoMoreVisibility = Visibility.Visible;
-                    PinsData.NoMore();
+                    Pins.NoMore();
                 }
                 else
-                    PinsData.HasMore();
-                return list.Data;
+                {
+                    NoMoreVisibility = Visibility.Collapsed;
+                    Pins.HasMore();
+                }
+
+                return result;
+            }
+            catch { }
+            finally
+            {
+                IsLoading = false;
+            }
+            return null;
+        }
+
+        private async Task<IEnumerable<Category>> GetCategoriesAsync(uint startIndex, int page)
+        {
+            if (IsLoading)
+            {
+                return new List<Category>();
+            }
+            IsLoading = true;
+            try
+            {
+                var result = await HttpHelper.GetAsync<CategoryCollection>(Constants.ApiCategories);
+
+                Categories.NoMore();
+
+                return result.Data;
             }
             catch
             {
@@ -109,7 +205,7 @@ namespace iHuaban.App.ViewModels
 
         private long GetMaxPinId()
         {
-            if (PinsData?.Count > 0 && long.TryParse(PinsData?[PinsData.Count - 1].KeyId, out long maxId))
+            if (Pins?.Count > 0 && long.TryParse(Pins?[Pins.Count - 1].KeyId, out long maxId))
             {
                 return maxId;
             }
@@ -119,14 +215,16 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        private string GetCategoryPinsUrl()
+        private string GetUrl()
         {
-            return Constants.ApiBase + SelectedItem.nav_link.TrimStart('/');
+            string query = "?limit=20";
+            var max = GetMaxPinId();
+            if (max > 0)
+            {
+                query += $"&max={max}";
+            }
+            return $"{this.DataType.Url.Trim('/')}/{SelectedCategory.nav_link.Trim('/')}/{query}";
         }
 
-        protected override string GetApiUrl()
-        {
-            return Constants.ApiCategories;
-        }
     }
 }

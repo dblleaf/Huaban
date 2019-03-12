@@ -16,11 +16,11 @@ namespace iHuaban.App.ViewModels
         public HomeViewModel(IHomeService homeService)
         {
             this.HomeService = homeService;
-            this.PinsData = new IncrementalLoadingList<IModel>(GetData);
+            this.Pins = new IncrementalLoadingList<IModel>(GetData);
         }
 
         private IncrementalLoadingList<IModel> _Recommends;
-        public IncrementalLoadingList<IModel> PinsData
+        public IncrementalLoadingList<IModel> Pins
         {
             get { return _Recommends; }
             set { SetValue(ref _Recommends, value); }
@@ -39,7 +39,7 @@ namespace iHuaban.App.ViewModels
                     try
                     {
                         currentPage = 1;
-                        await this.PinsData.ClearAndReload();
+                        await this.Pins.ClearAndReload();
                     }
                     catch (Exception)
                     {
@@ -63,9 +63,9 @@ namespace iHuaban.App.ViewModels
                 var home = await HomeService.GetPagingHomeAsync(currentPage++);
 
                 if (home.Recommends.Count > 0)
-                    PinsData.HasMore();
+                    Pins.HasMore();
                 else
-                    PinsData.NoMore();
+                    Pins.NoMore();
 
                 if (home.Explores?.Count > 0 && !(Explores?.Count > 0))
                 {

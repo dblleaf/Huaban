@@ -1,27 +1,41 @@
-﻿using System;
+﻿using iHuaban.Core;
+using iHuaban.Core.Helpers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
-    public abstract class Service<T> : IService<T>
+    public class Service : IService
     {
-        protected IServiceProvider ServiceProvider { get; private set; }
-        public Service(IServiceProvider serviceProvider)
+        protected IHttpHelper HttpHelper { get; private set; }
+        public Service(IHttpHelper httpHelper)
         {
-            this.ServiceProvider = serviceProvider;
+            this.HttpHelper = httpHelper;
         }
 
-        public T Get(string uri, int limit = 0, long max = 0)
+        public T Get<T>(string uri, int limit = 0, long max = 0)
         {
-           return this.ServiceProvider.Get<T>(uri, limit, max);
+            return GetAsync<T>(uri, limit, max).Result;
         }
 
-        public async Task<T> GetAsync(string uri, int limit = 0, long max = 0)
+        public async Task<T> GetAsync<T>(string uri, int limit = 0, long max = 0)
         {
-            return await this.ServiceProvider.GetAsync<T>(uri, limit, max);
+            List<KeyValuePair<string, long>> param = new List<KeyValuePair<string, long>>()
+            {
+                new KeyValuePair<string, long>("limit", limit),
+                new KeyValuePair<string, long>("max", max)
+            };
+
+            if (uri.IndexOf('?') < 0)
+            {
+                uri += "?";
+            }
+            else
+            {
+                uri += "&";
+            }
+            var result = await HttpHelper.GetAsync<T>(uri + param.ToQueryString());
+            return result;
         }
     }
 }

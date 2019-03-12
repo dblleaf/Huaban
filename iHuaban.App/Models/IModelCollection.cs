@@ -2,7 +2,8 @@
 
 namespace iHuaban.App.Models
 {
-    public interface IModelCollection<T> where T : new()
+    public interface IModelCollection<T>
+        where T : IModel
     {
         int Count { get; }
         IEnumerable<T> Data { get; }

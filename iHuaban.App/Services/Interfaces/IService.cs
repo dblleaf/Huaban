@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
-    
-
-    public interface IService<T>
+    public interface IService
     {
-        T Get(string uri, int limit = 0, long max = 0);
-        Task<T> GetAsync(string uri, int limit = 0, long max = 0);
+        T Get<T>(string uri, int limit = 0, long max = 0);
+        Task<T> GetAsync<T>(string uri, int limit = 0, long max = 0);
     }
 }
