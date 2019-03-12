@@ -11,12 +11,12 @@
         <Grid>
             <control:ExtendedGridView x:Name="gridView"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                ScaleSize="{Binding ScaleSize}"
-                Padding="6" CellMinWidth="{Binding CellMinWidth}"
-                ItemsSource="{Binding ViewModel.Pins}"
-                ItemTemplateSelector="{Binding ItemTemplateSelector}">
+                ScaleSize="300:300"
+                Padding="6" CellMinWidth="236"
+                ItemsSource="{Binding Pins}"
+                ItemTemplateSelector="{Binding DataTemplateSelector}">
                 <control:ExtendedGridView.Footer>
-                    <Grid Margin="8" Visibility="{Binding ViewModel.NoMoreVisibility}">
+                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
                         <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
                     </Grid>
                 </control:ExtendedGridView.Footer>
@@ -39,7 +39,7 @@
                     Background="{ThemeResource AppControlAcrylicBrush}">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                            <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
@@ -51,19 +51,19 @@
     <DataTemplate x:Key="TemplateCategories">
         <Grid>
             <control:ExtendedGridView x:Name="gridView"
-                ScaleSize="300:300"
+                ScaleSize="{Binding DataType.ScaleSize}"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
-                ItemsSource="{Binding ViewModel.Pins}"
-                ItemTemplateSelector="{Binding ItemTemplateSelector}">
+                ItemsSource="{Binding Pins}"
+                ItemTemplateSelector="{Binding DataType.DataTemplateSelector}">
                 <control:ExtendedGridView.Header>
                     <StackPanel Padding="6 0">
-                        <TextBlock Text="{Binding ViewModel.SelectedCategory.name}" FontSize="30"></TextBlock>
+                        <TextBlock Text="{Binding SelectedCategory.name}" FontSize="30"></TextBlock>
                         <GridView Margin="0 6"
                             ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
-                            Visibility="{Binding ViewModel.DataTypesVisibility}"
-                            ItemsSource="{Binding ViewModel.DataTypes}"
-                            SelectedItem="{Binding ViewModel.DataType,Mode=TwoWay}">
+                            Visibility="{Binding DataTypesVisibility}"
+                            ItemsSource="{Binding DataTypes}"
+                            SelectedItem="{Binding DataType,Mode=TwoWay}">
                             <GridView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <VirtualizingStackPanel Orientation="Horizontal"/>
@@ -81,14 +81,14 @@
                             </GridView.ItemTemplate>
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                    <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                                    <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
                                 </Core:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
                         </GridView>
                     </StackPanel>
                 </control:ExtendedGridView.Header>
                 <control:ExtendedGridView.Footer>
-                    <Grid Margin="8" Visibility="{Binding ViewModel.NoMoreVisibility}">
+                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
                         <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
                     </Grid>
                 </control:ExtendedGridView.Footer>
@@ -112,7 +112,7 @@
                     Background="{ThemeResource AppControlAcrylicBrush}">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                            <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
@@ -126,29 +126,28 @@
                     Background="{ThemeResource AppControlAcrylicBrush}">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding ViewModel.SetCategoryVisibilityCommand}" CommandParameter="true"></Core:InvokeCommandAction>
+                            <Core:InvokeCommandAction Command="{Binding SetCategoryVisibilityCommand}" CommandParameter="true"></Core:InvokeCommandAction>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8FD;" />
                 </Border>
             </StackPanel>
 
-            <control:ExtendedGridView SelectedItem="{Binding ViewModel.SelectedCategory,Mode=TwoWay}"
+            <control:ExtendedGridView SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
                 x:Name="categoryridView"
                 ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                Visibility="{Binding ViewModel.CategoryVisibility}"
-                ScaleSize="{Binding ScaleSize}"
-                Padding="6" CellMinWidth="{Binding CellMinWidth}"
-                ItemsSource="{Binding ViewModel.Categories}"
-                ItemTemplateSelector="{Binding ItemTemplateSelector}">
+                Visibility="{Binding CategoryVisibility}"
+                Padding="6" CellMinWidth="236"
+                ItemsSource="{Binding Categories}"
+                ItemTemplate="{StaticResource TemplateCategory}">
 
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="Tapped">
-                        <Core:InvokeCommandAction Command="{Binding ViewModel.SetCategoryVisibilityCommand}" CommandParameter="false"></Core:InvokeCommandAction>
+                        <Core:InvokeCommandAction Command="{Binding SetCategoryVisibilityCommand}" CommandParameter="false"></Core:InvokeCommandAction>
                     </Core:EventTriggerBehavior>
                     <Core:EventTriggerBehavior EventName="SelectionChanged">
-                        <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                        <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
                     </Core:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
             </control:ExtendedGridView>
@@ -159,23 +158,23 @@
         <Grid>
             <control:ExtendedGridView x:Name="gridView"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                ScaleSize="{Binding ScaleSize}"
-                Padding="6" CellMinWidth="{Binding CellMinWidth}"
-                ItemsSource="{Binding ViewModel.Data}"
-                ItemTemplateSelector="{Binding ItemTemplateSelector}">
+                ScaleSize="300:300"
+                Padding="6" CellMinWidth="236"
+                ItemsSource="{Binding Data}"
+                ItemTemplateSelector="{Binding DataType.DataTemplateSelector}">
                 <control:ExtendedGridView.Header>
                     <Grid Margin="6">
                         <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="QuerySubmitted">
-                                    <Core:InvokeCommandAction Command="{Binding ViewModel.SearchCommand}"></Core:InvokeCommandAction>
+                                    <Core:InvokeCommandAction Command="{Binding SearchCommand}"></Core:InvokeCommandAction>
                                 </Core:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
                         </AutoSuggestBox>
                     </Grid>
                 </control:ExtendedGridView.Header>
                 <control:ExtendedGridView.Footer>
-                    <Grid Margin="8" Visibility="{Binding ViewModel.NoMoreVisibility}">
+                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
                         <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
                     </Grid>
                 </control:ExtendedGridView.Footer>
@@ -198,7 +197,7 @@
                     Background="{ThemeResource AppControlAcrylicBrush}">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding ViewModel.RefreshCommand}"></Core:InvokeCommandAction>
+                            <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
@@ -208,27 +207,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateMine">
-        <Grid DataContext="{Binding ViewModel}">
-            <Grid Visibility="{Binding MeVisibility}" Padding="6">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Border Margin="6" Height="60" Width="60" CornerRadius="30">
-                    <Image Source="{Binding Me.avatar.Orignal}"/>
-                </Border>
-                <StackPanel Grid.Column="1">
-                    <TextBlock Margin="6" FontWeight="SemiBold" Text="{Binding Me.username}"></TextBlock>
-                    <TextBlock Margin="6"><Run Text="{Binding Me.follower_count}"/> 粉丝</TextBlock>
-                </StackPanel>
-            </Grid>
-            <ContentPresenter ContentTemplate="{StaticResource TemplateLogin}"/>
 
-        </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplatePin">

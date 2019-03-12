@@ -55,7 +55,7 @@ namespace iHuaban.App.Services
             return BuildLocator().Resolve<T>();
         }
 
-        public static T ResolveObject<T>(Type type) where T : new()
+        public static T ResolveObject<T>(Type type)
         {
             return (T)BuildLocator().Resolve(type);
         }

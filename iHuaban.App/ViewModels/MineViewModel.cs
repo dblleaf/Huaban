@@ -24,6 +24,10 @@ namespace iHuaban.App.ViewModels
                 }
             };
         }
+        public override string Icon => Constants.IconMine;
+        public override string Title => Constants.TextMine;
+        public override string TemplateName => Constants.TemplateMine;
+
         private User _Me;
         public User Me
         {
