@@ -136,7 +136,7 @@
             <control:ExtendedGridView SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
                 x:Name="categoryridView"
                 ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
-                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                Background="{ThemeResource AppBackgroundAcrylicBrush}"
                 Visibility="{Binding CategoryVisibility}"
                 Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding Categories}"
@@ -226,7 +226,7 @@
             Padding="{Binding ElementName=categoryridView,Path=Padding}"
             Width="{Binding ElementName=categoryridView,Path=CellWidth}">
             <Border
-                Background="{ThemeResource SystemControlChromeHighAcrylicWindowMediumBrush}"
+                Background="{ThemeResource SystemChromeMediumColor}"
                 VerticalAlignment="Center"
                 Padding="8">
                 <TextBlock Text="{Binding name}"></TextBlock>
@@ -268,7 +268,7 @@
                     <ColumnDefinition Width="2*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"></Grid>
+                <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Background="{ThemeResource SystemChromeMediumColor}"></Grid>
                 <Ellipse Fill="White"
                     Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
                     HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
