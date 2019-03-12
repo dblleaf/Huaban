@@ -1,5 +1,6 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.Services;
+using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
@@ -18,6 +20,13 @@ namespace iHuaban.App.ViewModels
             this.HomeService = homeService;
             this.Pins = new IncrementalLoadingList<IModel>(GetData);
         }
+
+        public override string Icon => Constants.IconHome;
+        public override string Title => Constants.TextHome;
+        public override string TemplateName => Constants.TemplateHome;
+        public string ScaleSize => "300:300";
+        public decimal CellMinWidth => 236;
+        public DataTemplateSelector DataTemplateSelector => new SupperDataTemplateSelector();
 
         private IncrementalLoadingList<IModel> _Recommends;
         public IncrementalLoadingList<IModel> Pins

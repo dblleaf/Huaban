@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
@@ -21,9 +22,24 @@ namespace iHuaban.App.ViewModels
 
             this.DataTypes = new ObservableCollection<DataType>()
             {
-                new DataType("采集", Constants.ApiBase, LoaderAsync<PinCollection ,Pin>),
-                new DataType("推荐画板", Constants.ApiBoards, LoaderAsync<BoardCollection, Board>),
-                new DataType("推荐用户", Constants.ApiUsers, LoaderAsync<FavoriteUserCollection, PUser>),
+                new DataType
+                {
+                    Type ="采集",
+                    Url = Constants.ApiBase,
+                    DataLoaderAsync =LoaderAsync<PinCollection, Pin>,
+                },
+                new DataType
+                {
+                    Type ="推荐画板",
+                    Url = Constants.ApiBoards,
+                    DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
+                },
+                new DataType
+                {
+                    Type = "推荐用户",
+                    Url =  Constants.ApiUsers,
+                    DataLoaderAsync =LoaderAsync<FavoriteUserCollection, PUser>,
+                },
             };
 
             this.Categories = new IncrementalLoadingList<Category>(GetCategoriesAsync);
@@ -35,7 +51,12 @@ namespace iHuaban.App.ViewModels
             this.DataType = DataTypes[0];
         }
 
-
+        public override string Icon => Constants.IconCategory;
+        public override string Title => Constants.TextCategory;
+        public override string TemplateName => Constants.TemplateCategories;
+        public string ScaleSize => "300:300";
+        public decimal CellMinWidth => 236;
+        public DataTemplateSelector DataTemplateSelector { get; private set; }
 
         private Visibility _DataTypesVisibility;
         public Visibility DataTypesVisibility

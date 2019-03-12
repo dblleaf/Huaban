@@ -137,7 +137,6 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
-    <Compile Include="TemplateSelectors\MyDataTemplateSelector.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />

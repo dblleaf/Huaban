@@ -3,8 +3,11 @@ using Windows.UI.Xaml;
 
 namespace iHuaban.Core.Models
 {
-    public class ViewModelBase : ObservableObject
+    public abstract class ViewModelBase : ObservableObject
     {
+        public virtual string Title { get; }
+        public virtual string Icon { get; }
+        public virtual string TemplateName { get; }
         public ViewModelBase()
         {
             this.NoMoreVisibility = Visibility.Collapsed;

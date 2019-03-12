@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
@@ -21,13 +22,32 @@ namespace iHuaban.App.ViewModels
             this.Data = new IncrementalLoadingList<IModel>(GetData);
             this.DataTypes = new ObservableCollection<DataType>()
             {
-                new DataType("采集", Constants.ApiSearchPins, Loader<PinCollection ,Pin>),
-                new DataType("画板", Constants.ApiSearchBoards, Loader<BoardCollection, Board>),
-                new DataType("用户", Constants.ApiSearchUsers, Loader<UserCollection, User>),
+                new DataType
+                {
+                    Type = "采集",
+                    Url = Constants.ApiSearchPins,
+                    DataLoaderAsync = Loader<PinCollection ,Pin>
+                },
+                new DataType
+                {
+                    Type = "画板",
+                    Url = Constants.ApiSearchBoards,
+                    DataLoaderAsync = Loader<BoardCollection, Board>
+                },
+                new DataType
+                {
+                    Type = "用户",
+                    Url = Constants.ApiSearchUsers,
+                    DataLoaderAsync = Loader<UserCollection, User>
+                },
             };
 
             this.DataType = DataTypes[0];
         }
+
+        public override string Icon => Constants.IconFind;
+        public override string Title => Constants.TextFind;
+        public override string TemplateName => Constants.TemplateSearch;
 
         private IncrementalLoadingList<IModel> _Data;
         public IncrementalLoadingList<IModel> Data
@@ -59,8 +79,6 @@ namespace iHuaban.App.ViewModels
 
         public ObservableCollection<DataType> DataTypes { get; }
 
-        
-
         private async Task<IEnumerable<IModel>> Loader<T, T2>(string url)
             where T : ModelCollection<T2>
             where T2 : IModel
@@ -76,7 +94,7 @@ namespace iHuaban.App.ViewModels
             return list;
         }
 
-        private int page = 0;
+        private int currentPage = 0;
         private async Task<IEnumerable<IModel>> GetData(uint startIndex, int page)
         {
             if (string.IsNullOrWhiteSpace(SearchKey))
@@ -92,7 +110,7 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                string url = $"{this.DataType.Url}?q={UrlEncode(this.SearchKey)}&page={++page}&per_page=20";
+                string url = $"{this.DataType.Url}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
                 var result = await this.DataType.DataLoaderAsync.Invoke(url);
 
                 if (result.Count() > 0)
@@ -123,7 +141,7 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
-                        page = 0;
+                        currentPage = 0;
                         await this.Data.ClearAndReload();
                     }
                     catch (Exception)
@@ -150,7 +168,7 @@ namespace iHuaban.App.ViewModels
                             return;
 
                         this.SearchKey = e.QueryText;
-                        page = 0;
+                        currentPage = 0;
                         await this.Data.ClearAndReload();
                     }
                     catch (Exception)
