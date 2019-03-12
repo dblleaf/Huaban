@@ -9,13 +9,6 @@ namespace iHuaban.Core.Models
         {
         }
 
-        private bool _DarkMode;
-        public bool DarkMode
-        {
-            get { return _DarkMode; }
-            set { SetValue(ref _DarkMode, value); }
-        }
-
         private string _SavePath;
         public string SavePath
         {

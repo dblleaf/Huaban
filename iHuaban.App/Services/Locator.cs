@@ -42,6 +42,8 @@ namespace iHuaban.App.Services
         {
             Container.RegisterInstance(Setting.Instance());
             Container.RegisterType<IHttpHelper, HttpHelper>();
+            Container.RegisterType<IStorageService, StorageService>();
+            Container.RegisterType<IThemeService, ThemeService>();
             Container.RegisterSingleton<INavigationService, NavigationService>();
             Container.RegisterType<IService, Service>();
             Container.RegisterType<IHomeService, HomeService>();

@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
 using iHuaban.App.Views;
 using iHuaban.Core.Models;
 using System;
@@ -73,10 +74,13 @@ namespace iHuaban.App
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    Locator.ResolveObject<INavigationService>().Navigate<MainPage>(e.Arguments);
+                    //rootFrame.Navigate(typeof(MainPage), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+
+                Locator.ResolveObject<IThemeService>().LoadTheme();
             }
         }
 
@@ -104,19 +108,10 @@ namespace iHuaban.App
             deferral.Complete();
         }
 
-        protected override void OnWindowCreated(WindowCreatedEventArgs args)
+        protected override void OnActivated(IActivatedEventArgs args)
         {
-            args.Window.Activated += Window_Activated;
-            base.OnWindowCreated(args);
-        }
-
-        private void Window_Activated(object sender, WindowActivatedEventArgs e)
-        {
-            try
-            {
-                Setting.Instance().WindowActived = !(e.WindowActivationState == CoreWindowActivationState.Deactivated);
-            }
-            catch { }
+            Locator.BuildLocator().Resolve<IThemeService>().LoadTheme();
+            base.OnActivated(args);
         }
     }
 }

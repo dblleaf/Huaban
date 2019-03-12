@@ -1,22 +1,19 @@
-﻿using iHuaban.Core.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Windows.Foundation;
-using Windows.Foundation.Metadata;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.Core.Controls
 {
-    public class ExtendGridView : GridView
+    public class ExtendedGridView : GridView
     {
-        public ExtendGridView()
+        public ExtendedGridView()
         {
-            this.SizeChanged += PinGridView_SizeChanged;
+            this.SizeChanged += ExtendedGridView_SizeChanged;
         }
 
-        private void PinGridView_SizeChanged(object sender, SizeChangedEventArgs e)
+        private void ExtendedGridView_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             try
             {
@@ -65,7 +62,7 @@ namespace iHuaban.Core.Controls
             = DependencyProperty.Register(
                 "ScaleSize",
                 typeof(string),
-                typeof(ExtendGridView),
+                typeof(ExtendedGridView),
                 new PropertyMetadata(string.Empty));
 
         public double CellMinWidth
@@ -84,7 +81,7 @@ namespace iHuaban.Core.Controls
             = DependencyProperty.Register(
                 "CellMinWidth",
                 typeof(double),
-                typeof(ExtendGridView),
+                typeof(ExtendedGridView),
                 new PropertyMetadata(240));
 
         public double CellWidth
@@ -103,7 +100,7 @@ namespace iHuaban.Core.Controls
             = DependencyProperty.Register(
                 "CellWidth",
                 typeof(double),
-                typeof(ExtendGridView),
+                typeof(ExtendedGridView),
                 new PropertyMetadata(235));
 
         public double CellHeight
@@ -122,7 +119,7 @@ namespace iHuaban.Core.Controls
             = DependencyProperty.Register(
                 "CellHeight",
                 typeof(double),
-                typeof(ExtendGridView),
+                typeof(ExtendedGridView),
                 new PropertyMetadata(double.NaN));
     }
 

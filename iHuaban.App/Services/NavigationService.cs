@@ -1,4 +1,6 @@
-﻿using System;
+﻿using iHuaban.Core;
+using iHuaban.Core.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -7,6 +9,7 @@ using System.Threading.Tasks;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 
 namespace iHuaban.App.Services
 {
@@ -16,7 +19,38 @@ namespace iHuaban.App.Services
         public NavigationService()
         {
             rootFrame = Window.Current.Content as Frame;
+            rootFrame.Navigated += RootFrame_Navigated;
             SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService_BackRequested;
+        }
+
+        private async void RootFrame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        {
+            var interfaces = e.SourcePageType.GetInterfaces();
+            if (e.Content is Page page)
+            {
+                if (page.DataContext != null)
+                {
+                    return;
+                }
+                foreach (var it in interfaces)
+                {
+                    var itInfo = it.GetTypeInfo();
+
+                    if (itInfo.IsGenericType && itInfo.GetGenericTypeDefinition() == typeof(IPage<>))
+                    {
+                        foreach (var genericType in itInfo.GenericTypeArguments)
+                        {
+                            if (typeof(ViewModelBase).IsAssignableFrom(genericType))
+                            {
+                                var vm = Locator.ResolveObject<ViewModelBase>(genericType);
+                                page.DataContext = vm;
+                                await vm.InitAsync();
+                            }
+                        }
+                    }
+                }
+            }
+
         }
 
         private void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
@@ -57,22 +91,22 @@ namespace iHuaban.App.Services
             }
         }
 
-        public void Navigate(string pageName)
+        public void Navigate(string pageName, object parameter = null)
         {
             var pageType = GetPageType(pageName);
-            Navigate(pageType);
+            Navigate(pageType, parameter);
         }
 
-        public void Navigate(Type pageType)
+        public void Navigate(Type pageType, object parameter = null)
         {
             if (pageType != null && typeof(Page).IsAssignableFrom(pageType))
             {
-                rootFrame.Navigate(pageType);
+                rootFrame.Navigate(pageType, parameter, new SuppressNavigationTransitionInfo());
                 DisplayBackButton();
             }
         }
 
-        public void Navigate<T>()
+        public void Navigate<T>(object parameter = null)
         {
             Navigate(typeof(T));
         }

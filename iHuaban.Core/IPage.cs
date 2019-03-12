@@ -2,8 +2,8 @@
 
 namespace iHuaban.Core
 {
-    public interface IPage<T> where T: ObservableObject
+
+    public interface IPage<T> where T : ViewModelBase
     {
-        T ViewModel { get; }
     }
 }
