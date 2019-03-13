@@ -1,6 +1,7 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.Services;
 using iHuaban.App.TemplateSelectors;
+using iHuaban.Core;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
@@ -49,6 +50,33 @@ namespace iHuaban.App.ViewModels
                     {
                         currentPage = 1;
                         await this.Pins.ClearAndReload();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
+        private DelegateCommand _GotoTopCommand;
+        public DelegateCommand GotoTopCommand
+        {
+            get
+            {
+                return _GotoTopCommand ?? (_GotoTopCommand = new DelegateCommand(
+                async o =>
+                {
+                    try
+                    {
+                        if (o is GridView gridView)
+                        {
+                            if (gridView?.Items?.Count > 0)
+                            {
+                                await gridView.ScrollToItem(gridView.Items[0]);
+                            }
+                        }
                     }
                     catch (Exception)
                     {

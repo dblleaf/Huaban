@@ -28,6 +28,11 @@
                     BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
                     BorderThickness="2" HorizontalAlignment="Center"
                     Background="{ThemeResource AppControlAcrylicBrush}">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding GotoTopCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
                 </Border>
 
@@ -101,6 +106,11 @@
                     BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
                     BorderThickness="2" HorizontalAlignment="Center"
                     Background="{ThemeResource AppControlAcrylicBrush}">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding GotoTopCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
                 </Border>
 
@@ -186,6 +196,11 @@
                     BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
                     BorderThickness="2" HorizontalAlignment="Center"
                     Background="{ThemeResource AppControlAcrylicBrush}">
+                    <Interactivity:Interaction.Behaviors>
+                        <Core:EventTriggerBehavior EventName="Tapped">
+                            <Core:InvokeCommandAction Command="{Binding GotoTopCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
+                        </Core:EventTriggerBehavior>
+                    </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
                 </Border>
 

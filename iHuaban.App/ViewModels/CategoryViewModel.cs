@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.Core;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
@@ -144,6 +145,33 @@ namespace iHuaban.App.ViewModels
                         await this.Pins.ClearAndReload();
                     }
                     catch (Exception ex)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
+        private DelegateCommand _GotoTopCommand;
+        public DelegateCommand GotoTopCommand
+        {
+            get
+            {
+                return _GotoTopCommand ?? (_GotoTopCommand = new DelegateCommand(
+                async o =>
+                {
+                    try
+                    {
+                        if (o is GridView gridView)
+                        {
+                            if (gridView?.Items?.Count > 0)
+                            {
+                                await gridView.ScrollToItem(gridView.Items[0]);
+                            }
+                        }
+                    }
+                    catch (Exception)
                     {
 
                     }

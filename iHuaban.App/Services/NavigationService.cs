@@ -45,12 +45,12 @@ namespace iHuaban.App.Services
                                 var vm = Locator.ResolveObject<ViewModelBase>(genericType);
                                 page.DataContext = vm;
                                 await vm.InitAsync();
+                                return;
                             }
                         }
                     }
                 }
             }
-
         }
 
         private void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
