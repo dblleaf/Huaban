@@ -208,6 +208,13 @@
     <Compile Include="Models\WeeklyDetail.cs" />
     <Compile Include="Models\WeeklyHotBoardImg.cs" />
     <Compile Include="Models\WeeklyTopicBoardImg.cs" />
+    <Compile Include="Services\BoardService.cs" />
+    <Compile Include="Services\CategoryService.cs" />
+    <Compile Include="Services\Constants.cs" />
+    <Compile Include="Services\OAuthorService.cs" />
+    <Compile Include="Services\PinService.cs" />
+    <Compile Include="Services\ServiceBase.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\BoardListViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardDetailViewModel.cs" />
     <Compile Include="ViewModels\Content\BoardPinsViewModel.cs" />
