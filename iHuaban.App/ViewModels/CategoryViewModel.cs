@@ -49,9 +49,9 @@ namespace iHuaban.App.ViewModels
             this.Categories.Add(Constants.CategoryAll);
             this.Categories.Add(Constants.CategoryHot);
             this.SelectedCategory = Constants.CategoryAll;
-            this.Pins = new IncrementalLoadingList<IModel>(GetPinsAsync);
+            this.Data = new IncrementalLoadingList<IModel>(GetPinsAsync);
 
-            this.Pins.AfterAddItems += o =>
+            this.Data.AfterAddItems += o =>
             {
                 this.GridViewHorizontalAlignment = HorizontalAlignment.Stretch;
             };
@@ -80,11 +80,11 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _CategoryVisibility, value); }
         }
 
-        private IncrementalLoadingList<IModel> _Pins;
-        public IncrementalLoadingList<IModel> Pins
+        private IncrementalLoadingList<IModel> _Data;
+        public IncrementalLoadingList<IModel> Data
         {
-            get { return _Pins; }
-            set { SetValue(ref _Pins, value); }
+            get { return _Data; }
+            set { SetValue(ref _Data, value); }
         }
 
         public ObservableCollection<DataType> DataTypes { get; }
@@ -157,7 +157,7 @@ namespace iHuaban.App.ViewModels
                     try
                     {
                         this.GridViewHorizontalAlignment = HorizontalAlignment.Left;
-                        await this.Pins.ClearAndReload();
+                        await this.Data.ClearAndReload();
                     }
                     catch (Exception ex)
                     {
@@ -229,12 +229,12 @@ namespace iHuaban.App.ViewModels
                 if (result.Count() == 0)
                 {
                     NoMoreVisibility = Visibility.Visible;
-                    Pins.NoMore();
+                    Data.NoMore();
                 }
                 else
                 {
                     NoMoreVisibility = Visibility.Collapsed;
-                    Pins.HasMore();
+                    Data.HasMore();
                 }
 
                 return result;
@@ -274,7 +274,7 @@ namespace iHuaban.App.ViewModels
 
         private long GetMaxPinId()
         {
-            if (Pins?.Count > 0 && long.TryParse(Pins?[Pins.Count - 1].KeyId, out long maxId))
+            if (Data?.Count > 0 && long.TryParse(Data?[Data.Count - 1].KeyId, out long maxId))
             {
                 return maxId;
             }

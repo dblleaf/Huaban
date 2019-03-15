@@ -60,7 +60,7 @@
                 HorizontalAlignment="{Binding GridViewHorizontalAlignment}"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
-                ItemsSource="{Binding Pins}"
+                ItemsSource="{Binding Data}"
                 ItemTemplateSelector="{Binding DataTemplateSelector}">
                 <control:ExtendedGridView.Header>
                     <StackPanel Padding="6 0">
