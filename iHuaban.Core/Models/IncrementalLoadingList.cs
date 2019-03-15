@@ -14,6 +14,8 @@ namespace iHuaban.Core.Models
 
         private Func<uint, int, Task<IEnumerable<T>>> func;
 
+        public Action<int> AfterAddItems;
+
         public bool HasMoreItems
         {
             get; private set;
@@ -64,6 +66,7 @@ namespace iHuaban.Core.Models
                         this.Add(item);
                     }
 
+                    this.AfterAddItems?.Invoke(this.Count);
                     _isBusy = false;
                 }
                 catch { }

@@ -13,6 +13,5 @@
         public Func<string, Task<IEnumerable<IModel>>> DataLoaderAsync { get; set; }
         public string ScaleSize { get; set; } = "300:300";
         public decimal CellMinWidth { get; set; } = 236;
-        public DataTemplateSelector DataTemplateSelector { get; set; } = new SupperDataTemplateSelector();
     }
 }

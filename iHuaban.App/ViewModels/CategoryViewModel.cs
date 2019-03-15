@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Helpers;
@@ -20,7 +21,7 @@ namespace iHuaban.App.ViewModels
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
-
+            this.GridViewHorizontalAlignment = HorizontalAlignment.Stretch;
             this.DataTypes = new ObservableCollection<DataType>()
             {
                 new DataType
@@ -40,6 +41,7 @@ namespace iHuaban.App.ViewModels
                     Type = "推荐用户",
                     Url =  Constants.ApiUsers,
                     DataLoaderAsync =LoaderAsync<FavoriteUserCollection, PUser>,
+                    ScaleSize = "4:5",
                 },
             };
 
@@ -49,6 +51,11 @@ namespace iHuaban.App.ViewModels
             this.SelectedCategory = Constants.CategoryAll;
             this.Pins = new IncrementalLoadingList<IModel>(GetPinsAsync);
 
+            this.Pins.AfterAddItems += o =>
+            {
+                this.GridViewHorizontalAlignment = HorizontalAlignment.Stretch;
+            };
+
             this.DataType = DataTypes[0];
         }
 
@@ -57,7 +64,7 @@ namespace iHuaban.App.ViewModels
         public override string TemplateName => Constants.TemplateCategories;
         public string ScaleSize => "300:300";
         public decimal CellMinWidth => 236;
-        public DataTemplateSelector DataTemplateSelector { get; private set; }
+        public DataTemplateSelector DataTemplateSelector { get; private set; } = new SupperDataTemplateSelector();
 
         private Visibility _DataTypesVisibility;
         public Visibility DataTypesVisibility
@@ -87,6 +94,13 @@ namespace iHuaban.App.ViewModels
         {
             get { return _DataType; }
             set { SetValue(ref _DataType, value); }
+        }
+
+        private HorizontalAlignment _GridViewHorizontalAlignment;
+        public HorizontalAlignment GridViewHorizontalAlignment
+        {
+            get { return _GridViewHorizontalAlignment; }
+            set { SetValue(ref _GridViewHorizontalAlignment, value); }
         }
 
         private Category _SelectedCategory;
@@ -142,6 +156,7 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
+                        this.GridViewHorizontalAlignment = HorizontalAlignment.Left;
                         await this.Pins.ClearAndReload();
                     }
                     catch (Exception ex)
@@ -204,6 +219,11 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
+                bool isUsers = this.DataType == this.DataTypes[2];
+                if (isUsers)
+                {
+
+                }
                 var result = await this.DataType.DataLoaderAsync(GetUrl());
 
                 if (result.Count() == 0)

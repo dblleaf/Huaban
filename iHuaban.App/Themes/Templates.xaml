@@ -57,10 +57,11 @@
         <Grid>
             <control:ExtendedGridView x:Name="gridView"
                 ScaleSize="{Binding DataType.ScaleSize}"
+                HorizontalAlignment="{Binding GridViewHorizontalAlignment}"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding Pins}"
-                ItemTemplateSelector="{Binding DataType.DataTemplateSelector}">
+                ItemTemplateSelector="{Binding DataTemplateSelector}">
                 <control:ExtendedGridView.Header>
                     <StackPanel Padding="6 0">
                         <TextBlock Text="{Binding SelectedCategory.name}" FontSize="30"></TextBlock>
@@ -227,7 +228,7 @@
 
     <DataTemplate x:Key="TemplatePin">
         <Grid
-            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -238,7 +239,7 @@
 
     <DataTemplate x:Key="TemplateCategory">
         <Grid
-            Padding="{Binding ElementName=categoryridView,Path=Padding}"
+            Margin="{Binding ElementName=categoryridView,Path=Padding}"
             Width="{Binding ElementName=categoryridView,Path=CellWidth}">
             <Border
                 Background="{ThemeResource SystemChromeMediumColor}"
@@ -251,7 +252,7 @@
 
     <DataTemplate x:Key="TemplateBoard">
         <Grid
-            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Grid Background="{ThemeResource SystemAltMediumColor}">
@@ -262,50 +263,50 @@
 
     <DataTemplate x:Key="TemplatePUser">
         <Grid
-            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
-            Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Image Source="{Binding user.avatar.Sq140}" Stretch="UniformToFill"/>
-            <Rectangle>
+            Height="{Binding ElementName=gridView,Path=CellHeight}"
+            Background="{ThemeResource SystemChromeMediumColor}">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.RowSpan="2" Grid.ColumnSpan="4" Source="{Binding user.avatar.Sq140}" Stretch="UniformToFill"/>
+            <Rectangle Grid.RowSpan="2" Grid.ColumnSpan="4" Height="{Binding ElementName=gridView,Path=CellWidth}">
                 <Rectangle.Fill>
                     <AcrylicBrush TintOpacity="0.0" TintColor="{ThemeResource SystemAltMediumColor}" BackgroundSource="Backdrop"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid Grid.Row="2" Grid.RowSpan="2" Grid.ColumnSpan="4" Background="{ThemeResource SystemChromeMediumColor}"></Grid>
-                <Ellipse Fill="White"
-                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                </Ellipse>
-                <Ellipse Margin="4" 
-                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding user.avatar.Sq140}"></ImageBrush>
-                    </Ellipse.Fill>
-                </Ellipse>
-                <StackPanel Grid.Row="3" Grid.ColumnSpan="4" Padding="0 0 6 0">
-                    <TextBlock Margin="6" FontWeight="Bold" TextAlignment="Center" Text="{Binding user.username}"></TextBlock>
-                    <TextBlock Foreground="{ThemeResource ApplicationPressedForegroundThemeBrush}" TextAlignment="Center"><Run Text="{Binding user.pin_count}"/>采集  <Run Text="{Binding user.follower_count}"/>粉丝</TextBlock>
-                </StackPanel>
-            </Grid>
+            <Ellipse Fill="White"
+                Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            </Ellipse>
+            <Ellipse Margin="4" 
+                Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding user.avatar.Sq140}"></ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <StackPanel Grid.Row="3" Grid.RowSpan="2" Grid.ColumnSpan="4" Padding="12">
+                <TextBlock Margin="6" FontWeight="Bold" TextAlignment="Center" Text="{Binding user.username}"></TextBlock>
+                <TextBlock Foreground="{ThemeResource ApplicationPressedForegroundThemeBrush}" TextAlignment="Center"><Run Text="{Binding user.pin_count}"/>采集  <Run Text="{Binding user.follower_count}"/>粉丝</TextBlock>
+            </StackPanel>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateRecommendBoard">
         <Grid
-            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Grid Background="{ThemeResource SystemAltMediumColor}">
@@ -316,7 +317,7 @@
 
     <DataTemplate x:Key="TemplateRecommendUser">
         <Grid
-            Padding="{Binding ElementName=gridView,Path=Padding}"
+            Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Image Source="{Binding RecommendCover.Sq140}" Stretch="UniformToFill"/>
