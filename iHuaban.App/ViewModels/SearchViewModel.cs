@@ -1,5 +1,6 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.TemplateSelectors;
+using iHuaban.Core;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
@@ -25,19 +26,19 @@ namespace iHuaban.App.ViewModels
                 new DataType
                 {
                     Type = "采集",
-                    Url = Constants.ApiSearchPins,
+                    BaseUrl = Constants.ApiSearchPins,
                     DataLoaderAsync = Loader<PinCollection ,Pin>
                 },
                 new DataType
                 {
                     Type = "画板",
-                    Url = Constants.ApiSearchBoards,
+                    BaseUrl = Constants.ApiSearchBoards,
                     DataLoaderAsync = Loader<BoardCollection, Board>
                 },
                 new DataType
                 {
                     Type = "用户",
-                    Url = Constants.ApiSearchUsers,
+                    BaseUrl = Constants.ApiSearchUsers,
                     DataLoaderAsync = Loader<UserCollection, User>
                 },
             };
@@ -110,7 +111,7 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                string url = $"{this.DataType.Url}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
+                string url = $"{this.DataType.BaseUrl}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
                 var result = await this.DataType.DataLoaderAsync.Invoke(url);
 
                 if (result.Count() > 0)
@@ -170,6 +171,33 @@ namespace iHuaban.App.ViewModels
                         this.SearchKey = e.QueryText;
                         currentPage = 0;
                         await this.Data.ClearAndReload();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
+        private DelegateCommand _GotoTopCommand;
+        public DelegateCommand GotoTopCommand
+        {
+            get
+            {
+                return _GotoTopCommand ?? (_GotoTopCommand = new DelegateCommand(
+                async o =>
+                {
+                    try
+                    {
+                        if (o is GridView gridView)
+                        {
+                            if (gridView?.Items?.Count > 0)
+                            {
+                                await gridView.ScrollToItem(gridView.Items[0]);
+                            }
+                        }
                     }
                     catch (Exception)
                     {

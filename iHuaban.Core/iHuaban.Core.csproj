@@ -108,6 +108,7 @@
   <ItemGroup>
     <Compile Include="Commands\DelegateCommand.cs" />
     <Compile Include="Controls\ExtendedGridView.cs" />
+    <Compile Include="Extentions\ControlExtension.cs" />
     <Compile Include="Extentions\KeyValuePairExtension.cs" />
     <Compile Include="Extentions\StorageExtention.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />

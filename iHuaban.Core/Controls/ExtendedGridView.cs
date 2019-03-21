@@ -26,7 +26,7 @@ namespace iHuaban.Core.Controls
 
                 double width = e.NewSize.Width - this.Padding.Left - this.Padding.Right;
 
-                double col = Math.Floor(width / CellMinWidth);
+                double col = Math.Floor(width / (this.CellMinWidth));
 
                 //if (col <= 1)
                 //    col = 2;
@@ -35,7 +35,7 @@ namespace iHuaban.Core.Controls
                 //if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
                 //    w = 6.1;
 
-                CellWidth = (double)Math.Floor((width) / col);
+                CellWidth = (double)Math.Floor((width) / col) - this.Padding.Left - this.Padding.Right;
                 if (scaleSize?.Count == 2)
                 {
                     CellHeight = CellWidth * scaleSize[1] / scaleSize[0];
@@ -63,7 +63,7 @@ namespace iHuaban.Core.Controls
                 "ScaleSize",
                 typeof(string),
                 typeof(ExtendedGridView),
-                new PropertyMetadata(string.Empty));
+                new PropertyMetadata(string.Empty, new PropertyChangedCallback(OnSizeChange)));
 
         public double CellMinWidth
         {
@@ -82,7 +82,7 @@ namespace iHuaban.Core.Controls
                 "CellMinWidth",
                 typeof(double),
                 typeof(ExtendedGridView),
-                new PropertyMetadata(240));
+                new PropertyMetadata(240, new PropertyChangedCallback(OnSizeChange)));
 
         public double CellWidth
         {
@@ -101,7 +101,7 @@ namespace iHuaban.Core.Controls
                 "CellWidth",
                 typeof(double),
                 typeof(ExtendedGridView),
-                new PropertyMetadata(235));
+                new PropertyMetadata(235, new PropertyChangedCallback(OnSizeChange)));
 
         public double CellHeight
         {
@@ -120,7 +120,13 @@ namespace iHuaban.Core.Controls
                 "CellHeight",
                 typeof(double),
                 typeof(ExtendedGridView),
-                new PropertyMetadata(double.NaN));
+                new PropertyMetadata(double.NaN, new PropertyChangedCallback(OnSizeChange)));
+
+        public static void OnSizeChange(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+
+        }
+
     }
 
     public class ScaleSize

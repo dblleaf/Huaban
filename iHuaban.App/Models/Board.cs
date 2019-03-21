@@ -16,7 +16,7 @@ namespace iHuaban.App.Models
         public string updated_at { set; get; }
         public bool following { set; get; }
         public int seq { set; get; }
-        public double Width { set; get; }
+
         public virtual File cover
         {
             get

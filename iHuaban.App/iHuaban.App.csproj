@@ -160,7 +160,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="iHuaban.App_TemporaryKey.pfx" />
     <None Include="Models\services.json" />
   </ItemGroup>
   <ItemGroup>
