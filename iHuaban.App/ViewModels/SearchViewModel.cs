@@ -26,19 +26,19 @@ namespace iHuaban.App.ViewModels
                 new DataType
                 {
                     Type = "采集",
-                    Url = Constants.ApiSearchPins,
+                    BaseUrl = Constants.ApiSearchPins,
                     DataLoaderAsync = Loader<PinCollection ,Pin>
                 },
                 new DataType
                 {
                     Type = "画板",
-                    Url = Constants.ApiSearchBoards,
+                    BaseUrl = Constants.ApiSearchBoards,
                     DataLoaderAsync = Loader<BoardCollection, Board>
                 },
                 new DataType
                 {
                     Type = "用户",
-                    Url = Constants.ApiSearchUsers,
+                    BaseUrl = Constants.ApiSearchUsers,
                     DataLoaderAsync = Loader<UserCollection, User>
                 },
             };
@@ -111,7 +111,7 @@ namespace iHuaban.App.ViewModels
             IsLoading = true;
             try
             {
-                string url = $"{this.DataType.Url}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
+                string url = $"{this.DataType.BaseUrl}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
                 var result = await this.DataType.DataLoaderAsync.Invoke(url);
 
                 if (result.Count() > 0)

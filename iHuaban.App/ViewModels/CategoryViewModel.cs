@@ -2,6 +2,7 @@
 using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
+using iHuaban.Core.Controls;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
@@ -11,52 +12,92 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using static System.Net.WebUtility;
 
 namespace iHuaban.App.ViewModels
 {
     public class CategoryViewModel : ViewModelBase
     {
+        private List<DataType> CategoryDataTypes { get; set; } = new List<DataType>();
+        private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
+
         private IHttpHelper HttpHelper { get; set; }
+
         public CategoryViewModel(IHttpHelper httpHelper)
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
-            this.GridViewHorizontalAlignment = HorizontalAlignment.Stretch;
-            this.DataTypes = new ObservableCollection<DataType>()
+            this.CategoryHeaderVisibility = Visibility.Visible;
+            this.SearchBoxVisibility = Visibility.Collapsed;
+
+            this.CategoryDataTypes = new List<DataType>()
             {
                 new DataType
                 {
                     Type ="采集",
-                    Url = Constants.ApiBase,
-                    DataLoaderAsync =LoaderAsync<PinCollection, Pin>,
+                    BaseUrl = Constants.ApiBase,
+                    DataLoaderAsync = LoaderAsync<PinCollection, Pin>,
+                    UrlAction = GetCategoryUrl,
                 },
                 new DataType
                 {
                     Type ="推荐画板",
-                    Url = Constants.ApiBoards,
+                    BaseUrl = Constants.ApiBoards,
                     DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
+                    UrlAction = GetCategoryUrl,
                 },
                 new DataType
                 {
                     Type = "推荐用户",
-                    Url =  Constants.ApiUsers,
-                    DataLoaderAsync =LoaderAsync<FavoriteUserCollection, PUser>,
+                    BaseUrl =  Constants.ApiUsers,
+                    DataLoaderAsync = LoaderAsync<FavoriteUserCollection, PUser>,
+                    UrlAction = GetCategoryUrl,
                     ScaleSize = "4:5",
                 },
             };
+
+            this.SearchDataTypes = new List<DataType>()
+            {
+                new DataType
+                {
+                    Type ="采集",
+                    BaseUrl = Constants.ApiSearchPins,
+                    DataLoaderAsync =LoaderAsync<PinCollection, Pin>,
+                    UrlAction = GetSearchUrl,
+                },
+                new DataType
+                {
+                    Type ="画板",
+                    BaseUrl = Constants.ApiSearchBoards,
+                    DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
+                    UrlAction = GetSearchUrl,
+                },
+                new DataType
+                {
+                    Type = "用户",
+                    BaseUrl =  Constants.ApiSearchUsers,
+                    DataLoaderAsync = LoaderAsync<UserCollection, User>,
+                    UrlAction = GetSearchUrl,
+                    ScaleSize = "4:5",
+                },
+            };
+
+            ChangeDataTypes(this.CategoryDataTypes);
 
             this.Categories = new IncrementalLoadingList<Category>(GetCategoriesAsync);
             this.Categories.Add(Constants.CategoryAll);
             this.Categories.Add(Constants.CategoryHot);
             this.SelectedCategory = Constants.CategoryAll;
-            this.Data = new IncrementalLoadingList<IModel>(GetPinsAsync);
-
-            this.Data.AfterAddItems += o =>
+            this.Data = new IncrementalLoadingList<IModel>(GetPinsAsync)
             {
-                this.GridViewHorizontalAlignment = HorizontalAlignment.Stretch;
+                AfterAddItems = o =>
+                {
+                    if (ExtendedGridView != null)
+                    {
+                        ExtendedGridView.Width = double.NaN;
+                    }
+                }
             };
-
-            this.DataType = DataTypes[0];
         }
 
         public override string Icon => Constants.IconCategory;
@@ -65,6 +106,20 @@ namespace iHuaban.App.ViewModels
         public string ScaleSize => "300:300";
         public decimal CellMinWidth => 236;
         public DataTemplateSelector DataTemplateSelector { get; private set; } = new SupperDataTemplateSelector();
+
+        private Visibility _SearchBoxVisibility;
+        public Visibility SearchBoxVisibility
+        {
+            get { return _SearchBoxVisibility; }
+            set { SetValue(ref _SearchBoxVisibility, value); }
+        }
+
+        private Visibility _CategoryHeaderVisibility;
+        public Visibility CategoryHeaderVisibility
+        {
+            get { return _CategoryHeaderVisibility; }
+            set { SetValue(ref _CategoryHeaderVisibility, value); }
+        }
 
         private Visibility _DataTypesVisibility;
         public Visibility DataTypesVisibility
@@ -87,7 +142,7 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _Data, value); }
         }
 
-        public ObservableCollection<DataType> DataTypes { get; }
+        public ObservableCollection<DataType> DataTypes { get; } = new ObservableCollection<DataType>();
 
         private DataType _DataType;
         public DataType DataType
@@ -96,33 +151,39 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _DataType, value); }
         }
 
-        private HorizontalAlignment _GridViewHorizontalAlignment;
-        public HorizontalAlignment GridViewHorizontalAlignment
-        {
-            get { return _GridViewHorizontalAlignment; }
-            set { SetValue(ref _GridViewHorizontalAlignment, value); }
-        }
-
         private Category _SelectedCategory;
         public Category SelectedCategory
         {
             get { return _SelectedCategory; }
             set
             {
-                DataTypesVisibility = (value == Constants.CategoryAll || value == Constants.CategoryHot) ? Visibility.Collapsed : Visibility.Visible;
-                if (DataTypesVisibility == Visibility.Collapsed)
-                {
-                    this.DataType = this.DataTypes[0];
-                }
                 SetValue(ref _SelectedCategory, value);
+                this.DataTypesVisibility = (value == Constants.CategoryAll || value == Constants.CategoryHot) ? Visibility.Collapsed : Visibility.Visible;
             }
+        }
+
+        private string _SearchText;
+        public string SearchText
+        {
+            get { return _SearchText; }
+            set { SetValue(ref _SearchText, value); }
+        }
+
+        private string _SearchKey;
+        public string SearchKey
+        {
+            get { return _SearchKey; }
+            set { SetValue(ref _SearchKey, value); }
         }
 
         private IncrementalLoadingList<Category> _Categories;
         public IncrementalLoadingList<Category> Categories
         {
             get { return _Categories; }
-            set { SetValue(ref _Categories, value); }
+            set
+            {
+                SetValue(ref _Categories, value);
+            }
         }
 
         private DelegateCommand _SetCategoryVisibilityCommand;
@@ -146,6 +207,7 @@ namespace iHuaban.App.ViewModels
             }
         }
 
+        private ExtendedGridView ExtendedGridView;
         private DelegateCommand _RefreshCommand;
         public DelegateCommand RefreshCommand
         {
@@ -156,7 +218,41 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
-                        this.GridViewHorizontalAlignment = HorizontalAlignment.Left;
+                        if (o is ExtendedGridView gridView)
+                        {
+                            ExtendedGridView = gridView;
+                            gridView.Width = (gridView.Parent as Grid).DesiredSize.Width - gridView.Margin.Left - gridView.Margin.Right - 2;
+                        }
+                        await this.Data.ClearAndReload();
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
+
+        private DelegateCommand _ChangeCategoryCommand;
+        public DelegateCommand ChangeCategoryCommand
+        {
+            get
+            {
+                return _ChangeCategoryCommand ?? (_ChangeCategoryCommand = new DelegateCommand(
+                async o =>
+                {
+                    try
+                    {
+
+                        this.ChangeDataTypes(this.CategoryDataTypes);
+
+                        this.CategoryHeaderVisibility = Visibility.Visible;
+                        this.SearchBoxVisibility = Visibility.Collapsed;
+                        this.SearchKey = string.Empty;
+                        this.SearchText = string.Empty;
+
                         await this.Data.ClearAndReload();
                     }
                     catch (Exception ex)
@@ -195,6 +291,61 @@ namespace iHuaban.App.ViewModels
             }
         }
 
+        private DelegateCommand _ShowSearchCommand;
+        public DelegateCommand ShowSearchCommand
+        {
+            get
+            {
+                return _ShowSearchCommand ?? (_ShowSearchCommand = new DelegateCommand(
+                o =>
+                {
+                    try
+                    {
+
+                        this.CategoryHeaderVisibility = Visibility.Collapsed;
+                        this.SearchBoxVisibility = Visibility.Visible;
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
+        private DelegateCommand _SearchCommand;
+        public DelegateCommand SearchCommand
+        {
+            get
+            {
+                return _SearchCommand ?? (_SearchCommand = new DelegateCommand(
+                async o =>
+                {
+                    try
+                    {
+                        var e = o as AutoSuggestBoxQuerySubmittedEventArgs;
+                        if (string.IsNullOrEmpty(e?.QueryText))
+                            return;
+
+                        this.SearchKey = e.QueryText;
+                        currentPage = 0;
+                        this.ChangeDataTypes(this.SearchDataTypes);
+
+                        this.CategoryHeaderVisibility = Visibility.Collapsed;
+                        this.SearchBoxVisibility = Visibility.Visible;
+                        this.DataTypesVisibility = Visibility.Visible;
+                        await this.Data.ClearAndReload();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
+
+                }, o => true));
+            }
+        }
+
         private async Task<IEnumerable<IModel>> LoaderAsync<T, T2>(string url)
             where T : ModelCollection<T2>
             where T2 : IModel
@@ -212,19 +363,15 @@ namespace iHuaban.App.ViewModels
 
         private async Task<IEnumerable<IModel>> GetPinsAsync(uint startIndex, int page)
         {
-            if (IsLoading)
+            if (IsLoading || this.DataType == null)
             {
                 return new List<IModel>();
             }
             IsLoading = true;
             try
             {
-                bool isUsers = this.DataType == this.DataTypes[2];
-                if (isUsers)
-                {
-
-                }
-                var result = await this.DataType.DataLoaderAsync(GetUrl());
+                var url = this.DataType.GetUrl();
+                var result = await this.DataType.DataLoaderAsync(url);
 
                 if (result.Count() == 0)
                 {
@@ -284,7 +431,7 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        private string GetUrl()
+        private string GetCategoryUrl(DataType dataType)
         {
             string query = "?limit=20";
             var max = GetMaxPinId();
@@ -292,8 +439,27 @@ namespace iHuaban.App.ViewModels
             {
                 query += $"&max={max}";
             }
-            return $"{this.DataType.Url.Trim('/')}/{SelectedCategory.nav_link.Trim('/')}/{query}";
+            return $"{dataType.BaseUrl.Trim('/')}/{SelectedCategory.nav_link.Trim('/')}/{query}";
         }
 
+        private int currentPage = 0;
+        private string GetSearchUrl(DataType dataType)
+        {
+            string url = $"{dataType.BaseUrl}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
+            return url;
+        }
+
+        private void ChangeDataTypes(IEnumerable<DataType> dataTypes)
+        {
+            this.DataTypes.Clear();
+            if (dataTypes?.Count() > 0)
+            {
+                foreach (var dataType in dataTypes)
+                {
+                    this.DataTypes.Add(dataType);
+                }
+                this.DataType = DataTypes[0];
+            }
+        }
     }
 }
