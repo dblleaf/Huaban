@@ -84,38 +84,39 @@
                                 </SymbolIcon>
                             </Grid>
                         </Grid>
-
-                        <GridView Margin="0 6"
-                            ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
+                        <ListBox 
+                            Background="{ThemeResource AppBackgroundAcrylicBrush}"
+                            Margin="0 6" Padding="0"
                             Visibility="{Binding DataTypesVisibility}"
+                            ItemContainerStyle="{StaticResource DataTypeListBoxItemStyle}"
                             ItemsSource="{Binding DataTypes}"
                             SelectedItem="{Binding DataType,Mode=TwoWay}">
-                            <GridView.ItemsPanel>
+                            <ListBox.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <VirtualizingStackPanel Orientation="Horizontal"/>
                                 </ItemsPanelTemplate>
-                            </GridView.ItemsPanel>
-                            <GridView.ItemTemplate>
+                            </ListBox.ItemsPanel>
+                            <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <Border
-                                        BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                                        BorderThickness="1"
-                                        Padding="20 10">
-                                        <TextBlock Text="{Binding Type}"></TextBlock>
-                                    </Border>
+                                    <TextBlock Text="{Binding Type}"></TextBlock>
                                 </DataTemplate>
-                            </GridView.ItemTemplate>
+                            </ListBox.ItemTemplate>
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="SelectionChanged">
                                     <Core:InvokeCommandAction Command="{Binding RefreshCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
                                 </Core:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
-                        </GridView>
+                        </ListBox>
                     </StackPanel>
                 </control:ExtendedGridView.Header>
                 <control:ExtendedGridView.Footer>
-                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                        <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                    <Grid>
+                        <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                            <TextBlock Text="No more data" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <Grid Margin="8" Visibility="{Binding IsLoading,Converter={Binding ValueConverter}}">
+                            <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
+                        </Grid>
                     </Grid>
                 </control:ExtendedGridView.Footer>
             </control:ExtendedGridView>
@@ -251,7 +252,18 @@
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Interactivity:Interaction.Behaviors>
+                    <Core:EventTriggerBehavior EventName="PointerEntered">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=pinResolution}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
+                    </Core:EventTriggerBehavior>
+                    <Core:EventTriggerBehavior EventName="PointerExited">
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=pinResolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
+                    </Core:EventTriggerBehavior>
+                </Interactivity:Interaction.Behaviors>
                 <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
+                <Grid x:Name="pinResolution" Visibility="Collapsed" Padding="8" VerticalAlignment="Bottom" Background="{ThemeResource SystemAltLowColor}">
+                    <TextBlock><Run Text="{Binding file.width}"/> x <Run Text="{Binding file.height}"/></TextBlock>
+                </Grid>
             </Grid>
         </Grid>
     </DataTemplate>
@@ -261,7 +273,7 @@
             Margin="{Binding ElementName=categoryridView,Path=Padding}"
             Width="{Binding ElementName=categoryridView,Path=CellWidth}">
             <Border
-                Background="{ThemeResource SystemChromeMediumColor}"
+                Background="{ThemeResource SystemAltLowColor}"
                 VerticalAlignment="Center"
                 Padding="8">
                 <TextBlock Text="{Binding name}"></TextBlock>
@@ -274,7 +286,7 @@
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Grid Background="{ThemeResource SystemAltMediumColor}">
+            <Grid Background="{ThemeResource SystemAltLowColor}">
                 <Image Source="{Binding cover.Sq235}"></Image>
             </Grid>
         </Grid>
@@ -285,7 +297,7 @@
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}"
-            Background="{ThemeResource SystemChromeMediumColor}">
+            Background="{ThemeResource SystemAltLowColor}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -328,7 +340,7 @@
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}"
-            Background="{ThemeResource SystemChromeMediumColor}">
+            Background="{ThemeResource SystemAltLowColor}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />

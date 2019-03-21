@@ -13,7 +13,7 @@
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="关于" FontWeight="Bold" Margin="16 0"></TextBlock>
-        <ListView Grid.Row="1" ItemsSource="{Binding AboutList}" Style="{StaticResource AboutListStyle}"></ListView>
+        <TextBlock Text="关于" VerticalAlignment="Center" FontWeight="Bold" Margin="16 0"></TextBlock>
+        <ListBox Grid.Row="1" ItemsSource="{Binding AboutList}" Background="{ThemeResource AppBackgroundAcrylicBrush}" Style="{StaticResource AboutListStyle}"></ListBox>
     </Grid>
 </Page>

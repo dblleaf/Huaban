@@ -1,9 +1,11 @@
 ﻿using iHuaban.App.TemplateSelectors;
+using iHuaban.Core.Converters;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using Unity;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.Services
 {
@@ -44,6 +46,7 @@ namespace iHuaban.App.Services
             Container.RegisterType<IHttpHelper, HttpHelper>();
             Container.RegisterType<IStorageService, StorageService>();
             Container.RegisterType<IThemeService, ThemeService>();
+            Container.RegisterType<IValueConverter, ObjectToVisibilityConverter>();
             Container.RegisterSingleton<INavigationService, NavigationService>();
             Container.RegisterType<IService, Service>();
             Container.RegisterType<IHomeService, HomeService>();

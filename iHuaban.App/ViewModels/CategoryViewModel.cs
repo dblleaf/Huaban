@@ -12,6 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 using static System.Net.WebUtility;
 
 namespace iHuaban.App.ViewModels
@@ -22,14 +23,14 @@ namespace iHuaban.App.ViewModels
         private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
 
         private IHttpHelper HttpHelper { get; set; }
-
-        public CategoryViewModel(IHttpHelper httpHelper)
+        public IValueConverter ValueConverter { get; set; }
+        public CategoryViewModel(IHttpHelper httpHelper, IValueConverter valueConverter)
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
             this.CategoryHeaderVisibility = Visibility.Visible;
             this.SearchBoxVisibility = Visibility.Collapsed;
-
+            this.ValueConverter = valueConverter;
             this.CategoryDataTypes = new List<DataType>()
             {
                 new DataType
@@ -41,14 +42,14 @@ namespace iHuaban.App.ViewModels
                 },
                 new DataType
                 {
-                    Type ="推荐画板",
+                    Type ="画板",
                     BaseUrl = Constants.ApiBoards,
                     DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
                     UrlAction = GetCategoryUrl,
                 },
                 new DataType
                 {
-                    Type = "推荐用户",
+                    Type = "用户",
                     BaseUrl =  Constants.ApiUsers,
                     DataLoaderAsync = LoaderAsync<FavoriteUserCollection, PUser>,
                     UrlAction = GetCategoryUrl,
@@ -221,7 +222,7 @@ namespace iHuaban.App.ViewModels
                         if (o is ExtendedGridView gridView)
                         {
                             ExtendedGridView = gridView;
-                            gridView.Width = (gridView.Parent as Grid).DesiredSize.Width - gridView.Margin.Left - gridView.Margin.Right - 2;
+                            gridView.Width = (gridView.Parent as Grid).DesiredSize.Width - gridView.Margin.Left - gridView.Margin.Right - 0.6;
                         }
                         await this.Data.ClearAndReload();
                     }
