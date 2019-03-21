@@ -2,6 +2,7 @@
 using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
+using iHuaban.Core.Controls;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
@@ -87,7 +88,16 @@ namespace iHuaban.App.ViewModels
             this.Categories.Add(Constants.CategoryAll);
             this.Categories.Add(Constants.CategoryHot);
             this.SelectedCategory = Constants.CategoryAll;
-            this.Data = new IncrementalLoadingList<IModel>(GetPinsAsync);
+            this.Data = new IncrementalLoadingList<IModel>(GetPinsAsync)
+            {
+                AfterAddItems = o =>
+                {
+                    if (ExtendedGridView != null)
+                    {
+                        ExtendedGridView.Width = double.NaN;
+                    }
+                }
+            };
         }
 
         public override string Icon => Constants.IconCategory;
@@ -197,6 +207,7 @@ namespace iHuaban.App.ViewModels
             }
         }
 
+        private ExtendedGridView ExtendedGridView;
         private DelegateCommand _RefreshCommand;
         public DelegateCommand RefreshCommand
         {
@@ -207,6 +218,11 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
+                        if (o is ExtendedGridView gridView)
+                        {
+                            ExtendedGridView = gridView;
+                            gridView.Width = (gridView.Parent as Grid).DesiredSize.Width - gridView.Margin.Left - gridView.Margin.Right - 2;
+                        }
                         await this.Data.ClearAndReload();
                     }
                     catch (Exception ex)

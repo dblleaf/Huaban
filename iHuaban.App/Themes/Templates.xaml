@@ -54,7 +54,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateCategories">
-        <Grid>
+        <Grid x:Name="categoriesRoot">
             <control:ExtendedGridView x:Name="gridView"
                 ScaleSize="{Binding DataType.ScaleSize}"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
@@ -107,7 +107,7 @@
                             </GridView.ItemTemplate>
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                    <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
+                                    <Core:InvokeCommandAction Command="{Binding RefreshCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
                                 </Core:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
                         </GridView>
@@ -157,7 +157,7 @@
                     Background="{ThemeResource AppControlAcrylicBrush}">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding SetCategoryVisibilityCommand}" CommandParameter="true"></Core:InvokeCommandAction>
+                            <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryridView}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8FD;" />
@@ -168,14 +168,13 @@
                 x:Name="categoryridView"
                 ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
                 Background="{ThemeResource AppBackgroundAcrylicBrush}"
-                Visibility="{Binding CategoryVisibility}"
-                Padding="6" CellMinWidth="236"
+                Padding="6" CellMinWidth="236" Visibility="Collapsed"
                 ItemsSource="{Binding Categories}"
                 ItemTemplate="{StaticResource TemplateCategory}">
 
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="Tapped">
-                        <Core:InvokeCommandAction Command="{Binding SetCategoryVisibilityCommand}" CommandParameter="false"></Core:InvokeCommandAction>
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryridView}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
                     </Core:EventTriggerBehavior>
                     <Core:EventTriggerBehavior EventName="SelectionChanged">
                         <Core:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"></Core:InvokeCommandAction>
