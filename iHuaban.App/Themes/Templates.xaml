@@ -53,8 +53,8 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateCategories">
-        <Grid x:Name="categoriesRoot">
+    <DataTemplate x:Key="TemplateFind">
+        <Grid>
             <control:ExtendedGridView x:Name="gridView"
                 ScaleSize="{Binding DataType.ScaleSize}"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
@@ -158,7 +158,7 @@
                     Background="{ThemeResource AppControlAcrylicBrush}">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryridView}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
+                            <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryGridView}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8FD;" />
@@ -166,7 +166,7 @@
             </StackPanel>
 
             <control:ExtendedGridView SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                x:Name="categoryridView"
+                x:Name="categoryGridView"
                 ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
                 Background="{ThemeResource AppBackgroundAcrylicBrush}"
                 Padding="6" CellMinWidth="236" Visibility="Collapsed"
@@ -175,7 +175,7 @@
 
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="Tapped">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryridView}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryGridView}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
                     </Core:EventTriggerBehavior>
                     <Core:EventTriggerBehavior EventName="SelectionChanged">
                         <Core:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"></Core:InvokeCommandAction>
@@ -244,6 +244,86 @@
 
     <DataTemplate x:Key="TemplateMine">
 
+        <ContentControl Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding ViewModel}" ContentTemplateSelector="{Binding DataTemplateSelector}"/>
+
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateCurrentUser">
+        <Grid>
+            <TextBlock Text="TemplateCurrentUser"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TemplateLogin">
+        <StackPanel MaxWidth="400">
+            <TextBlock HorizontalAlignment="Center"
+                Margin="6 48 6 32"
+                FontSize="18">使用花瓣账号登录</TextBlock>
+            <TextBox
+                 Margin="6"
+                BorderThickness="0 0 0 1"
+                PlaceholderText="用户名/邮箱地址"
+                Text="{Binding UserName, Mode=TwoWay}"></TextBox>
+            <PasswordBox
+                 Margin="6"
+                BorderThickness="0 0 0 1"
+                PlaceholderText="密码"
+                Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
+
+            <Button Command="{Binding LoginCommand}"
+                Margin="6"
+                HorizontalAlignment="Stretch">登录</Button>
+
+            <TextBlock HorizontalAlignment="Center"
+                Margin="6 48 6 32"
+                FontSize="18">第三方账号登陆</TextBlock>
+
+            <ListBox Margin="12" Grid.Row="1" ItemsSource="{Binding SnsTypes}" Background="Transparent">
+                <!--<Interactivity:Interaction.Behaviors>
+                                <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                    <Core:InvokeCommandAction Command="{Binding ShowWebViewCommand}"></Core:InvokeCommandAction>
+                                </Core:EventTriggerBehavior>
+                            </Interactivity:Interaction.Behaviors>-->
+                <ListBox.Resources>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Padding" Value="6"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Grid Background="Transparent">
+                                        <VisualStateManager.VisualStateGroups>
+                                            <VisualStateGroup>
+                                                <!--缺省样式-->
+                                                <VisualState x:Name="Normal" />
+                                            </VisualStateGroup>
+                                        </VisualStateManager.VisualStateGroups>
+                                        <Grid x:Name="ContentBackground">
+                                            <ContentPresenter
+                                                Content="{TemplateBinding Content}"
+                                                Margin="{TemplateBinding Padding}" />
+                                        </Grid>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListBox.Resources>
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Ellipse Width="48" Height="48" Margin="1" Fill="White"/>
+                            <Image Width="50" Height="50" Source="{Binding Icon}"/>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplatePin">
@@ -270,8 +350,8 @@
 
     <DataTemplate x:Key="TemplateCategory">
         <Grid
-            Margin="{Binding ElementName=categoryridView,Path=Padding}"
-            Width="{Binding ElementName=categoryridView,Path=CellWidth}">
+            Margin="{Binding ElementName=categoryGridView,Path=Padding}"
+            Width="{Binding ElementName=categoryGridView,Path=CellWidth}">
             <Border
                 Background="{ThemeResource SystemAltLowColor}"
                 VerticalAlignment="Center"
@@ -442,7 +522,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateLogin">
+    <DataTemplate x:Key="TemplateLoginBak">
         <Grid DataContext="{Binding LoginViewModel}" Visibility="{Binding LoginVisibility}">
             <Pivot SelectedIndex="{Binding PivotIndex,Mode=TwoWay}">
                 <PivotItem>

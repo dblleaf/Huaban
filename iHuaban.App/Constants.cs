@@ -36,11 +36,12 @@ namespace iHuaban.App
         #region Template
 
         public const string TemplateSearch = "TemplateSearch";
-        public const string TemplateCategories = "TemplateCategories";
         public const string TemplateMine = "TemplateMine";
         public const string TemplateHome = "TemplateHome";
-
+        public const string TemplateFind = "TemplateFind";
         public const string TemplateCategory = "TemplateCategory";
+        public const string TemplateCurrentUser = "TemplateCurrentUser";
+        public const string TemplateLogin = "TemplateLogin";
         #endregion
         public const string TextHome = "首页";
         public const string TextCategory = "分类";

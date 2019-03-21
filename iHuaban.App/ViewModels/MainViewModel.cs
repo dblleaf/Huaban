@@ -19,8 +19,7 @@ namespace iHuaban.App.ViewModels
         public MainViewModel(
             INavigationService navigationService,
             HomeViewModel homeViewModel,
-            CategoryViewModel categoryViewModel,
-            SearchViewModel searchViewModel,
+            FindViewModel findViewModel,
             MineViewModel mineViewModel,
             DataTemplateSelector dataTemplateSelector)
         {
@@ -29,8 +28,7 @@ namespace iHuaban.App.ViewModels
             var list = new List<ViewModelBase>
             {
                 homeViewModel,
-                categoryViewModel,
-                searchViewModel,
+                findViewModel,
                 mineViewModel
             };
             Menu = new ObservableCollection<ViewModelBase>(list);

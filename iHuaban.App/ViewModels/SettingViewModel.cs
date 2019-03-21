@@ -1,5 +1,7 @@
 ﻿using iHuaban.App.Services;
+using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 
 namespace iHuaban.App.ViewModels
@@ -30,5 +32,19 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _DarkMode, value); }
         }
 
+        private DelegateCommand logoutCommand;
+        public DelegateCommand LogoutCommand
+        {
+            get
+            {
+                return logoutCommand ?? (logoutCommand = new DelegateCommand(
+                    async o =>
+                    {
+                        await Task.Delay(0);
+                    },
+                    o => true)
+                );
+            }
+        }
     }
 }

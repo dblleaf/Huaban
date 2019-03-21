@@ -2,6 +2,7 @@
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -9,6 +10,7 @@ namespace iHuaban.App.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        public override string TemplateName => Constants.TemplateLogin;
         public List<SNSType> SnsTypes => new List<SNSType>
         {
             new SNSType { strName = "微博", strType = "weibo", Icon = "/Assets/sina_weibo_50px.png", Url = "http://huaban.com/oauth/weibo/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" },
@@ -17,11 +19,26 @@ namespace iHuaban.App.ViewModels
             new SNSType { strName = "人人", strType = "renren", Icon = "/Assets/renren_50px.png", Url = "https://huaban.com/oauth/renren/?auth_callback=ms-appx-web:///Assets/auth.html&client_id=1d912cae47144fa09d88&md=com.huaban.android" }
         };
 
-        private int _PivotIndex;
-        public int PivotIndex
+        private string _UserName;
+        public string UserName
         {
-            set => SetValue(ref _PivotIndex, value);
-            get => _PivotIndex;
+            get { return _UserName; }
+            set
+            {
+                SetValue(ref _UserName, value);
+                LoginCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        private string _Password;
+        public string Password
+        {
+            get { return _Password; }
+            set
+            {
+                SetValue(ref _Password, value);
+                LoginCommand.RaiseCanExecuteChanged();
+            }
         }
 
         private string _LoginUri;
@@ -38,20 +55,20 @@ namespace iHuaban.App.ViewModels
             get { return _WebViewVisibility; }
         }
 
-        private DelegateCommand _SetPivotIndexCommand;
-        public DelegateCommand SetPivotIndexCommand
+        private DelegateCommand _LoginCommand;
+        public DelegateCommand LoginCommand
         {
             get
             {
-                return _SetPivotIndexCommand ?? (_SetPivotIndexCommand = new DelegateCommand(
+                return _LoginCommand ?? (_LoginCommand = new DelegateCommand(
+                    async o =>
+                    {
+                        await Task.Delay(0);
+                    },
                     o =>
                     {
-
-                        int idx = 0;
-                        int.TryParse(o.ToString(), out idx);
-                        PivotIndex = idx;
-                    },
-                    o => true)
+                        return !string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password);
+                    })
                 );
             }
         }

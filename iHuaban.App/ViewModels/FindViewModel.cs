@@ -17,14 +17,14 @@ using static System.Net.WebUtility;
 
 namespace iHuaban.App.ViewModels
 {
-    public class CategoryViewModel : ViewModelBase
+    public class FindViewModel : ViewModelBase
     {
         private List<DataType> CategoryDataTypes { get; set; } = new List<DataType>();
         private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
 
         private IHttpHelper HttpHelper { get; set; }
         public IValueConverter ValueConverter { get; set; }
-        public CategoryViewModel(IHttpHelper httpHelper, IValueConverter valueConverter)
+        public FindViewModel(IHttpHelper httpHelper, IValueConverter valueConverter)
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
@@ -101,9 +101,9 @@ namespace iHuaban.App.ViewModels
             };
         }
 
-        public override string Icon => Constants.IconCategory;
-        public override string Title => Constants.TextCategory;
-        public override string TemplateName => Constants.TemplateCategories;
+        public override string Icon => Constants.IconFind;
+        public override string Title => Constants.TextFind;
+        public override string TemplateName => Constants.TemplateFind;
         public string ScaleSize => "300:300";
         public decimal CellMinWidth => 236;
         public DataTemplateSelector DataTemplateSelector { get; private set; } = new SupperDataTemplateSelector();

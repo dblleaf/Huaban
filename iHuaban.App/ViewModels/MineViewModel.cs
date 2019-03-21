@@ -1,64 +1,42 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Models;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
     public class MineViewModel : ViewModelBase
     {
-        public LoginViewModel LoginViewModel { get; } = new LoginViewModel();
-        public MineViewModel()
+        private ViewModelBase viewModel;
+        public ViewModelBase ViewModel
         {
-            HasLogged = false;
-            Me = new User
+            get { return viewModel; }
+            set { SetValue(ref viewModel, value); }
+        }
+        public ViewModelBase LoginViewModel { get; private set; }
+        public ViewModelBase CurrentUserViewModel { get; private set; }
+        public Context Context { get; private set; }
+
+        public MineViewModel(LoginViewModel loginViewModel, CurrentUserViewModel currentUserViewModel, Context context)
+        {
+            this.LoginViewModel = loginViewModel;
+            this.CurrentUserViewModel = currentUserViewModel;
+            this.Context = context;
+            this.ViewModel = context.User == null ? LoginViewModel : CurrentUserViewModel;
+            this.Context.PropertyChanged += (sender, e) =>
             {
-                username = "碗大面宽",
-                pin_count = 65,
-                board_count = 2,
-                avatar = new File
+                if (e.PropertyName == nameof(this.Context.User))
                 {
-                    id = 202148178,
-                    key = "00b0c515f7d3f89bc96c8ad3f17fba334c23dc47f2b-D7MsIH",
-                    width = "160",
-                    height = "160"
+                    ViewModel = context.User == null ? LoginViewModel : CurrentUserViewModel;
                 }
             };
         }
+
         public override string Icon => Constants.IconMine;
         public override string Title => Constants.TextMine;
         public override string TemplateName => Constants.TemplateMine;
 
-        private User _Me;
-        public User Me
-        {
-            set => SetValue(ref _Me, value);
-            get => _Me;
-        }
-        private Visibility _MeVisibility;
-        public Visibility MeVisibility
-        {
-            set => SetValue(ref _MeVisibility, value);
-            get => _MeVisibility;
-        }
-
-        private Visibility _LoginVisibility;
-        public Visibility LoginVisibility
-        {
-            set => SetValue(ref _LoginVisibility, value);
-            get => _LoginVisibility;
-        }
-
-        public bool HasLogged
-        {
-            set
-            {
-                LoginVisibility = (value ? Visibility.Collapsed : Visibility.Visible);
-                MeVisibility = (!value ? Visibility.Collapsed : Visibility.Visible);
-            }
-            get
-            {
-                return Me == null;
-            }
-        }
+        public DataTemplateSelector DataTemplateSelector => new SupperDataTemplateSelector();
     }
 }

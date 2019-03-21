@@ -105,6 +105,7 @@
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
+    <Compile Include="Models\AuthToken.cs" />
     <Compile Include="Models\Cover.cs" />
     <Compile Include="Models\Explore.cs" />
     <Compile Include="Models\ExtendedTheme.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Models\PinCollection.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserCollection.cs" />
+    <Compile Include="Models\Context.cs" />
     <Compile Include="Services\Interfaces\IStorageService.cs" />
     <Compile Include="Services\Interfaces\IThemeService.cs" />
     <Compile Include="Services\StorageService.cs" />
@@ -138,7 +140,8 @@
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
-    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\CurrentUserViewModel.cs" />
+    <Compile Include="ViewModels\FindViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
