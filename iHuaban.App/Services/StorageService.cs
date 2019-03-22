@@ -10,7 +10,7 @@ namespace iHuaban.App.Services
         private StorageFolder LocalFolder = ApplicationData.Current.LocalFolder;
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
 
-        public async Task SaveLocal<T>(T model, string filename = "")
+        public async Task SaveLocalSync<T>(T model, string filename = "")
         {
             if (string.IsNullOrEmpty(filename))
                 filename = $"{typeof(T).Name}.json";
@@ -18,7 +18,7 @@ namespace iHuaban.App.Services
             await LocalFolder.SaveStorageData(filename, model);
         }
 
-        public async Task<T> ReadLocal<T>(string filename = "")
+        public async Task<T> ReadLocalSync<T>(string filename = "")
         {
             var t = default(T);
             if (string.IsNullOrEmpty(filename))
@@ -27,12 +27,12 @@ namespace iHuaban.App.Services
             return t;
         }
 
-        public async Task DeleteLocal(string fileName)
+        public async Task DeleteLocalSync(string fileName)
         {
             await LocalFolder.DeleteStorageFile(fileName);
         }
 
-        public async Task SaveRoaming<T>(T model, string filename = "")
+        public async Task SaveRoamingSync<T>(T model, string filename = "")
         {
             if (string.IsNullOrEmpty(filename))
                 filename = $"{typeof(T).Name}.json";
@@ -40,7 +40,7 @@ namespace iHuaban.App.Services
             await RoamingFolder.SaveStorageData(filename, model);
         }
 
-        public async Task<T> ReadRoaming<T>(string filename = "")
+        public async Task<T> ReadRoamingSync<T>(string filename = "")
         {
             var t = default(T);
             if (string.IsNullOrEmpty(filename))
@@ -49,7 +49,7 @@ namespace iHuaban.App.Services
             return t;
         }
 
-        public async Task DeleteRoaming(string fileName)
+        public async Task DeleteRoamingSync(string fileName)
         {
             await RoamingFolder.DeleteStorageFile(fileName);
         }

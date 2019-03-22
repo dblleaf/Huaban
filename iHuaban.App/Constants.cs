@@ -27,6 +27,8 @@ namespace iHuaban.App
         public const string ApiSearchBoards = "http://api.huaban.com/search/boards/";
         public const string ApiSearchUsers = "http://api.huaban.com/search/people/";
 
+        public const string ApiAccessToken = "https://huaban.com/oauth/access_token/";
+
         public static readonly Category CategoryAll = new Category { name = "最新", nav_link = "/all/" };
         public static readonly Category CategoryHot = new Category { name = "最热", nav_link = "/popular/" };
 
@@ -43,6 +45,8 @@ namespace iHuaban.App
         public const string TemplateCurrentUser = "TemplateCurrentUser";
         public const string TemplateLogin = "TemplateLogin";
         #endregion
+
+        #region Text
         public const string TextHome = "首页";
         public const string TextCategory = "分类";
         public const string TextFind = "发现";
@@ -50,7 +54,9 @@ namespace iHuaban.App
         public const string TextSetting = "设置";
         public const string TextAbout = "关于";
         public const string TextRefresh = "刷新";
+        #endregion
 
+        #region Icon
         public const string IconHome = "\uE80F";
         public const string IconCategory = "\uE8FD";
         public const string IconFind = "\uE721";
@@ -59,5 +65,25 @@ namespace iHuaban.App
 
         public const string IconAbout = "\uE9CE";
         public const string IconRefesh = "\uE72C";
+        #endregion
+
+        #region Auth
+        //1553242516
+        //1552187596//2019/3/10 11:13:16
+        //1552187563//2019/3/10 11:12:43
+        //993743d208ae49288837:1552187596:b4651d9d89f46a58b9ffbf1f413b2c64
+        //993743d208ae49288837:1552187563:df998cf56f76ee9b7b03cb0e36b96279
+        public const string ClientId = "993743d208ae49288837";
+        public const string AuthSecret = "b4651d9d89f46a58b9ffbf1f413b2c64";
+        public const string ClientSecret = "df998cf56f76ee9b7b03cb0e36b96279";
+        public const string ClientInfo = ClientId + ":" + ClientSecret;
+        public const string OAuthCallback = "ms-appx-web:///Assets/authcallback.html";
+        public const string MD = "com.huaban.android";
+
+        public const string Authorization = "Authorization";
+        public const string ClientIdKey = "X-Client-ID";
+        public const string ClientSecretKey = "ClientSecret";
+
+        #endregion
     }
 }

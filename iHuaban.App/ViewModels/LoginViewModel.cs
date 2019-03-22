@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System.Collections.Generic;
@@ -10,6 +11,16 @@ namespace iHuaban.App.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
+        private IAuthService authService;
+        private Context context;
+        public LoginViewModel(IAuthService authService, Context context)
+        {
+            this.authService = authService;
+            this.context = context;
+            this.UserName = "okokit@126.com";
+            this.Password = "999999999";
+        }
+
         public override string TemplateName => Constants.TemplateLogin;
         public List<SNSType> SnsTypes => new List<SNSType>
         {
@@ -63,6 +74,11 @@ namespace iHuaban.App.ViewModels
                 return _LoginCommand ?? (_LoginCommand = new DelegateCommand(
                     async o =>
                     {
+                        var token = await authService.AccessTokenAsync(UserName, Password);
+                        if (string.IsNullOrEmpty(token?.access_token))
+                        {
+                            context.AuthToken = token;
+                        }
                         await Task.Delay(0);
                     },
                     o =>

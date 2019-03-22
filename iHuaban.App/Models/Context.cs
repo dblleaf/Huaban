@@ -4,6 +4,23 @@ namespace iHuaban.App.Models
 {
     public sealed class Context : ObservableObject
     {
+        public string Sid
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(Cookie))
+                {
+                    return string.Empty;
+                }
+                var arr = Cookie.Split(';');
+                if (arr?.Length > 0)
+                {
+                    return arr[0];
+                }
+                return string.Empty;
+            }
+        }
+        public string Cookie { get; set; }
         private User user;
         public User User
         {

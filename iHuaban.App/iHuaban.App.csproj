@@ -102,7 +102,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Helpers\HbHttpHelper.cs" />
+    <Compile Include="Helpers\IHbHttpHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
+    <Compile Include="Models\AccessTokenParameter.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
     <Compile Include="Models\AuthToken.cs" />
@@ -113,6 +116,7 @@
     <Compile Include="Models\ModelCollection.cs" />
     <Compile Include="Models\RecommendBoard.cs" />
     <Compile Include="Models\RecommendUser.cs" />
+    <Compile Include="Models\RefreshTokenParameter.cs" />
     <Compile Include="Models\SearchType.cs" />
     <Compile Include="Models\SimpleModel.cs" />
     <Compile Include="Models\SNSType.cs" />
@@ -127,6 +131,8 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserCollection.cs" />
     <Compile Include="Models\Context.cs" />
+    <Compile Include="Services\AuthService.cs" />
+    <Compile Include="Services\Interfaces\IAuthService.cs" />
     <Compile Include="Services\Interfaces\IStorageService.cs" />
     <Compile Include="Services\Interfaces\IThemeService.cs" />
     <Compile Include="Services\StorageService.cs" />

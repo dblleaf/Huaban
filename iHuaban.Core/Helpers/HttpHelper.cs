@@ -1,76 +1,88 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
 
 namespace iHuaban.Core.Helpers
 {
     public class HttpHelper : IHttpHelper
     {
-        public Action<HttpRequestMessage> OnCreateHttpRequestMessage;
-        public Action<HttpClient> OnCreateHttpClient;
-        protected virtual HttpClient GetClient()
+        protected virtual async Task<HttpRequestMessage> GetHttpRequestMessageAsync(HttpMethod httpMethod, Uri uri, Dictionary<string, string> headers = null, object content = null)
         {
-            HttpClient client = new HttpClient();
-            OnCreateHttpClient?.Invoke(client);
-            return client;
-        }
+            HttpRequestMessage httpRequestMessage = new HttpRequestMessage(httpMethod, uri);
 
-        protected virtual TResult DeserializeObject<TResult>(string content)
-        {
-            return JsonConvert.DeserializeObject<TResult>(content);
-        }
-
-        public string Get(string url)
-        {
-            return GetAsync(url).Result;
-        }
-
-        public TResult Get<TResult>(string url)
-        {
-            return GetAsync<TResult>(url).Result;
-        }
-
-        public async Task<string> GetAsync(string url)
-        {
-            return await GetClient().GetStringAsync(url);
-        }
-
-        public async Task<TResult> GetAsync<TResult>(string url)
-        {
-            var content = await GetAsync(url);
-            return DeserializeObject<TResult>(content);
-        }
-
-        public string Post(string url, params KeyValuePair<string, string>[] keyValues)
-        {
-            return PostAsync(url, keyValues).Result;
-        }
-
-        public TResult Post<TResult>(string url, params KeyValuePair<string, string>[] keyValues)
-        {
-            var content = PostAsync(url, keyValues).Result;
-            return DeserializeObject<TResult>(content);
-        }
-
-        public async Task<string> PostAsync(string url, params KeyValuePair<string, string>[] keyValues)
-        {
-            HttpContent httpContent = null;
-            if (keyValues?.Length > 0)
+            if (headers?.Count > 0)
             {
-                httpContent = new FormUrlEncodedContent(keyValues);
+                foreach (var keyValue in headers)
+                {
+                    if (string.IsNullOrWhiteSpace(keyValue.Key) || string.IsNullOrWhiteSpace(keyValue.Value))
+                    {
+                        continue;
+                    }
+                    httpRequestMessage.Headers.Add(keyValue.Key, keyValue.Value);
+                }
             }
-            var httpResponse = await GetClient().PostAsync(url, httpContent);
-            return await httpResponse.Content.ReadAsStringAsync();
+
+            if (content != null)
+            {
+                httpRequestMessage.Content = GetHttpContent(content);
+            }
+
+            return await Task.FromResult(httpRequestMessage);
         }
 
-        public async Task<TResult> PostAsync<TResult>(string url, params KeyValuePair<string, string>[] keyValues)
+        protected virtual HttpContent GetHttpContent(object content)
         {
-            var content = await PostAsync(url, keyValues);
-            return DeserializeObject<TResult>(content);
+            return new StringContent(JsonConvert.SerializeObject(content), Encoding.UTF8, "application/json");
+        }
+
+        protected virtual HttpClient GetHttpClient()
+        {
+            return new HttpClient();
+        }
+
+        protected virtual void SaveResponse(HttpResponseMessage httpResponse)
+        {
+        }
+
+        public async Task<string> GetStringAsync(string url, Dictionary<string, string> headers = null)
+        {
+            return await SendRequestStringAsync(HttpMethod.Get, url, headers, null);
+        }
+
+        public async Task<T> GetAsync<T>(string url, Dictionary<string, string> headers = null)
+        {
+            return await SendRequestAsync<T>(HttpMethod.Get, url, headers);
+        }
+
+        public async Task<string> PostAsync(string url, Dictionary<string, string> headers = null, object content = null)
+        {
+            return await SendRequestStringAsync(HttpMethod.Post, url, headers, content);
+        }
+
+        public async Task<T> PostAsync<T>(string url, Dictionary<string, string> headers = null, object content = null)
+        {
+            return await SendRequestAsync<T>(HttpMethod.Post, url, headers, content);
+        }
+
+        public async Task<T> SendRequestAsync<T>(HttpMethod httpMethod, string url, Dictionary<string, string> headers = null, object content = null)
+        {
+            var json = await SendRequestStringAsync(httpMethod, url, headers, content);
+            return JsonConvert.DeserializeObject<T>(json);
+        }
+
+        public async Task<string> SendRequestStringAsync(HttpMethod httpMethod, string url, Dictionary<string, string> headers = null, object content = null)
+        {
+            using (var client = GetHttpClient())
+            {
+                var requestMessage = await GetHttpRequestMessageAsync(httpMethod, new Uri(url), headers, content);
+                var response = await client.SendAsync(requestMessage);
+                var responseContent = await response.Content.ReadAsStringAsync();
+                SaveResponse(response);
+                return responseContent;
+            }
         }
     }
 }

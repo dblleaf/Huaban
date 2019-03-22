@@ -8,13 +8,13 @@ namespace iHuaban.App.Services
 {
     public interface IStorageService
     {
-        Task SaveLocal<T>(T model, string filename = "");
-        Task<T> ReadLocal<T>(string filename = "");
-        Task DeleteLocal(string fileName);
+        Task SaveLocalSync<T>(T model, string filename = "");
+        Task<T> ReadLocalSync<T>(string filename = "");
+        Task DeleteLocalSync(string fileName);
 
-        Task SaveRoaming<T>(T model, string filename = "");
-        Task<T> ReadRoaming<T>(string filename = "");
-        Task DeleteRoaming(string fileName);
+        Task SaveRoamingSync<T>(T model, string filename = "");
+        Task<T> ReadRoamingSync<T>(string filename = "");
+        Task DeleteRoamingSync(string fileName);
 
         void SaveSetting(string key, string value);
         string GetSetting(string key);
