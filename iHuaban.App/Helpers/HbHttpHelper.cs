@@ -34,12 +34,12 @@ namespace iHuaban.App.Helpers
                 }
             );
         }
-
+        private string Cookie;
         protected override void SaveResponse(HttpResponseMessage httpResponse)
         {
             if (httpResponse.Headers.Contains("Set-Cookie"))
             {
-                context.Cookie = string.Join(";", httpResponse.Headers.GetValues("Set-Cookie"));
+                Cookie = string.Join(";", httpResponse.Headers.GetValues("Set-Cookie"));
             }
         }
 
@@ -59,14 +59,13 @@ namespace iHuaban.App.Helpers
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.DefaultRequestHeaders.Add("Accept-Language", "zh-Hans-CN;q=1");
             client.DefaultRequestHeaders.Add("X-Request", "JSON");
-            var token = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{Constants.ClientId}:{ConvertDateTimeToInt(DateTime.UtcNow)}:{Constants.ClientSecret}"));
-            client.DefaultRequestHeaders.Add("client", "Basic " + token);
+
             client.DefaultRequestHeaders.Add("Host", "api.huaban.com");
             if (!string.IsNullOrWhiteSpace(context.Sid))
             {
                 client.DefaultRequestHeaders.Add("Cookie", context.Sid);
             }
-            token = Convert.ToBase64String(Encoding.UTF8.GetBytes($"{Constants.ClientId}:{ConvertDateTimeToInt(DateTime.UtcNow)}:{Constants.AuthSecret}"));
+            var token = GetRequestToken();
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", token);
             return client;
         }
@@ -83,6 +82,7 @@ namespace iHuaban.App.Helpers
                     if (newToken != null)
                     {
                         context.AuthToken = newToken;
+                        context.Cookie = Cookie;
                     }
                 }
 
@@ -100,6 +100,12 @@ namespace iHuaban.App.Helpers
             var startTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
             long t = (dateTime.Ticks - startTime.Ticks) / (10000 * 1000);
             return t;
+        }
+
+        protected string GetRequestToken()
+        {
+            var clientInfo = $"{Constants.ClientId}:{ConvertDateTimeToInt(DateTime.UtcNow)}:{Guid.NewGuid().ToString().ToLower().Replace("-", "")}";
+            return Convert.ToBase64String(Encoding.UTF8.GetBytes(clientInfo));
         }
     }
 }

@@ -68,14 +68,9 @@ namespace iHuaban.App
         #endregion
 
         #region Auth
-        //1553242516
-        //1552187596//2019/3/10 11:13:16
-        //1552187563//2019/3/10 11:12:43
-        //993743d208ae49288837:1552187596:b4651d9d89f46a58b9ffbf1f413b2c64
-        //993743d208ae49288837:1552187563:df998cf56f76ee9b7b03cb0e36b96279
-        public const string ClientId = "993743d208ae49288837";
-        public const string AuthSecret = "b4651d9d89f46a58b9ffbf1f413b2c64";
-        public const string ClientSecret = "df998cf56f76ee9b7b03cb0e36b96279";
+
+        public const string ClientId = "";
+        public const string ClientSecret = "";
         public const string ClientInfo = ClientId + ":" + ClientSecret;
         public const string OAuthCallback = "ms-appx-web:///Assets/authcallback.html";
         public const string MD = "com.huaban.android";
