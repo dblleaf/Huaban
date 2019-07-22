@@ -5,7 +5,6 @@ namespace iHuaban.App.Services
 {
     public interface IAuthService
     {
-        Task<AuthToken> AccessTokenAsync(string userName, string password);
-        Task<AuthToken> RefreshTokenAsync(string refreshToken);
+        Task<bool> LoginAsync(string userName, string password);
     }
 }

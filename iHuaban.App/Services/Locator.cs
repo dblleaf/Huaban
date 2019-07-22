@@ -47,7 +47,6 @@ namespace iHuaban.App.Services
             Container.RegisterInstance(Setting.Instance());
             Container.RegisterSingleton<Context>();
             Container.RegisterType<IHttpHelper, HbHttpHelper>();
-            Container.RegisterType<IHbHttpHelper, HbHttpHelper>();
             Container.RegisterType<IStorageService, StorageService>();
             Container.RegisterType<IThemeService, ThemeService>();
             Container.RegisterType<IValueConverter, ObjectToVisibilityConverter>();

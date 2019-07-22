@@ -43,10 +43,6 @@ namespace iHuaban.Core.Helpers
             return new HttpClient();
         }
 
-        protected virtual void SaveResponse(HttpResponseMessage httpResponse)
-        {
-        }
-
         public async Task<string> GetStringAsync(string url, Dictionary<string, string> headers = null)
         {
             return await SendRequestStringAsync(HttpMethod.Get, url, headers, null);
@@ -80,7 +76,6 @@ namespace iHuaban.Core.Helpers
                 var requestMessage = await GetHttpRequestMessageAsync(httpMethod, new Uri(url), headers, content);
                 var response = await client.SendAsync(requestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
-                SaveResponse(response);
                 return responseContent;
             }
         }

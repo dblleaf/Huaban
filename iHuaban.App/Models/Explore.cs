@@ -1,4 +1,6 @@
-﻿namespace iHuaban.App.Models
+﻿using Newtonsoft.Json;
+
+namespace iHuaban.App.Models
 {
     public class Explore : IModel
     {
@@ -10,5 +12,8 @@
         public string theme { get; set; }
         public string KeyId => explore_id;
         public string typeName => this.GetType().Name;
+
+        [JsonProperty("cover")]
+        public File RecommendCover { get; set; }
     }
 }

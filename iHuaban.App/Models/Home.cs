@@ -41,7 +41,10 @@ namespace iHuaban.App.Models
                 {
                     recommend = jsonRecommend.ToObject<RecommendBoard>();
                 }
-
+                else if (type == "explores")
+                {
+                    recommend = jsonRecommend.ToObject<Explore>();
+                }
                 if (recommend != null)
                 {
                     recommends.Add(recommend);

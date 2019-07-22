@@ -4,32 +4,52 @@ using System.Threading.Tasks;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using iHuaban.Core.Helpers;
+using System;
 
 namespace iHuaban.App.Services
 {
     public class AuthService : IAuthService
     {
-        private IHbHttpHelper hbHttpHelper;
-        public AuthService(IHbHttpHelper hbHttpHelper)
+        private IHttpHelper httpHelper;
+        public AuthService(IHttpHelper httpHelper)
         {
-            this.hbHttpHelper = hbHttpHelper;
+            this.httpHelper = httpHelper;
         }
 
-        public async Task<AuthToken> AccessTokenAsync(string userName, string password)
+        public async Task<bool> LoginAsync(string userName, string password)
         {
-            return await hbHttpHelper.PostAsync<AuthToken>(
-                Constants.ApiAccessToken,
-                content: new Dictionary<string, string>
+            try
+            {
+                Dictionary<string, string> headers = new Dictionary<string, string>();
+                headers.Add("Origin", "https://huaban.com");
+                headers.Add("Referer", "https://huaban.com/");
+                var result = await httpHelper.PostAsync<AuthResult>(
+                    Constants.UrlLogin,
+                    headers: headers,
+                    content: new
+                    {
+                        password = password,
+                        email = userName,
+                        _ref = "frame",
+                    });
+                if (string.IsNullOrWhiteSpace(result?.err))
                 {
-                    { "grant_type", "password"},
-                    { "password", password },
-                    { "username", userName },
-                });
+                    return true;
+                }
+
+                if (!string.IsNullOrWhiteSpace(result.msg))
+                {
+                    throw new Exception(result.msg);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return false;
         }
 
-        public async Task<AuthToken> RefreshTokenAsync(string refreshToken)
-        {
-            return await hbHttpHelper.RefreshToken(refreshToken);
-        }
     }
 }

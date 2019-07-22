@@ -13,8 +13,6 @@ namespace iHuaban.Core.Models
             this.NoMoreVisibility = Visibility.Collapsed;
         }
 
-        public Setting Setting { get; private set; } = Setting.Instance();
-
         public virtual async Task InitAsync()
         {
             await Task.FromResult(0);

@@ -10,15 +10,19 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
 {
     public class HomeViewModel : ViewModelBase
     {
         private IHomeService HomeService { get; set; }
-        public HomeViewModel(IHomeService homeService)
+
+        public IValueConverter ValueConverter { get; set; }
+        public HomeViewModel(IHomeService homeService,IValueConverter valueConverter)
         {
             this.HomeService = homeService;
+            this.ValueConverter = valueConverter;
             this.Pins = new IncrementalLoadingList<IModel>(GetData);
         }
 

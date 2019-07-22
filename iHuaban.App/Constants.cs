@@ -27,7 +27,7 @@ namespace iHuaban.App
         public const string ApiSearchBoards = "http://api.huaban.com/search/boards/";
         public const string ApiSearchUsers = "http://api.huaban.com/search/people/";
 
-        public const string ApiAccessToken = "https://huaban.com/oauth/access_token/";
+        public const string UrlLogin = "https://huaban.com/oauth";
 
         public static readonly Category CategoryAll = new Category { name = "最新", nav_link = "/all/" };
         public static readonly Category CategoryHot = new Category { name = "最热", nav_link = "/popular/" };

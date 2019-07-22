@@ -1,6 +1,8 @@
-﻿namespace iHuaban.App.Models
+﻿using iHuaban.Core.Models;
+
+namespace iHuaban.App.Models
 {
-    public class Pin : IModel
+    public class Pin : ObservableObject, IModel
     {
         public long pin_id { set; get; }
         public long user_id { set; get; }
@@ -22,5 +24,21 @@
         public string KeyId => pin_id.ToString();
 
         public string typeName => this.GetType().Name;
+
+        private bool _like;
+        public bool like
+        {
+            get { return _like; }
+            set
+            {
+                SetValue(ref _like, value);
+                NotifyPropertyChanged(nameof(dislike));
+            }
+        }
+
+        public bool dislike
+        {
+            get { return !_like; }
+        }
     }
 }

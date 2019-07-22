@@ -25,5 +25,6 @@ namespace iHuaban.Core
             var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.OpenIfExists);
             await file.DeleteAsync();
         }
+
     }
 }

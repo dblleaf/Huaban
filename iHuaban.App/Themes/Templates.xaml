@@ -243,9 +243,12 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateMine">
-
-        <ContentControl Background="Transparent" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" Content="{Binding ViewModel}" ContentTemplateSelector="{Binding DataTemplateSelector}"/>
-
+        <ContentControl
+            Background="Transparent"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch"
+            Content="{Binding ViewModel}"
+            ContentTemplateSelector="{Binding DataTemplateSelector}"/>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateCurrentUser">
@@ -255,7 +258,7 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateLogin">
-        <StackPanel MaxWidth="400">
+        <StackPanel MaxWidth="480">
             <TextBlock HorizontalAlignment="Center"
                 Margin="6 48 6 32"
                 FontSize="18">使用花瓣账号登录</TextBlock>
@@ -274,55 +277,6 @@
                 Margin="6"
                 HorizontalAlignment="Stretch">登录</Button>
 
-            <TextBlock HorizontalAlignment="Center"
-                Margin="6 48 6 32"
-                FontSize="18">第三方账号登陆</TextBlock>
-
-            <ListBox Margin="12" Grid.Row="1" ItemsSource="{Binding SnsTypes}" Background="Transparent">
-                <!--<Interactivity:Interaction.Behaviors>
-                                <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                    <Core:InvokeCommandAction Command="{Binding ShowWebViewCommand}"></Core:InvokeCommandAction>
-                                </Core:EventTriggerBehavior>
-                            </Interactivity:Interaction.Behaviors>-->
-                <ListBox.Resources>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Padding" Value="6"/>
-                        <Setter Property="Margin" Value="0"/>
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="ListBoxItem">
-                                    <Grid Background="Transparent">
-                                        <VisualStateManager.VisualStateGroups>
-                                            <VisualStateGroup>
-                                                <!--缺省样式-->
-                                                <VisualState x:Name="Normal" />
-                                            </VisualStateGroup>
-                                        </VisualStateManager.VisualStateGroups>
-                                        <Grid x:Name="ContentBackground">
-                                            <ContentPresenter
-                                                Content="{TemplateBinding Content}"
-                                                Margin="{TemplateBinding Padding}" />
-                                        </Grid>
-                                    </Grid>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.Resources>
-                <ListBox.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListBox.ItemsPanel>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Ellipse Width="48" Height="48" Margin="1" Fill="White"/>
-                            <Image Width="50" Height="50" Source="{Binding Icon}"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
         </StackPanel>
     </DataTemplate>
 
@@ -334,15 +288,41 @@
             <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="PointerEntered">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=pinResolution}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
                     </Core:EventTriggerBehavior>
                     <Core:EventTriggerBehavior EventName="PointerExited">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=pinResolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
+                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
                     </Core:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
                 <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
-                <Grid x:Name="pinResolution" Visibility="Collapsed" Padding="8" VerticalAlignment="Bottom" Background="{ThemeResource SystemAltLowColor}">
+                <Grid
+                    RequestedTheme="Dark"
+                    x:Name="resolution"
+                    Visibility="Collapsed"
+                    Padding="8"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    Background="{ThemeResource SystemAltLowColor}">
                     <TextBlock><Run Text="{Binding file.width}"/> x <Run Text="{Binding file.height}"/></TextBlock>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                        <FontIcon Margin="4 0" FontSize="14" ToolTipService.ToolTip="Download" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
+                        <FontIcon Margin="4 0" FontSize="14" ToolTipService.ToolTip="Quickly Pick" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE945;"/>
+                        <FontIcon
+                            Margin="4 0"
+                            FontSize="14"
+                            ToolTipService.ToolTip="Like"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xEB51;"
+                            Visibility="{Binding dislike,Converter={StaticResource ObjectToVisibilityConverter}}"/>
+                        <FontIcon
+                            Margin="4 0"
+                            FontSize="14"
+                            ToolTipService.ToolTip="Dislike"
+                            Foreground="Red"
+                            FontFamily="{StaticResource SymbolThemeFontFamily}"
+                            Glyph="&#xEB52;"
+                            Visibility="{Binding like,Converter={StaticResource ObjectToVisibilityConverter}}"/>
+                    </StackPanel>
                 </Grid>
             </Grid>
         </Grid>
@@ -462,10 +442,28 @@
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
-            Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Grid Background="{ThemeResource SystemAltMediumColor}">
-                <Image Source="{Binding RecommendCover.Sq235}"></Image>
-            </Grid>
+            Height="{Binding ElementName=gridView,Path=CellHeight}"
+             Background="{ThemeResource SystemAltMediumColor}">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="PointerEntered">
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
+                </Core:EventTriggerBehavior>
+                <Core:EventTriggerBehavior EventName="PointerExited">
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <Image Source="{Binding RecommendCover.Sq235}"></Image>
+            <StackPanel
+                x:Name="resolution"
+                Visibility="Collapsed"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource SystemAltLowColor}"
+                RequestedTheme="Dark">
+                <StackPanel Margin="4" Padding="4 4 20 4" HorizontalAlignment="Left" BorderBrush="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" BorderThickness="0 0 0 1">
+                    <TextBlock FontSize="18">画板</TextBlock>
+                </StackPanel>
+                <TextBlock Text="{Binding title}" Margin="8 4 8 8"/>
+            </StackPanel>
         </Grid>
     </DataTemplate>
 
@@ -474,38 +472,85 @@
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}">
-            <Image Source="{Binding RecommendCover.Sq140}" Stretch="UniformToFill"/>
-            <Rectangle>
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="PointerEntered">
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
+                </Core:EventTriggerBehavior>
+                <Core:EventTriggerBehavior EventName="PointerExited">
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Image Grid.RowSpan="4" Grid.ColumnSpan="4" Source="{Binding RecommendCover.Sq140}" Stretch="UniformToFill"/>
+            <Rectangle Grid.RowSpan="4" Grid.ColumnSpan="4" Height="{Binding ElementName=gridView,Path=CellWidth}">
                 <Rectangle.Fill>
                     <AcrylicBrush TintOpacity="0.0" TintColor="{ThemeResource SystemAltMediumColor}" BackgroundSource="Backdrop"/>
                 </Rectangle.Fill>
             </Rectangle>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <Ellipse Fill="White"
+                Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            </Ellipse>
+            <Ellipse Margin="4" 
+                Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
+                HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding RecommendCover.Sq140}"></ImageBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <StackPanel
+                Grid.RowSpan="4"
+                Grid.ColumnSpan="3"
+                x:Name="resolution"
+                Visibility="Collapsed"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource SystemAltLowColor}"
+                RequestedTheme="Dark">
+                <StackPanel Margin="4" Padding="4 4 20 4" HorizontalAlignment="Left" BorderBrush="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" BorderThickness="0 0 0 1">
+                    <TextBlock FontSize="18">人物</TextBlock>
+                </StackPanel>
+                <TextBlock Margin="8 2 8 2" FontWeight="Bold" Text="{Binding username}"></TextBlock>
+                <TextBlock Margin="8 2 8 8" Foreground="{ThemeResource ApplicationPressedForegroundThemeBrush}"><Run Text="{Binding pin_count}"/>采集  <Run Text="{Binding follower_count}"/>粉丝</TextBlock>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
 
-                <Ellipse Fill="White"
-                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                </Ellipse>
-                <Ellipse Margin="4" 
-                    Grid.Row="1" Grid.RowSpan="2" Grid.Column="1"
-                    HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding RecommendCover.Sq140}"></ImageBrush>
-                    </Ellipse.Fill>
-                </Ellipse>
-
-            </Grid>
+    <DataTemplate x:Key="TemplateExplore">
+        <Grid
+            Margin="{Binding ElementName=gridView,Path=Padding}"
+            Width="{Binding ElementName=gridView,Path=CellWidth}"
+            Height="{Binding ElementName=gridView,Path=CellHeight}"
+            Background="{ThemeResource SystemAltMediumColor}">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="PointerEntered">
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
+                </Core:EventTriggerBehavior>
+                <Core:EventTriggerBehavior EventName="PointerExited">
+                    <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <Image Source="{Binding RecommendCover.Sq235}"></Image>
+            <StackPanel
+                x:Name="resolution"
+                Visibility="Collapsed"
+                VerticalAlignment="Bottom"
+                Background="{ThemeResource SystemAltLowColor}"
+                RequestedTheme="Dark">
+                <StackPanel Margin="4" Padding="4 4 20 4" HorizontalAlignment="Left" BorderBrush="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" BorderThickness="0 0 0 1">
+                    <TextBlock FontSize="18">兴趣</TextBlock>
+                </StackPanel>
+                <TextBlock Text="{Binding name}" Margin="8 4 8 8"/>
+            </StackPanel>
         </Grid>
     </DataTemplate>
 
@@ -522,118 +567,6 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateLoginBak">
-        <Grid DataContext="{Binding LoginViewModel}" Visibility="{Binding LoginVisibility}">
-            <Pivot SelectedIndex="{Binding PivotIndex,Mode=TwoWay}">
-                <PivotItem>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock HorizontalAlignment="Center" Margin="12" FontSize="18">使用社交账号登录</TextBlock>
-                        <ListBox Margin="12" Grid.Row="1" ItemsSource="{Binding SnsTypes}" Background="Transparent">
-                            <!--<Interactivity:Interaction.Behaviors>
-                                <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                    <Core:InvokeCommandAction Command="{Binding ShowWebViewCommand}"></Core:InvokeCommandAction>
-                                </Core:EventTriggerBehavior>
-                            </Interactivity:Interaction.Behaviors>-->
-                            <ListBox.Resources>
-                                <Style TargetType="ListBoxItem">
-                                    <Setter Property="Padding" Value="6"/>
-                                    <Setter Property="Margin" Value="0"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="ListBoxItem">
-                                                <Grid Background="Transparent">
-                                                    <VisualStateManager.VisualStateGroups>
-                                                        <VisualStateGroup>
-                                                            <!--缺省样式-->
-                                                            <VisualState x:Name="Normal" />
-                                                        </VisualStateGroup>
-                                                    </VisualStateManager.VisualStateGroups>
-                                                    <Grid x:Name="ContentBackground">
-                                                        <ContentPresenter
-                                                            Content="{TemplateBinding Content}"
-                                                            Margin="{TemplateBinding Padding}" />
-                                                    </Grid>
-                                                </Grid>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </ListBox.Resources>
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Ellipse Width="48" Height="48" Margin="1" Fill="White"/>
-                                        <Image Width="50" Height="50" Source="{Binding Icon}"/>
-                                    </Grid>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                        </ListBox>
-                        <Button Margin="12" Grid.Row="2" Style="{StaticResource ButtonLogin}"
-                            Background="{ThemeResource SystemControlBackgroundAccentBrush}"
-                            Content=" 社交账号登录 &gt;"
-                            CommandParameter="1"/>
-                    </Grid>
-                </PivotItem>
-                <PivotItem>
-                    <Grid MaxWidth="400">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock
-                            Grid.ColumnSpan="3"
-                            HorizontalAlignment="Center"
-                            Margin="6"
-                            FontSize="18">使用花瓣账号登录</TextBlock>
-                        <TextBox
-                            Grid.Row="1"
-                            Grid.ColumnSpan="3"
-                            Margin="6"
-                            BorderThickness="0 0 0 1"
-                            PlaceholderText="用户名/邮箱地址"
-                            Text="{Binding UserName, Mode=TwoWay}"></TextBox>
-                        <PasswordBox
-                            Grid.Row="2"
-                            Grid.ColumnSpan="3"
-                            Margin="6"
-                            BorderThickness="0 0 0 1"
-                            PlaceholderText="密码"
-                            Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-                        <Button
-                            Grid.Row="3"
-                            Grid.Column="0"
-                            Margin="6"
-                            HorizontalAlignment="Stretch"
-                            CommandParameter="0">取消</Button>
-                        <Button
-                            Grid.Row="3"
-                            Grid.Column="1"
-                            Margin="6"
-                            HorizontalAlignment="Stretch">登录</Button>
-
-                    </Grid>
-                </PivotItem>
-            </Pivot>
-        </Grid>
-    </DataTemplate>
     <!--关于列表-->
     <DataTemplate x:Key="TemplateAboutList">
         <StackPanel>
