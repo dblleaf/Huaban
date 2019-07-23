@@ -19,7 +19,7 @@ namespace iHuaban.App.Services
 
         public async Task<Home> GetPagingHomeAsync(int page)
         {
-            string url = Constants.ApiBase;
+            string url = Constants.UrlBase;
             if (page > 0)
             {
                 url += $"?page={page}";

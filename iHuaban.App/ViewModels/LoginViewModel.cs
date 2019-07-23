@@ -74,7 +74,6 @@ namespace iHuaban.App.ViewModels
                             
                             if (!result)
                             {
-                               
                                 this.context.ShowMessage("登录失败！");
                             }
 

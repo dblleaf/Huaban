@@ -38,14 +38,12 @@ namespace iHuaban.App.Helpers
 
             var client = new HttpClient(handler);
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
-            client.DefaultRequestHeaders.Add("Connection", "gzip, deflate, br");
+            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
+            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
             client.DefaultRequestHeaders.Add("Host", "huaban.com");
             client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
             client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
-            client.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3843.0 Safari/537.36 Edg/77.0.218.4");
-
             client.DefaultRequestHeaders.Add("X-Request", "JSON");
             client.DefaultRequestHeaders.Add("X-Requested-With", "XMLHttpRequest");
 

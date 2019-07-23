@@ -6,6 +6,7 @@ using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using Unity;
+using Unity.Injection;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
@@ -47,6 +48,7 @@ namespace iHuaban.App.Services
             Container.RegisterInstance(Setting.Instance());
             Container.RegisterSingleton<Context>();
             Container.RegisterType<IHttpHelper, HbHttpHelper>();
+
             Container.RegisterType<IStorageService, StorageService>();
             Container.RegisterType<IThemeService, ThemeService>();
             Container.RegisterType<IValueConverter, ObjectToVisibilityConverter>();

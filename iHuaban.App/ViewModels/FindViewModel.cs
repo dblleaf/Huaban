@@ -24,7 +24,7 @@ namespace iHuaban.App.ViewModels
 
         private IHttpHelper HttpHelper { get; set; }
         public IValueConverter ValueConverter { get; set; }
-        public FindViewModel(IHttpHelper httpHelper, IValueConverter valueConverter)
+        public FindViewModel(HttpHelper httpHelper, IValueConverter valueConverter)
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;

@@ -8,7 +8,7 @@ namespace iHuaban.App.Services
     public class Service : IService
     {
         protected IHttpHelper HttpHelper { get; private set; }
-        public Service(IHttpHelper httpHelper)
+        public Service(HttpHelper httpHelper)
         {
             this.HttpHelper = httpHelper;
         }

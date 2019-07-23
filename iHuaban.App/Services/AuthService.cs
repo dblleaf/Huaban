@@ -33,7 +33,8 @@ namespace iHuaban.App.Services
                         email = userName,
                         _ref = "frame",
                     });
-                if (string.IsNullOrWhiteSpace(result?.err))
+
+                if (result.err == "404")
                 {
                     return true;
                 }

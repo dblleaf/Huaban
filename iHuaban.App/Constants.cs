@@ -5,7 +5,7 @@ namespace iHuaban.App
     public class Constants
     {
         #region Api
-        public const string ApiBase = "http://api.huaban.com/";
+        public const string ApiBase = "https://api.huaban.com/";
         public const string ApiBoardsName = "boards";
         public const string ApiCategoriesName = "categories";
         public const string ApiFavoriteName = "favorite";
@@ -27,7 +27,8 @@ namespace iHuaban.App
         public const string ApiSearchBoards = "http://api.huaban.com/search/boards/";
         public const string ApiSearchUsers = "http://api.huaban.com/search/people/";
 
-        public const string UrlLogin = "https://huaban.com/oauth";
+        public const string UrlBase = "https://huaban.com/";
+        public const string UrlLogin = "https://huaban.com/oauth/";
 
         public static readonly Category CategoryAll = new Category { name = "最新", nav_link = "/all/" };
         public static readonly Category CategoryHot = new Category { name = "最热", nav_link = "/popular/" };
