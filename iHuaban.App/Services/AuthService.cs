@@ -17,8 +17,16 @@ namespace iHuaban.App.Services
             this.httpHelper = httpHelper;
         }
 
+
+
         public async Task<bool> LoginAsync(string userName, string password)
         {
+            Dictionary<string, string> content = new Dictionary<string, string>
+            {
+                {"password",password },
+                {"email",userName },
+                {"_ref","frame" },
+            };
             try
             {
                 Dictionary<string, string> headers = new Dictionary<string, string>();
@@ -27,12 +35,7 @@ namespace iHuaban.App.Services
                 var result = await httpHelper.PostAsync<AuthResult>(
                     Constants.UrlLogin,
                     headers: headers,
-                    content: new
-                    {
-                        password = password,
-                        email = userName,
-                        _ref = "frame",
-                    });
+                    content: content);
 
                 if (result.err == "404")
                 {
@@ -50,6 +53,11 @@ namespace iHuaban.App.Services
                 throw ex;
             }
             return false;
+        }
+
+        public async Task<User> GetMeAsync()
+        {
+            return await httpHelper.GetAsync<User>(Constants.UrlMe);
         }
 
     }

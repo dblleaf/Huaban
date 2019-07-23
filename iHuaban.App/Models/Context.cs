@@ -1,5 +1,6 @@
 ﻿using iHuaban.Core.Models;
 using System;
+using System.Collections.Generic;
 using System.Net;
 
 namespace iHuaban.App.Models
@@ -22,7 +23,7 @@ namespace iHuaban.App.Models
             set { SetValue(ref quickBoard, value); }
         }
 
-        internal CookieContainer Cookies { get; set; } = new CookieContainer();
+        internal CookieContainer CookieContainer { get; set; } = new CookieContainer();
 
         public void ShowMessage(string mesage)
         {
@@ -30,6 +31,13 @@ namespace iHuaban.App.Models
             {
                 ShowMessageHandler(mesage);
             }
+        }
+
+        public Dictionary<string, string> Cookies { get; set; } = new Dictionary<string, string>();
+
+        public void AddCookies(string cookies)
+        {
+
         }
     }
 }

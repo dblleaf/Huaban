@@ -2,6 +2,8 @@
 using iHuaban.Core.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -29,18 +31,12 @@ namespace iHuaban.App.Helpers
 
         protected override HttpClient GetHttpClient()
         {
-            var handler = new HttpClientHandler
-            {
-                CookieContainer = this.context.Cookies,
-                UseCookies = true,
-                UseDefaultCredentials = false
-            };
-
-            var client = new HttpClient(handler);
+            var client = new HttpClient();
             client.DefaultRequestHeaders.Add("Accept", "application/json");
             client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             client.DefaultRequestHeaders.Add("Connection", "keep-alive");
             client.DefaultRequestHeaders.Add("Host", "huaban.com");
+            client.DefaultRequestHeaders.Add("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
             client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
             client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
             client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3843.0 Safari/537.36 Edg/77.0.218.4");
@@ -50,5 +46,24 @@ namespace iHuaban.App.Helpers
             return client;
         }
 
+        protected override async Task<HttpRequestMessage> GetHttpRequestMessageAsync(HttpMethod httpMethod, Uri uri, Dictionary<string, string> headers = null, object content = null)
+        {
+            var request = await base.GetHttpRequestMessageAsync(httpMethod, uri, headers, content);
+            request.Headers.Add("Cookie", string.Join("; ", context.Cookies.Select(o => $"{o.Key}={o.Value}")));
+            return request;
+        }
+
+        protected override void AfterRequest(HttpResponseMessage response)
+        {
+            base.AfterRequest(response);
+            try
+            {
+                if (response.Headers.Contains("Set-Cookie"))
+                {
+                    var setCookies = response.Headers.GetValues("Set-Cookie");
+                }
+            }
+            catch { }
+        }
     }
 }

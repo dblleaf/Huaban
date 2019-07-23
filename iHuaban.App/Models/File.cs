@@ -2,7 +2,7 @@
 {
     public class File
     {
-        protected const string site = "http://img.hb.aicdn.com/";
+        protected const string site = "https://hbimg.huabanimg.com/";
 
         public long id { set; get; }
         public string farm { set; get; }

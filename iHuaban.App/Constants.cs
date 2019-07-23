@@ -29,6 +29,7 @@ namespace iHuaban.App
 
         public const string UrlBase = "https://huaban.com/";
         public const string UrlLogin = "https://huaban.com/oauth/";
+        public const string UrlMe = "https://huaban.com/users/me";
 
         public static readonly Category CategoryAll = new Category { name = "最新", nav_link = "/all/" };
         public static readonly Category CategoryHot = new Category { name = "最热", nav_link = "/popular/" };
@@ -66,20 +67,6 @@ namespace iHuaban.App
 
         public const string IconAbout = "\uE9CE";
         public const string IconRefesh = "\uE72C";
-        #endregion
-
-        #region Auth
-
-        public const string ClientId = "";
-        public const string ClientSecret = "";
-        public const string ClientInfo = ClientId + ":" + ClientSecret;
-        public const string OAuthCallback = "ms-appx-web:///Assets/authcallback.html";
-        public const string MD = "com.huaban.android";
-
-        public const string Authorization = "Authorization";
-        public const string ClientIdKey = "X-Client-ID";
-        public const string ClientSecretKey = "ClientSecret";
-
         #endregion
     }
 }

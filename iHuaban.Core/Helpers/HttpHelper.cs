@@ -76,8 +76,13 @@ namespace iHuaban.Core.Helpers
                 var requestMessage = await GetHttpRequestMessageAsync(httpMethod, new Uri(url), headers, content);
                 var response = await client.SendAsync(requestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
+                AfterRequest(response);
                 return responseContent;
             }
+        }
+
+        protected virtual void AfterRequest(HttpResponseMessage response)
+        {
         }
     }
 }
