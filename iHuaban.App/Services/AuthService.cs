@@ -19,7 +19,7 @@ namespace iHuaban.App.Services
 
 
 
-        public async Task<bool> LoginAsync(string userName, string password)
+        public async Task<AuthResult> LoginAsync(string userName, string password)
         {
             Dictionary<string, string> content = new Dictionary<string, string>
             {
@@ -37,22 +37,13 @@ namespace iHuaban.App.Services
                     headers: headers,
                     content: content);
 
-                if (result.err == "404")
-                {
-                    return true;
-                }
-
-                if (!string.IsNullOrWhiteSpace(result.msg))
-                {
-                    throw new Exception(result.msg);
-                }
+                return result;
             }
 
             catch (Exception ex)
             {
                 throw ex;
             }
-            return false;
         }
 
         public async Task<User> GetMeAsync()

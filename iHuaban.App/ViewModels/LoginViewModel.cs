@@ -70,17 +70,11 @@ namespace iHuaban.App.ViewModels
                     {
                         try
                         {
-                            var result = await authService.LoginAsync(UserName, Password);
-                            var aaa = this.context.Cookies;
-                            if (!result)
-                            {
-                                this.context.ShowMessage("登录失败！");
-                            }
+                            var auth = await authService.LoginAsync(UserName, Password);
 
-                            var user = await authService.GetMeAsync();
-                            if (!string.IsNullOrWhiteSpace(user.user_id))
+                            if (!string.IsNullOrWhiteSpace(auth?.User?.user_id))
                             {
-                                this.context.User = user;
+                                this.context.User = auth.User;
                             }
 
                         }

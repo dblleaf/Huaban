@@ -28,7 +28,7 @@ namespace iHuaban.App
         public const string ApiSearchUsers = "http://api.huaban.com/search/people/";
 
         public const string UrlBase = "https://huaban.com/";
-        public const string UrlLogin = "https://huaban.com/oauth/";
+        public const string UrlLogin = "https://huaban.com/auth/";
         public const string UrlMe = "https://huaban.com/users/me";
 
         public static readonly Category CategoryAll = new Category { name = "最新", nav_link = "/all/" };

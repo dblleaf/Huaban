@@ -31,17 +31,12 @@ namespace iHuaban.App.Helpers
 
         protected override HttpClient GetHttpClient()
         {
-            var client = new HttpClient();
-            client.DefaultRequestHeaders.Add("Accept", "application/json");
-            client.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
-            client.DefaultRequestHeaders.Add("Connection", "keep-alive");
-            client.DefaultRequestHeaders.Add("Host", "huaban.com");
-            client.DefaultRequestHeaders.Add("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
-            client.DefaultRequestHeaders.Add("Sec-Fetch-Mode", "cors");
-            client.DefaultRequestHeaders.Add("Sec-Fetch-Site", "same-origin");
-            client.DefaultRequestHeaders.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3843.0 Safari/537.36 Edg/77.0.218.4");
-            client.DefaultRequestHeaders.Add("X-Request", "JSON");
-            client.DefaultRequestHeaders.Add("X-Requested-With", "XMLHttpRequest");
+            HttpClientHandler handler = new HttpClientHandler
+            {
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+            };
+
+            var client = new HttpClient(handler);
 
             return client;
         }
@@ -49,7 +44,21 @@ namespace iHuaban.App.Helpers
         protected override async Task<HttpRequestMessage> GetHttpRequestMessageAsync(HttpMethod httpMethod, Uri uri, Dictionary<string, string> headers = null, object content = null)
         {
             var request = await base.GetHttpRequestMessageAsync(httpMethod, uri, headers, content);
-            request.Headers.Add("Cookie", string.Join("; ", context.Cookies.Select(o => $"{o.Key}={o.Value}")));
+
+            request.Headers.Add("Accept", "application/json");
+            request.Headers.Add("Accept-Language", "en-US,en;q=0.9");
+            request.Headers.Add("Connection", "keep-alive");
+            request.Headers.Add("Host", "huaban.com");
+            request.Headers.Add("Sec-Fetch-Mode", "cors");
+            request.Headers.Add("Sec-Fetch-Site", "same-origin");
+            request.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3851.0 Safari/537.36 Edg/77.0.223.0");
+            request.Headers.Add("X-Request", "JSON");
+            request.Headers.Add("X-Requested-With", "XMLHttpRequest");
+
+            if (this.context.Cookies != null && this.context.Cookies.Any())
+            {
+                //request.Headers.Add("Cookie", this.context.CookieString);
+            }
             return request;
         }
 
@@ -58,10 +67,16 @@ namespace iHuaban.App.Helpers
             base.AfterRequest(response);
             try
             {
-                if (response.Headers.Contains("Set-Cookie"))
+                Dictionary<string, string> cookies = new Dictionary<string, string>();
+                if (response.Headers.Contains("N-SID"))
                 {
-                    var setCookies = response.Headers.GetValues("Set-Cookie");
+                    cookies.Add("sid", Uri.EscapeUriString(response.Headers.GetValues("N-SID").FirstOrDefault()));
                 }
+                if (response.Headers.Contains("N-UID"))
+                {
+                    cookies.Add("uid", response.Headers.GetValues("N-UID").FirstOrDefault());
+                }
+                this.context.AddCookies(cookies);
             }
             catch { }
         }

@@ -1,6 +1,7 @@
 ﻿using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 
 namespace iHuaban.App.Models
@@ -35,9 +36,27 @@ namespace iHuaban.App.Models
 
         public Dictionary<string, string> Cookies { get; set; } = new Dictionary<string, string>();
 
-        public void AddCookies(string cookies)
+        public void AddCookies(IEnumerable<KeyValuePair<string, string>> cookies)
         {
+            foreach (var cookie in cookies)
+            {
+                if (this.Cookies.ContainsKey(cookie.Key))
+                {
+                    this.Cookies[cookie.Key] = cookie.Value;
+                }
+                else
+                {
+                    this.Cookies.Add(cookie.Key, cookie.Value);
+                }
+            }
+        }
 
+        public string CookieString
+        {
+            get
+            {
+                return string.Join(";", this.Cookies.Select(o => $"{o.Key}={o.Value}"));
+            }
         }
     }
 }

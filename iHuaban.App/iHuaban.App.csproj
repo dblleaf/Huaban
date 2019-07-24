@@ -105,11 +105,11 @@
     <Compile Include="Helpers\HbHttpHelper.cs" />
     <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Models\AccessTokenParameter.cs" />
+    <Compile Include="Models\AuthResult.cs" />
     <Compile Include="Models\BoardCollection.cs" />
     <Compile Include="Models\CategoryCollection.cs" />
     <Compile Include="Models\AuthToken.cs" />
     <Compile Include="Models\Cover.cs" />
-    <Compile Include="Models\Error.cs" />
     <Compile Include="Models\Explore.cs" />
     <Compile Include="Models\ExtendedTheme.cs" />
     <Compile Include="Models\Home.cs" />
