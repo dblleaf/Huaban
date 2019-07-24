@@ -1,13 +1,7 @@
 ﻿using iHuaban.App.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using iHuaban.Core.Models;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using iHuaban.Core;
-using iHuaban.Core.Models;
 
 namespace iHuaban.App.TemplateSelectors
 {

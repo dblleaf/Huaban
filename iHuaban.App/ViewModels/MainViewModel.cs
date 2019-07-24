@@ -14,16 +14,20 @@ namespace iHuaban.App.ViewModels
     public class MainViewModel : ViewModelBase
     {
         private INavigationService navigationService;
-
+        private IStorageService storageService;
         public ObservableCollection<ViewModelBase> Menu { get; set; }
-        public MainViewModel(
+        public MainViewModel
+        (
             INavigationService navigationService,
+            IStorageService storageService,
             HomeViewModel homeViewModel,
             FindViewModel findViewModel,
             MineViewModel mineViewModel,
-            DataTemplateSelector dataTemplateSelector)
+            DataTemplateSelector dataTemplateSelector
+        )
         {
             this.navigationService = navigationService;
+            this.storageService = storageService;
             this.DataTemplateSelector = dataTemplateSelector;
             var list = new List<ViewModelBase>
             {
@@ -32,6 +36,11 @@ namespace iHuaban.App.ViewModels
                 mineViewModel
             };
             Menu = new ObservableCollection<ViewModelBase>(list);
+        }
+
+        public override async Task InitAsync()
+        {
+            await Task.Delay(0);
         }
 
         public DataTemplateSelector DataTemplateSelector { get; private set; }

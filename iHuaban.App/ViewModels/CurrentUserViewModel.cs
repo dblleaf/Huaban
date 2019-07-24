@@ -10,6 +10,17 @@ namespace iHuaban.App.ViewModels
         public CurrentUserViewModel(Context context)
         {
             this.Context = context;
+            this.Context.PropertyChanged += Context_PropertyChanged;
         }
+
+        private void Context_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(User))
+            {
+                this.NotifyPropertyChanged(nameof(User));
+            }
+        }
+
+        public User User { get { return this.Context.User; } }
     }
 }

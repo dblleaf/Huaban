@@ -3,23 +3,35 @@ using iHuaban.App.Services;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
         private IAuthService authService;
+        private IStorageService storageService;
         private Context context;
-        public LoginViewModel(IAuthService authService, Context context)
+        public LoginViewModel
+        (
+            IAuthService authService,
+            IStorageService storageService,
+            Context context
+        )
         {
             this.authService = authService;
+            this.storageService = storageService;
             this.context = context;
             this.UserName = "okokit@126.com";
             this.Password = "999999999";
+        }
+
+        public override async Task InitAsync()
+        {
+            this.UserName = storageService.GetSetting(nameof(UserName));
+            this.Password = storageService.GetSetting(nameof(Password));
+            await Task.Delay(0);
         }
 
         public override string TemplateName => Constants.TemplateLogin;
@@ -71,19 +83,21 @@ namespace iHuaban.App.ViewModels
                         try
                         {
                             var auth = await authService.LoginAsync(UserName, Password);
-
                             if (!string.IsNullOrWhiteSpace(auth?.User?.user_id))
                             {
                                 this.context.User = auth.User;
+                                this.storageService.SaveSetting(nameof(UserName), UserName);
+                                this.storageService.SaveSetting(nameof(Password), Password);
                             }
-
+                            if (!string.IsNullOrWhiteSpace(auth.msg))
+                            {
+                                this.context.ShowMessage(auth.msg);
+                            }
                         }
                         catch (Exception ex)
                         {
-
                             this.context.ShowMessage(ex.Message);
                         }
-
                         await Task.Delay(0);
                     },
                     o =>
@@ -93,6 +107,5 @@ namespace iHuaban.App.ViewModels
                 );
             }
         }
-
     }
 }

@@ -4,6 +4,8 @@
     {
         public string user_id { set; get; }
         public string username { set; get; }
+        public string urlname { get; set; }
+        public string email { get; set; }
         public int pin_count { set; get; }
         public int like_count { set; get; }
         public int board_count { set; get; }

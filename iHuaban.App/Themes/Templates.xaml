@@ -254,19 +254,18 @@
     <DataTemplate x:Key="TemplateCurrentUser">
         <Grid>
             <StackPanel>
-                <TextBlock>user_id: <Run Text="{Binding user_id}"/></TextBlock>
-                <TextBlock>username: <Run Text="{Binding username}"/></TextBlock>
-                <TextBlock>urlname: <Run Text="{Binding urlname}"/></TextBlock>
-                <TextBlock>email: <Run Text="{Binding email}"/></TextBlock>
-                <TextBlock>board_count: <Run Text="{Binding board_count}"/></TextBlock>
-                <TextBlock>like_count: <Run Text="{Binding like_count}"/></TextBlock>
-                <TextBlock>boards_like_count: <Run Text="{Binding boards_like_count}"/></TextBlock>
-                <TextBlock>muse_board_count: <Run Text="{Binding muse_board_count}"/></TextBlock>
-                <TextBlock>follower_count: <Run Text="{Binding follower_count}"/></TextBlock>
-                <TextBlock>following_count: <Run Text="{Binding following_count}"/></TextBlock>
-                <TextBlock>pin_count: <Run Text="{Binding pin_count}"/></TextBlock>
+                <TextBlock>user_id: <Run Text="{Binding User.user_id}"/></TextBlock>
+                <TextBlock>username: <Run Text="{Binding User.username}"/></TextBlock>
+                <TextBlock>urlname: <Run Text="{Binding User.urlname}"/></TextBlock>
+                <TextBlock>email: <Run Text="{Binding User.email}"/></TextBlock>
+                <TextBlock>board_count: <Run Text="{Binding User.board_count}"/></TextBlock>
+                <TextBlock>like_count: <Run Text="{Binding User.like_count}"/></TextBlock>
+                <TextBlock>boards_like_count: <Run Text="{Binding User.boards_like_count}"/></TextBlock>
+                <TextBlock>muse_board_count: <Run Text="{Binding User.muse_board_count}"/></TextBlock>
+                <TextBlock>follower_count: <Run Text="{Binding User.follower_count}"/></TextBlock>
+                <TextBlock>following_count: <Run Text="{Binding User.following_count}"/></TextBlock>
+                <TextBlock>pin_count: <Run Text="{Binding User.pin_count}"/></TextBlock>
             </StackPanel>
-            <TextBlock Text="TemplateCurrentUser"/>
         </Grid>
     </DataTemplate>
 

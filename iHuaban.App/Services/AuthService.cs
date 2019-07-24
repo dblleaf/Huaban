@@ -1,11 +1,8 @@
-﻿using iHuaban.App.Helpers;
-using iHuaban.App.Models;
-using System.Threading.Tasks;
-using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
+﻿using iHuaban.App.Models;
 using iHuaban.Core.Helpers;
 using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
@@ -16,8 +13,6 @@ namespace iHuaban.App.Services
         {
             this.httpHelper = httpHelper;
         }
-
-
 
         public async Task<AuthResult> LoginAsync(string userName, string password)
         {

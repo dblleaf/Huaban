@@ -24,8 +24,6 @@ namespace iHuaban.App.Models
             set { SetValue(ref quickBoard, value); }
         }
 
-        internal CookieContainer CookieContainer { get; set; } = new CookieContainer();
-
         public void ShowMessage(string mesage)
         {
             if (ShowMessageHandler != null)
