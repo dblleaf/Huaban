@@ -103,7 +103,6 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Helpers\HbHttpHelper.cs" />
-    <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Models\AccessTokenParameter.cs" />
     <Compile Include="Models\AuthResult.cs" />
     <Compile Include="Models\BoardCollection.cs" />
@@ -168,7 +167,6 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
-    <None Include="Models\services.json" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\AppList\AppList.scale-100.png" />
