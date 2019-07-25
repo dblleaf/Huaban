@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
 using iHuaban.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,15 +9,18 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace iHuaban.App.Helpers
 {
     public class HbHttpHelper : HttpHelper
     {
         private Context context;
-        public HbHttpHelper(Context context)
+        private IStorageService storageService;
+        public HbHttpHelper(Context context, IStorageService storageService)
         {
             this.context = context;
+            this.storageService = storageService;
         }
 
         protected override HttpContent GetHttpContent(object content)
@@ -33,7 +37,8 @@ namespace iHuaban.App.Helpers
         {
             HttpClientHandler handler = new HttpClientHandler
             {
-                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+                AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate,
+                CookieContainer = this.context.CookieContainer,
             };
 
             var client = new HttpClient(handler);
@@ -67,16 +72,12 @@ namespace iHuaban.App.Helpers
             base.AfterRequest(response);
             try
             {
-                Dictionary<string, string> cookies = new Dictionary<string, string>();
-                if (response.Headers.Contains("N-SID"))
-                {
-                    cookies.Add("sid", Uri.EscapeUriString(response.Headers.GetValues("N-SID").FirstOrDefault()));
-                }
-                if (response.Headers.Contains("N-UID"))
-                {
-                    cookies.Add("uid", response.Headers.GetValues("N-UID").FirstOrDefault());
-                }
-                this.context.AddCookies(cookies);
+                var cookies = this.context
+                     .CookieContainer
+                     .GetCookies(new Uri(Constants.UrlBase))
+                     .Cast<Cookie>();
+
+                storageService.SaveSetting("Cookies", JsonConvert.SerializeObject(cookies));
             }
             catch { }
         }

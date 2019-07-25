@@ -9,6 +9,7 @@ namespace iHuaban.App.Models
     public sealed class Context : ObservableObject
     {
         public Action<string> ShowMessageHandler { get; set; }
+        public CookieContainer CookieContainer { get; set; } = new CookieContainer();
 
         private User user;
         public User User

@@ -1,0 +1,79 @@
+﻿using iHuaban.App.Models;
+using iHuaban.Core.Helpers;
+using iHuaban.Core.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+
+namespace iHuaban.App.ViewModels
+{
+    public class ListViewModel<T> : ViewModelBase
+        where T : IModel
+    {
+        private string baseUrl;
+        private IHttpHelper httpHelper;
+        private Func<string, IEnumerable<T>> converter;
+        public ListViewModel(string baseUrl, IHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
+        {
+            this.baseUrl = baseUrl;
+            this.httpHelper = httpHelper;
+            this.converter = converter;
+            this.Data = new IncrementalLoadingList<T>(GetData);
+        }
+
+        public IncrementalLoadingList<T> Data { private set; get; }
+
+        private async Task<IEnumerable<T>> GetData(uint startIndex, int page)
+        {
+            if (IsLoading)
+            {
+                return new List<T>();
+            }
+            IsLoading = true;
+            try
+            {
+                string query = "?limit=20";
+                var max = GetMaxPinId();
+                if (max > 0)
+                {
+                    query += $"&max={max}";
+                }
+                var url = $"{ this.baseUrl.Trim('/')}{query}";
+                var json = await httpHelper.GetStringAsync(url);
+                var result = this.converter(json);
+                if (result.Count() == 0)
+                {
+                    NoMoreVisibility = Visibility.Visible;
+                    Data.NoMore();
+                }
+                else
+                {
+                    NoMoreVisibility = Visibility.Collapsed;
+                    Data.HasMore();
+                }
+
+                return result;
+            }
+            catch { }
+            finally
+            {
+                IsLoading = false;
+            }
+            return null;
+        }
+
+        private long GetMaxPinId()
+        {
+            if (Data?.Count > 0 && long.TryParse(Data?[Data.Count - 1].KeyId, out long maxId))
+            {
+                return maxId;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
