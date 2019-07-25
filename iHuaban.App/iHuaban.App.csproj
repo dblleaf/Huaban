@@ -103,7 +103,6 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Helpers\HbHttpHelper.cs" />
-    <Compile Include="Helpers\StorageHelper.cs" />
     <Compile Include="Models\AccessTokenParameter.cs" />
     <Compile Include="Models\AuthResult.cs" />
     <Compile Include="Models\BoardCollection.cs" />
@@ -148,6 +147,7 @@
     <Compile Include="ViewModels\CurrentUserViewModel.cs" />
     <Compile Include="ViewModels\FindViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
+    <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />

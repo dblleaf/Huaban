@@ -22,5 +22,10 @@ namespace iHuaban.App.ViewModels
         }
 
         public User User { get { return this.Context.User; } }
+
+        public IncrementalLoadingList<Pin> Pins { get; set; } new IncrementalLoadingList<Pin>();
+        public IncrementalLoadingList<Board> Boards { get; set; } new IncrementalLoadingList<Board>();
+        public IncrementalLoadingList<Pin> Likes { get; set; } new IncrementalLoadingList<Pin>();
+
     }
 }

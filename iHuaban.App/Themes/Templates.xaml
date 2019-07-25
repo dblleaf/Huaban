@@ -252,20 +252,90 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateCurrentUser">
-        <Grid>
-            <StackPanel>
-                <TextBlock>user_id: <Run Text="{Binding User.user_id}"/></TextBlock>
-                <TextBlock>username: <Run Text="{Binding User.username}"/></TextBlock>
-                <TextBlock>urlname: <Run Text="{Binding User.urlname}"/></TextBlock>
-                <TextBlock>email: <Run Text="{Binding User.email}"/></TextBlock>
-                <TextBlock>board_count: <Run Text="{Binding User.board_count}"/></TextBlock>
-                <TextBlock>like_count: <Run Text="{Binding User.like_count}"/></TextBlock>
-                <TextBlock>boards_like_count: <Run Text="{Binding User.boards_like_count}"/></TextBlock>
-                <TextBlock>muse_board_count: <Run Text="{Binding User.muse_board_count}"/></TextBlock>
-                <TextBlock>follower_count: <Run Text="{Binding User.follower_count}"/></TextBlock>
-                <TextBlock>following_count: <Run Text="{Binding User.following_count}"/></TextBlock>
-                <TextBlock>pin_count: <Run Text="{Binding User.pin_count}"/></TextBlock>
+        <Grid Padding="8">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Ellipse
+                    Width="60" Height="60"
+                    HorizontalAlignment="Left">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding User.avatar.Sq140}"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <StackPanel Margin="8 0 0 0" VerticalAlignment="Center">
+                    <TextBlock Margin="4 0" VerticalAlignment="Center" Text="{Binding User.username}"></TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="4" HorizontalAlignment="Center"><Run Text="{Binding User.follower_count}"/> <Run Text="粉丝"/></TextBlock>
+                        <TextBlock Margin="4" HorizontalAlignment="Center"><Run Text="{Binding User.following_count}"/> <Run Text="关注"/></TextBlock>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
+            <Pivot Grid.Row="1">
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock FontSize="15">画板 <Run Text="{Binding User.board_count}"/></TextBlock>
+                    </PivotItem.Header>
+                    <PivotItem.Content>
+                        <control:ExtendedGridView
+                            x:Name="gridViewPin"
+                                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
+                                ScaleSize="300:300"
+                                Padding="6" CellMinWidth="236"
+                                ItemsSource="{Binding Pins}"
+                                ItemTemplate="{StaticResource TemplatePin}">
+                            <control:ExtendedGridView.Footer>
+                                <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                                    <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </control:ExtendedGridView.Footer>
+                        </control:ExtendedGridView>
+                    </PivotItem.Content>
+                </PivotItem>
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock FontSize="15">采集 <Run Text="{Binding User.pin_count}"/></TextBlock>
+                    </PivotItem.Header>
+                    <PivotItem.Content>
+                        <control:ExtendedGridView
+                            x:Name="gridViewBoard"
+                                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
+                                ScaleSize="300:300"
+                                Padding="6" CellMinWidth="236"
+                                ItemsSource="{Binding Boards}"
+                                ItemTemplate="{StaticResource TemplateBoard}">
+                            <control:ExtendedGridView.Footer>
+                                <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                                    <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </control:ExtendedGridView.Footer>
+                        </control:ExtendedGridView>
+                    </PivotItem.Content>
+                </PivotItem>
+                <PivotItem>
+                    <PivotItem.Header>
+                        <TextBlock FontSize="15">喜欢 <Run Text="{Binding User.like_count}"/></TextBlock>
+                    </PivotItem.Header>
+                    <PivotItem.Content>
+                        <control:ExtendedGridView
+                            x:Name="gridViewLike"
+                                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
+                                ScaleSize="300:300"
+                                Padding="6" CellMinWidth="236"
+                                ItemsSource="{Binding Likes}"
+                                ItemTemplate="{StaticResource TemplatePin}">
+                            <control:ExtendedGridView.Footer>
+                                <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                                    <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                                </Grid>
+                            </control:ExtendedGridView.Footer>
+                        </control:ExtendedGridView>
+                    </PivotItem.Content>
+                </PivotItem>
+            </Pivot>
+
         </Grid>
     </DataTemplate>
 
