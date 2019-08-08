@@ -46,6 +46,9 @@ namespace iHuaban.App
         public const string TemplateCategory = "TemplateCategory";
         public const string TemplateCurrentUser = "TemplateCurrentUser";
         public const string TemplateLogin = "TemplateLogin";
+        public const string TemplatePinList = "TemplatePinList";
+        public const string TemplateBoardList = "TemplateBoardList";
+        public const string TemplateUserList = "TemplateUserList";
         #endregion
 
         #region Text

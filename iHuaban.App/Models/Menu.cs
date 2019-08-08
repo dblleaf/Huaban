@@ -7,6 +7,6 @@ namespace iHuaban.App.Models
         public string Title { set; get; }
         public string Icon { set; get; }
         public string TemplateName { set; get; }
-        public ViewModelBase ViewModel { set; get; }
+        public PageViewModel ViewModel { set; get; }
     }
 }

@@ -12,15 +12,25 @@ namespace iHuaban.App.ViewModels
     public class ListViewModel<T> : ViewModelBase
         where T : IModel
     {
-        private string baseUrl;
-        private IHttpHelper httpHelper;
-        private Func<string, IEnumerable<T>> converter;
-        public ListViewModel(string baseUrl, IHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
+        internal string BaseUrl { get; set; }
+        internal IHttpHelper HttpHelper { get; set; }
+        internal Func<string, IEnumerable<T>> Converter { get; set; }
+        public ListViewModel() { }
+
+        public ListViewModel(string baseUrl, string templateName, IHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
         {
-            this.baseUrl = baseUrl;
-            this.httpHelper = httpHelper;
-            this.converter = converter;
+            this.BaseUrl = baseUrl;
+            this.HttpHelper = httpHelper;
+            this.Converter = converter;
+            this.TemplateName = templateName;
             this.Data = new IncrementalLoadingList<T>(GetData);
+        }
+
+        public void SetBaseUrl(string baseUrl)
+        {
+            this.BaseUrl = baseUrl;
+            this.Data.Clear();
+            this.Data.HasMore();
         }
 
         public IncrementalLoadingList<T> Data { private set; get; }
@@ -40,9 +50,9 @@ namespace iHuaban.App.ViewModels
                 {
                     query += $"&max={max}";
                 }
-                var url = $"{ this.baseUrl.Trim('/')}{query}";
-                var json = await httpHelper.GetStringAsync(url);
-                var result = this.converter(json);
+                var url = $"{ this.BaseUrl.Trim('/')}{query}";
+                var json = await HttpHelper.GetStringAsync(url);
+                var result = this.Converter(json);
                 if (result.Count() == 0)
                 {
                     NoMoreVisibility = Visibility.Visible;

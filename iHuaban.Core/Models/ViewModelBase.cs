@@ -1,21 +1,16 @@
-﻿using System.Threading.Tasks;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 
 namespace iHuaban.Core.Models
 {
-    public abstract class ViewModelBase : ObservableObject
+    public class ViewModelBase : ObservableObject
     {
-        public virtual string Title { get; }
-        public virtual string Icon { get; }
-        public virtual string TemplateName { get; }
+        public virtual string Title { get; set; }
+        public virtual int Badge { get; set; }
+        public virtual string Icon { get; set; }
+        public virtual string TemplateName { get; set; }
         public ViewModelBase()
         {
             this.NoMoreVisibility = Visibility.Collapsed;
-        }
-
-        public virtual async Task InitAsync()
-        {
-            await Task.FromResult(0);
         }
 
         private bool _IsLoading;

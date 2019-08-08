@@ -4,7 +4,9 @@ using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 
 namespace iHuaban.App.ViewModels
 {
@@ -27,8 +29,9 @@ namespace iHuaban.App.ViewModels
             this.Password = "999999999";
         }
 
-        public override async Task InitAsync()
+        public override async Task InitAsync(NavigationEventArgs e)
         {
+            await new MessageDialog("message").ShowAsync();
             this.UserName = storageService.GetSetting(nameof(UserName));
             this.Password = storageService.GetSetting(nameof(Password));
             await Task.Delay(0);

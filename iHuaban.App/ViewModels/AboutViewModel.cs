@@ -4,7 +4,7 @@ using System.Collections.ObjectModel;
 
 namespace iHuaban.App.ViewModels
 {
-    public class AboutViewModel: ViewModelBase
+    public class AboutViewModel: PageViewModel
     {
         public ObservableCollection<SimpleModel> AboutList { set; get; } = new ObservableCollection<SimpleModel>(new SimpleModel[] {
             new SimpleModel { Title = "应用名称", Label = "爱花瓣UWP" },

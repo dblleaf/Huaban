@@ -118,8 +118,9 @@
     <Compile Include="Models\IncrementalLoadingList.cs" />
     <Compile Include="Models\ScaleSize.cs" />
     <Compile Include="Models\Setting.cs" />
-    <Compile Include="Models\ViewModelBase.cs" />
+    <Compile Include="Models\PageViewModel.cs" />
     <Compile Include="Models\ObservableObject.cs" />
+    <Compile Include="Models\ViewModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\iHuaban.Core.rd.xml" />
   </ItemGroup>

@@ -37,11 +37,11 @@ namespace iHuaban.App.Services
                     {
                         foreach (var genericType in itInfo.GenericTypeArguments)
                         {
-                            if (typeof(ViewModelBase).IsAssignableFrom(genericType))
+                            if (typeof(PageViewModel).IsAssignableFrom(genericType))
                             {
-                                var vm = Locator.ResolveObject<ViewModelBase>(genericType);
+                                var vm = Locator.ResolveObject<PageViewModel>(genericType);
                                 page.DataContext = vm;
-                                await vm.InitAsync();
+                                await vm.InitAsync(e);
                                 return;
                             }
                         }

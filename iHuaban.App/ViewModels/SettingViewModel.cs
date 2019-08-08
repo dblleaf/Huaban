@@ -7,10 +7,11 @@ using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
 
 namespace iHuaban.App.ViewModels
 {
-    public class SettingViewModel : ViewModelBase
+    public class SettingViewModel : PageViewModel
     {
         private IThemeService themeService;
         private IStorageService storageService;
@@ -73,7 +74,7 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        public override async Task InitAsync()
+        public override async Task InitAsync(NavigationEventArgs e)
         {
             await Task.Delay(0);
             var savePath = storageService.GetSetting("SavePath");

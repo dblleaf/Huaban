@@ -3,7 +3,7 @@
 namespace iHuaban.Core
 {
 
-    public interface IPage<T> where T : ViewModelBase
+    public interface IPage<T> where T : PageViewModel
     {
     }
 }

@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace iHuaban.App.ViewModels
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : PageViewModel
     {
         private INavigationService navigationService;
         private IStorageService storageService;
@@ -38,7 +39,7 @@ namespace iHuaban.App.ViewModels
             Menu = new ObservableCollection<ViewModelBase>(list);
         }
 
-        public override async Task InitAsync()
+        public override async Task InitAsync(NavigationEventArgs e)
         {
             await Task.Delay(0);
         }
