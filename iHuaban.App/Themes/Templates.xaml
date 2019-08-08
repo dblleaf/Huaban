@@ -275,11 +275,10 @@
             </StackPanel>
             <Pivot Grid.Row="1"
                 ItemsSource="{Binding Path=Menu}"
-                HeaderTemplate="{StaticResource TemplateMainPagePivotHeader}"
                 ItemTemplateSelector="{Binding DataTemplateSelector}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
-                        
+                        <TextBlock></TextBlock>
                     </DataTemplate>
                 </Pivot.HeaderTemplate>
             </Pivot>
