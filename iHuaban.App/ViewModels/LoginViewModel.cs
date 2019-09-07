@@ -29,7 +29,7 @@ namespace iHuaban.App.ViewModels
             this.Password = "999999999";
         }
 
-        public override async Task InitAsync(NavigationEventArgs e)
+        public async Task InitAsync(NavigationEventArgs e)
         {
             await new MessageDialog("message").ShowAsync();
             this.UserName = storageService.GetSetting(nameof(UserName));
