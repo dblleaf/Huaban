@@ -42,8 +42,8 @@ namespace iHuaban.App.Services
             if (Window.Current.Content is FrameworkElement frameworkElement)
             {
                 frameworkElement.RequestedTheme = Theme;
-                SetTitleBar();
             }
+            SetTitleBar();
             StorageService.SaveSetting(Constants.RequestTheme, Theme.ToString());
         }
 
