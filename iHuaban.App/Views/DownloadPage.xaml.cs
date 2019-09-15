@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.Views
 {
-    public sealed partial class AboutPage : Page, IView<AboutViewModel>
+    public sealed partial class DownloadPage : Page, IView<DownloadViewModel>
     {
-        public AboutPage()
+        public DownloadPage()
         {
             this.InitializeComponent();
         }

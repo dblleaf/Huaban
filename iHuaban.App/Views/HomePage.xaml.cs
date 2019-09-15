@@ -4,9 +4,9 @@ using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.Views
 {
-    public sealed partial class AboutPage : Page, IView<AboutViewModel>
+    public sealed partial class HomePage : Page, IView<HomeViewModel>
     {
-        public AboutPage()
+        public HomePage()
         {
             this.InitializeComponent();
         }

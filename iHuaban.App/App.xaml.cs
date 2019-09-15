@@ -79,7 +79,7 @@ namespace iHuaban.App
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
-
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
                 Locator.ResolveObject<IThemeService>().LoadTheme();
             }
         }

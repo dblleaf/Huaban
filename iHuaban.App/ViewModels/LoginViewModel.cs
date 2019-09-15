@@ -91,6 +91,7 @@ namespace iHuaban.App.ViewModels
                                 this.context.User = auth.User;
                                 this.storageService.SaveSetting(nameof(UserName), UserName);
                                 this.storageService.SaveSetting(nameof(Password), Password);
+                                this.storageService.SaveSetting("cookie", context.CookieString);
                             }
                             if (!string.IsNullOrWhiteSpace(auth.msg))
                             {

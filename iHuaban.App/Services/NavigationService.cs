@@ -1,26 +1,58 @@
 ﻿using iHuaban.Core;
 using iHuaban.Core.Models;
 using System;
+using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
+using Windows.UI.Xaml.Navigation;
 
 namespace iHuaban.App.Services
 {
     public class NavigationService : INavigationService
     {
-        private Frame rootFrame;
-        public NavigationService()
+        private static Frame rootFrame;
+        private static Frame splitViewFrame;
+
+        static NavigationService()
         {
-            rootFrame = Window.Current.Content as Frame;
-            rootFrame.Navigated += RootFrame_Navigated;
-            SystemNavigationManager.GetForCurrentView().BackRequested += NavigationService_BackRequested;
+            NavigationService.rootFrame = Window.Current.Content as Frame;
+            NavigationService.rootFrame.Navigated += RootFrame_Navigated;
         }
 
-        private async void RootFrame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
+        public static void SetSplitViewFrame(Frame splitViewFrame)
+        {
+            NavigationService.splitViewFrame = splitViewFrame;
+            NavigationService.splitViewFrame.Navigated += SplitViewFrame_Navigated;
+        }
+
+        private static void SplitViewFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            var interfaces = e.SourcePageType.GetInterfaces();
+            if (e.Content is Page page)
+            {
+                foreach (var it in interfaces)
+                {
+                    var itInfo = it.GetTypeInfo();
+
+                    if (itInfo.IsGenericType && itInfo.GetGenericTypeDefinition() == typeof(IView<>))
+                    {
+                        foreach (var genericType in itInfo.GenericTypeArguments)
+                        {
+                            if (typeof(PageViewModel).IsAssignableFrom(genericType))
+                            {
+                                var vm = Locator.ResolveObject<PageViewModel>(genericType);
+                                page.DataContext = vm;
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private static void RootFrame_Navigated(object sender, Windows.UI.Xaml.Navigation.NavigationEventArgs e)
         {
             var interfaces = e.SourcePageType.GetInterfaces();
             if (e.Content is Page page)
@@ -41,49 +73,10 @@ namespace iHuaban.App.Services
                             {
                                 var vm = Locator.ResolveObject<PageViewModel>(genericType);
                                 page.DataContext = vm;
-                                await vm.InitAsync(e);
                                 return;
                             }
                         }
                     }
-                }
-            }
-        }
-
-        private void NavigationService_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            bool handled = e.Handled;
-
-            if (!e.Handled)
-                this.BackRequested(ref handled);
-
-            e.Handled = handled;
-        }
-
-        private bool b;
-        private void BackRequested(ref bool handled)
-        {
-            if (this.rootFrame.CanGoBack)
-            {
-                handled = true;
-                this.rootFrame.GoBack();
-                DisplayBackButton();
-            }
-            else if (!this.rootFrame.CanGoBack && !handled)
-            {
-                if (b)
-                {
-                    App.Current.Exit();
-                }
-                else
-                {
-                    b = true;
-                    handled = true;
-                    Task.Run(async () =>
-                    {
-                        await Task.Delay(1500);
-                        b = false;
-                    });
                 }
             }
         }
@@ -96,24 +89,20 @@ namespace iHuaban.App.Services
 
         public void Navigate(Type pageType, object parameter = null)
         {
-            if (pageType != null && typeof(Page).IsAssignableFrom(pageType))
+            if (pageType != null && pageType.GetInterfaces().Any(o => o.IsGenericType && o.GetGenericTypeDefinition() == typeof(IView<>)))
+            {
+                splitViewFrame.Navigate(pageType, parameter, new SuppressNavigationTransitionInfo());
+                //DisplayBackButton();
+            }
+            else if (pageType != null && pageType.GetInterfaces().Any(o => o.IsGenericType && o.GetGenericTypeDefinition() == typeof(IPage<>)))
             {
                 rootFrame.Navigate(pageType, parameter, new SuppressNavigationTransitionInfo());
-                DisplayBackButton();
             }
         }
 
         public void Navigate<T>(object parameter = null)
         {
             Navigate(typeof(T));
-        }
-
-        public void DisplayBackButton()
-        {
-            if (rootFrame.CanGoBack)
-                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            else
-                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
         private Type GetPageType(string pageName)

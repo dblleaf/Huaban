@@ -115,6 +115,7 @@
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\IHttpHelper.cs" />
     <Compile Include="IPage.cs" />
+    <Compile Include="IView.cs" />
     <Compile Include="Models\IncrementalLoadingList.cs" />
     <Compile Include="Models\ScaleSize.cs" />
     <Compile Include="Models\Setting.cs" />

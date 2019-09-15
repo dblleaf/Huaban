@@ -59,6 +59,7 @@ namespace iHuaban.App
         public const string TextSetting = "设置";
         public const string TextAbout = "关于";
         public const string TextRefresh = "刷新";
+        public const string TextDownload = "下载";
         #endregion
 
         #region Icon
@@ -67,9 +68,10 @@ namespace iHuaban.App
         public const string IconFind = "\uE721";
         public const string IconMine = "\uE77B";
         public const string IconSetting = "\uE713";
-
+        public const string IconLike = "\uEB51";
         public const string IconAbout = "\uE9CE";
         public const string IconRefesh = "\uE72C";
+        public const string IconDownload = "\uE896";
         #endregion
     }
 }

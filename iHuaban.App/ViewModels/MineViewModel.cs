@@ -6,7 +6,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
-    public class MineViewModel : ViewModelBase
+    public class MineViewModel : PageViewModel
     {
         private IHttpHelper httpHelper;
         private ViewModelBase viewModel;

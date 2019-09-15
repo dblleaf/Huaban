@@ -15,10 +15,11 @@ namespace iHuaban.App.ViewModels
         internal string BaseUrl { get; set; }
         internal IHttpHelper HttpHelper { get; set; }
         internal Func<string, IEnumerable<T>> Converter { get; set; }
-        public ListViewModel() { }
 
-        public ListViewModel(string baseUrl, string templateName, IHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
+        public ListViewModel(string title, int badge, string baseUrl, string templateName, IHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
         {
+            this.Title = title;
+            this.Badge = badge;
             this.BaseUrl = baseUrl;
             this.HttpHelper = httpHelper;
             this.Converter = converter;
@@ -31,6 +32,11 @@ namespace iHuaban.App.ViewModels
             this.BaseUrl = baseUrl;
             this.Data.Clear();
             this.Data.HasMore();
+        }
+
+        public string AAA
+        {
+            get { return this.Data.GetType().ToString(); }
         }
 
         public IncrementalLoadingList<T> Data { private set; get; }

@@ -14,20 +14,17 @@ using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
 {
-    public class HomeViewModel : PageViewModel
+    public  class NewHomeViewModel : PageViewModel
     {
         private IHomeService HomeService { get; set; }
 
         public IValueConverter ValueConverter { get; set; }
-        public HomeViewModel(IHomeService homeService,IValueConverter valueConverter)
+        public NewHomeViewModel(IHomeService homeService, IValueConverter valueConverter)
         {
             this.HomeService = homeService;
             this.ValueConverter = valueConverter;
             this.Pins = new IncrementalLoadingList<IModel>(GetData);
         }
-
-        public override string Icon => Constants.IconHome;
-        public override string Title => Constants.TextHome;
         public override string TemplateName => Constants.TemplateHome;
         public string ScaleSize => "300:300";
         public decimal CellMinWidth => 236;

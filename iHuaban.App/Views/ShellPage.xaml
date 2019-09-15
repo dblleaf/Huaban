@@ -6,36 +6,78 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource AppBackgroundAcrylicBrush}">
-
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
+    Background="{ThemeResource HBPageBackgroundColor}">
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:InvokeCommandAction Command="{Binding PageLoadedCommand}"></Core:InvokeCommandAction>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+    <Page.Resources>
+        <Storyboard x:Name="BigToSmaillAvatar">
+            <DoubleAnimation Storyboard.TargetName="avatar" Duration="0:0:0.2" EnableDependentAnimation="True" Storyboard.TargetProperty="Width" From="100" To="32" />
+            <DoubleAnimation Storyboard.TargetName="avatar" Duration="0:0:0.2" EnableDependentAnimation="True" Storyboard.TargetProperty="Height" From="100" To="32" />
+            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Duration="0:0:0.2" EnableDependentAnimation="True" Storyboard.TargetProperty="X" From="50" To="0" />
+        </Storyboard>
+        <Storyboard x:Name="SmaillToBigAvatar">
+            <DoubleAnimation Storyboard.TargetName="avatar" Duration="0:0:0.2" EnableDependentAnimation="True" Storyboard.TargetProperty="Width" From="32" To="100" />
+            <DoubleAnimation Storyboard.TargetName="avatar" Duration="0:0:0.2" EnableDependentAnimation="True" Storyboard.TargetProperty="Height" From="32" To="100" />
+            <DoubleAnimation Storyboard.TargetName="TranslateTransform" Duration="0:0:0.2" EnableDependentAnimation="True" Storyboard.TargetProperty="X" From="0" To="50" />
+        </Storyboard>
+    </Page.Resources>
     <Grid>
-        <NavigationView
+        <SplitView
             x:Name="rootSplitView"
-            PaneDisplayMode="LeftMinimal"
-            OpenPaneLength="256" 
-            IsPaneOpen="True" 
-            IsBackButtonVisible="Collapsed" 
-            IsPaneToggleButtonVisible="False"
-            MenuItemsSource="{Binding Menu}">
-            <NavigationView.MenuItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Horizontal" Margin="0">
-                        <FontIcon FontSize="16" FontFamily="Segoe MDL2 Assets" Glyph="{Binding Path=Icon}"/>
-                        <TextBlock FontSize="14" Margin="16 0 0 0" Text="{Binding Path=Title}"></TextBlock>
+            OpenPaneLength="220"
+            IsPaneOpen="True"
+            CompositeMode="SourceOver"
+            DisplayMode="CompactInline"
+            PaneOpening="RootSplitView_PaneOpening"
+            PaneClosing="RootSplitView_PaneClosing">
+            <SplitView.Pane>
+                <StackPanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}" Padding="0 64 0 0">
+                    <StackPanel Visibility="{Binding Path=Context.IsLogin,Converter={Binding ValueConverter}}">
+                        <Ellipse x:Name="avatar" HorizontalAlignment="Left" Margin="8"
+                            Width="100" Height="100">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Context.User.avatar.Sq140}"></ImageBrush>
+                            </Ellipse.Fill>
+                            <Ellipse.RenderTransform>
+                                <TranslateTransform x:Name="TranslateTransform" X="50" />
+                            </Ellipse.RenderTransform>
+                        </Ellipse>
+
+                        <TextBlock x:Name="userName" Visibility="{Binding ElementName=rootSplitView,Path=IsPaneOpen,Converter={Binding ValueConverter}}" Margin="0 0 0 8" HorizontalAlignment="Center" Text="{Binding Context.User.username}"></TextBlock>
                     </StackPanel>
-                </DataTemplate>
-            </NavigationView.MenuItemTemplate>
-            <NavigationView.Content>
-                <Grid Margin="0 -32 0 0" Padding="0 32 0 0" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollMode="Enabled">
-                    <TextBlock FontSize="24" Height="555555">Content</TextBlock>
-                </Grid>
-            </NavigationView.Content>
-        </NavigationView>
-        <StackPanel Background="Transparent" x:Name="coreTitle" Height="32" VerticalAlignment="Top" Orientation="Horizontal">
-            <TextBlock Margin="36 4 4 4">爱花瓣</TextBlock>
+                    <ListBox SelectedItem="{Binding SelectedMenu,Mode=TwoWay}" ItemsSource="{Binding Menu}" Background="Transparent" Style="{ThemeResource MenuListStyle}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <FontIcon Width="48" Margin="-3 0 0 0" Height="40" FontSize="16" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="{Binding Icon}" />
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Title}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <Interactivity:Interaction.Behaviors>
+                            <Core:EventTriggerBehavior EventName="SelectionChanged">
+                                <Core:InvokeCommandAction Command="{Binding NavigateCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+                            </Core:EventTriggerBehavior>
+                        </Interactivity:Interaction.Behaviors>
+                    </ListBox>
+                </StackPanel>
+            </SplitView.Pane>
+            <Grid>
+                <Frame x:Name="rootFrame" />
+            </Grid>
+
+        </SplitView>
+        <StackPanel Padding="12 4" Background="Transparent" x:Name="coreTitle" Height="32" VerticalAlignment="Top" Orientation="Horizontal">
+            <TextBlock x:Name="appName" Visibility="{Binding ElementName=rootSplitView,Path=IsPaneOpen,Converter={StaticResource ObjectToVisibilityConverter}}">爱花瓣</TextBlock>
+            <TextBlock> </TextBlock>
         </StackPanel>
-        <ToggleButton Padding="4 3" Background="Transparent" VerticalAlignment="Top" IsChecked="{Binding Path=IsPaneOpen,ElementName=rootSplitView,Mode=TwoWay}">
-            <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xF0E2;"/>
+        <ToggleButton Margin="12 32" Padding="0" Background="Transparent" VerticalAlignment="Top" IsChecked="{Binding Path=IsPaneOpen,ElementName=rootSplitView,Mode=TwoWay}">
+            <SymbolIcon Symbol="GlobalNavigationButton"/>
         </ToggleButton>
     </Grid>
 </Page>

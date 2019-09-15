@@ -22,7 +22,8 @@ namespace iHuaban.App.ViewModels
             this.DarkMode = themeService.RequestTheme == ElementTheme.Dark;
             this.PropertyChanged += SettingViewModel_PropertyChanged;
         }
-
+        public override string Icon => Constants.IconSetting;
+        public override string Title => Constants.TextSetting;
         private bool _DarkMode;
         public bool DarkMode
         {
@@ -74,7 +75,7 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        public override async Task InitAsync(NavigationEventArgs e)
+        public override async Task InitAsync()
         {
             await Task.Delay(0);
             var savePath = storageService.GetSetting("SavePath");
@@ -85,7 +86,7 @@ namespace iHuaban.App.ViewModels
                 {
                     SavePath = await StorageFolder.GetFolderFromPathAsync(savePath);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     SavePath = await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
                 }

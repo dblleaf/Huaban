@@ -15,7 +15,11 @@ namespace iHuaban.App.Models
         public User User
         {
             get { return user; }
-            set { SetValue(ref user, value); }
+            set
+            {
+                SetValue(ref user, value);
+                IsLogin = value != null;
+            }
         }
 
         private Board quickBoard;
@@ -23,6 +27,13 @@ namespace iHuaban.App.Models
         {
             get { return quickBoard; }
             set { SetValue(ref quickBoard, value); }
+        }
+
+        private bool isLogin;
+        public bool IsLogin
+        {
+            get { return isLogin; }
+            set { SetValue(ref isLogin, value); }
         }
 
         public void ShowMessage(string mesage)
@@ -55,6 +66,14 @@ namespace iHuaban.App.Models
             get
             {
                 return string.Join(";", this.Cookies.Select(o => $"{o.Key}={o.Value}"));
+            }
+        }
+
+        public void SetCookie(IEnumerable<Cookie> cookies)
+        {
+            foreach (Cookie cookie in cookies)
+            {
+                this.CookieContainer.Add(new Uri(Constants.UrlBase), cookie);
             }
         }
     }

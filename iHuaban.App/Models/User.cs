@@ -1,4 +1,6 @@
-﻿namespace iHuaban.App.Models
+﻿using System.Collections.Generic;
+
+namespace iHuaban.App.Models
 {
     public class User : IModel
     {
@@ -17,6 +19,11 @@
         public string KeyId => user_id;
         public File avatar { set; get; }
         public string typeName => this.GetType().Name;
+        public List<Pin> Pins { get; set; }
+        public List<Board> Boards { get; set; }
+        public List<Pin> Likes { get; set; }
+        
+        public List<User> Users { get; set; }
     }
 
     public class PUser : IModel

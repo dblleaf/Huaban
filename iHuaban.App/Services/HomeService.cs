@@ -22,7 +22,7 @@ namespace iHuaban.App.Services
             string url = Constants.UrlBase;
             if (page > 0)
             {
-                url += $"?page={page}";
+                url += $"discovery/?page={page}";
             }
             string json = await HttpHelper.GetStringAsync(url);
             return Home.ParseHome(json);

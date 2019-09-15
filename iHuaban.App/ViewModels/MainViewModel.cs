@@ -39,11 +39,6 @@ namespace iHuaban.App.ViewModels
             Menu = new ObservableCollection<ViewModelBase>(list);
         }
 
-        public override async Task InitAsync(NavigationEventArgs e)
-        {
-            await Task.Delay(0);
-        }
-
         public DataTemplateSelector DataTemplateSelector { get; private set; }
         public override string Icon => string.Empty;
         public override string Title => string.Empty;
@@ -62,7 +57,7 @@ namespace iHuaban.App.ViewModels
                         string page = o.ToString();
                         navigationService.Navigate(page);
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                     }

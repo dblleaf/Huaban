@@ -13,7 +13,7 @@ namespace iHuaban.App.Services
             internal const string RequestTheme = "RequestTheme";
         }
 
-        public static ElementTheme Theme { get; set; } = ElementTheme.Dark;
+        public static ElementTheme Theme { get; set; } = ElementTheme.Light;
         public ElementTheme RequestTheme => ThemeService.Theme;
         private IStorageService StorageService { get; set; }
         public ThemeService(IStorageService storageService)
@@ -33,8 +33,8 @@ namespace iHuaban.App.Services
             if (Enum.TryParse<ElementTheme>(themeStr, out ElementTheme theme))
             {
                 Theme = theme;
-                SetTheme();
             }
+            SetTheme();
         }
 
         public void SetTheme()

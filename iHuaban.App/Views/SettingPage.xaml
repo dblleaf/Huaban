@@ -5,16 +5,26 @@
     xmlns:local="using:iHuaban.App.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:control="using:iHuaban.Core.Controls"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity"
+    xmlns:Core="using:Microsoft.Xaml.Interactions.Core"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid Padding="0 32 0 0" Background="{ThemeResource AppBackgroundAcrylicBrush}">
+    Background="{ThemeResource HBPageBackgroundBrush}">
+    <Interactivity:Interaction.Behaviors>
+        <Core:EventTriggerBehavior EventName="Loaded">
+            <Core:InvokeCommandAction Command="{Binding PageLoadedCommand}"></Core:InvokeCommandAction>
+        </Core:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="48"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="设置" VerticalAlignment="Center" FontWeight="Bold" Padding="16 0"></TextBlock>
-        <StackPanel Grid.Row="1" Margin="0" Padding="8">
+        <StackPanel Padding="12" Background="{ThemeResource HBControlBackgroundBrush}">
+            <TextBlock Text="设置" FontSize="16"></TextBlock>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="1" Margin="0" Padding="8" MaxWidth="540">
             <ToggleSwitch Margin="4" Header="夜间模式"  IsOn="{Binding DarkMode,Mode=TwoWay}"></ToggleSwitch>
             <StackPanel Margin="4">
                 <TextBlock Margin="0 0 0 4">下载目录</TextBlock>

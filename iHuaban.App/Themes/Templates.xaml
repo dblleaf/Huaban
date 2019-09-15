@@ -273,7 +273,7 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
-            <Pivot Grid.Row="1"
+            <Pivot Grid.Row="1" x:Name="rootPivot"
                 ItemsSource="{Binding Path=ListTypes}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
@@ -285,18 +285,20 @@
                 </Pivot.HeaderTemplate>
                 <Pivot.ItemTemplate>
                     <DataTemplate>
-                        <control:ExtendedGridView x:Name="gridView"
-                            ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                            ScaleSize="300:300"
-                            Padding="6" CellMinWidth="236"
-                            ItemsSource="{Binding Data}"
-                            ItemTemplateSelector="{Binding DataTemplateSelector}">
-                            <control:ExtendedGridView.Footer>
-                                <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                                    <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
-                                </Grid>
-                            </control:ExtendedGridView.Footer>
-                        </control:ExtendedGridView>
+                        <Grid>
+                            <control:ExtendedGridView
+                                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
+                                ScaleSize="300:300"
+                                Padding="6" CellMinWidth="236"
+                                ItemsSource="{Binding Data}"
+                                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
+                                <control:ExtendedGridView.Footer>
+                                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                                        <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                                    </Grid>
+                                </control:ExtendedGridView.Footer>
+                            </control:ExtendedGridView>
+                        </Grid>
                     </DataTemplate>
                 </Pivot.ItemTemplate>
             </Pivot>
@@ -403,7 +405,7 @@
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
             Height="{Binding ElementName=gridView,Path=CellHeight}"
-            Background="{ThemeResource SystemAltLowColor}">
+            Background="{ThemeResource HBControlBackgroundBrush}">
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
