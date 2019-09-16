@@ -1,8 +1,7 @@
-﻿using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
-using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -16,8 +15,8 @@ namespace iHuaban.App.ViewModels
 {
     public class SearchViewModel : ViewModelBase
     {
-        private IHttpHelper HttpHelper { get; set; }
-        public SearchViewModel(IHttpHelper httpHelper)
+        private IApiHttpHelper HttpHelper { get; set; }
+        public SearchViewModel(IApiHttpHelper httpHelper)
         {
             this.HttpHelper = httpHelper;
             this.Data = new IncrementalLoadingList<IModel>(GetData);

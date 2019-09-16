@@ -1,4 +1,5 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.Core.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,8 +9,8 @@ namespace iHuaban.App.Services
 {
     public class AuthService : IAuthService
     {
-        private IHttpHelper httpHelper;
-        public AuthService(IHttpHelper httpHelper)
+        private IAuthHttpHelper httpHelper;
+        public AuthService(IAuthHttpHelper httpHelper)
         {
             this.httpHelper = httpHelper;
         }

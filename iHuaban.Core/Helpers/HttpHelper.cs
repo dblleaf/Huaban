@@ -9,6 +9,7 @@ namespace iHuaban.Core.Helpers
 {
     public class HttpHelper : IHttpHelper
     {
+        public virtual string BaseUrl { get; }
         protected virtual async Task<HttpRequestMessage> GetHttpRequestMessageAsync(HttpMethod httpMethod, Uri uri, Dictionary<string, string> headers = null, object content = null)
         {
             HttpRequestMessage httpRequestMessage = new HttpRequestMessage(httpMethod, uri);
@@ -71,9 +72,11 @@ namespace iHuaban.Core.Helpers
 
         public async Task<string> SendRequestStringAsync(HttpMethod httpMethod, string url, Dictionary<string, string> headers = null, object content = null)
         {
+
             using (var client = GetHttpClient())
             {
-                var requestMessage = await GetHttpRequestMessageAsync(httpMethod, new Uri(url), headers, content);
+                var baseUri = new Uri(this.BaseUrl);
+                var requestMessage = await GetHttpRequestMessageAsync(httpMethod, new Uri(baseUri, url), headers, content);
                 var response = await client.SendAsync(requestMessage);
                 var responseContent = await response.Content.ReadAsStringAsync();
                 AfterRequest(response);

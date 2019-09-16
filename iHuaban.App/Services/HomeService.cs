@@ -1,13 +1,13 @@
-﻿using iHuaban.App.Models;
-using iHuaban.Core.Helpers;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
 {
     public class HomeService : IHomeService
     {
-        private IHttpHelper HttpHelper;
-        public HomeService(IHttpHelper httpHelper)
+        private IApiHttpHelper HttpHelper;
+        public HomeService(IApiHttpHelper httpHelper)
         {
             this.HttpHelper = httpHelper;
         }
@@ -19,11 +19,12 @@ namespace iHuaban.App.Services
 
         public async Task<Home> GetPagingHomeAsync(int page)
         {
-            string url = Constants.UrlBase;
-            if (page > 0)
+            if (page <= 0)
             {
-                url += $"discovery/?page={page}";
+                page = 1;
             }
+
+            string url = $"discovery/?page={page}";
             string json = await HttpHelper.GetStringAsync(url);
             return Home.ParseHome(json);
         }

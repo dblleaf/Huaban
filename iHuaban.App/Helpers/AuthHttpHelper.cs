@@ -6,18 +6,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
 namespace iHuaban.App.Helpers
 {
-    public class HbHttpHelper : HttpHelper
+    public class AuthHttpHelper : HttpHelper, IAuthHttpHelper
     {
+        public override string BaseUrl => "https://huaban.com";
         private Context context;
         private IStorageService storageService;
-        public HbHttpHelper(Context context, IStorageService storageService)
+        public AuthHttpHelper(Context context, IStorageService storageService)
         {
             this.context = context;
             this.storageService = storageService;

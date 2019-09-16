@@ -19,7 +19,7 @@ namespace iHuaban.App.ViewModels
         private IHomeService HomeService { get; set; }
 
         public IValueConverter ValueConverter { get; set; }
-        public HomeViewModel(IHomeService homeService,IValueConverter valueConverter)
+        public HomeViewModel(IHomeService homeService, IValueConverter valueConverter)
         {
             this.HomeService = homeService;
             this.ValueConverter = valueConverter;
@@ -94,24 +94,36 @@ namespace iHuaban.App.ViewModels
         private int currentPage = 1;
         private async Task<IEnumerable<IModel>> GetData(uint startIndex, int page)
         {
-            if (IsLoading || currentPage > 5)
+            if (IsLoading)
             {
                 return new List<IModel>();
             }
+            if (currentPage > 5)
+            {
+                Pins.NoMore();
+                NoMoreVisibility = Visibility.Visible;
+                return new List<IModel>();
+            }
+
             IsLoading = true;
             try
             {
                 var home = await HomeService.GetPagingHomeAsync(currentPage++);
 
                 if (home.Recommends.Count > 0)
+                {
                     Pins.HasMore();
+                }
                 else
+                {
                     Pins.NoMore();
+                    NoMoreVisibility = Visibility.Visible;
+                }
 
                 if (home.Explores?.Count > 0 && !(Explores?.Count > 0))
                 {
                     Explores = new ObservableCollection<Explore>(home.Explores);
-                    NoMoreVisibility = Visibility.Visible;
+
                 }
 
                 return home.Recommends;

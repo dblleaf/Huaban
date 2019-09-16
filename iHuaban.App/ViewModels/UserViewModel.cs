@@ -1,25 +1,24 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.App.TemplateSelectors;
-using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using System.Linq;
 using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
     public class UserViewModel : ViewModelBase
     {
-        private IHttpHelper httpHelper;
+        private IApiHttpHelper httpHelper;
         public override string TemplateName => Constants.TemplateCurrentUser;
         public User User { get; private set; }
-        public UserViewModel(User user, IHttpHelper httpHelper)
+        public UserViewModel(User user, IApiHttpHelper httpHelper)
         {
             this.User = user;
             this.httpHelper = httpHelper;
             string urlname = !string.IsNullOrEmpty(this.User.urlname) ? this.User.urlname : this.User.user_id;
-            urlname = Constants.UrlBase + urlname + "/";
+            urlname = urlname + "/";
             ListTypes = new List<ViewModelBase>
             {
                 new ListViewModel<Pin>
@@ -29,18 +28,13 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "pins/",
                     templateName: Constants.TemplatePinList,
                     httpHelper: httpHelper,
-                    converter: o =>
-                    {
-                        var obj = JObject.Parse(o).GetValue("user");
-                        var pins = obj.Values<Pin>("pins").ToList();
-                        return pins;
-                    }
+                    converter: o => JObject.Parse(o).GetValue("pins").Values<Pin>()
                 ),
                 new ListViewModel<Board>
                 (
                     title: "画板",
                     badge: user.board_count,
-                    baseUrl: urlname,
+                    baseUrl: urlname + "boards/",
                     templateName: Constants.TemplateBoardList,
                     httpHelper: httpHelper,
                     converter: o => JObject.Parse(o).GetValue("boards").Values<Board>()
@@ -61,7 +55,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "following",
                     templateName: Constants.TemplateUserList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("user").Values<User>()
+                    converter: o => JObject.Parse(o).GetValue("users").Values<User>()
                 ),
                 new ListViewModel<Board>
                 (

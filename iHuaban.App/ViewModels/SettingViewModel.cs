@@ -75,7 +75,7 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        public override async Task InitAsync()
+        public override async void Init()
         {
             await Task.Delay(0);
             var savePath = storageService.GetSetting("SavePath");

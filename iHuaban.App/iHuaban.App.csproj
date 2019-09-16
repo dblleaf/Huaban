@@ -11,7 +11,7 @@
     <AssemblyName>iHuaban.App</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -102,7 +102,10 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
-    <Compile Include="Helpers\HbHttpHelper.cs" />
+    <Compile Include="Helpers\ApiHttpHelper.cs" />
+    <Compile Include="Helpers\AuthHttpHelper.cs" />
+    <Compile Include="Helpers\IApiHttpHelper.cs" />
+    <Compile Include="Helpers\IAuthHttpHelper.cs" />
     <Compile Include="Models\AccessTokenParameter.cs" />
     <Compile Include="Models\AuthResult.cs" />
     <Compile Include="Models\BoardCollection.cs" />
@@ -147,7 +150,6 @@
     <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
-    <Compile Include="ViewModels\NewHomeViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\FindViewModel.cs" />

@@ -8,10 +8,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Newtonsoft.Json;
 using System.Net;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml;
 
 namespace iHuaban.App.ViewModels
 {
@@ -108,17 +108,23 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        public override async Task InitAsync()
+        public override void Init()
         {
-            string cookieJson = storageService.GetSetting("Cookies");
-            var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
-            this.Context.SetCookie(cookies);
-            var user = await this.authService.GetMeAsync();
-            if (user != null)
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
+            dispatcherTimer.Tick += async (s, e) =>
             {
-                this.Context.User = user;
-            }
-            await Task.Delay(0);
+                dispatcherTimer.Stop();
+                string cookieJson = storageService.GetSetting("Cookies");
+                var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
+                this.Context.SetCookie(cookies);
+                var user = await this.authService.GetMeAsync();
+                if (user != null && !string.IsNullOrWhiteSpace(user.user_id))
+                {
+                    this.Context.User = user;
+                }
+            };
+            dispatcherTimer.Start();
         }
     }
 }

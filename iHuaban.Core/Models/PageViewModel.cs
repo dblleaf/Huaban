@@ -1,17 +1,16 @@
 ﻿using iHuaban.Core.Commands;
 using System;
 using System.Threading.Tasks;
-using Windows.UI.Xaml.Navigation;
+using Windows.ApplicationModel.Core;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace iHuaban.Core.Models
 {
     public abstract class PageViewModel : ViewModelBase
     {
 
-        public virtual async Task InitAsync()
-        {
-            await Task.FromResult(0);
-        }
+        public virtual void Init() { }
 
         private DelegateCommand _PageLoadedCommand;
         public DelegateCommand PageLoadedCommand
@@ -19,20 +18,16 @@ namespace iHuaban.Core.Models
             get
             {
                 return _PageLoadedCommand ?? (_PageLoadedCommand = new DelegateCommand(
-                async o =>
+                o =>
                 {
                     try
                     {
-                        await this.InitAsync();
+                        this.Init();
                     }
                     catch (Exception)
-                    {
-
-                    }
-
+                    { }
                 }, o => true));
             }
         }
-
     }
 }

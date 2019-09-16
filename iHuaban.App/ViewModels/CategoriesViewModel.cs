@@ -1,4 +1,5 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
@@ -22,9 +23,9 @@ namespace iHuaban.App.ViewModels
         private List<DataType> CategoryDataTypes { get; set; } = new List<DataType>();
         private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
 
-        private IHttpHelper HttpHelper { get; set; }
+        private IApiHttpHelper HttpHelper { get; set; }
         public IValueConverter ValueConverter { get; set; }
-        public CategoriesViewModel(HttpHelper httpHelper, IValueConverter valueConverter)
+        public CategoriesViewModel(IApiHttpHelper httpHelper, IValueConverter valueConverter)
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
@@ -35,21 +36,21 @@ namespace iHuaban.App.ViewModels
                 new DataType
                 {
                     Type ="采集",
-                    BaseUrl = Constants.ApiBase,
+                    BaseUrl = "",
                     DataLoaderAsync = LoaderAsync<PinCollection, Pin>,
                     UrlAction = GetCategoryUrl,
                 },
                 new DataType
                 {
                     Type ="画板",
-                    BaseUrl = Constants.ApiBoards,
+                    BaseUrl = Constants.ApiBoardsName,
                     DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
                     UrlAction = GetCategoryUrl,
                 },
                 new DataType
                 {
                     Type = "用户",
-                    BaseUrl =  Constants.ApiUsers,
+                    BaseUrl =  "users",
                     DataLoaderAsync = LoaderAsync<FavoriteUserCollection, PUser>,
                     UrlAction = GetCategoryUrl,
                     ScaleSize = "4:5",

@@ -1,4 +1,5 @@
-﻿using iHuaban.Core;
+﻿using iHuaban.App.Helpers;
+using iHuaban.Core;
 using iHuaban.Core.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -7,8 +8,8 @@ namespace iHuaban.App.Services
 {
     public class Service : IService
     {
-        protected IHttpHelper HttpHelper { get; private set; }
-        public Service(HttpHelper httpHelper)
+        protected IApiHttpHelper HttpHelper { get; private set; }
+        public Service(IApiHttpHelper httpHelper)
         {
             this.HttpHelper = httpHelper;
         }

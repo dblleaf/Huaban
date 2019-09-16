@@ -1,4 +1,5 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
@@ -8,7 +9,7 @@ namespace iHuaban.App.ViewModels
 {
     public class MineViewModel : PageViewModel
     {
-        private IHttpHelper httpHelper;
+        private IApiHttpHelper httpHelper;
         private ViewModelBase viewModel;
         public ViewModelBase ViewModel
         {
@@ -19,7 +20,7 @@ namespace iHuaban.App.ViewModels
 
         public Context Context { get; private set; }
 
-        public MineViewModel(LoginViewModel loginViewModel, IHttpHelper httpHelper, Context context)
+        public MineViewModel(LoginViewModel loginViewModel, IApiHttpHelper httpHelper, Context context)
         {
             this.LoginViewModel = loginViewModel;
             this.httpHelper = httpHelper;

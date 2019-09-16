@@ -1,4 +1,5 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
@@ -13,10 +14,10 @@ namespace iHuaban.App.ViewModels
         where T : IModel
     {
         internal string BaseUrl { get; set; }
-        internal IHttpHelper HttpHelper { get; set; }
+        internal IApiHttpHelper HttpHelper { get; set; }
         internal Func<string, IEnumerable<T>> Converter { get; set; }
 
-        public ListViewModel(string title, int badge, string baseUrl, string templateName, IHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
+        public ListViewModel(string title, int badge, string baseUrl, string templateName, IApiHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
         {
             this.Title = title;
             this.Badge = badge;

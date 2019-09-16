@@ -1,4 +1,5 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
@@ -20,9 +21,9 @@ namespace iHuaban.App.ViewModels
     public class FindViewModel : PageViewModel
     {
         private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
-        private IHttpHelper HttpHelper { get; set; }
+        private IApiHttpHelper HttpHelper { get; set; }
         public IValueConverter ValueConverter { get; set; }
-        public FindViewModel(HttpHelper httpHelper, IValueConverter valueConverter)
+        public FindViewModel(IApiHttpHelper httpHelper, IValueConverter valueConverter)
         {
             this.HttpHelper = httpHelper;
             this.ValueConverter = valueConverter;
@@ -32,21 +33,21 @@ namespace iHuaban.App.ViewModels
                 new DataType
                 {
                     Type ="采集",
-                    BaseUrl = Constants.ApiSearchPins,
+                    BaseUrl = "search",
                     DataLoaderAsync =LoaderAsync<PinCollection, Pin>,
                     UrlAction = GetSearchUrl,
                 },
                 new DataType
                 {
                     Type ="画板",
-                    BaseUrl = Constants.ApiSearchBoards,
+                    BaseUrl = "search/boards",
                     DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
                     UrlAction = GetSearchUrl,
                 },
                 new DataType
                 {
                     Type = "用户",
-                    BaseUrl =  Constants.ApiSearchUsers,
+                    BaseUrl =  "search/users",
                     DataLoaderAsync = LoaderAsync<UserCollection, User>,
                     UrlAction = GetSearchUrl,
                     ScaleSize = "4:5",
