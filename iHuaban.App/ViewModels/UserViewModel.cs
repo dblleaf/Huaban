@@ -2,6 +2,7 @@
 using iHuaban.App.Models;
 using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Models;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using Windows.UI.Xaml.Controls;
@@ -28,7 +29,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "pins/",
                     templateName: Constants.TemplatePinList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("pins").Values<Pin>()
+                    converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data
                 ),
                 new ListViewModel<Board>
                 (
@@ -37,7 +38,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "boards/",
                     templateName: Constants.TemplateBoardList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("boards").Values<Board>()
+                    converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data
                 ),
                 new ListViewModel<Pin>
                 (
@@ -46,7 +47,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "likes/",
                     templateName: Constants.TemplatePinList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("likes").Values<Pin>()
+                    converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data
                 ),
                 new ListViewModel<User>
                 (
@@ -55,7 +56,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "following",
                     templateName: Constants.TemplateUserList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("users").Values<User>()
+                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
                 ),
                 new ListViewModel<Board>
                 (
@@ -64,7 +65,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "following/boards",
                     templateName: Constants.TemplateBoardList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("boards").Values<Board>()
+                    converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data
                 ),
                 new ListViewModel<User>
                 (
@@ -73,7 +74,7 @@ namespace iHuaban.App.ViewModels
                     baseUrl: urlname + "followers/",
                     templateName: Constants.TemplateUserList,
                     httpHelper: httpHelper,
-                    converter: o => JObject.Parse(o).GetValue("users").Values<User>()
+                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
                 )
             };
             //ListTypes = new List<ViewModelBase>

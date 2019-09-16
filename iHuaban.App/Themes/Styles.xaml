@@ -371,6 +371,9 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="Margin" Value="0"/>
     </Style>
+    <Style TargetType="PivotHeaderPanel">
+        <Setter Property="Background" Value="{ThemeResource HBControlBackgroundBrush}" />
+    </Style>
     <Style x:Key="ButtonLogin" TargetType="Button">
         <Setter Property="HorizontalAlignment" Value="Center"/>
     </Style>

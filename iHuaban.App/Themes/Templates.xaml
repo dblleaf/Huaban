@@ -252,12 +252,12 @@
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateCurrentUser">
-        <Grid Padding="8">
+        <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal" Padding="8" Background="{ThemeResource HBControlBackgroundBrush}">
                 <Ellipse
                     Width="60" Height="60"
                     HorizontalAlignment="Left">
@@ -285,8 +285,8 @@
                 </Pivot.HeaderTemplate>
                 <Pivot.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <control:ExtendedGridView
+                        <Grid Padding="-2">
+                            <control:ExtendedGridView x:Name="gridView"
                                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                                 ScaleSize="300:300"
                                 Padding="6" CellMinWidth="236"
@@ -396,6 +396,15 @@
             Height="{Binding ElementName=gridView,Path=CellHeight}">
             <Grid Background="{ThemeResource SystemAltLowColor}">
                 <Image Source="{Binding cover.Sq235}"></Image>
+                <Grid
+                    RequestedTheme="Dark"
+                    x:Name="resolution"
+                    Padding="8"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Stretch"
+                    Background="{ThemeResource SystemAltLowColor}">
+                    <TextBlock Text="{Binding title}"></TextBlock>
+                </Grid>
             </Grid>
         </Grid>
     </DataTemplate>
