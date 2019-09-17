@@ -13,7 +13,7 @@
             <RowDefinition Height="48"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBlock Text="关于" VerticalAlignment="Center" FontWeight="Bold" Margin="16 0"></TextBlock>
+        <Button Style="{StaticResource AutoPaddingButtonStyle}" FontSize="16">关于</Button>
         <ListBox Grid.Row="1" ItemsSource="{Binding AboutList}" Background="{ThemeResource AppBackgroundAcrylicBrush}" Style="{StaticResource AboutListStyle}"></ListBox>
     </Grid>
 </Page>

@@ -20,7 +20,9 @@
                 ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
             <control:ExtendedGridView.Header>
                 <StackPanel Margin="-6 -6 -6 6" Padding="12" Background="{ThemeResource HBControlBackgroundBrush}">
-                    <TextBlock FontSize="16">首页</TextBlock>
+                    <Button Style="{StaticResource AutoPaddingButtonStyle}">
+                        <TextBlock FontSize="16">首页</TextBlock>
+                    </Button>
                 </StackPanel>
             </control:ExtendedGridView.Header>
             <control:ExtendedGridView.Footer>

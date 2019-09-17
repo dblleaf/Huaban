@@ -27,16 +27,45 @@
         </Storyboard>
     </Page.Resources>
     <Grid>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1024"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rootSplitView.DisplayMode" Value="CompactInline" />
+                        <Setter Target="rootSplitView.IsPaneOpen" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720"></AdaptiveTrigger>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rootSplitView.DisplayMode" Value="CompactOverlay" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="rootSplitView.DisplayMode" Value="Overlay" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
         <SplitView
             x:Name="rootSplitView"
             OpenPaneLength="220"
             IsPaneOpen="True"
             CompositeMode="SourceOver"
-            DisplayMode="CompactInline"
             PaneOpening="RootSplitView_PaneOpening"
             PaneClosing="RootSplitView_PaneClosing">
             <SplitView.Pane>
-                <StackPanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}" Padding="0 64 0 0">
+                <StackPanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}" Padding="0">
+                    <TextBlock Margin="48 14 12 12" x:Name="appName">爱花瓣</TextBlock>
                     <StackPanel Visibility="{Binding Path=Context.IsLogin,Converter={Binding ValueConverter}}">
                         <Ellipse x:Name="avatar" HorizontalAlignment="Left" Margin="8"
                             Width="100" Height="100">
@@ -72,12 +101,12 @@
             </Grid>
 
         </SplitView>
-        <StackPanel Padding="12 4" Background="Transparent" x:Name="coreTitle" Height="32" VerticalAlignment="Top" Orientation="Horizontal">
-            <TextBlock x:Name="appName" Visibility="{Binding ElementName=rootSplitView,Path=IsPaneOpen,Converter={StaticResource ObjectToVisibilityConverter}}">爱花瓣</TextBlock>
-            <TextBlock> </TextBlock>
+        <StackPanel Background="Transparent" x:Name="coreTitle" Height="32" VerticalAlignment="Top">
         </StackPanel>
-        <ToggleButton Margin="12 32" Padding="0" Background="Transparent" VerticalAlignment="Top" IsChecked="{Binding Path=IsPaneOpen,ElementName=rootSplitView,Mode=TwoWay}">
+
+        <ToggleButton Margin="12" Padding="0" Background="Transparent" VerticalAlignment="Top" IsChecked="{Binding Path=IsPaneOpen,ElementName=rootSplitView,Mode=TwoWay}">
             <SymbolIcon Symbol="GlobalNavigationButton"/>
         </ToggleButton>
+
     </Grid>
 </Page>

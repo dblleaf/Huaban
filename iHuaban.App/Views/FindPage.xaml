@@ -20,7 +20,7 @@
                 ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
             <control:ExtendedGridView.Header>
                 <StackPanel Margin="-6 -6 -6 6" Padding="12" Background="{ThemeResource HBControlBackgroundBrush}">
-                    <TextBlock FontSize="16">搜索</TextBlock>
+                    <Button Style="{StaticResource AutoPaddingButtonStyle}" FontSize="16">搜索</Button>
                     <Grid Margin="0 12 0 0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />

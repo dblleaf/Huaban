@@ -14,7 +14,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Padding="12" Background="{ThemeResource HBControlBackgroundBrush}">
-            <TextBlock FontSize="16">下载</TextBlock>
+            <Button Style="{StaticResource AutoPaddingButtonStyle}">
+                <TextBlock FontSize="16">下载</TextBlock>
+            </Button>
+
         </StackPanel>
     </Grid>
 </Page>

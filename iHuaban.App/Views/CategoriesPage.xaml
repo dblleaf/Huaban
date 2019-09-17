@@ -20,7 +20,9 @@
                 ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
             <control:ExtendedGridView.Header>
                 <StackPanel Margin="-6 -6 -6 6" Padding="12" HorizontalAlignment="Stretch" Background="{ThemeResource HBControlBackgroundBrush}">
-                    <TextBlock FontSize="16" VerticalAlignment="Center">分类 - <Run Text="{Binding SelectedCategory.name}" /></TextBlock>
+                    <Button Style="{StaticResource AutoPaddingButtonStyle}">
+                        <TextBlock FontSize="16" VerticalAlignment="Center">分类 - <Run Text="{Binding SelectedCategory.name}" /></TextBlock>
+                    </Button>
                     <ComboBox Margin="0 12 0 0"
                         Visibility="{Binding DataTypesVisibility}"
                         ItemContainerStyle="{StaticResource DataTypeListBoxItemStyle}"

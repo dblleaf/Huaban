@@ -13,7 +13,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Padding="12" Background="{ThemeResource HBControlBackgroundBrush}">
-            <TextBlock FontSize="16">我的</TextBlock>
+            <Button Style="{StaticResource AutoPaddingButtonStyle}">
+                <TextBlock FontSize="16">我的</TextBlock>
+            </Button>
         </StackPanel>
         <ContentControl Grid.Row="1"
             Background="Transparent"
