@@ -9,12 +9,6 @@ namespace iHuaban.App.TemplateSelectors
     {
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {
-            var menu = item as ViewModelBase;
-            if (menu != null)
-            {
-                return (DataTemplate)Application.Current.Resources[menu.TemplateName];
-            }
-
             var recommend = item as IModel;
             if (recommend != null)
             {

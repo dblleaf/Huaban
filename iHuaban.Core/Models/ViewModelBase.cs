@@ -4,10 +4,6 @@ namespace iHuaban.Core.Models
 {
     public class ViewModelBase : ObservableObject
     {
-        public virtual string Title { get; set; }
-        public virtual int Badge { get; set; }
-        public virtual string Icon { get; set; }
-        public virtual string TemplateName { get; set; }
         public ViewModelBase()
         {
             this.NoMoreVisibility = Visibility.Collapsed;

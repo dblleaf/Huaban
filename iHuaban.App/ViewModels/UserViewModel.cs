@@ -1,18 +1,14 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
 using iHuaban.Core.Models;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
-using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
     public class UserViewModel : ViewModelBase
     {
         private IApiHttpHelper httpHelper;
-        public override string TemplateName => Constants.TemplateCurrentUser;
         public User User { get; private set; }
         public UserViewModel(User user, IApiHttpHelper httpHelper)
         {
@@ -24,78 +20,44 @@ namespace iHuaban.App.ViewModels
             {
                 new ListViewModel<Pin>
                 (
-                    title: "采集",
-                    badge: user.pin_count,
-                    baseUrl: urlname + "pins/",
-                    templateName: Constants.TemplatePinList,
+                    dataType: new DataType { Title = "采集", Badge = user.pin_count, BaseUrl = urlname + "pins/" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data
                 ),
                 new ListViewModel<Board>
                 (
-                    title: "画板",
-                    badge: user.board_count,
-                    baseUrl: urlname + "boards/",
-                    templateName: Constants.TemplateBoardList,
+                    dataType: new DataType { Title = "画板", Badge = user.board_count, BaseUrl = urlname + "boards/" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data
                 ),
                 new ListViewModel<Pin>
                 (
-                    title: "喜欢",
-                    badge: user.like_count,
-                    baseUrl: urlname + "likes/",
-                    templateName: Constants.TemplatePinList,
+                    dataType: new DataType { Title = "喜欢", Badge = user.like_count, BaseUrl = urlname + "likes/" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data
                 ),
                 new ListViewModel<User>
                 (
-                    title: "关注用户",
-                    badge: user.following_count,
-                    baseUrl: urlname + "following",
-                    templateName: Constants.TemplateUserList,
+                    dataType: new DataType { Title = "粉丝", Badge = user.follower_count, BaseUrl = urlname + "followers/", ScaleSize = "4:5", },
+                    httpHelper: httpHelper,
+                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
+                ),
+                new ListViewModel<User>
+                (
+                    dataType: new DataType { Title = "关注用户", Badge = user.following_count, BaseUrl = urlname + "following", ScaleSize = "4:5", },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
                 ),
                 new ListViewModel<Board>
                 (
-                    title: "关注画板",
-                    badge: user.muse_board_count,
-                    baseUrl: urlname + "following/boards",
-                    templateName: Constants.TemplateBoardList,
+                    dataType: new DataType { Title = "关注画板", Badge = user.muse_board_count, BaseUrl = urlname + "following/boards" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data
-                ),
-                new ListViewModel<User>
-                (
-                    title: "粉丝",
-                    badge: user.follower_count,
-                    baseUrl: urlname + "followers/",
-                    templateName: Constants.TemplateUserList,
-                    httpHelper: httpHelper,
-                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
                 )
             };
-            //ListTypes = new List<ViewModelBase>
-            //{
-            //    new ListViewModel<Pin>
-            //    {
-            //        baseUrl: urlname+"pins/",
-            //        TemplateName = Constants.TemplatePinList,
-            //        HttpHelper = httpHelper,
-            //        Converter = o => JObject.Parse(o).GetValue("pins").Values<Pin>()
-            //    },
-            //    new ListViewModel<Board>(urlname, Constants.TemplateBoardList, httpHelper, o => JObject.Parse(o).GetValue("boards").Values<Board>()),
-            //    new ListViewModel<Pin>(urlname + "likes/", Constants.TemplatePinList, httpHelper, o => JObject.Parse(o).GetValue("likes").Values<Pin>()),
-            //    new ListViewModel<User>(urlname + "following", Constants.TemplateUserList, httpHelper, o => JObject.Parse(o).GetValue("users").Values<User>()),
-            //    new ListViewModel<Board>(urlname + "following/boards", Constants.TemplateBoardList, httpHelper, o => JObject.Parse(o).GetValue("boards").Values<Board>()),
-            //    new ListViewModel<User>(urlname + "followers/", Constants.TemplateUserList, httpHelper, o => JObject.Parse(o).GetValue("users").Values<User>()),
-            //};
         }
 
         public List<ViewModelBase> ListTypes { get; set; }
 
-        public DataTemplateSelector DataTemplateSelector => new SupperDataTemplateSelector();
     }
 }

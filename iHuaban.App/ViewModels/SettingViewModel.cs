@@ -7,7 +7,6 @@ using Windows.Storage;
 using Windows.Storage.AccessCache;
 using Windows.Storage.Pickers;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Navigation;
 
 namespace iHuaban.App.ViewModels
 {
@@ -22,8 +21,7 @@ namespace iHuaban.App.ViewModels
             this.DarkMode = themeService.RequestTheme == ElementTheme.Dark;
             this.PropertyChanged += SettingViewModel_PropertyChanged;
         }
-        public override string Icon => Constants.IconSetting;
-        public override string Title => Constants.TextSetting;
+
         private bool _DarkMode;
         public bool DarkMode
         {

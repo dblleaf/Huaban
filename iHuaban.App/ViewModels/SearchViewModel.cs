@@ -45,10 +45,6 @@ namespace iHuaban.App.ViewModels
             this.DataType = DataTypes[0];
         }
 
-        public override string Icon => Constants.IconFind;
-        public override string Title => Constants.TextFind;
-        public override string TemplateName => Constants.TemplateSearch;
-
         private IncrementalLoadingList<IModel> _Data;
         public IncrementalLoadingList<IModel> Data
         {

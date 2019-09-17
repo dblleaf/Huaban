@@ -37,8 +37,6 @@ namespace iHuaban.App.ViewModels
             await Task.Delay(0);
         }
 
-        public override string TemplateName => Constants.TemplateLogin;
-
         private string _UserName;
         public string UserName
         {

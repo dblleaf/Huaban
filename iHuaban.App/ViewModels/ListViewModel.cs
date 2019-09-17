@@ -1,6 +1,5 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -13,31 +12,18 @@ namespace iHuaban.App.ViewModels
     public class ListViewModel<T> : ViewModelBase
         where T : IModel
     {
-        internal string BaseUrl { get; set; }
         internal IApiHttpHelper HttpHelper { get; set; }
         internal Func<string, IEnumerable<T>> Converter { get; set; }
-
-        public ListViewModel(string title, int badge, string baseUrl, string templateName, IApiHttpHelper httpHelper, Func<string, IEnumerable<T>> converter)
+        public DataType DataType { get; private set; } = new DataType();
+        public ListViewModel(
+            DataType dataType,
+            IApiHttpHelper httpHelper,
+            Func<string, IEnumerable<T>> converter)
         {
-            this.Title = title;
-            this.Badge = badge;
-            this.BaseUrl = baseUrl;
+            this.DataType = dataType;
             this.HttpHelper = httpHelper;
             this.Converter = converter;
-            this.TemplateName = templateName;
             this.Data = new IncrementalLoadingList<T>(GetData);
-        }
-
-        public void SetBaseUrl(string baseUrl)
-        {
-            this.BaseUrl = baseUrl;
-            this.Data.Clear();
-            this.Data.HasMore();
-        }
-
-        public string AAA
-        {
-            get { return this.Data.GetType().ToString(); }
         }
 
         public IncrementalLoadingList<T> Data { private set; get; }
@@ -57,7 +43,7 @@ namespace iHuaban.App.ViewModels
                 {
                     query += $"&max={max}";
                 }
-                var url = $"{ this.BaseUrl.Trim('/')}{query}";
+                var url = $"{ this.DataType.BaseUrl.Trim('/')}{query}";
                 var json = await HttpHelper.GetStringAsync(url);
                 var result = this.Converter(json);
                 if (result.Count() == 0)

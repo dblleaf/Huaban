@@ -23,13 +23,11 @@ namespace iHuaban.App.ViewModels
             IStorageService storageService,
             HomeViewModel homeViewModel,
             FindViewModel findViewModel,
-            MineViewModel mineViewModel,
-            DataTemplateSelector dataTemplateSelector
+            MineViewModel mineViewModel
         )
         {
             this.navigationService = navigationService;
             this.storageService = storageService;
-            this.DataTemplateSelector = dataTemplateSelector;
             var list = new List<ViewModelBase>
             {
                 homeViewModel,
@@ -38,11 +36,6 @@ namespace iHuaban.App.ViewModels
             };
             Menu = new ObservableCollection<ViewModelBase>(list);
         }
-
-        public DataTemplateSelector DataTemplateSelector { get; private set; }
-        public override string Icon => string.Empty;
-        public override string Title => string.Empty;
-        public override string TemplateName => string.Empty;
 
         private DelegateCommand _NavigateCommand;
         public DelegateCommand NavigateCommand

@@ -68,13 +68,6 @@ namespace iHuaban.App.ViewModels
             };
         }
 
-        public override string Icon => Constants.IconFind;
-        public override string Title => Constants.TextFind;
-        public override string TemplateName => Constants.TemplateFind;
-        public string ScaleSize => "300:300";
-        public decimal CellMinWidth => 236;
-        public DataTemplateSelector DataTemplateSelector { get; private set; } = new SupperDataTemplateSelector();
-
         private IncrementalLoadingList<IModel> _Data;
         public IncrementalLoadingList<IModel> Data
         {

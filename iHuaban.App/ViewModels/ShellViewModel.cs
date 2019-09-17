@@ -3,15 +3,13 @@ using iHuaban.App.Services;
 using iHuaban.App.Views;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using Windows.UI.Xaml.Controls;
-using Newtonsoft.Json;
 using System.Net;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml;
 
 namespace iHuaban.App.ViewModels
 {
@@ -21,7 +19,6 @@ namespace iHuaban.App.ViewModels
         private IStorageService storageService;
         private IAuthService authService;
         public ObservableCollection<MenuItem> Menu { get; set; }
-        public DataTemplateSelector DataTemplateSelector { get; private set; }
         public IValueConverter ValueConverter { get; set; }
         public Context Context { get; private set; }
         public ShellViewModel(
@@ -108,23 +105,16 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        public override void Init()
+        public override async void Init()
         {
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 1);
-            dispatcherTimer.Tick += async (s, e) =>
+            string cookieJson = storageService.GetSetting("Cookies");
+            var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
+            this.Context.SetCookie(cookies);
+            var user = await this.authService.GetMeAsync();
+            if (user != null && !string.IsNullOrWhiteSpace(user.user_id))
             {
-                dispatcherTimer.Stop();
-                string cookieJson = storageService.GetSetting("Cookies");
-                var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
-                this.Context.SetCookie(cookies);
-                var user = await this.authService.GetMeAsync();
-                if (user != null && !string.IsNullOrWhiteSpace(user.user_id))
-                {
-                    this.Context.User = user;
-                }
-            };
-            dispatcherTimer.Start();
+                this.Context.User = user;
+            }
         }
     }
 }

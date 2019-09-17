@@ -106,32 +106,32 @@
     <Compile Include="Helpers\AuthHttpHelper.cs" />
     <Compile Include="Helpers\IApiHttpHelper.cs" />
     <Compile Include="Helpers\IAuthHttpHelper.cs" />
-    <Compile Include="Models\AccessTokenParameter.cs" />
-    <Compile Include="Models\AuthResult.cs" />
-    <Compile Include="Models\BoardCollection.cs" />
-    <Compile Include="Models\CategoryCollection.cs" />
-    <Compile Include="Models\AuthToken.cs" />
-    <Compile Include="Models\Cover.cs" />
-    <Compile Include="Models\Explore.cs" />
+    <Compile Include="Models\Api\AccessTokenParameter.cs" />
+    <Compile Include="Models\Api\AuthResult.cs" />
+    <Compile Include="Models\Api\BoardCollection.cs" />
+    <Compile Include="Models\Api\CategoryCollection.cs" />
+    <Compile Include="Models\Api\AuthToken.cs" />
+    <Compile Include="Models\Api\Cover.cs" />
+    <Compile Include="Models\Api\Explore.cs" />
     <Compile Include="Models\ExtendedTheme.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\MenuItem.cs" />
-    <Compile Include="Models\ModelCollection.cs" />
-    <Compile Include="Models\RecommendBoard.cs" />
-    <Compile Include="Models\RecommendUser.cs" />
-    <Compile Include="Models\RefreshTokenParameter.cs" />
-    <Compile Include="Models\SearchType.cs" />
+    <Compile Include="Models\Api\ModelCollection.cs" />
+    <Compile Include="Models\Api\RecommendBoard.cs" />
+    <Compile Include="Models\Api\RecommendUser.cs" />
+    <Compile Include="Models\Api\RefreshTokenParameter.cs" />
+    <Compile Include="Models\DataType.cs" />
     <Compile Include="Models\SimpleModel.cs" />
-    <Compile Include="Models\IModel.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Board.cs" />
-    <Compile Include="Models\File.cs" />
-    <Compile Include="Models\IModelCollection.cs" />
+    <Compile Include="Models\Api\IModel.cs" />
+    <Compile Include="Models\Api\Category.cs" />
+    <Compile Include="Models\Api\Board.cs" />
+    <Compile Include="Models\Api\File.cs" />
+    <Compile Include="Models\Api\IModelCollection.cs" />
     <Compile Include="Models\Menu.cs" />
-    <Compile Include="Models\Pin.cs" />
-    <Compile Include="Models\PinCollection.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="Models\UserCollection.cs" />
+    <Compile Include="Models\Api\Pin.cs" />
+    <Compile Include="Models\Api\PinCollection.cs" />
+    <Compile Include="Models\Api\User.cs" />
+    <Compile Include="Models\Api\UserCollection.cs" />
     <Compile Include="Models\Context.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\Interfaces\IAuthService.cs" />
@@ -171,9 +171,6 @@
     </Compile>
     <Compile Include="Views\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\DownloadPage.xaml.cs">
@@ -294,10 +291,6 @@
     <Page Include="Views\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\DownloadPage.xaml">
       <Generator>MSBuild:Compile</Generator>

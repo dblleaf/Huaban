@@ -17,7 +17,7 @@
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding Data}"
-                ItemTemplateSelector="{Binding DataTemplateSelector}">
+                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
             <control:ExtendedGridView.Header>
                 <StackPanel Margin="-6 -6 -6 6" Padding="12" Background="{ThemeResource HBControlBackgroundBrush}">
                     <TextBlock FontSize="16">搜索</TextBlock>

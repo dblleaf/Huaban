@@ -14,7 +14,7 @@
                 ScaleSize="300:300"
                 Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding Pins}"
-                ItemTemplateSelector="{Binding DataTemplateSelector}">
+                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
                 <control:ExtendedGridView.Footer>
                     <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
                         <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
@@ -60,7 +60,7 @@
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding Data}"
-                ItemTemplateSelector="{Binding DataTemplateSelector}">
+                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
                 <control:ExtendedGridView.Header>
                     <StackPanel Padding="6 0" HorizontalAlignment="Stretch">
                         <Grid >
@@ -192,7 +192,7 @@
                 ScaleSize="300:300"
                 Padding="6" CellMinWidth="236"
                 ItemsSource="{Binding Data}"
-                ItemTemplateSelector="{Binding DataType.DataTemplateSelector}">
+                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
                 <control:ExtendedGridView.Header>
                     <Grid Margin="6">
                         <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
@@ -248,7 +248,7 @@
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             Content="{Binding ViewModel}"
-            ContentTemplateSelector="{Binding DataTemplateSelector}"/>
+            ContentTemplateSelector="{StaticResource SupperDataTemplateSelector}"/>
     </DataTemplate>
 
     <DataTemplate x:Key="TemplateCurrentUser">
@@ -273,13 +273,14 @@
                     </StackPanel>
                 </StackPanel>
             </StackPanel>
+            <StackPanel Grid.Row="1" Height="44" Background="{ThemeResource HBControlBackgroundBrush}" VerticalAlignment="Top" HorizontalAlignment="Stretch"></StackPanel>
             <Pivot Grid.Row="1" x:Name="rootPivot"
                 ItemsSource="{Binding Path=ListTypes}">
                 <Pivot.HeaderTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="14" Text="{Binding Title}"/>
-                            <TextBlock FontSize="10" Margin="4 0 0 0" Text="{Binding Badge}"/>
+                            <TextBlock FontSize="14" Text="{Binding DataType.Title}"/>
+                            <TextBlock FontSize="10" Margin="4 0 0 0" Text="{Binding DataType.Badge}"/>
                         </StackPanel>
                     </DataTemplate>
                 </Pivot.HeaderTemplate>
@@ -288,7 +289,7 @@
                         <Grid Padding="-2">
                             <control:ExtendedGridView x:Name="gridView"
                                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                                ScaleSize="300:300"
+                                ScaleSize="{Binding DataType.ScaleSize}"
                                 Padding="6" CellMinWidth="236"
                                 ItemsSource="{Binding Data}"
                                 ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">

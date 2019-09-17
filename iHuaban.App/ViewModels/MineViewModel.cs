@@ -1,9 +1,6 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
-using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
-using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.ViewModels
 {
@@ -39,11 +36,5 @@ namespace iHuaban.App.ViewModels
         {
             return new UserViewModel(this.Context.User, this.httpHelper);
         }
-
-        public override string Icon => Constants.IconMine;
-        public override string Title => Constants.TextMine;
-        public override string TemplateName => Constants.TemplateMine;
-
-        public DataTemplateSelector DataTemplateSelector => new SupperDataTemplateSelector();
     }
 }

@@ -16,7 +16,8 @@ namespace iHuaban.App.Models
         public int explore_following_count { set; get; }
         public int boards_like_count { set; get; }
         public int following_count { set; get; }
-        public string KeyId => user_id;
+        public string KeyId => seq;
+        public string seq { get; set; }
         public File avatar { set; get; }
         public string typeName => this.GetType().Name;
         public List<Pin> Pins { get; set; }

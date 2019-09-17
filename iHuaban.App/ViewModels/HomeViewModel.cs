@@ -26,13 +26,6 @@ namespace iHuaban.App.ViewModels
             this.Pins = new IncrementalLoadingList<IModel>(GetData);
         }
 
-        public override string Icon => Constants.IconHome;
-        public override string Title => Constants.TextHome;
-        public override string TemplateName => Constants.TemplateHome;
-        public string ScaleSize => "300:300";
-        public decimal CellMinWidth => 236;
-        public DataTemplateSelector DataTemplateSelector => new SupperDataTemplateSelector();
-
         private IncrementalLoadingList<IModel> _Recommends;
         public IncrementalLoadingList<IModel> Pins
         {

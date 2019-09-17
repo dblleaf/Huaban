@@ -1,15 +1,15 @@
 ﻿namespace iHuaban.App.Models
 {
-    using iHuaban.App.TemplateSelectors;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Windows.UI.Xaml.Controls;
 
     public class DataType
     {
+        public string Title { get; set; }
         public string Type { get; set; }
         public string BaseUrl { get; set; }
+        public long Badge { get; set; }
         public Func<string, Task<IEnumerable<IModel>>> DataLoaderAsync { get; set; }
         public Func<DataType, string> UrlAction { get; set; }
         public string ScaleSize { get; set; } = "300:300";

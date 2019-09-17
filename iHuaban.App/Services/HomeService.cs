@@ -24,7 +24,7 @@ namespace iHuaban.App.Services
                 page = 1;
             }
 
-            string url = $"discovery/?page={page}";
+            string url = $"?page={page}";
             string json = await HttpHelper.GetStringAsync(url);
             return Home.ParseHome(json);
         }
