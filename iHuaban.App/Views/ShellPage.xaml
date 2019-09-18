@@ -35,7 +35,6 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="rootSplitView.DisplayMode" Value="CompactInline" />
-                        <Setter Target="rootSplitView.IsPaneOpen" Value="True" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState>
@@ -65,7 +64,7 @@
             PaneClosing="RootSplitView_PaneClosing">
             <SplitView.Pane>
                 <StackPanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}" Padding="0">
-                    <TextBlock Margin="48 14 12 12" x:Name="appName">爱花瓣</TextBlock>
+                    <TextBlock Margin="48 14 12 12" x:Name="appName" Text="{Binding AppName}"></TextBlock>
                     <StackPanel Visibility="{Binding Path=Context.IsLogin,Converter={Binding ValueConverter}}">
                         <Ellipse x:Name="avatar" HorizontalAlignment="Left" Margin="8"
                             Width="100" Height="100">

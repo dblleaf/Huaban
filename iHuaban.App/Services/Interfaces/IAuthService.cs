@@ -6,6 +6,6 @@ namespace iHuaban.App.Services
     public interface IAuthService
     {
         Task<AuthResult> LoginAsync(string userName, string password);
-        Task<User> GetMeAsync();
+        Task LoadMeAsync();
     }
 }

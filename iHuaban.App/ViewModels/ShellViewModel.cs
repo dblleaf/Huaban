@@ -3,12 +3,10 @@ using iHuaban.App.Services;
 using iHuaban.App.Views;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Net;
-using Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel;
 using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
@@ -21,6 +19,7 @@ namespace iHuaban.App.ViewModels
         public ObservableCollection<MenuItem> Menu { get; set; }
         public IValueConverter ValueConverter { get; set; }
         public Context Context { get; private set; }
+        public string AppName { get; private set; } = Package.Current.DisplayName;
         public ShellViewModel(
             INavigationService navigationService,
             IStorageService storageService,
@@ -102,18 +101,6 @@ namespace iHuaban.App.ViewModels
                     }
 
                 }, o => true));
-            }
-        }
-
-        public override async void Init()
-        {
-            string cookieJson = storageService.GetSetting("Cookies");
-            var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
-            this.Context.SetCookie(cookies);
-            var user = await this.authService.GetMeAsync();
-            if (user != null && !string.IsNullOrWhiteSpace(user.user_id))
-            {
-                this.Context.User = user;
             }
         }
     }

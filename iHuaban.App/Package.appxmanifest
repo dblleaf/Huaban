@@ -3,7 +3,7 @@
   <Identity Name="c333e4c5-3013-4eba-ab71-07c1cd55ca4a" Publisher="CN=v-zhaso" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="c333e4c5-3013-4eba-ab71-07c1cd55ca4a" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>iHuaban.App</DisplayName>
+    <DisplayName>爱花瓣</DisplayName>
     <PublisherDisplayName>v-zhaso</PublisherDisplayName>
     <Logo>assets\Store\StoreLogo.png</Logo>
   </Properties>
@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="iHuaban.App.App">
-      <uap:VisualElements DisplayName="爱花瓣UWP" Square150x150Logo="assets\Medium\Medium150x150Logo.png" Square44x44Logo="assets\AppList\AppList.png" Description="iHuaban.App" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="爱花瓣" Square150x150Logo="assets\Medium\Medium150x150Logo.png" Square44x44Logo="assets\AppList\AppList.png" Description="iHuaban.App" BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="assets\Wide\Wide310x150Logo.png" Square71x71Logo="assets\Small\Small71x71Logo.png" Square310x310Logo="assets\Large\Large310x310Logo.png">
         </uap:DefaultTile>
         <uap:SplashScreen Image="assets\SplashScreen\SplashScreen.png" />

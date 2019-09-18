@@ -205,8 +205,13 @@
                     </Grid>
                 </control:ExtendedGridView.Header>
                 <control:ExtendedGridView.Footer>
-                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                        <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                    <Grid>
+                        <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                            <TextBlock Text="No more data" HorizontalAlignment="Center"/>
+                        </Grid>
+                        <Grid Margin="8" Visibility="{Binding IsLoading,Converter={Binding ValueConverter}}">
+                            <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
+                        </Grid>
                     </Grid>
                 </control:ExtendedGridView.Footer>
             </control:ExtendedGridView>
@@ -294,8 +299,13 @@
                                 ItemsSource="{Binding Data}"
                                 ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
                                 <control:ExtendedGridView.Footer>
-                                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                                        <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                                    <Grid>
+                                        <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                                            <TextBlock Text="No more data" HorizontalAlignment="Center"/>
+                                        </Grid>
+                                        <Grid Margin="8" Visibility="{Binding IsLoading,Converter={Binding ValueConverter}}">
+                                            <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
+                                        </Grid>
                                     </Grid>
                                 </control:ExtendedGridView.Footer>
                             </control:ExtendedGridView>
