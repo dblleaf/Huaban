@@ -4,6 +4,13 @@ namespace iHuaban.Core.Models
 {
     public class ViewModelBase : ObservableObject
     {
+        public virtual string TemplateName
+        {
+            get
+            {
+                return "Template" + this.GetType().Name.Replace("ViewModel", "");
+            }
+        }
         public ViewModelBase()
         {
             this.NoMoreVisibility = Visibility.Collapsed;

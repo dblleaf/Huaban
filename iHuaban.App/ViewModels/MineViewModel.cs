@@ -25,7 +25,7 @@ namespace iHuaban.App.ViewModels
             this.ViewModel = context.User == null ? LoginViewModel : GetCurrentUserViewModel();
             this.Context.PropertyChanged += (sender, e) =>
             {
-                if (e.PropertyName == nameof(this.Context.User))
+                if (e.PropertyName == "User")
                 {
                     ViewModel = context.User == null ? LoginViewModel : GetCurrentUserViewModel();
                 }

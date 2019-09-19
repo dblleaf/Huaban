@@ -22,6 +22,6 @@
             HorizontalContentAlignment="Stretch"
             VerticalContentAlignment="Stretch"
             Content="{Binding ViewModel}"
-            ContentTemplate="{StaticResource TemplateCurrentUser}"/>
+            ContentTemplateSelector="{StaticResource SupperDataTemplateSelector}"/>
     </Grid>
 </Page>

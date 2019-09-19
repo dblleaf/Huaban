@@ -55,7 +55,6 @@ namespace iHuaban.App.Services
             Container.RegisterType<IService, Service>();
             Container.RegisterType<IHomeService, HomeService>();
             Container.RegisterType<IAuthService, AuthService>();
-            Container.RegisterType<DataTemplateSelector, SupperDataTemplateSelector>();
         }
 
         public static T ResolveObject<T>()

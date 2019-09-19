@@ -17,10 +17,24 @@ namespace iHuaban.App
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.UnhandledException += App_UnhandledException;
+        }
+
+        private async void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            e.Handled = true;
+            await new ContentDialog
+            {
+                Title = "发生错误",
+                Content = e.Message,
+                CloseButtonText = "关闭",
+                DefaultButton = ContentDialogButton.Close
+            }.ShowAsync();
         }
 
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
+            Locator.BuildLocator();
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
             {
@@ -35,12 +49,12 @@ namespace iHuaban.App
 
             if (e.PrelaunchActivated == false)
             {
-                await Locator.ResolveObject<IAuthService>().LoadMeAsync();
                 if (rootFrame.Content == null)
                 {
                     Locator.ResolveObject<INavigationService>().Navigate<ShellPage>(e.Arguments);
                 }
                 Window.Current.Activate();
+                await Locator.ResolveObject<IAuthService>().LoadMeAsync();
                 ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
                 Locator.ResolveObject<IThemeService>().LoadTheme();
             }
@@ -59,8 +73,8 @@ namespace iHuaban.App
 
         protected override void OnActivated(IActivatedEventArgs args)
         {
-            Locator.BuildLocator().Resolve<IThemeService>().LoadTheme();
             base.OnActivated(args);
         }
+
     }
 }

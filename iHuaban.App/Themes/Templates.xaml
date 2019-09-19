@@ -53,210 +53,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateFind">
-        <Grid>
-            <control:ExtendedGridView x:Name="gridView"
-                ScaleSize="{Binding DataType.ScaleSize}"
-                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                Padding="6" CellMinWidth="236"
-                ItemsSource="{Binding Data}"
-                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
-                <control:ExtendedGridView.Header>
-                    <StackPanel Padding="6 0" HorizontalAlignment="Stretch">
-                        <Grid >
-                            <Grid Visibility="{Binding SearchBoxVisibility}" Padding="0 6">
-                                <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="QuerySubmitted">
-                                            <Core:InvokeCommandAction Command="{Binding SearchCommand}"></Core:InvokeCommandAction>
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                </AutoSuggestBox>
-                            </Grid>
-                            <Grid Visibility="{Binding CategoryHeaderVisibility}">
-                                <TextBlock Text="{Binding SelectedCategory.name}" FontSize="30"></TextBlock>
-                                <SymbolIcon Symbol="Find" ToolTipService.ToolTip="Search" HorizontalAlignment="Right" Margin="12">
-                                    <Interactivity:Interaction.Behaviors>
-                                        <Core:EventTriggerBehavior EventName="Tapped">
-                                            <Core:InvokeCommandAction Command="{Binding ShowSearchCommand}"></Core:InvokeCommandAction>
-                                        </Core:EventTriggerBehavior>
-                                    </Interactivity:Interaction.Behaviors>
-                                </SymbolIcon>
-                            </Grid>
-                        </Grid>
-                        <ListBox 
-                            Background="{ThemeResource AppBackgroundAcrylicBrush}"
-                            Margin="0 6" Padding="0"
-                            Visibility="{Binding DataTypesVisibility}"
-                            ItemContainerStyle="{StaticResource DataTypeListBoxItemStyle}"
-                            ItemsSource="{Binding DataTypes}"
-                            SelectedItem="{Binding DataType,Mode=TwoWay}">
-                            <ListBox.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ListBox.ItemsPanel>
-                            <ListBox.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding Type}"></TextBlock>
-                                </DataTemplate>
-                            </ListBox.ItemTemplate>
-                            <Interactivity:Interaction.Behaviors>
-                                <Core:EventTriggerBehavior EventName="SelectionChanged">
-                                    <Core:InvokeCommandAction Command="{Binding RefreshCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
-                                </Core:EventTriggerBehavior>
-                            </Interactivity:Interaction.Behaviors>
-                        </ListBox>
-                    </StackPanel>
-                </control:ExtendedGridView.Header>
-                <control:ExtendedGridView.Footer>
-                    <Grid>
-                        <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                            <TextBlock Text="No more data" HorizontalAlignment="Center"/>
-                        </Grid>
-                        <Grid Margin="8" Visibility="{Binding IsLoading,Converter={Binding ValueConverter}}">
-                            <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Grid>
-                </control:ExtendedGridView.Footer>
-            </control:ExtendedGridView>
-
-            <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Border ToolTipService.ToolTip="Go to Top"
-                    CornerRadius="18"
-                    Width="36" Height="36" Margin="4"
-                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                    BorderThickness="2" HorizontalAlignment="Center"
-                    Background="{ThemeResource AppControlAcrylicBrush}">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding GotoTopCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
-                </Border>
-
-                <Border ToolTipService.ToolTip="Refresh"
-                    CornerRadius="18"
-                    Width="36" Height="36" Margin="4"
-                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                    BorderThickness="2" HorizontalAlignment="Center"
-                    Background="{ThemeResource AppControlAcrylicBrush}">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
-                </Border>
-
-                <Border ToolTipService.ToolTip="Category"
-                    CornerRadius="18"
-                    Width="36" Height="36" Margin="4"
-                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                    BorderThickness="2" HorizontalAlignment="Center"
-                    Background="{ThemeResource AppControlAcrylicBrush}">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryGridView}" PropertyName="Visibility" Value="Visible"></Core:ChangePropertyAction>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE8FD;" />
-                </Border>
-            </StackPanel>
-
-            <control:ExtendedGridView SelectedItem="{Binding SelectedCategory,Mode=TwoWay}"
-                x:Name="categoryGridView"
-                ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
-                Background="{ThemeResource AppBackgroundAcrylicBrush}"
-                Padding="6" CellMinWidth="236" Visibility="Collapsed"
-                ItemsSource="{Binding Categories}"
-                ItemTemplate="{StaticResource TemplateCategory}">
-
-                <Interactivity:Interaction.Behaviors>
-                    <Core:EventTriggerBehavior EventName="Tapped">
-                        <Core:ChangePropertyAction TargetObject="{Binding ElementName=categoryGridView}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
-                    </Core:EventTriggerBehavior>
-                    <Core:EventTriggerBehavior EventName="SelectionChanged">
-                        <Core:InvokeCommandAction Command="{Binding ChangeCategoryCommand}"></Core:InvokeCommandAction>
-                    </Core:EventTriggerBehavior>
-                </Interactivity:Interaction.Behaviors>
-            </control:ExtendedGridView>
-        </Grid>
-    </DataTemplate>
-
-    <DataTemplate x:Key="TemplateSearch">
-        <Grid>
-            <control:ExtendedGridView x:Name="gridView"
-                ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                ScaleSize="300:300"
-                Padding="6" CellMinWidth="236"
-                ItemsSource="{Binding Data}"
-                ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
-                <control:ExtendedGridView.Header>
-                    <Grid Margin="6">
-                        <AutoSuggestBox VerticalAlignment="Center" x:Name="searchBox" QueryIcon="Find" PlaceholderText="搜索你喜欢的">
-                            <Interactivity:Interaction.Behaviors>
-                                <Core:EventTriggerBehavior EventName="QuerySubmitted">
-                                    <Core:InvokeCommandAction Command="{Binding SearchCommand}"></Core:InvokeCommandAction>
-                                </Core:EventTriggerBehavior>
-                            </Interactivity:Interaction.Behaviors>
-                        </AutoSuggestBox>
-                    </Grid>
-                </control:ExtendedGridView.Header>
-                <control:ExtendedGridView.Footer>
-                    <Grid>
-                        <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                            <TextBlock Text="No more data" HorizontalAlignment="Center"/>
-                        </Grid>
-                        <Grid Margin="8" Visibility="{Binding IsLoading,Converter={Binding ValueConverter}}">
-                            <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Grid>
-                </control:ExtendedGridView.Footer>
-            </control:ExtendedGridView>
-            <StackPanel Margin="8" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                <Border ToolTipService.ToolTip="Go to Top"
-                    CornerRadius="18"
-                    Width="36" Height="36" Margin="4"
-                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                    BorderThickness="2" HorizontalAlignment="Center"
-                    Background="{ThemeResource AppControlAcrylicBrush}">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding GotoTopCommand}" CommandParameter="{Binding ElementName=gridView}"></Core:InvokeCommandAction>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE898;" />
-                </Border>
-
-                <Border ToolTipService.ToolTip="Refresh"
-                    CornerRadius="18"
-                    Width="36" Height="36" Margin="4"
-                    BorderBrush="{ThemeResource ButtonBorderThemeBrush}"
-                    BorderThickness="2" HorizontalAlignment="Center"
-                    Background="{ThemeResource AppControlAcrylicBrush}">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding RefreshCommand}"></Core:InvokeCommandAction>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE72C;" />
-                </Border>
-            </StackPanel>
-        </Grid>
-    </DataTemplate>
-
-    <DataTemplate x:Key="TemplateMine">
-        <ContentControl
-            Background="Transparent"
-            HorizontalContentAlignment="Stretch"
-            VerticalContentAlignment="Stretch"
-            Content="{Binding ViewModel}"
-            ContentTemplateSelector="{StaticResource SupperDataTemplateSelector}"/>
-    </DataTemplate>
-
-    <DataTemplate x:Key="TemplateCurrentUser">
+    <DataTemplate x:Key="TemplateUser">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -339,7 +136,7 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplatePin">
+    <DataTemplate x:Key="TemplatePinItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -387,7 +184,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateCategory">
+    <DataTemplate x:Key="TemplateCategoryItem">
         <Grid
             Margin="{Binding ElementName=categoryGridView,Path=Padding}"
             Width="{Binding ElementName=categoryGridView,Path=CellWidth}">
@@ -400,7 +197,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateBoard">
+    <DataTemplate x:Key="TemplateBoardItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -420,7 +217,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplatePUser">
+    <DataTemplate x:Key="TemplatePUserItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -463,7 +260,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateUser">
+    <DataTemplate x:Key="TemplateUserItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -506,7 +303,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateRecommendBoard">
+    <DataTemplate x:Key="TemplateRecommendBoardItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -535,7 +332,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateRecommendUser">
+    <DataTemplate x:Key="TemplateRecommendUserItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -593,7 +390,7 @@
         </Grid>
     </DataTemplate>
 
-    <DataTemplate x:Key="TemplateExplore">
+    <DataTemplate x:Key="TemplateExploreItem">
         <Grid
             Margin="{Binding ElementName=gridView,Path=Padding}"
             Width="{Binding ElementName=gridView,Path=CellWidth}"
@@ -629,21 +426,4 @@
         </StackPanel>
     </DataTemplate>
 
-    <DataTemplate x:Key="PinListItemTemplate">
-        <Grid>
-
-        </Grid>
-    </DataTemplate>
-
-    <!--关于列表-->
-    <DataTemplate x:Key="TemplateAboutList">
-        <StackPanel>
-            <TextBlock Foreground="{ThemeResource SystemControlDisabledBaseLowBrush}" Text="{Binding Title}"></TextBlock>
-            <RichTextBlock TextWrapping="WrapWholeWords">
-                <Paragraph>
-                    <Run Text="{Binding Label}" />
-                </Paragraph>
-            </RichTextBlock>
-        </StackPanel>
-    </DataTemplate>
 </ResourceDictionary>

@@ -71,6 +71,11 @@ namespace iHuaban.App.Models
 
         public void SetCookie(IEnumerable<Cookie> cookies)
         {
+            if (cookies == null)
+            {
+                return;
+            }
+
             foreach (Cookie cookie in cookies)
             {
                 this.CookieContainer.Add(new Uri(Constants.UrlBase), cookie);

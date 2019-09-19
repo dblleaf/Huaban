@@ -107,7 +107,7 @@
                     ItemContainerStyle="{StaticResource DefaultSelecteExtendGridItemStyle}"
                     Padding="6" CellMinWidth="236"
                     ItemsSource="{Binding Categories}" VerticalAlignment="Bottom"
-                    ItemTemplate="{StaticResource TemplateCategory}">
+                    ItemTemplate="{StaticResource TemplateCategoryItem}">
 
                 <Interactivity:Interaction.Behaviors>
                     <Core:EventTriggerBehavior EventName="SelectionChanged">

@@ -123,20 +123,6 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-        private string _SearchText;
-        public string SearchText
-        {
-            get { return _SearchText; }
-            set { SetValue(ref _SearchText, value); }
-        }
-
-        private string _SearchKey;
-        public string SearchKey
-        {
-            get { return _SearchKey; }
-            set { SetValue(ref _SearchKey, value); }
-        }
-
         private IncrementalLoadingList<Category> _Categories;
         public IncrementalLoadingList<Category> Categories
         {
@@ -144,27 +130,6 @@ namespace iHuaban.App.ViewModels
             set
             {
                 SetValue(ref _Categories, value);
-            }
-        }
-
-        private DelegateCommand _SetCategoryVisibilityCommand;
-        public DelegateCommand SetCategoryVisibilityCommand
-        {
-            get
-            {
-                return _SetCategoryVisibilityCommand ?? (_SetCategoryVisibilityCommand = new DelegateCommand(
-                o =>
-                {
-                    try
-                    {
-                        this.CategoryVisibility = o.ToString().Equals("true", StringComparison.CurrentCultureIgnoreCase) ? Visibility.Visible : Visibility.Collapsed;
-                    }
-                    catch (Exception)
-                    {
-
-                    }
-
-                }, o => true));
             }
         }
 
@@ -205,13 +170,6 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
-
-                        this.ChangeDataTypes(this.CategoryDataTypes);
-
-                        this.CategoryHeaderVisibility = Visibility.Visible;
-                        this.SearchKey = string.Empty;
-                        this.SearchText = string.Empty;
-
                         await this.Data.ClearAndReload();
                     }
                     catch (Exception)
@@ -344,13 +302,6 @@ namespace iHuaban.App.ViewModels
                 query += $"&max={max}";
             }
             return $"{dataType.BaseUrl.Trim('/')}/{SelectedCategory.nav_link.Trim('/')}/{query}";
-        }
-
-        private int currentPage = 0;
-        private string GetSearchUrl(DataType dataType)
-        {
-            string url = $"{dataType.BaseUrl}?q={UrlEncode(this.SearchKey)}&page={++currentPage}&per_page=20";
-            return url;
         }
 
         private void ChangeDataTypes(IEnumerable<DataType> dataTypes)
