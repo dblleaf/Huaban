@@ -13,7 +13,7 @@ namespace iHuaban.App.Helpers
 {
     public class AuthHttpHelper : HttpHelper, IAuthHttpHelper
     {
-        public override string BaseUrl => "https://huaban.com";
+        public override string BaseUrl => "http://huaban.com";
         private Context context;
         private IStorageService storageService;
         public AuthHttpHelper(Context context, IStorageService storageService)

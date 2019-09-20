@@ -29,7 +29,7 @@ namespace iHuaban.App
 
         public const string UrlBase = "https://huaban.com/";
         public const string UrlLogin = "https://huaban.com/auth/";
-        public const string UrlMe = "https://huaban.com/users/me";
+        public const string UrlMe = "users/me";
 
         public static readonly Category CategoryAll = new Category { name = "最新", nav_link = "/all/" };
         public static readonly Category CategoryHot = new Category { name = "最热", nav_link = "/popular/" };

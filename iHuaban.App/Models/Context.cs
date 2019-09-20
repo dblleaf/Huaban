@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
 
 namespace iHuaban.App.Models
 {
@@ -34,6 +36,20 @@ namespace iHuaban.App.Models
         {
             get { return isLogin; }
             set { SetValue(ref isLogin, value); }
+        }
+
+        private ElementTheme _PaneRequestTheme;
+        public ElementTheme PaneRequestTheme
+        {
+            get { return _PaneRequestTheme; }
+            set { SetValue(ref _PaneRequestTheme, value); }
+        }
+
+        private Brush _PaneBrush;
+        public Brush PaneBrush
+        {
+            get { return _PaneBrush; }
+            set { SetValue(ref _PaneBrush, value); }
         }
 
         public void ShowMessage(string mesage)

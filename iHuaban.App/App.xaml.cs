@@ -54,9 +54,10 @@ namespace iHuaban.App
                     Locator.ResolveObject<INavigationService>().Navigate<ShellPage>(e.Arguments);
                 }
                 Window.Current.Activate();
-                await Locator.ResolveObject<IAuthService>().LoadMeAsync();
-                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
                 Locator.ResolveObject<IThemeService>().LoadTheme();
+                ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
+                await Locator.ResolveObject<IAuthService>().LoadMeAsync();
+
             }
         }
 

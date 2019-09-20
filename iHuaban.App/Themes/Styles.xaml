@@ -383,12 +383,7 @@
         <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="8" />
     </Style>
-    <Style TargetType="ListBoxItem" x:Key="DataTypeListBoxItemStyle">
-        <Setter Property="Margin" Value="0 0 2 0" />
-        <Setter Property="MinHeight" Value="40" />
-        <Setter Property="Padding" Value="30 10" />
-        <Setter Property="Background" Value="{ThemeResource SystemAltLowColor}" />
-    </Style>
+
     <Style TargetType="ListViewItem" x:Key="NoStyleListViewItemStyle">
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
