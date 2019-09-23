@@ -11,6 +11,7 @@ namespace iHuaban.App.Models
     public sealed class Context : ObservableObject
     {
         public Action<string> ShowMessageHandler { get; set; }
+        public Action<Pin> PickPinHandlder { get; set; }
         public CookieContainer CookieContainer { get; set; } = new CookieContainer();
 
         private User user;
@@ -57,6 +58,14 @@ namespace iHuaban.App.Models
             if (ShowMessageHandler != null)
             {
                 ShowMessageHandler(mesage);
+            }
+        }
+
+        public void PickPin(Pin pin)
+        {
+            if (PickPinHandlder != null)
+            {
+                PickPinHandlder(pin);
             }
         }
 

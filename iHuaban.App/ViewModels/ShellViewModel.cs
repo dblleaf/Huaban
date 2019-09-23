@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
@@ -71,6 +72,12 @@ namespace iHuaban.App.ViewModels
                 },
             };
             Menu = new ObservableCollection<MenuItem>(list);
+            BoardPickerVisible = Visibility.Collapsed;
+
+            this.Context.PickPinHandlder += pin =>
+            {
+                this.BoardPickerVisible = Visibility.Visible;
+            };
         }
 
         private MenuItem _SelectedMenu;
@@ -78,6 +85,13 @@ namespace iHuaban.App.ViewModels
         {
             get { return _SelectedMenu; }
             set { SetValue(ref _SelectedMenu, value); }
+        }
+
+        private Visibility _BoardPickerVisible;
+        public Visibility BoardPickerVisible
+        {
+            get { return _BoardPickerVisible; }
+            set { SetValue(ref _BoardPickerVisible, value); }
         }
 
         private DelegateCommand _NavigateCommand;

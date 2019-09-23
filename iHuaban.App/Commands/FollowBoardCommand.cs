@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Windows.UI.Popups;
 
 namespace iHuaban.App.Commands
 {
@@ -12,8 +13,9 @@ namespace iHuaban.App.Commands
             return true;
         }
 
-        public void Execute(object parameter)
+        public async void Execute(object parameter)
         {
+            await new MessageDialog("FollowBoardCommand", "FollowBoardCommand").ShowAsync();
         }
     }
 }
