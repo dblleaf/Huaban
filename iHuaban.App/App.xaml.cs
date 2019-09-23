@@ -34,7 +34,7 @@ namespace iHuaban.App
 
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-            Locator.BuildLocator();
+            UnityConfig.Build();
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
             {
@@ -51,12 +51,12 @@ namespace iHuaban.App
             {
                 if (rootFrame.Content == null)
                 {
-                    Locator.ResolveObject<INavigationService>().Navigate<ShellPage>(e.Arguments);
+                    UnityConfig.ResolveObject<INavigationService>().Navigate<ShellPage>(e.Arguments);
                 }
                 Window.Current.Activate();
-                Locator.ResolveObject<IThemeService>().LoadTheme();
+                UnityConfig.ResolveObject<IThemeService>().LoadTheme();
                 ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
-                await Locator.ResolveObject<IAuthService>().LoadMeAsync();
+                await UnityConfig.ResolveObject<IAuthService>().LoadMeAsync();
 
             }
         }

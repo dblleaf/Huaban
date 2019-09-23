@@ -2,13 +2,14 @@
     x:Class="iHuaban.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:iHuaban.App"
-    xmlns:converters="using:iHuaban.Core.Converters"
-    xmlns:selectors="using:iHuaban.App.TemplateSelectors">
+    xmlns:locators="using:iHuaban.App.Locators"
+    xmlns:selectors="using:iHuaban.App.TemplateSelectors"
+    xmlns:converters="using:iHuaban.Core.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
             <selectors:SupperDataTemplateSelector x:Key="SupperDataTemplateSelector" />
+            <locators:CommandLocator x:Key="CommandLocator" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/Styles.xaml" />
                 <ResourceDictionary Source="/Themes/Templates.xaml" />

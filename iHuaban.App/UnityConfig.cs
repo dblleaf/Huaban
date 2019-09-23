@@ -1,32 +1,31 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
+using iHuaban.App.Services;
 using iHuaban.Core.Converters;
 using iHuaban.Core.Models;
 using System;
 using Unity;
-using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
 
-namespace iHuaban.App.Services
+namespace iHuaban.App
 {
-    public class Locator
+    public class UnityConfig
     {
-        private static Locator Instance { get; set; }
+        private static UnityConfig Instance { get; set; }
 
         private IUnityContainer Container { set; get; }
 
-        private Locator()
+        private UnityConfig()
         {
             this.Container = new UnityContainer();
         }
 
-        public static Locator BuildLocator()
+        public static UnityConfig Build()
         {
             if (Instance != null)
                 return Instance;
 
-            Instance = new Locator();
+            Instance = new UnityConfig();
             Instance.Register();
             return Instance;
         }
@@ -59,12 +58,12 @@ namespace iHuaban.App.Services
 
         public static T ResolveObject<T>()
         {
-            return BuildLocator().Resolve<T>();
+            return Build().Resolve<T>();
         }
 
         public static T ResolveObject<T>(Type type)
         {
-            return (T)BuildLocator().Resolve(type);
+            return (T)Build().Resolve(type);
         }
     }
 }

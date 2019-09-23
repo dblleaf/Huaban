@@ -42,7 +42,7 @@ namespace iHuaban.App.Services
                         {
                             if (typeof(PageViewModel).IsAssignableFrom(genericType))
                             {
-                                var vm = Locator.ResolveObject<PageViewModel>(genericType);
+                                var vm = UnityConfig.ResolveObject<PageViewModel>(genericType);
                                 page.DataContext = vm;
                                 return;
                             }
@@ -71,7 +71,7 @@ namespace iHuaban.App.Services
                         {
                             if (typeof(PageViewModel).IsAssignableFrom(genericType))
                             {
-                                var vm = Locator.ResolveObject<PageViewModel>(genericType);
+                                var vm = UnityConfig.ResolveObject<PageViewModel>(genericType);
                                 page.DataContext = vm;
                                 return;
                             }

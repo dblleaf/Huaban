@@ -5,7 +5,6 @@ namespace iHuaban.Core.Models
 {
     public abstract class PageViewModel : ViewModelBase, IDisposable
     {
-        private bool disposed = false;
         public virtual void Init() { }
 
         ~PageViewModel()
@@ -26,7 +25,6 @@ namespace iHuaban.Core.Models
                 }
 
                 _PageLoadedCommand = null;
-                disposed = true;
             }
         }
 

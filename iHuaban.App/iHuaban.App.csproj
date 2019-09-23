@@ -101,11 +101,21 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\DownloadCommand.cs" />
+    <Compile Include="Commands\FollowBoardCommand.cs" />
+    <Compile Include="Commands\FollowUserCommand.cs" />
+    <Compile Include="Commands\LikePinCommand.cs" />
+    <Compile Include="Commands\PinCommand.cs" />
+    <Compile Include="Commands\QuickPinCommand.cs" />
+    <Compile Include="Commands\ToBoardCommand.cs" />
+    <Compile Include="Commands\ToPinCommand.cs" />
+    <Compile Include="Commands\ToUserCommand.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Helpers\ApiHttpHelper.cs" />
     <Compile Include="Helpers\AuthHttpHelper.cs" />
     <Compile Include="Helpers\IApiHttpHelper.cs" />
     <Compile Include="Helpers\IAuthHttpHelper.cs" />
+    <Compile Include="Locators\CommandLocator.cs" />
     <Compile Include="Models\Api\AccessTokenParameter.cs" />
     <Compile Include="Models\Api\AuthResult.cs" />
     <Compile Include="Models\Api\BoardCollection.cs" />
@@ -142,7 +152,7 @@
     <Compile Include="Services\Interfaces\INavigationService.cs" />
     <Compile Include="Services\Interfaces\IHomeService.cs" />
     <Compile Include="Services\Interfaces\IService.cs" />
-    <Compile Include="Services\Locator.cs" />
+    <Compile Include="UnityConfig.cs" />
     <Compile Include="Services\NavigationService.cs" />
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ThemeService.cs" />
