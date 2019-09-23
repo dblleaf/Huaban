@@ -4,9 +4,10 @@ using System.Collections.ObjectModel;
 
 namespace iHuaban.App.ViewModels
 {
-    public class AboutViewModel: PageViewModel
+    public class AboutViewModel : PageViewModel
     {
-        public ObservableCollection<SimpleModel> AboutList { set; get; } = new ObservableCollection<SimpleModel>(new SimpleModel[] {
+        public ObservableCollection<SimpleModel> AboutList { set; get; } = new ObservableCollection<SimpleModel>(new SimpleModel[]
+        {
             new SimpleModel { Title = "应用名称", Label = "爱花瓣UWP" },
             new SimpleModel { Title = "声明", Label = "第三方App，非官方"},
             new SimpleModel { Title = "开源地址", Label = "http://github.com/dblleaf/huaban" },
@@ -15,5 +16,11 @@ namespace iHuaban.App.ViewModels
             new SimpleModel { Title = "微博", Label = "@宋小召召" },
             new SimpleModel { Title = "QQ群", Label = "534867173" }
         });
+
+        public override void ViewModelDispose()
+        {
+            base.ViewModelDispose();
+            AboutList = null;
+        }
     }
 }

@@ -20,7 +20,6 @@ namespace iHuaban.App.ViewModels
 {
     public class FindViewModel : PageViewModel
     {
-        private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
         private IApiHttpHelper HttpHelper { get; set; }
         public IValueConverter ValueConverter { get; set; }
         public FindViewModel(IApiHttpHelper httpHelper, IValueConverter valueConverter)

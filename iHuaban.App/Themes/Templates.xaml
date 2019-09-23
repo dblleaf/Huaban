@@ -150,7 +150,7 @@
                         <Core:ChangePropertyAction TargetObject="{Binding ElementName=resolution}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
                     </Core:EventTriggerBehavior>
                 </Interactivity:Interaction.Behaviors>
-                <Image Source="{Binding file.FW236}" Stretch="UniformToFill"/>
+                <Image Source="{Binding file.Sq235}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
                 <Grid
                     RequestedTheme="Dark"
                     x:Name="resolution"

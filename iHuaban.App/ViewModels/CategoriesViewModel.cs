@@ -1,10 +1,8 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Controls;
-using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -14,14 +12,12 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Data;
-using static System.Net.WebUtility;
 
 namespace iHuaban.App.ViewModels
 {
     public class CategoriesViewModel : PageViewModel
     {
         private List<DataType> CategoryDataTypes { get; set; } = new List<DataType>();
-        private List<DataType> SearchDataTypes { get; set; } = new List<DataType>();
 
         private IApiHttpHelper HttpHelper { get; set; }
         public IValueConverter ValueConverter { get; set; }
@@ -31,7 +27,7 @@ namespace iHuaban.App.ViewModels
             this.CategoryVisibility = Visibility.Collapsed;
             this.CategoryHeaderVisibility = Visibility.Visible;
             this.ValueConverter = valueConverter;
-            this.CategoryDataTypes = new List<DataType>()
+            this.DataTypes = new ObservableCollection<DataType>()
             {
                 new DataType
                 {
@@ -56,8 +52,7 @@ namespace iHuaban.App.ViewModels
                     ScaleSize = "4:5",
                 },
             };
-
-            ChangeDataTypes(this.CategoryDataTypes);
+            this.DataType = DataTypes[0];
 
             this.Categories = new IncrementalLoadingList<Category>(GetCategoriesAsync);
             this.Categories.Add(Constants.CategoryAll);
@@ -73,6 +68,17 @@ namespace iHuaban.App.ViewModels
                     }
                 }
             };
+        }
+
+        public override void ViewModelDispose()
+        {
+            base.ViewModelDispose();
+            DataTypes.Clear();
+            Categories.Clear();
+            Data.Clear();
+            Categories = null;
+            DataTypes = null;
+            Data = null;
         }
 
         private Visibility _CategoryHeaderVisibility;
@@ -103,7 +109,7 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _Data, value); }
         }
 
-        public ObservableCollection<DataType> DataTypes { get; } = new ObservableCollection<DataType>();
+        public ObservableCollection<DataType> DataTypes { private set; get; } = new ObservableCollection<DataType>();
 
         private DataType _DataType;
         public DataType DataType
@@ -304,17 +310,5 @@ namespace iHuaban.App.ViewModels
             return $"{dataType.BaseUrl.Trim('/')}/{SelectedCategory.nav_link.Trim('/')}/{query}";
         }
 
-        private void ChangeDataTypes(IEnumerable<DataType> dataTypes)
-        {
-            this.DataTypes.Clear();
-            if (dataTypes?.Count() > 0)
-            {
-                foreach (var dataType in dataTypes)
-                {
-                    this.DataTypes.Add(dataType);
-                }
-                this.DataType = DataTypes[0];
-            }
-        }
     }
 }
