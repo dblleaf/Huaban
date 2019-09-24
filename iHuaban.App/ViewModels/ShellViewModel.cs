@@ -94,6 +94,13 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _BoardPickerVisible, value); }
         }
 
+        private IncrementalLoadingList<Board> _BoardList;
+        public IncrementalLoadingList<Board> BoardList
+        {
+            get { return _BoardList; }
+            set { SetValue(ref _BoardList, value); }
+        }
+
         private DelegateCommand _NavigateCommand;
         public DelegateCommand NavigateCommand
         {

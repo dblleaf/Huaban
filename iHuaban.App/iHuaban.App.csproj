@@ -124,6 +124,9 @@
     <Compile Include="Models\Api\AuthToken.cs" />
     <Compile Include="Models\Api\Cover.cs" />
     <Compile Include="Models\Api\Explore.cs" />
+    <Compile Include="Models\Api\FollowBoardResult.cs" />
+    <Compile Include="Models\Api\LikeResult.cs" />
+    <Compile Include="Models\Api\PinResult.cs" />
     <Compile Include="Models\ExtendedTheme.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\MenuItem.cs" />
@@ -144,8 +147,8 @@
     <Compile Include="Models\Api\User.cs" />
     <Compile Include="Models\Api\UserCollection.cs" />
     <Compile Include="Models\Context.cs" />
-    <Compile Include="Services\AuthService.cs" />
-    <Compile Include="Services\Interfaces\IAuthService.cs" />
+    <Compile Include="Services\AccountService.cs" />
+    <Compile Include="Services\Interfaces\IAccountService.cs" />
     <Compile Include="Services\Interfaces\IStorageService.cs" />
     <Compile Include="Services\Interfaces\IThemeService.cs" />
     <Compile Include="Services\StorageService.cs" />
