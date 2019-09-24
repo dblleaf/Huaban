@@ -12,12 +12,12 @@ namespace iHuaban.App.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        private IAuthService authService;
+        private IAccountService authService;
         private IStorageService storageService;
         private Context context;
         public LoginViewModel
         (
-            IAuthService authService,
+            IAccountService authService,
             IStorageService storageService,
             Context context
         )

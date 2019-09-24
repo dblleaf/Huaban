@@ -1,24 +1,16 @@
 ﻿using iHuaban.App.Models;
 using System;
-using System.Windows.Input;
 using Windows.UI.Popups;
 
 namespace iHuaban.App.Commands
 {
-    public class DownloadCommand : ICommand
+    public class DownloadCommand : Command
     {
-        private Context context;
-        public event EventHandler CanExecuteChanged;
         public DownloadCommand(Context context)
-        {
-            this.context = context;
-        }
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
+            : base(context)
+        { }
 
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             await new MessageDialog("Download", "Download").ShowAsync();
         }

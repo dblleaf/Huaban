@@ -56,7 +56,7 @@ namespace iHuaban.App
                 Window.Current.Activate();
                 UnityConfig.ResolveObject<IThemeService>().LoadTheme();
                 ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
-                await UnityConfig.ResolveObject<IAuthService>().LoadMeAsync();
+                await UnityConfig.ResolveObject<IAccountService>().LoadMeAsync();
 
             }
         }

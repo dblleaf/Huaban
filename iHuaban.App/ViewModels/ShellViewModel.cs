@@ -16,7 +16,7 @@ namespace iHuaban.App.ViewModels
     {
         private INavigationService navigationService;
         private IStorageService storageService;
-        private IAuthService authService;
+        private IAccountService authService;
         public ObservableCollection<MenuItem> Menu { get; set; }
         public IValueConverter ValueConverter { get; set; }
         public Context Context { get; private set; }
@@ -24,7 +24,7 @@ namespace iHuaban.App.ViewModels
         public ShellViewModel(
             INavigationService navigationService,
             IStorageService storageService,
-            IAuthService authService,
+            IAccountService authService,
             IValueConverter valueConverter,
             Context context)
         {

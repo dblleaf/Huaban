@@ -12,6 +12,10 @@ namespace iHuaban.App.Models
     {
         public Action<string> ShowMessageHandler { get; set; }
         public Action<Pin> PickPinHandlder { get; set; }
+        public Action<Pin> QuickPickPinHandler { get; set; }
+        public Action<Pin> LikeHandler { get; set; }
+        public Action<Board> FollowBoardHandler { get; set; }
+        public Action<User> FollowUserHandler { get; set; }
         public CookieContainer CookieContainer { get; set; } = new CookieContainer();
 
         private User user;

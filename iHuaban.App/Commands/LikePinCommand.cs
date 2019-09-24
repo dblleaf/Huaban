@@ -1,21 +1,25 @@
-﻿using System;
-using System.Windows.Input;
-using Windows.UI.Popups;
+﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
 
 namespace iHuaban.App.Commands
 {
-    public class LikePinCommand : ICommand
+    public class LikePinCommand : Command
     {
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+        private IAccountService accountService;
+        public LikePinCommand(Context context, IAccountService accountService)
+            : base(context)
         {
-            return true;
+            this.accountService = accountService;
         }
 
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
-            await new MessageDialog("LikePinCommand", "LikePinCommand").ShowAsync();
+            if (parameter is Pin pin)
+            {
+                var result = await accountService.LikePin(pin);
+                pin.like = true;
+                Context.ShowMessage("关注成功");
+            }
         }
     }
 }

@@ -19,5 +19,9 @@
             </Button>
 
         </StackPanel>
+        <Grid Grid.Row="1">
+            <Image Width="400" Height="400" Source="ms-appx:///Assets/avatar.png" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"></Image>
+            <Image Width="100" Height="100" Source="ms-appx:///Assets/biao.jpg" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="20"></Image>
+        </Grid>
     </Grid>
 </Page>

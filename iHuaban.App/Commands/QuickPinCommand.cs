@@ -1,21 +1,27 @@
-﻿using System;
-using System.Windows.Input;
-using Windows.UI.Popups;
+﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
 
 namespace iHuaban.App.Commands
 {
-    public class QuickPinCommand : ICommand
+    public class QuickPinCommand : Command
     {
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+        private IAccountService accountService;
+        public QuickPinCommand(Context context, IAccountService accountService)
+            : base(context)
         {
-            return true;
+            this.accountService = accountService;
         }
 
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
-            await new MessageDialog("QuickPinCommand", "QuickPinCommand").ShowAsync();
+            if (parameter is Pin pin && !string.IsNullOrWhiteSpace(this.Context.QuickBoard.board_id))
+            {
+                var result = await accountService.PickPin(pin, this.Context.QuickBoard.board_id);
+                if (result.Pin.pin_id > 0)
+                {
+                    Context.ShowMessage("关注成功");
+                }
+            }
         }
     }
 }

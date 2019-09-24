@@ -1,21 +1,25 @@
-﻿using System;
-using System.Windows.Input;
-using Windows.UI.Popups;
+﻿using iHuaban.App.Models;
+using iHuaban.App.Services;
 
 namespace iHuaban.App.Commands
 {
-    public class FollowUserCommand : ICommand
+    public class FollowUserCommand : Command
     {
-        public event EventHandler CanExecuteChanged;
-
-        public bool CanExecute(object parameter)
+        private IAccountService accountService;
+        public FollowUserCommand(Context context, IAccountService accountService)
+            : base(context)
         {
-            return true;
+            this.accountService = accountService;
         }
 
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
-            await new MessageDialog("FollowUserCommand", "FollowUserCommand").ShowAsync();
+            if (parameter is User user)
+            {
+                var str= await accountService.FollowUser(user);
+                user.following = (str != "{}");
+                Context.ShowMessage(user.following ? "关注成功" : "关注失败");
+            }
         }
     }
 }

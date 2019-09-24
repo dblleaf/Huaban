@@ -53,7 +53,7 @@ namespace iHuaban.App
             Container.RegisterSingleton<INavigationService, NavigationService>();
             Container.RegisterType<IService, Service>();
             Container.RegisterType<IHomeService, HomeService>();
-            Container.RegisterType<IAuthService, AuthService>();
+            Container.RegisterType<IAccountService, AccountService>();
         }
 
         public static T ResolveObject<T>()

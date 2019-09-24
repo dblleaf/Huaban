@@ -1,19 +1,15 @@
-﻿using System;
-using System.Windows.Input;
+﻿using iHuaban.App.Models;
+using System;
 using Windows.UI.Popups;
 
 namespace iHuaban.App.Commands
 {
-    public class ToUserCommand : ICommand
+    public class ToUserCommand : Command
     {
-        public event EventHandler CanExecuteChanged;
+        public ToUserCommand(Context context)
+            : base(context) { }
 
-        public bool CanExecute(object parameter)
-        {
-            return true;
-        }
-
-        public async void Execute(object parameter)
+        public override async void Execute(object parameter)
         {
             await new MessageDialog("ToUserCommand", "ToUserCommand").ShowAsync();
         }

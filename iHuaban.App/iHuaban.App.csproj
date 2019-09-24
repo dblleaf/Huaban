@@ -101,6 +101,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Commands\Command.cs" />
     <Compile Include="Commands\DownloadCommand.cs" />
     <Compile Include="Commands\FollowBoardCommand.cs" />
     <Compile Include="Commands\FollowUserCommand.cs" />
@@ -235,6 +236,8 @@
     <Content Include="Assets\AppList\AppList.targetsize-80_altform-unplated.png" />
     <Content Include="Assets\AppList\AppList.targetsize-96.png" />
     <Content Include="Assets\AppList\AppList.targetsize-96_altform-unplated.png" />
+    <Content Include="Assets\avatar.png" />
+    <Content Include="Assets\biao.jpg" />
     <Content Include="Assets\douban_50px.png" />
     <Content Include="Assets\huaban.svg" />
     <Content Include="Assets\Large\Large310x310Logo.scale-100.png" />
