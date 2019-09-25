@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Windows.ApplicationModel;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 
@@ -71,12 +72,18 @@ namespace iHuaban.App.ViewModels
                     Type = typeof(SettingPage)
                 },
             };
+            Popup popup = new Popup();
             Menu = new ObservableCollection<MenuItem>(list);
             BoardPickerVisible = Visibility.Collapsed;
 
             this.Context.PickPinHandlder += pin =>
             {
                 this.BoardPickerVisible = Visibility.Visible;
+            };
+
+            this.Context.ShowMessageHandler += async msg =>
+            {
+                await new MessageDialog(msg).ShowAsync();
             };
         }
 

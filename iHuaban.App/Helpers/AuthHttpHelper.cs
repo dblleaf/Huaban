@@ -13,7 +13,7 @@ namespace iHuaban.App.Helpers
 {
     public class AuthHttpHelper : HttpHelper, IAuthHttpHelper
     {
-        public override string BaseUrl => "http://huaban.com";
+        public override string BaseUrl => "https://huaban.com";
         private Context context;
         private IStorageService storageService;
         public AuthHttpHelper(Context context, IStorageService storageService)
@@ -50,7 +50,6 @@ namespace iHuaban.App.Helpers
             var request = await base.GetHttpRequestMessageAsync(httpMethod, uri, headers, content);
 
             request.Headers.Add("Accept", "application/json");
-            request.Headers.Add("Accept-Language", "en-US,en;q=0.9");
             request.Headers.Add("Connection", "keep-alive");
             request.Headers.Add("Host", "huaban.com");
             request.Headers.Add("Sec-Fetch-Mode", "cors");
@@ -59,9 +58,15 @@ namespace iHuaban.App.Helpers
             request.Headers.Add("X-Request", "JSON");
             request.Headers.Add("X-Requested-With", "XMLHttpRequest");
 
-            if (this.context.Cookies != null && this.context.Cookies.Any())
+            var cookies = this.context
+                     .CookieContainer
+                     .GetCookies(new Uri(Constants.UrlBase))
+                     .Cast<Cookie>();
+
+            if (cookies != null && cookies.Any())
             {
-                //request.Headers.Add("Cookie", this.context.CookieString);
+                var cookieString = string.Join("; ", cookies.Select(o => $"{o.Name}={o.Value}"));
+                request.Headers.Add("Cookie", this.context.CookieString);
             }
             return request;
         }
@@ -75,8 +80,10 @@ namespace iHuaban.App.Helpers
                      .CookieContainer
                      .GetCookies(new Uri(Constants.UrlBase))
                      .Cast<Cookie>();
-
-                storageService.SaveSetting("Cookies", JsonConvert.SerializeObject(cookies));
+                if (cookies?.Any() == true)
+                {
+                    storageService.SaveSetting("Cookies", JsonConvert.SerializeObject(cookies));
+                }
             }
             catch { }
         }

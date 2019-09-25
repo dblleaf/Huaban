@@ -196,7 +196,7 @@
                             Glyph="&#xEB51;">
                             <Interactivity:Interaction.Behaviors>
                                 <Core:EventTriggerBehavior EventName="Tapped">
-                                    <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=LikePinCommand}"></Core:InvokeCommandAction>
+                                    <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=LikePinCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
                                 </Core:EventTriggerBehavior>
                             </Interactivity:Interaction.Behaviors>
                         </FontIcon>

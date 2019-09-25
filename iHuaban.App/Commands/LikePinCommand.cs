@@ -1,5 +1,9 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.Services;
+using System;
+using System.Threading.Tasks;
+using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace iHuaban.App.Commands
 {
@@ -12,13 +16,27 @@ namespace iHuaban.App.Commands
             this.accountService = accountService;
         }
 
-        public override async void Execute(object parameter)
+
+        public async override void Execute(object parameter)
         {
-            if (parameter is Pin pin)
+            try
             {
-                var result = await accountService.LikePin(pin);
-                pin.like = true;
-                Context.ShowMessage("关注成功");
+                var Dispatcher = Window.Current.Dispatcher;
+                await Task.Run(async () =>
+                {
+                    if (parameter is Pin pin)
+                    {
+                        var result = await accountService.LikePin(pin);
+                        await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            pin.like = true;
+                            Context.ShowMessage("关注成功");
+                        });
+                    }
+                });
+            }
+            catch
+            {
             }
         }
     }

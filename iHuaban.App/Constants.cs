@@ -5,7 +5,7 @@ namespace iHuaban.App
     public class Constants
     {
         #region Api
-        public const string ApiBase = "https://api.huaban.com/";
+        public const string ApiBase = "http://api.huaban.com/";
         public const string ApiBoardsName = "boards";
         public const string ApiCategoriesName = "categories";
         public const string ApiFavoriteName = "favorite";
