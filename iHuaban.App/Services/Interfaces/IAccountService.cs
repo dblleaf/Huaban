@@ -6,14 +6,15 @@ namespace iHuaban.App.Services
     public interface IAccountService
     {
         Task<AuthResult> LoginAsync(string userName, string password);
-        Task LoadMeAsync();
-        Task<PinResult> PickPin(Pin pin, string boardId);
-        Task<LikeResult> LikePin(Pin pin);
-        Task<string> UnLikePin(Pin pin);
-        Task<FollowBoardResult> FollowBoard(Board board);
-        Task<string> UnFollowBoard(Board board);
-        Task<string> FollowUser(User user);
-        Task<string> UnFollowUser(User user);
-        Task<string> CreateBoard(Board board, string category);
+        Task<User> GetMeAsync();
+        Task<PinResult> PickPinAsync(Pin pin, string boardId);
+        Task<LikeResult> LikePinAsync(Pin pin);
+        Task<string> UnLikePinAsync(Pin pin);
+        Task<FollowBoardResult> FollowBoardAsync(Board board);
+        Task<string> UnFollowBoardAsync(Board board);
+        Task<string> FollowUserAsync(User user);
+        Task<string> UnFollowUserAsync(User user);
+        Task<string> CreateBoardAsync(Board board, string category);
+        Task<BoardCollection> GetLastBoardsAsync();
     }
 }

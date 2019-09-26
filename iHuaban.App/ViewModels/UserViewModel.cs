@@ -10,7 +10,7 @@ namespace iHuaban.App.ViewModels
     {
         private IApiHttpHelper httpHelper;
         public User User { get; private set; }
-        public UserViewModel(User user, IApiHttpHelper httpHelper)
+        public UserViewModel(User user, IApiHttpHelper httpHelper, Context context)
         {
             this.User = user;
             this.httpHelper = httpHelper;
@@ -20,6 +20,7 @@ namespace iHuaban.App.ViewModels
             {
                 new ListViewModel<Pin>
                 (
+                    context: context,
                     dataType: new DataType { Title = "采集", Badge = user.pin_count, BaseUrl = urlname + "pins/" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data,
@@ -27,12 +28,14 @@ namespace iHuaban.App.ViewModels
                 ),
                 new ListViewModel<Board>
                 (
+                    context: context,
                     dataType: new DataType { Title = "画板", Badge = user.board_count, BaseUrl = urlname + "boards/" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data
                 ),
                 new ListViewModel<Pin>
                 (
+                    context: context,
                     dataType: new DataType { Title = "喜欢", Badge = user.like_count, BaseUrl = urlname + "likes/" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data,
@@ -40,6 +43,7 @@ namespace iHuaban.App.ViewModels
                 ),
                 new ListViewModel<User>
                 (
+                    context: context,
                     dataType: new DataType { Title = "粉丝", Badge = user.follower_count, BaseUrl = urlname + "followers/", ScaleSize = "4:5", },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data,
@@ -47,6 +51,7 @@ namespace iHuaban.App.ViewModels
                 ),
                 new ListViewModel<User>
                 (
+                    context: context,
                     dataType: new DataType { Title = "关注用户", Badge = user.following_count, BaseUrl = urlname + "following", ScaleSize = "4:5", },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data,
@@ -54,6 +59,7 @@ namespace iHuaban.App.ViewModels
                 ),
                 new ListViewModel<Board>
                 (
+                    context: context,
                     dataType: new DataType { Title = "关注画板", Badge = user.muse_board_count, BaseUrl = urlname + "following/boards" },
                     httpHelper: httpHelper,
                     converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data,

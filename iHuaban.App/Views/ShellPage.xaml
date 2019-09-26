@@ -65,7 +65,7 @@
             <SplitView.Pane>
                 <StackPanel Background="{ThemeResource SystemControlAcrylicWindowMediumHighBrush}" Padding="0">
                     <TextBlock Margin="48 14 12 12" x:Name="appName" Text="{Binding AppName}"></TextBlock>
-                    <StackPanel Visibility="{Binding Path=Context.IsLogin,Converter={Binding ValueConverter}}">
+                    <StackPanel Visibility="{Binding Path=Context.IsLogin,Converter={StaticResource ObjectToVisibilityConverter}}">
                         <Ellipse x:Name="avatar" HorizontalAlignment="Left" Margin="8"
                             Width="100" Height="100">
                             <Ellipse.Fill>
@@ -76,7 +76,7 @@
                             </Ellipse.RenderTransform>
                         </Ellipse>
 
-                        <TextBlock x:Name="userName" Visibility="{Binding ElementName=rootSplitView,Path=IsPaneOpen,Converter={Binding ValueConverter}}" Margin="0 0 0 8" HorizontalAlignment="Center" Text="{Binding Context.User.username}"></TextBlock>
+                        <TextBlock x:Name="userName" Visibility="{Binding ElementName=rootSplitView,Path=IsPaneOpen,Converter={StaticResource ObjectToVisibilityConverter}}" Margin="0 0 0 8" HorizontalAlignment="Center" Text="{Binding Context.User.username}"></TextBlock>
                     </StackPanel>
                     <ListBox SelectedItem="{Binding SelectedMenu,Mode=TwoWay}" ItemsSource="{Binding Menu}" Background="Transparent" Style="{ThemeResource MenuListStyle}">
                         <ListBox.ItemTemplate>

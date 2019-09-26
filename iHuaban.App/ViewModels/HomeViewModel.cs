@@ -14,15 +14,14 @@ using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
 {
-    public class HomeViewModel : PageViewModel
+    public class HomeViewModel : HBPageViewModel
     {
         private IHomeService HomeService { get; set; }
 
-        public IValueConverter ValueConverter { get; set; }
-        public HomeViewModel(IHomeService homeService, IValueConverter valueConverter)
+        public HomeViewModel(IHomeService homeService, Context context)
+            : base(context)
         {
             this.HomeService = homeService;
-            this.ValueConverter = valueConverter;
             this.Pins = new IncrementalLoadingList<IModel>(GetData);
         }
 

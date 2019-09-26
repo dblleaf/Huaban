@@ -3,9 +3,12 @@ using iHuaban.App.Services;
 using iHuaban.App.Views;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using System.Net;
 using Windows.ApplicationModel;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -19,14 +22,12 @@ namespace iHuaban.App.ViewModels
         private IStorageService storageService;
         private IAccountService authService;
         public ObservableCollection<MenuItem> Menu { get; set; }
-        public IValueConverter ValueConverter { get; set; }
         public Context Context { get; private set; }
         public string AppName { get; private set; } = Package.Current.DisplayName;
         public ShellViewModel(
             INavigationService navigationService,
             IStorageService storageService,
             IAccountService authService,
-            IValueConverter valueConverter,
             Context context)
         {
             this.navigationService = navigationService;
@@ -86,6 +87,23 @@ namespace iHuaban.App.ViewModels
             };
         }
 
+        public override async void Init()
+        {
+            base.Init();
+            string cookieJson = storageService.GetSetting("Cookies");
+            var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
+            this.Context.SetCookie(cookies);
+            var user = await authService.GetMeAsync();
+            if (!string.IsNullOrWhiteSpace(user?.user_id))
+            {
+                Context.User = user;
+                var lastboards = await authService.GetLastBoardsAsync();
+                if (lastboards?.Boards?.Count > 0)
+                {
+                    this.Context.QuickBoard = lastboards.Boards[0];
+                }
+            }
+        }
         private MenuItem _SelectedMenu;
         public MenuItem SelectedMenu
         {

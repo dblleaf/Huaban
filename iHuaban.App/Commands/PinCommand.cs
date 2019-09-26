@@ -9,6 +9,10 @@ namespace iHuaban.App.Commands
 
         public override void Execute(object parameter)
         {
+            if (parameter is Pin pin)
+            {
+                this.Context.PickPin(pin);
+            }
         }
     }
 }

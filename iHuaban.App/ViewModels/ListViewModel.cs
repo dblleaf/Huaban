@@ -18,18 +18,21 @@ namespace iHuaban.App.ViewModels
     public class ListViewModel<T> : ViewModelBase
         where T : IModel
     {
+        public Context Context { get; set; }
         internal IApiHttpHelper HttpHelper { get; set; }
         internal Func<string, IEnumerable<T>> Converter { get; set; }
         internal ListViewModelType Type { get; set; } = ListViewModelType.Max;
         public DataType DataType { get; private set; } = new DataType();
         private Func<T, string> feedKeyfunc;
         public ListViewModel(
+            Context context,
             DataType dataType,
             IApiHttpHelper httpHelper,
             Func<string, IEnumerable<T>> converter,
             Func<T, string> feedKeyfunc = null,
             ListViewModelType type = ListViewModelType.Max)
         {
+            this.Context = context;
             this.DataType = dataType;
             this.HttpHelper = httpHelper;
             this.Converter = converter;

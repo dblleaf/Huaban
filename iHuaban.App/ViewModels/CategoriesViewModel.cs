@@ -15,18 +15,18 @@ using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
 {
-    public class CategoriesViewModel : PageViewModel
+    public class CategoriesViewModel : HBPageViewModel
     {
+
         private List<DataType> CategoryDataTypes { get; set; } = new List<DataType>();
 
         private IApiHttpHelper HttpHelper { get; set; }
-        public IValueConverter ValueConverter { get; set; }
-        public CategoriesViewModel(IApiHttpHelper httpHelper, IValueConverter valueConverter)
+        public CategoriesViewModel(IApiHttpHelper httpHelper, Context context)
+            : base(context)
         {
             this.HttpHelper = httpHelper;
             this.CategoryVisibility = Visibility.Collapsed;
             this.CategoryHeaderVisibility = Visibility.Visible;
-            this.ValueConverter = valueConverter;
             this.DataTypes = new ObservableCollection<DataType>()
             {
                 new DataType

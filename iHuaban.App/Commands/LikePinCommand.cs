@@ -26,11 +26,10 @@ namespace iHuaban.App.Commands
                 {
                     if (parameter is Pin pin)
                     {
-                        var result = await accountService.LikePin(pin);
+                        var result = await accountService.LikePinAsync(pin);
                         await Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
                             pin.like = true;
-                            Context.ShowMessage("关注成功");
                         });
                     }
                 });

@@ -17,7 +17,10 @@ namespace iHuaban.App.Models
         public Action<Board> FollowBoardHandler { get; set; }
         public Action<User> FollowUserHandler { get; set; }
         public CookieContainer CookieContainer { get; set; } = new CookieContainer();
-
+        public Context()
+        {
+            QuickBoardMsg = "快速采集";
+        }
         private User user;
         public User User
         {
@@ -33,7 +36,21 @@ namespace iHuaban.App.Models
         public Board QuickBoard
         {
             get { return quickBoard; }
-            set { SetValue(ref quickBoard, value); }
+            set
+            {
+                SetValue(ref quickBoard, value);
+                if (value != null)
+                {
+                    this.QuickBoardMsg = $"快速采集到：{value.title}";
+                }
+            }
+        }
+
+        private string quickBoardMsg;
+        public string QuickBoardMsg
+        {
+            get { return quickBoardMsg; }
+            set { SetValue(ref quickBoardMsg, value); }
         }
 
         private bool isLogin;

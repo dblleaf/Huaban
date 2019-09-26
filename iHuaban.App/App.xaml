@@ -2,12 +2,15 @@
     x:Class="iHuaban.App.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:lconverters="using:iHuaban.App.Converters"
     xmlns:locators="using:iHuaban.App.Locators"
     xmlns:selectors="using:iHuaban.App.TemplateSelectors"
     xmlns:converters="using:iHuaban.Core.Converters">
     <Application.Resources>
         <ResourceDictionary>
             <converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter"/>
+            <converters:ReverseVisibilityConverter x:Key="ReverseVisibilityConverter"/>
+            <lconverters:LikeBrushConverter x:Key="LikeBrushConverter" />
             <selectors:SupperDataTemplateSelector x:Key="SupperDataTemplateSelector" />
             <locators:CommandLocator x:Key="CommandLocator" />
             <ResourceDictionary.MergedDictionaries>

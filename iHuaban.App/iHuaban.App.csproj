@@ -112,6 +112,7 @@
     <Compile Include="Commands\ToPinCommand.cs" />
     <Compile Include="Commands\ToUserCommand.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Converters\LikeBrushConverter.cs" />
     <Compile Include="Helpers\ApiHttpHelper.cs" />
     <Compile Include="Helpers\AuthHttpHelper.cs" />
     <Compile Include="Helpers\IApiHttpHelper.cs" />
@@ -166,13 +167,13 @@
     <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
+    <Compile Include="ViewModels\HBPageViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\FindViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />
     <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />

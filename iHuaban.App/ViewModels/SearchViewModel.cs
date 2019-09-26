@@ -13,10 +13,11 @@ using static System.Net.WebUtility;
 
 namespace iHuaban.App.ViewModels
 {
-    public class SearchViewModel : ViewModelBase
+    public class SearchViewModel : HBPageViewModel
     {
         private IApiHttpHelper HttpHelper { get; set; }
-        public SearchViewModel(IApiHttpHelper httpHelper)
+        public SearchViewModel(IApiHttpHelper httpHelper, Context context)
+            : base(context)
         {
             this.HttpHelper = httpHelper;
             this.Data = new IncrementalLoadingList<IModel>(GetData);

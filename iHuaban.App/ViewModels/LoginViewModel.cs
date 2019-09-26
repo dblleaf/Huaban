@@ -10,7 +10,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace iHuaban.App.ViewModels
 {
-    public class LoginViewModel : ViewModelBase
+    public class LoginViewModel : HBPageViewModel
     {
         private IAccountService authService;
         private IStorageService storageService;
@@ -20,7 +20,7 @@ namespace iHuaban.App.ViewModels
             IAccountService authService,
             IStorageService storageService,
             Context context
-        )
+        ) : base(context)
         {
             this.authService = authService;
             this.storageService = storageService;

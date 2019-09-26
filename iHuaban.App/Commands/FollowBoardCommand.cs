@@ -16,7 +16,7 @@ namespace iHuaban.App.Commands
         {
             if (parameter is Board board)
             {
-                var followBoard = await accountService.FollowBoard(board);
+                var followBoard = await accountService.FollowBoardAsync(board);
                 board.following = !string.IsNullOrEmpty((followBoard.Follow.board_id));
                 Context.ShowMessage(board.following ? "关注成功" : "关注失败");
             }

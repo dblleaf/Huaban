@@ -32,7 +32,7 @@ namespace iHuaban.App
             }.ShowAsync();
         }
 
-        protected override async void OnLaunched(LaunchActivatedEventArgs e)
+        protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             UnityConfig.Build();
             Frame rootFrame = Window.Current.Content as Frame;
@@ -56,8 +56,6 @@ namespace iHuaban.App
                 Window.Current.Activate();
                 UnityConfig.ResolveObject<IThemeService>().LoadTheme();
                 ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(256, 500));
-                await UnityConfig.ResolveObject<IAccountService>().LoadMeAsync();
-
             }
         }
 

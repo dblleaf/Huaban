@@ -4,7 +4,7 @@ using iHuaban.Core.Models;
 
 namespace iHuaban.App.ViewModels
 {
-    public class MineViewModel : PageViewModel
+    public class MineViewModel : HBPageViewModel
     {
         private IApiHttpHelper httpHelper;
         private ViewModelBase viewModel;
@@ -15,13 +15,12 @@ namespace iHuaban.App.ViewModels
         }
         public ViewModelBase LoginViewModel { get; private set; }
 
-        public Context Context { get; private set; }
 
         public MineViewModel(LoginViewModel loginViewModel, IApiHttpHelper httpHelper, Context context)
+            : base(context)
         {
             this.LoginViewModel = loginViewModel;
             this.httpHelper = httpHelper;
-            this.Context = context;
             this.ViewModel = context.User == null ? LoginViewModel : GetCurrentUserViewModel();
             this.Context.PropertyChanged += (sender, e) =>
             {
@@ -34,7 +33,7 @@ namespace iHuaban.App.ViewModels
 
         public UserViewModel GetCurrentUserViewModel()
         {
-            return new UserViewModel(this.Context.User, this.httpHelper);
+            return new UserViewModel(this.Context.User, this.httpHelper, Context);
         }
     }
 }

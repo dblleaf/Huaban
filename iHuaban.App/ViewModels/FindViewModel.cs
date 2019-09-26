@@ -1,10 +1,8 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using iHuaban.App.TemplateSelectors;
 using iHuaban.Core;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Controls;
-using iHuaban.Core.Helpers;
 using iHuaban.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -18,14 +16,13 @@ using static System.Net.WebUtility;
 
 namespace iHuaban.App.ViewModels
 {
-    public class FindViewModel : PageViewModel
+    public class FindViewModel : HBPageViewModel
     {
         private IApiHttpHelper HttpHelper { get; set; }
-        public IValueConverter ValueConverter { get; set; }
-        public FindViewModel(IApiHttpHelper httpHelper, IValueConverter valueConverter)
+        public FindViewModel(IApiHttpHelper httpHelper, Context context)
+            : base(context)
         {
             this.HttpHelper = httpHelper;
-            this.ValueConverter = valueConverter;
 
             this.DataTypes = new ObservableCollection<DataType>()
             {

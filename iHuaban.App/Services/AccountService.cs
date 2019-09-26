@@ -1,9 +1,7 @@
 ﻿using iHuaban.App.Helpers;
 using iHuaban.App.Models;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace iHuaban.App.Services
@@ -50,19 +48,12 @@ namespace iHuaban.App.Services
             }
         }
 
-        public async Task LoadMeAsync()
+        public async Task<User> GetMeAsync()
         {
-            string cookieJson = storageService.GetSetting("Cookies");
-            var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
-            this.Context.SetCookie(cookies);
-            var user = await httpHelper.GetAsync<User>(Constants.UrlMe);
-            if (user != null && !string.IsNullOrWhiteSpace(user.user_id))
-            {
-                this.Context.User = user;
-            }
+            return await httpHelper.GetAsync<User>(Constants.UrlMe);
         }
 
-        public async Task<PinResult> PickPin(Pin pin, string boardId)
+        public async Task<PinResult> PickPinAsync(Pin pin, string boardId)
         {
             Dictionary<string, object> body = new Dictionary<string, object>()
             {
@@ -74,32 +65,32 @@ namespace iHuaban.App.Services
             return await httpHelper.PostAsync<PinResult>("pins/?check=true", null, body);
         }
 
-        public async Task<LikeResult> LikePin(Pin pin)
+        public async Task<LikeResult> LikePinAsync(Pin pin)
         {
             return await httpHelper.PostAsync<LikeResult>($"pins/{pin.pin_id}/like/");
         }
 
-        public async Task<FollowBoardResult> FollowBoard(Board board)
+        public async Task<FollowBoardResult> FollowBoardAsync(Board board)
         {
             return await httpHelper.PostAsync<FollowBoardResult>($"boards/{board.board_id}/follow/");
         }
 
-        public async Task<string> FollowUser(User user)
+        public async Task<string> FollowUserAsync(User user)
         {
             return await httpHelper.PostAsync($"users/{user.user_id}/follow/");
         }
 
-        public async Task<string> UnLikePin(Pin pin)
+        public async Task<string> UnLikePinAsync(Pin pin)
         {
             return await httpHelper.PostAsync($"pins/{pin.pin_id}/unlike/");
         }
 
-        public async Task<string> UnFollowBoard(Board board)
+        public async Task<string> UnFollowBoardAsync(Board board)
         {
             return await httpHelper.PostAsync($"boards/{board.board_id}/unfollow/");
         }
 
-        public async Task<string> UnFollowUser(User user)
+        public async Task<string> UnFollowUserAsync(User user)
         {
             string urlName = user.user_id;
             if (!string.IsNullOrWhiteSpace(user.urlname))
@@ -109,7 +100,7 @@ namespace iHuaban.App.Services
             return await httpHelper.PostAsync($"users/{urlName}/unfollow/");
         }
 
-        public async Task<string> CreateBoard(Board board, string category)
+        public async Task<string> CreateBoardAsync(Board board, string category)
         {
             Dictionary<string, object> body = new Dictionary<string, object>()
             {
@@ -120,6 +111,12 @@ namespace iHuaban.App.Services
             };
 
             return await httpHelper.PostAsync("boards/", null, body);
+        }
+
+        public async Task<BoardCollection> GetLastBoardsAsync()
+        {
+
+            return await httpHelper.GetAsync<BoardCollection>("last_boards/");
         }
     }
 }

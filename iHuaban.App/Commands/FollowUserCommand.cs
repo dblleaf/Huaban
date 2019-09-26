@@ -16,7 +16,7 @@ namespace iHuaban.App.Commands
         {
             if (parameter is User user)
             {
-                var str= await accountService.FollowUser(user);
+                var str= await accountService.FollowUserAsync(user);
                 user.following = (str != "{}");
                 Context.ShowMessage(user.following ? "关注成功" : "关注失败");
             }
