@@ -72,7 +72,6 @@ namespace iHuaban.App.ViewModels
                     Type = typeof(SettingPage)
                 },
             };
-            Popup popup = new Popup();
             Menu = new ObservableCollection<MenuItem>(list);
             BoardPickerVisible = Visibility.Collapsed;
 

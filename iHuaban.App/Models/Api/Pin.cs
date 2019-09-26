@@ -20,6 +20,7 @@ namespace iHuaban.App.Models
         public int comment_count { set; get; }
         public int repin_count { set; get; }
         public long PinId => pin_id;
+        public long seq { set; get; }
         public File file { set; get; }
         public string KeyId => pin_id.ToString();
 

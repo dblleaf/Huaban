@@ -22,7 +22,8 @@ namespace iHuaban.App.ViewModels
                 (
                     dataType: new DataType { Title = "采集", Badge = user.pin_count, BaseUrl = urlname + "pins/" },
                     httpHelper: httpHelper,
-                    converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data
+                    converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data,
+                    feedKeyfunc: o=> o.pin_id.ToString()
                 ),
                 new ListViewModel<Board>
                 (
@@ -34,25 +35,29 @@ namespace iHuaban.App.ViewModels
                 (
                     dataType: new DataType { Title = "喜欢", Badge = user.like_count, BaseUrl = urlname + "likes/" },
                     httpHelper: httpHelper,
-                    converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data
+                    converter: o => JsonConvert.DeserializeObject<PinCollection>(o).Data,
+                    feedKeyfunc: o=> o.seq.ToString()
                 ),
                 new ListViewModel<User>
                 (
                     dataType: new DataType { Title = "粉丝", Badge = user.follower_count, BaseUrl = urlname + "followers/", ScaleSize = "4:5", },
                     httpHelper: httpHelper,
-                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
+                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data,
+                    feedKeyfunc: o=> o.seq.ToString()
                 ),
                 new ListViewModel<User>
                 (
                     dataType: new DataType { Title = "关注用户", Badge = user.following_count, BaseUrl = urlname + "following", ScaleSize = "4:5", },
                     httpHelper: httpHelper,
-                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data
+                    converter: o => JsonConvert.DeserializeObject<UserCollection>(o).Data,
+                    feedKeyfunc: o=> o.seq.ToString()
                 ),
                 new ListViewModel<Board>
                 (
                     dataType: new DataType { Title = "关注画板", Badge = user.muse_board_count, BaseUrl = urlname + "following/boards" },
                     httpHelper: httpHelper,
-                    converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data
+                    converter: o => JsonConvert.DeserializeObject<BoardCollection>(o).Data,
+                    type: ListViewModelType.Page
                 )
             };
         }

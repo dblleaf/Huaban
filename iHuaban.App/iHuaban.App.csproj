@@ -127,6 +127,7 @@
     <Compile Include="Models\Api\FollowBoardResult.cs" />
     <Compile Include="Models\Api\LikeResult.cs" />
     <Compile Include="Models\Api\PinResult.cs" />
+    <Compile Include="Models\DataItem.cs" />
     <Compile Include="Models\ExtendedTheme.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\MenuItem.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Models\Api\RecommendUser.cs" />
     <Compile Include="Models\Api\RefreshTokenParameter.cs" />
     <Compile Include="Models\DataType.cs" />
+    <Compile Include="Models\PinDownloadItem.cs" />
     <Compile Include="Models\SimpleModel.cs" />
     <Compile Include="Models\Api\IModel.cs" />
     <Compile Include="Models\Api\Category.cs" />
