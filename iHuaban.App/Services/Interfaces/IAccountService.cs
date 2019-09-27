@@ -16,5 +16,6 @@ namespace iHuaban.App.Services
         Task<string> UnFollowUserAsync(User user);
         Task<string> CreateBoardAsync(Board board, string category);
         Task<BoardCollection> GetLastBoardsAsync();
+        Task<BoardCollection> GetBoardListAsync();
     }
 }

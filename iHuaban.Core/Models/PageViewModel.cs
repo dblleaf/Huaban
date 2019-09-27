@@ -1,5 +1,6 @@
 ﻿using iHuaban.Core.Commands;
 using System;
+using Windows.UI.Xaml;
 
 namespace iHuaban.Core.Models
 {

@@ -83,18 +83,32 @@ namespace iHuaban.App.ViewModels
                     {
                         try
                         {
-                            var auth = await authService.LoginAsync(UserName, Password);
-                            if (!string.IsNullOrWhiteSpace(auth?.User?.user_id))
+                            IsLoading = true;
+                            var dispatcher = Window.Current.Dispatcher;
+                            await Task.Run(async () =>
                             {
-                                this.context.User = auth.User;
-                                this.storageService.SaveSetting(nameof(UserName), UserName);
-                                this.storageService.SaveSetting(nameof(Password), Password);
-                                this.storageService.SaveSetting("cookie", context.CookieString);
-                            }
-                            if (!string.IsNullOrWhiteSpace(auth.msg))
-                            {
-                                this.context.ShowMessage(auth.msg);
-                            }
+                                var auth = await authService.LoginAsync(UserName, Password);
+
+                                await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                                {
+                                    if (!string.IsNullOrWhiteSpace(auth?.User?.user_id))
+                                    {
+                                        this.context.User = auth.User;
+
+                                        this.storageService.SaveSetting(nameof(UserName), UserName);
+                                        this.storageService.SaveSetting(nameof(Password), Password);
+                                        this.storageService.SaveSetting("cookie", context.CookieString);
+                                    }
+                                    if (!string.IsNullOrWhiteSpace(auth.msg))
+                                    {
+                                        this.context.ShowMessage(auth.msg);
+                                    }
+
+                                    IsLoading = false;
+                                });
+
+                            });
+
                         }
                         catch (Exception ex)
                         {
@@ -104,7 +118,7 @@ namespace iHuaban.App.ViewModels
                     },
                     o =>
                     {
-                        return !string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password);
+                        return IsLoading || (!string.IsNullOrWhiteSpace(UserName) && !string.IsNullOrWhiteSpace(Password));
                     })
                 );
             }

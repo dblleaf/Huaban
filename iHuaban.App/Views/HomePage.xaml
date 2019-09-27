@@ -26,8 +26,13 @@
                 </StackPanel>
             </control:ExtendedGridView.Header>
             <control:ExtendedGridView.Footer>
-                <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
-                    <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                <Grid>
+                    <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
+                        <TextBlock Text="没有更多了" HorizontalAlignment="Center"/>
+                    </Grid>
+                    <Grid Margin="8" Visibility="{Binding IsLoading,Converter={StaticResource ObjectToVisibilityConverter}}">
+                        <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
+                    </Grid>
                 </Grid>
             </control:ExtendedGridView.Footer>
         </control:ExtendedGridView>

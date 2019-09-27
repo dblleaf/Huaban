@@ -46,6 +46,9 @@
                     <Grid Margin="8" Visibility="{Binding NoMoreVisibility}">
                         <TextBlock Text="No more data" HorizontalAlignment="Center"/>
                     </Grid>
+                    <Grid Margin="8" Visibility="{Binding IsLoading,Converter={StaticResource ObjectToVisibilityConverter}}">
+                        <TextBlock Text="Loading ..." HorizontalAlignment="Center"/>
+                    </Grid>
                 </Grid>
             </control:ExtendedGridView.Footer>
         </control:ExtendedGridView>

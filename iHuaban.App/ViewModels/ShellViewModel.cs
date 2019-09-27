@@ -1,4 +1,5 @@
-﻿using iHuaban.App.Models;
+﻿using iHuaban.App.Helpers;
+using iHuaban.App.Models;
 using iHuaban.App.Services;
 using iHuaban.App.Views;
 using iHuaban.Core.Commands;
@@ -9,10 +10,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Data;
 
 namespace iHuaban.App.ViewModels
 {
@@ -21,6 +23,7 @@ namespace iHuaban.App.ViewModels
         private INavigationService navigationService;
         private IStorageService storageService;
         private IAccountService authService;
+        private IApiHttpHelper httpHelper;
         public ObservableCollection<MenuItem> Menu { get; set; }
         public Context Context { get; private set; }
         public string AppName { get; private set; } = Package.Current.DisplayName;
@@ -28,11 +31,13 @@ namespace iHuaban.App.ViewModels
             INavigationService navigationService,
             IStorageService storageService,
             IAccountService authService,
+            IApiHttpHelper httpHelper,
             Context context)
         {
             this.navigationService = navigationService;
             this.storageService = storageService;
             this.authService = authService;
+            this.httpHelper = httpHelper;
             this.Context = context;
             var list = new List<MenuItem>
             {
@@ -73,7 +78,9 @@ namespace iHuaban.App.ViewModels
                     Type = typeof(SettingPage)
                 },
             };
+
             Menu = new ObservableCollection<MenuItem>(list);
+            BoardList = new IncrementalLoadingList<Board>(GetMyBoards);
             BoardPickerVisible = Visibility.Collapsed;
 
             this.Context.PickPinHandlder += pin =>
@@ -87,23 +94,42 @@ namespace iHuaban.App.ViewModels
             };
         }
 
-        public override async void Init()
+        public override void Init()
         {
             base.Init();
+            SelectedMenu = Menu[0];
             string cookieJson = storageService.GetSetting("Cookies");
             var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
             this.Context.SetCookie(cookies);
-            var user = await authService.GetMeAsync();
-            if (!string.IsNullOrWhiteSpace(user?.user_id))
-            {
-                Context.User = user;
-                var lastboards = await authService.GetLastBoardsAsync();
-                if (lastboards?.Boards?.Count > 0)
+            var dispatcher = Window.Current.Dispatcher;
+            Task.WhenAll(
+                Task.Run(async () =>
                 {
-                    this.Context.QuickBoard = lastboards.Boards[0];
-                }
-            }
+                    var user = await authService.GetMeAsync();
+                    if (!string.IsNullOrWhiteSpace(user?.user_id))
+                    {
+                        await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                        {
+                            this.Context.User = user;
+                        });
+
+                    }
+                }),
+                Task.Run(async () =>
+                {
+                    var boardCollection = await authService.GetLastBoardsAsync();
+                    if (boardCollection?.Boards?.Count > 0)
+                    {
+                        await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            this.Context.QuickBoard = boardCollection.Boards[0];
+                        });
+
+                    }
+                })
+            ).ContinueWith(p => { });
         }
+
         private MenuItem _SelectedMenu;
         public MenuItem SelectedMenu
         {
@@ -146,6 +172,60 @@ namespace iHuaban.App.ViewModels
                     }
 
                 }, o => true));
+            }
+        }
+
+        private bool isLoadingBoards = false;
+        private async Task<IEnumerable<Board>> GetMyBoards(uint startIndex, int page)
+        {
+            if (isLoadingBoards || this.Context.User == null)
+            {
+                return new List<Board>();
+            }
+
+            try
+            {
+                isLoadingBoards = true;
+                string urlname = !string.IsNullOrEmpty(this.Context.User.urlname) ? this.Context.User.urlname : this.Context.User.user_id;
+
+                var query = "?limit=20";
+                var max = GetMaxKeyId();
+                if (max > 0)
+                {
+                    query += $"&max={max}";
+                }
+
+                var collection = await httpHelper.GetAsync<BoardCollection>($"{urlname}/boards/{query}");
+                var result = collection.Boards;
+
+                if (result.Count() == 0)
+                {
+                    BoardList.NoMore();
+                }
+                else
+                {
+                    BoardList.HasMore();
+                }
+
+                return result;
+            }
+            catch { }
+            finally
+            {
+                isLoadingBoards = false;
+            }
+            return null;
+        }
+
+        private long GetMaxKeyId()
+        {
+            if (BoardList?.Count > 0 && long.TryParse(BoardList[BoardList.Count - 1].KeyId, out long maxId))
+            {
+                return maxId;
+            }
+            else
+            {
+                return 0;
             }
         }
     }

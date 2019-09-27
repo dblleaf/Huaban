@@ -115,7 +115,16 @@ namespace iHuaban.App.Services
 
         public async Task<BoardCollection> GetLastBoardsAsync()
         {
+            return await httpHelper.GetAsync<BoardCollection>("last_boards/");
+        }
 
+        public async Task<BoardCollection> GetBoardListAsync()
+        {
+            var urlName = this.Context.User.user_id;
+            if (!string.IsNullOrWhiteSpace(this.Context.User.urlname))
+            {
+
+            }
             return await httpHelper.GetAsync<BoardCollection>("last_boards/");
         }
     }
