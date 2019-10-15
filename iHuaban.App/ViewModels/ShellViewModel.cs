@@ -108,7 +108,7 @@ namespace iHuaban.App.ViewModels
                     var user = await authService.GetMeAsync();
                     if (!string.IsNullOrWhiteSpace(user?.user_id))
                     {
-                        await dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
+                        await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
                             this.Context.User = user;
                         });
