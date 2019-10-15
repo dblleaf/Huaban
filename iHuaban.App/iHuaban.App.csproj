@@ -164,6 +164,7 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
+    <Compile Include="ViewModels\Content\BoardSelectorViewModel.cs" />
     <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
