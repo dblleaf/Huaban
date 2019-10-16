@@ -4,8 +4,6 @@ using iHuaban.App.Services;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -15,7 +13,7 @@ namespace iHuaban.App.ViewModels
     public class ImageViewerViewModel : ViewModelBase
     {
         private IApiHttpHelper httpHelper;
-        private Context Context;
+        public Context Context { get; set; }
         private IThemeService themeService;
         private IAccountService accountService;
         public ImageViewerViewModel(IApiHttpHelper httpHelper,
@@ -33,12 +31,27 @@ namespace iHuaban.App.ViewModels
         public Pin Pin
         {
             get { return _Pin; }
-            set { SetValue(ref _Pin, value); }
+            private set { SetValue(ref _Pin, value); }
         }
 
         public ElementTheme GetRequestTheme()
         {
             return this.themeService.RequestTheme;
+        }
+
+        public async Task SetPinAsync(Pin pin)
+        {
+            var url = $"pins/{pin.pin_id}";
+            var Dispatcher = Window.Current.Dispatcher;
+            this.Pin = pin;
+            await Task.Run(async () =>
+            {
+                var result = await this.httpHelper.GetAsync<PinResult>(url);
+                await Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                {
+                    this.Pin = result.Pin;
+                });
+            });
         }
 
         internal Popup Parent;

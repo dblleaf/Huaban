@@ -10,59 +10,101 @@
     xmlns:Core="using:Microsoft.Xaml.Interactions.Core">
 
     <Grid Background="{ThemeResource HBControlBackgroundBrush}">
-        <Interactivity:Interaction.Behaviors>
-            <Core:EventTriggerBehavior EventName="Tapped">
-                <Core:InvokeCommandAction Command="{Binding HideCommand}"></Core:InvokeCommandAction>
-            </Core:EventTriggerBehavior>
-        </Interactivity:Interaction.Behaviors>
         <ScrollViewer>
-            <StackPanel Margin="50" Width="698" Padding="20" VerticalAlignment="Top" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
-                    <Button ToolTipService.ToolTip="采集">
-                        <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8EB;">
-                        </FontIcon>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="Tapped">
-                                <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=PinCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                    </Button>
-                    <Button ToolTipService.ToolTip="{Binding DataContext.Context.QuickBoardMsg,ElementName=gridView}">
-                        <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE945;"/>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="Tapped">
-                                <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=QuickPinCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                    </Button>
-                    <Button ToolTipService.ToolTip="下载">
-                        <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="Tapped">
-                                <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=DownloadCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                    </Button>
-                    <Button ToolTipService.ToolTip="喜欢" Visibility="{Binding Pin.like,Converter={StaticResource ReverseVisibilityConverter}}">
-                        <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB52;">
-                        </FontIcon>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="Tapped">
-                                <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=LikePinCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                    </Button>
-                    <Button ToolTipService.ToolTip="喜欢"  Visibility="{Binding Pin.like,Converter={StaticResource ObjectToVisibilityConverter}}">
-                        <FontIcon Margin="3" FontSize="14" Foreground="Red" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB52;">
-                        </FontIcon>
-                        <Interactivity:Interaction.Behaviors>
-                            <Core:EventTriggerBehavior EventName="Tapped">
-                            </Core:EventTriggerBehavior>
-                        </Interactivity:Interaction.Behaviors>
-                    </Button>
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="DoubleTapped">
+                    <Core:InvokeCommandAction Command="{Binding HideCommand}"></Core:InvokeCommandAction>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <StackPanel Margin="50" Width="698" VerticalAlignment="Top">
+                <StackPanel Padding="20 16" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Image Width="50" Height="50" Source="{Binding Pin.board.cover.Sq75sf}" />
+                            <StackPanel Margin="5 0">
+                                <TextBlock FontSize="18" Text="{Binding Pin.board.title}"/>
+                                <StackPanel Margin="0 5" Orientation="Horizontal">
+                                    <TextBlock><Run Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Text="{Binding Pin.board.pin_count}"/><Run Text=" 采集"/></TextBlock>
+                                    <TextBlock Margin="5 0"><Run Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Text="来自 "/><Run Text="{Binding Pin.user.username}"/></TextBlock>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal">
+                            <Button ToolTipService.ToolTip="采集">
+                                <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE8EB;">
+                                </FontIcon>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=PinCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                            </Button>
+                            <Button ToolTipService.ToolTip="{Binding Context.QuickBoardMsg}">
+                                <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE945;"/>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=QuickPinCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                            </Button>
+                            <Button ToolTipService.ToolTip="下载">
+                                <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE896;"/>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=DownloadCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                            </Button>
+                            <Button ToolTipService.ToolTip="喜欢" Visibility="{Binding Pin.like,Converter={StaticResource ReverseVisibilityConverter}}">
+                                <FontIcon Margin="3" FontSize="14" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB52;">
+                                </FontIcon>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                        <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=LikePinCommand}" CommandParameter="{Binding Pin}"></Core:InvokeCommandAction>
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                            </Button>
+                            <Button ToolTipService.ToolTip="喜欢"  Visibility="{Binding Pin.like,Converter={StaticResource ObjectToVisibilityConverter}}">
+                                <FontIcon Margin="3" FontSize="14" Foreground="Red" FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xEB52;">
+                                </FontIcon>
+                                <Interactivity:Interaction.Behaviors>
+                                    <Core:EventTriggerBehavior EventName="Tapped">
+                                    </Core:EventTriggerBehavior>
+                                </Interactivity:Interaction.Behaviors>
+                            </Button>
+                        </StackPanel>
+                    </Grid>
+                    <Image Margin="0 8 0 0" Grid.Row="1" Source="{Binding Pin.file.FW658}" HorizontalAlignment="Stretch"/>
                 </StackPanel>
-                <Image Grid.Row="1" Source="{Binding Pin.file.FW658}" HorizontalAlignment="Stretch"/>
+                <StackPanel Padding="20 16" Margin="0 16 0 0" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Width="50" Height="50" Source="{Binding Pin.user.avatar.Sq75sf}" />
+                        <StackPanel Margin="8 0 0 0">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="18" Text="{Binding Pin.user.username}"></TextBlock>
+                                <TextBlock VerticalAlignment="Bottom" Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Visibility="{Binding ElementName=viaUser,Path=Visibility}" Margin="5 0"> 从 </TextBlock>
+                                <TextBlock FontSize="18" x:Name="viaUser" Text="{Binding Pin.via_user.username}" Visibility="{Binding Path=Pin.via_user,Converter={StaticResource ObjectToVisibilityConverter}}"></TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0 5">
+                                <TextBlock Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Visibility="{Binding Path=Pin.via_user,Converter={StaticResource ReverseVisibilityConverter}}">采集于</TextBlock>
+                                <TextBlock Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Visibility="{Binding ElementName=viaUser,Path=Visibility}">转采于</TextBlock>
+                                <TextBlock Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Margin="5 0" Text="{Binding Path=Pin.created_at}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Margin="0 16 0 0">
+                        <TextBlock Text="{Binding Pin.raw_text}"></TextBlock>
+                    </StackPanel>
+                </StackPanel>
             </StackPanel>
         </ScrollViewer>
+        <Button VerticalAlignment="Top">
+            <Interactivity:Interaction.Behaviors>
+                <Core:EventTriggerBehavior EventName="Tapped">
+                    <Core:InvokeCommandAction Command="{Binding HideCommand}"></Core:InvokeCommandAction>
+                </Core:EventTriggerBehavior>
+            </Interactivity:Interaction.Behaviors>
+            <SymbolIcon Symbol="Back" />
+        </Button>
     </Grid>
 </UserControl>

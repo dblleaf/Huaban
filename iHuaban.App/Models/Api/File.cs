@@ -46,5 +46,10 @@
         {
             get { return Orignal + "_fw658"; }
         }
+
+        public string Sq75sf
+        {
+            get { return Orignal + "_sq75sf"; }
+        }
     }
 }

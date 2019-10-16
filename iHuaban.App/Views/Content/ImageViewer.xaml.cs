@@ -45,11 +45,11 @@ namespace iHuaban.App.Views.Content
             this.Width = Window.Current.Bounds.Width;
             this.Height = Window.Current.Bounds.Height;
         }
-        private void OnShow(Pin pin)
+        private async void OnShow(Pin pin)
         {
             popup.RequestedTheme = this.ViewModel.GetRequestTheme();
-            this.ViewModel.Pin = pin;
             popup.IsOpen = true;
+            await this.ViewModel.SetPinAsync(pin);
         }
 
         private static ImageViewer instance;

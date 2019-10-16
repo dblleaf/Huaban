@@ -41,5 +41,9 @@ namespace iHuaban.App.Models
         {
             get { return !_like; }
         }
+
+        public User user { get; set; }
+        public User via_user { get; set; }
+        public Board board { get; set; }
     }
 }
