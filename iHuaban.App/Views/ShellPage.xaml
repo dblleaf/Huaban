@@ -107,49 +107,5 @@
         <ToggleButton Margin="12" Padding="0" Background="Transparent" VerticalAlignment="Top" IsChecked="{Binding Path=IsPaneOpen,ElementName=rootSplitView,Mode=TwoWay}">
             <SymbolIcon Symbol="GlobalNavigationButton"/>
         </ToggleButton>
-        <Grid Background="Transparent" x:Name="boardPicker" Visibility="{Binding BoardPickerVisible,Mode=TwoWay}">
-            <Grid 
-                HorizontalAlignment="Right"
-                Width="260"
-                Background="{ThemeResource AppControlAcrylicBrush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Button Background="Transparent" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Interactivity:Interaction.Behaviors>
-                        <Core:EventTriggerBehavior EventName="Click">
-                            <Core:ChangePropertyAction TargetObject="{Binding ElementName=boardPicker}" PropertyName="Visibility" Value="Collapsed"></Core:ChangePropertyAction>
-                        </Core:EventTriggerBehavior>
-                    </Interactivity:Interaction.Behaviors>
-                    <SymbolIcon Symbol="Back"/>
-                </Button>
-                <control:ExtendedGridView
-                   Grid.Row="1"
-                    VerticalAlignment="Center"
-                    x:Name="gridViewMyBoards"
-                    ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
-                    ScaleSize="200:200"
-                    Padding="6" CellMinWidth="236"
-                    ItemsSource="{Binding BoardList}">
-                    <control:ExtendedGridView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid 
-                            Margin="{Binding ElementName=gridViewMyBoards,Path=Padding}"
-                            Width="{Binding ElementName=gridViewMyBoards,Path=CellWidth}">
-                                <Border
-                                Background="{ThemeResource SystemAltLowColor}"
-                                VerticalAlignment="Center"
-                                Padding="8">
-                                    <TextBlock Text="{Binding title}"></TextBlock>
-                                </Border>
-                            </Grid>
-                        </DataTemplate>
-                    </control:ExtendedGridView.ItemTemplate>
-                </control:ExtendedGridView>
-               
-            </Grid>
-            
-        </Grid>
     </Grid>
 </Page>

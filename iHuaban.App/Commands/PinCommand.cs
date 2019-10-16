@@ -1,4 +1,5 @@
 ﻿using iHuaban.App.Models;
+using iHuaban.App.Views;
 
 namespace iHuaban.App.Commands
 {
@@ -11,7 +12,7 @@ namespace iHuaban.App.Commands
         {
             if (parameter is Pin pin)
             {
-                this.Context.PickPin(pin);
+                PickPinPane.Show(pin);
             }
         }
     }

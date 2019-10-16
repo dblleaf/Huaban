@@ -5,7 +5,7 @@
     <ResourceDictionary.ThemeDictionaries>
         <ResourceDictionary x:Key="Default">
             <Color x:Key="SystemAccentColor">#EE4F5C</Color>
-            <Color x:Key="HBPageBackgroundColor">#EE2C2C2C</Color>
+            <Color x:Key="HBPageBackgroundColor">#FF111111</Color>
             <Color x:Key="HBControlBackgroundColor">#EE1B1B1B</Color>
             <SolidColorBrush x:Key="HBPageBackgroundBrush" Color="{StaticResource HBPageBackgroundColor}" />
             <SolidColorBrush x:Key="HBControlBackgroundBrush" Color="{ThemeResource HBControlBackgroundColor}" />

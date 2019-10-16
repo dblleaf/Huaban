@@ -7,10 +7,10 @@ using Windows.UI.Xaml.Controls.Primitives;
 
 namespace iHuaban.App.Views
 {
-    public sealed partial class BoardSelector : UserControl
+    public sealed partial class PickPinPane : UserControl
     {
         private Popup popup;
-        public BoardSelector()
+        public PickPinPane()
         {
             this.InitializeComponent();
             this.SetBounds();
@@ -18,16 +18,12 @@ namespace iHuaban.App.Views
 
             popup = new Popup();
             popup.Child = this;
-            this.DataContext = UnityConfig.ResolveObject<BoardSelectorViewModel>();
+            this.ViewModel = UnityConfig.ResolveObject<PickPinPaneViewModel>();
+            this.ViewModel.Parent = this.popup;
+            this.DataContext = this.ViewModel;
         }
 
-        private BoardSelectorViewModel ViewModel
-        {
-            get
-            {
-                return this.DataContext as BoardSelectorViewModel;
-            }
-        }
+        private PickPinPaneViewModel ViewModel { get; set; }
         private void Current_SizeChanged(object sender, Windows.UI.Core.WindowSizeChangedEventArgs e)
         {
             SetBounds();
@@ -39,17 +35,19 @@ namespace iHuaban.App.Views
             this.Height = Window.Current.Bounds.Height;
         }
 
-        private void OnShow(Action<Board> afterSelectBoard)
+        private void OnShow(Pin pin)
         {
+            popup.RequestedTheme = this.ViewModel.GetRequestTheme();
+            this.ViewModel.Pin = pin;
+            this.BoardListView.SelectedIndex = -1;
             popup.IsOpen = true;
-            this.ViewModel.AfterSelectBoard = afterSelectBoard;
         }
 
-        private static BoardSelector instance;
-        internal static void Show(Action<Board> afterSelectBoard)
+        private static PickPinPane instance;
+        internal static void Show(Pin pin)
         {
-            instance = instance ?? new BoardSelector();
-            instance.OnShow(afterSelectBoard);
+            instance = instance ?? new PickPinPane();
+            instance.OnShow(pin);
         }
     }
 }

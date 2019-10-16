@@ -11,16 +11,12 @@ namespace iHuaban.App.Models
     public sealed class Context : ObservableObject
     {
         public Action<string> ShowMessageHandler { get; set; }
-        public Action<Pin> PickPinHandlder { get; set; }
-        public Action<Pin> QuickPickPinHandler { get; set; }
-        public Action<Pin> LikeHandler { get; set; }
-        public Action<Board> FollowBoardHandler { get; set; }
-        public Action<User> FollowUserHandler { get; set; }
         public CookieContainer CookieContainer { get; set; } = new CookieContainer();
         public Context()
         {
             QuickBoardMsg = "快速采集";
         }
+
         private User user;
         public User User
         {
@@ -79,14 +75,6 @@ namespace iHuaban.App.Models
             if (ShowMessageHandler != null)
             {
                 ShowMessageHandler(mesage);
-            }
-        }
-
-        public void PickPin(Pin pin)
-        {
-            if (PickPinHandlder != null)
-            {
-                PickPinHandlder(pin);
             }
         }
 

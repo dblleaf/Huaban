@@ -2,6 +2,7 @@
 using iHuaban.App.Models;
 using iHuaban.App.Services;
 using iHuaban.App.Views;
+using iHuaban.App.Views.Content;
 using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using Newtonsoft.Json;
@@ -80,17 +81,10 @@ namespace iHuaban.App.ViewModels
             };
 
             Menu = new ObservableCollection<MenuItem>(list);
-            BoardList = new IncrementalLoadingList<Board>(GetMyBoards);
-            BoardPickerVisible = Visibility.Collapsed;
 
-            this.Context.PickPinHandlder += pin =>
+            this.Context.ShowMessageHandler +=  msg =>
             {
-                this.BoardPickerVisible = Visibility.Visible;
-            };
-
-            this.Context.ShowMessageHandler += async msg =>
-            {
-                await new MessageDialog(msg).ShowAsync();
+                PopupMessage.ShowMessage(msg);
             };
         }
 
@@ -137,20 +131,6 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _SelectedMenu, value); }
         }
 
-        private Visibility _BoardPickerVisible;
-        public Visibility BoardPickerVisible
-        {
-            get { return _BoardPickerVisible; }
-            set { SetValue(ref _BoardPickerVisible, value); }
-        }
-
-        private IncrementalLoadingList<Board> _BoardList;
-        public IncrementalLoadingList<Board> BoardList
-        {
-            get { return _BoardList; }
-            set { SetValue(ref _BoardList, value); }
-        }
-
         private DelegateCommand _NavigateCommand;
         public DelegateCommand NavigateCommand
         {
@@ -172,60 +152,6 @@ namespace iHuaban.App.ViewModels
                     }
 
                 }, o => true));
-            }
-        }
-
-        private bool isLoadingBoards = false;
-        private async Task<IEnumerable<Board>> GetMyBoards(uint startIndex, int page)
-        {
-            if (isLoadingBoards || this.Context.User == null)
-            {
-                return new List<Board>();
-            }
-
-            try
-            {
-                isLoadingBoards = true;
-                string urlname = !string.IsNullOrEmpty(this.Context.User.urlname) ? this.Context.User.urlname : this.Context.User.user_id;
-
-                var query = "?limit=20";
-                var max = GetMaxKeyId();
-                if (max > 0)
-                {
-                    query += $"&max={max}";
-                }
-
-                var collection = await httpHelper.GetAsync<BoardCollection>($"{urlname}/boards/{query}");
-                var result = collection.Boards;
-
-                if (result.Count() == 0)
-                {
-                    BoardList.NoMore();
-                }
-                else
-                {
-                    BoardList.HasMore();
-                }
-
-                return result;
-            }
-            catch { }
-            finally
-            {
-                isLoadingBoards = false;
-            }
-            return null;
-        }
-
-        private long GetMaxKeyId()
-        {
-            if (BoardList?.Count > 0 && long.TryParse(BoardList[BoardList.Count - 1].KeyId, out long maxId))
-            {
-                return maxId;
-            }
-            else
-            {
-                return 0;
             }
         }
     }

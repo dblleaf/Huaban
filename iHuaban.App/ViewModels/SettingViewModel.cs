@@ -104,7 +104,7 @@ namespace iHuaban.App.ViewModels
             }
             else if (e.PropertyName == nameof(SavePath))
             {
-                storageService.SaveSetting(nameof(SavePath), SavePath.Path);
+                storageService.SaveSetting(Constants.SavePath, SavePath.Path);
             }
         }
     }

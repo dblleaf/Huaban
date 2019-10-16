@@ -73,5 +73,7 @@ namespace iHuaban.App
         public const string IconRefesh = "\uE72C";
         public const string IconDownload = "\uE896";
         #endregion
+
+        public const string SavePath = "SavePath";
     }
 }

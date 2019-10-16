@@ -24,6 +24,8 @@
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
     <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
+    <PackageCertificateThumbprint>8FA9D8EBEA4CDE7E22067ADBD792CE1CF37A4ACE</PackageCertificateThumbprint>
+    <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -164,7 +166,8 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
-    <Compile Include="ViewModels\Content\BoardSelectorViewModel.cs" />
+    <Compile Include="ViewModels\Content\ImageViewerViewModel.cs" />
+    <Compile Include="ViewModels\Content\PickPinPaneViewModel.cs" />
     <Compile Include="ViewModels\DownloadViewModel.cs" />
     <Compile Include="ViewModels\AboutViewModel.cs" />
     <Compile Include="ViewModels\CategoriesViewModel.cs" />
@@ -184,8 +187,14 @@
     <Compile Include="Views\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\BoardSelector.xaml.cs">
-      <DependentUpon>BoardSelector.xaml</DependentUpon>
+    <Compile Include="Views\Content\ImageViewer.xaml.cs">
+      <DependentUpon>ImageViewer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\PickPinPane.xaml.cs">
+      <DependentUpon>PickPinPane.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\PopupMessage.xaml.cs">
+      <DependentUpon>PopupMessage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FindPage.xaml.cs">
       <DependentUpon>FindPage.xaml</DependentUpon>
@@ -307,7 +316,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Content\BoardSelector.xaml">
+    <Page Include="Views\Content\ImageViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Content\PickPinPane.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Content\PopupMessage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
