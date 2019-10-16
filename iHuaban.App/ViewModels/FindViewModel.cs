@@ -114,7 +114,6 @@ namespace iHuaban.App.ViewModels
             }
         }
 
-
         private DelegateCommand _GotoTopCommand;
         public DelegateCommand GotoTopCommand
         {
@@ -137,7 +136,6 @@ namespace iHuaban.App.ViewModels
                     {
 
                     }
-
                 }, o => true));
             }
         }

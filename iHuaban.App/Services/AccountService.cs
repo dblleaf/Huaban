@@ -53,8 +53,13 @@ namespace iHuaban.App.Services
             return await httpHelper.GetAsync<User>(Constants.UrlMe);
         }
 
-        public async Task<PinResult> PickPinAsync(Pin pin, string boardId)
+        public async Task<PinResult> PickPinAsync(Pin pin, string boardId, bool check = true)
         {
+            string url = "pins/";
+            if (check)
+            {
+                url += "?check=true";
+            }
             Dictionary<string, object> body = new Dictionary<string, object>()
             {
                 { "board_id", boardId },
@@ -62,7 +67,7 @@ namespace iHuaban.App.Services
                 { "via", pin.pin_id },
             };
 
-            return await httpHelper.PostAsync<PinResult>("pins/?check=true", null, body);
+            return await httpHelper.PostAsync<PinResult>(url, null, body);
         }
 
         public async Task<LikeResult> LikePinAsync(Pin pin)

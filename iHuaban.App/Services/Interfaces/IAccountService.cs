@@ -7,7 +7,7 @@ namespace iHuaban.App.Services
     {
         Task<AuthResult> LoginAsync(string userName, string password);
         Task<User> GetMeAsync();
-        Task<PinResult> PickPinAsync(Pin pin, string boardId);
+        Task<PinResult> PickPinAsync(Pin pin, string boardId, bool check = true);
         Task<LikeResult> LikePinAsync(Pin pin);
         Task<string> UnLikePinAsync(Pin pin);
         Task<FollowBoardResult> FollowBoardAsync(Board board);

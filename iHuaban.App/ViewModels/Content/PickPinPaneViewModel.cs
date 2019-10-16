@@ -71,7 +71,7 @@ namespace iHuaban.App.ViewModels
                             var dispatcher = Window.Current.Dispatcher;
                             await Task.Run(async () =>
                             {
-                                var result = await accountService.PickPinAsync(Pin, this.SelectedBoard.board_id);
+                                var result = await accountService.PickPinAsync(Pin, this.SelectedBoard.board_id, false);
                                 if (result.Pin.pin_id > 0)
                                 {
                                     await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
@@ -84,7 +84,6 @@ namespace iHuaban.App.ViewModels
                                 }
                             });
                         }
-
                     }
                     catch (Exception)
                     { }

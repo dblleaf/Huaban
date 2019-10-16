@@ -13,6 +13,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
@@ -82,21 +83,27 @@ namespace iHuaban.App.ViewModels
 
             Menu = new ObservableCollection<MenuItem>(list);
 
-            this.Context.ShowMessageHandler +=  msg =>
-            {
-                PopupMessage.ShowMessage(msg);
-            };
+            this.Context.ShowMessageHandler += msg =>
+           {
+               PopupMessage.ShowMessage(msg);
+           };
         }
 
-        public override void Init()
+        public override async void Init()
         {
             base.Init();
             SelectedMenu = Menu[0];
+            await this.InitPath();
+            await this.InitUser();
+        }
+
+        private async Task InitUser()
+        {
             string cookieJson = storageService.GetSetting("Cookies");
             var cookies = JsonConvert.DeserializeObject<List<Cookie>>(cookieJson);
             this.Context.SetCookie(cookies);
             var dispatcher = Window.Current.Dispatcher;
-            Task.WhenAll(
+            await Task.WhenAll(
                 Task.Run(async () =>
                 {
                     var user = await authService.GetMeAsync();
@@ -123,7 +130,26 @@ namespace iHuaban.App.ViewModels
                 })
             ).ContinueWith(p => { });
         }
+        private async Task InitPath()
+        {
+            var savePath = storageService.GetSetting("SavePath");
 
+            if (!string.IsNullOrWhiteSpace(savePath))
+            {
+                try
+                {
+                    await StorageFolder.GetFolderFromPathAsync(savePath);
+                }
+                catch (Exception)
+                {
+                    await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
+                }
+            }
+            else
+            {
+                await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
+            }
+        }
         private MenuItem _SelectedMenu;
         public MenuItem SelectedMenu
         {
