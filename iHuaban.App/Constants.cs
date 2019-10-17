@@ -55,6 +55,7 @@ namespace iHuaban.App
         public const string TextHome = "首页";
         public const string TextCategory = "分类";
         public const string TextFind = "发现";
+        public const string TextSearch = "搜索";
         public const string TextMine = "我的";
         public const string TextSetting = "设置";
         public const string TextAbout = "关于";

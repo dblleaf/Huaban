@@ -25,8 +25,8 @@ namespace iHuaban.App.ViewModels
             this.authService = authService;
             this.storageService = storageService;
             this.context = context;
-            this.UserName = "okokit@126.com";
-            this.Password = "999999999";
+            //this.UserName = "okokit@126.com";
+            //this.Password = "999999999";
         }
 
         public async Task InitAsync(NavigationEventArgs e)

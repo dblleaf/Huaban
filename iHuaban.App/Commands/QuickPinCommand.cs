@@ -17,6 +17,12 @@ namespace iHuaban.App.Commands
 
         public override async void Execute(object parameter)
         {
+            if (this.Context.User == null || string.IsNullOrWhiteSpace(this.Context.User.user_id))
+            {
+                this.Context.ShowMessage("没有登录！");
+                return;
+            }
+
             if (parameter is Pin pin && !string.IsNullOrWhiteSpace(this.Context.QuickBoard.board_id))
             {
                 var dispatcher = Window.Current.Dispatcher;

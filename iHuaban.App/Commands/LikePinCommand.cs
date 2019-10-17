@@ -19,6 +19,12 @@ namespace iHuaban.App.Commands
 
         public async override void Execute(object parameter)
         {
+            if (this.Context.User == null || string.IsNullOrWhiteSpace(this.Context.User.user_id))
+            {
+                this.Context.ShowMessage("没有登录！");
+                return;
+            }
+
             try
             {
                 var Dispatcher = Window.Current.Dispatcher;

@@ -43,21 +43,21 @@ namespace iHuaban.App.ViewModels
             this.Context = context;
             var list = new List<MenuItem>
             {
+                //new MenuItem
+                //{
+                //    Title = Constants.TextHome,
+                //    Icon = Constants.IconHome,
+                //    Type = typeof(HomePage)
+                //},
                 new MenuItem
                 {
-                    Title = Constants.TextHome,
-                    Icon = Constants.IconHome,
-                    Type = typeof(HomePage)
-                },
-                new MenuItem
-                {
-                    Title = Constants.TextCategory,
+                    Title = Constants.TextFind,
                     Icon = Constants.IconCategory,
                     Type = typeof(CategoriesPage)
                 },
                 new MenuItem
                 {
-                    Title = Constants.TextFind,
+                    Title = Constants.TextSearch,
                     Icon = Constants.IconFind,
                     Type = typeof(FindPage)
                 },
@@ -73,7 +73,7 @@ namespace iHuaban.App.ViewModels
                     Icon = Constants.IconDownload,
                     Type = typeof(DownloadPage)
                 },
-                 new MenuItem
+                new MenuItem
                 {
                     Title = Constants.TextSetting,
                     Icon = Constants.IconSetting,
@@ -133,22 +133,23 @@ namespace iHuaban.App.ViewModels
         private async Task InitPath()
         {
             var savePath = storageService.GetSetting("SavePath");
-
+            StorageFolder storageFolder = null;
             if (!string.IsNullOrWhiteSpace(savePath))
             {
                 try
                 {
-                    await StorageFolder.GetFolderFromPathAsync(savePath);
+                    storageFolder = await StorageFolder.GetFolderFromPathAsync(savePath);
                 }
                 catch (Exception)
                 {
-                    await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
+                    storageFolder = await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
                 }
             }
             else
             {
-                await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
+                storageFolder = await KnownFolders.PicturesLibrary.CreateFolderAsync("huaban", CreationCollisionOption.OpenIfExists);
             }
+            storageService.SaveSetting(Constants.SavePath, storageFolder.Path);
         }
         private MenuItem _SelectedMenu;
         public MenuItem SelectedMenu

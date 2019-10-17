@@ -30,6 +30,7 @@
             </Grid>
             <Grid Grid.Column="1" Margin="16 8">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
@@ -38,7 +39,8 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <ListView
+                <TextBlock Margin="8 16"><Run Text="采集" FontSize="16"/><Run Foreground="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" Text=" 到画板"/></TextBlock>
+                <ListView Grid.Row="1"
                     x:Name="BoardListView"
                     Margin="0 0 0 12"
                     Grid.ColumnSpan="3"
@@ -56,9 +58,9 @@
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </ListView>
-                <TextBlock Visibility="Collapsed" Grid.Row="1" VerticalAlignment="Center">创建画板</TextBlock>
-                <TextBox Visibility="Collapsed" Grid.Row="1" Grid.Column="1" Margin="6 0" />
-                <Button Visibility="Collapsed" Grid.Row="1" Grid.Column="2">
+                <TextBlock Visibility="Collapsed" Grid.Row="2" VerticalAlignment="Center">创建画板</TextBlock>
+                <TextBox Visibility="Collapsed" Grid.Row="2" Grid.Column="1" Margin="6 0" />
+                <Button Visibility="Collapsed" Grid.Row="2" Grid.Column="2">
                     <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" FontSize="16" Glyph="&#xE710;"/>
                 </Button>
             </Grid>
