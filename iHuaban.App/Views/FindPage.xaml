@@ -31,7 +31,7 @@
                             SelectedItem="{Binding DataType,Mode=TwoWay}">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Type}"></TextBlock>
+                                    <TextBlock Text="{Binding Title}"></TextBlock>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                             <Interactivity:Interaction.Behaviors>

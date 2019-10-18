@@ -133,8 +133,7 @@
     <Compile Include="Models\Api\FollowBoardResult.cs" />
     <Compile Include="Models\Api\LikeResult.cs" />
     <Compile Include="Models\Api\PinResult.cs" />
-    <Compile Include="Models\DataItem.cs" />
-    <Compile Include="Models\ExtendedTheme.cs" />
+    <Compile Include="Models\HBType.cs" />
     <Compile Include="Models\Home.cs" />
     <Compile Include="Models\MenuItem.cs" />
     <Compile Include="Models\Api\ModelCollection.cs" />
@@ -149,7 +148,6 @@
     <Compile Include="Models\Api\Board.cs" />
     <Compile Include="Models\Api\File.cs" />
     <Compile Include="Models\Api\IModelCollection.cs" />
-    <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\Api\Pin.cs" />
     <Compile Include="Models\Api\PinCollection.cs" />
     <Compile Include="Models\Api\User.cs" />
@@ -169,6 +167,7 @@
     <Compile Include="Services\Service.cs" />
     <Compile Include="Services\ThemeService.cs" />
     <Compile Include="TemplateSelectors\SupperDataTemplateSelector.cs" />
+    <Compile Include="ViewModels\CollectionViewModel.cs" />
     <Compile Include="ViewModels\Content\ImageViewerViewModel.cs" />
     <Compile Include="ViewModels\Content\PickPinPaneViewModel.cs" />
     <Compile Include="ViewModels\DownloadViewModel.cs" />
@@ -182,7 +181,6 @@
     <Compile Include="ViewModels\ListViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="ViewModels\MineViewModel.cs" />
-    <Compile Include="ViewModels\SearchViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="Views\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>

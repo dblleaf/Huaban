@@ -7,7 +7,6 @@
     public class DataType
     {
         public string Title { get; set; }
-        public string Type { get; set; }
         public string BaseUrl { get; set; }
         public long Badge { get; set; }
         public Func<string, Task<IEnumerable<IModel>>> DataLoaderAsync { get; set; }

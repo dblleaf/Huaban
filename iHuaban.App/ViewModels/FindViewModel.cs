@@ -28,21 +28,21 @@ namespace iHuaban.App.ViewModels
             {
                 new DataType
                 {
-                    Type ="采集",
+                    Title ="采集",
                     BaseUrl = "search",
                     DataLoaderAsync =LoaderAsync<PinCollection, Pin>,
                     UrlAction = GetSearchUrl,
                 },
                 new DataType
                 {
-                    Type ="画板",
+                    Title ="画板",
                     BaseUrl = "search/boards",
                     DataLoaderAsync = LoaderAsync<BoardCollection, Board>,
                     UrlAction = GetSearchUrl,
                 },
                 new DataType
                 {
-                    Type = "用户",
+                    Title = "用户",
                     BaseUrl =  "search/users",
                     DataLoaderAsync = LoaderAsync<UserCollection, User>,
                     UrlAction = GetSearchUrl,
