@@ -16,8 +16,6 @@
                 ScaleSize="{Binding DataType.ScaleSize}"
                 ItemContainerStyle="{StaticResource DefaultExtendGridItemStyle}"
                 Padding="6" CellMinWidth="236"
-                DataContext="{Binding Collection}"
-                SelectedItem="{Binding SelectedItem,Mode=TwoWay}"
                 ItemsSource="{Binding Data}"
                 ItemTemplateSelector="{StaticResource SupperDataTemplateSelector}">
             <control:ExtendedGridView.Header>

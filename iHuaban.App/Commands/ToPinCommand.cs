@@ -1,5 +1,6 @@
 ﻿using iHuaban.App.Models;
 using iHuaban.App.Views.Content;
+using Windows.UI.Xaml.Controls;
 
 namespace iHuaban.App.Commands
 {
@@ -10,9 +11,9 @@ namespace iHuaban.App.Commands
 
         public override void Execute(object parameter)
         {
-            if (parameter is Pin pin)
+            if (parameter is ListViewBase listView)
             {
-                ImageViewer.Show(pin);
+                ImageViewer.Show(listView);
             }
         }
     }

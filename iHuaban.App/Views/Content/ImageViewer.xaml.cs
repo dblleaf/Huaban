@@ -45,18 +45,18 @@ namespace iHuaban.App.Views.Content
             this.Width = Window.Current.Bounds.Width;
             this.Height = Window.Current.Bounds.Height;
         }
-        private async void OnShow(Pin pin)
+        private async void OnShow(ListViewBase listView)
         {
             popup.RequestedTheme = this.ViewModel.GetRequestTheme();
             popup.IsOpen = true;
-            await this.ViewModel.SetPinAsync(pin);
+            await this.ViewModel.SetPinAsync(listView);
         }
 
         private static ImageViewer instance;
-        internal static void Show(Pin pin)
+        internal static void Show(ListViewBase listView)
         {
             instance = instance ?? new ImageViewer();
-            instance.OnShow(pin);
+            instance.OnShow(listView);
         }
     }
 }

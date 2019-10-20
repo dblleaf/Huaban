@@ -19,5 +19,12 @@ namespace iHuaban.App.ViewModels
             get { return _SelectedItem; }
             set { SetValue(ref _SelectedItem, value); }
         }
+
+        private string _ScaleSize;
+        public string ScaleSize
+        {
+            get { return _ScaleSize; }
+            set { SetValue(ref _ScaleSize, value); }
+        }
     }
 }

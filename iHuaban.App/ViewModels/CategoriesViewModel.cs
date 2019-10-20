@@ -69,11 +69,6 @@ namespace iHuaban.App.ViewModels
                 }
             };
 
-            this.Collection = new CollectionModel<IModel>
-            {
-                Data = this.Data,
-                Context = this.Context
-            };
         }
 
         public override void ViewModelDispose()
@@ -108,13 +103,7 @@ namespace iHuaban.App.ViewModels
             set { SetValue(ref _CategoryVisibility, value); }
         }
 
-        private CollectionModel<IModel> _Collection;
-        public CollectionModel<IModel> Collection
-        {
-            get { return _Collection; }
-            set { SetValue(ref _Collection, value); }
-        }
-        private IncrementalLoadingList<IModel> Data { get; set; }
+        public IncrementalLoadingList<IModel> Data { get; set; }
 
         public ObservableCollection<DataType> DataTypes { private set; get; } = new ObservableCollection<DataType>();
 

@@ -66,27 +66,33 @@ namespace iHuaban.App.ViewModels
                 {
                     try
                     {
-                        if (Parent != null)
+                        if (Parent != null && this.SelectedBoard != null)
                         {
                             var dispatcher = Window.Current.Dispatcher;
+                            var pin = this.Pin;
+                            var board = this.SelectedBoard;
+                            var context = this.Context;
+                            var prent = Parent;
+                            var _this = this;
                             await Task.Run(async () =>
                             {
-                                var result = await accountService.PickPinAsync(Pin, this.SelectedBoard.board_id, false);
+                                var result = await accountService.PickPinAsync(pin, board.board_id, false);
                                 if (result.Pin.pin_id > 0)
                                 {
                                     await dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
                                     {
-                                        this.Context.QuickBoard = this.SelectedBoard;
-                                        Context.ShowMessage($"已采集到：{ this.SelectedBoard.title}");
-                                        Parent.IsOpen = false;
-                                        this.SelectedBoard = null;
+                                        context.QuickBoard = board;
+                                        context.ShowMessage($"已采集到：{ board.title}");
+                                        prent.IsOpen = false;
+                                        _this.SelectedBoard = null;
                                     });
                                 }
                             });
                         }
                     }
                     catch (Exception)
-                    { }
+                    {
+                    }
 
                 }, o => true));
             }

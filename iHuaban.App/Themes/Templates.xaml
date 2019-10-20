@@ -153,7 +153,9 @@
                 <Image Source="{Binding file.Sq235}" Stretch="UniformToFill" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
                     <Interactivity:Interaction.Behaviors>
                         <Core:EventTriggerBehavior EventName="Tapped">
-                            <Core:InvokeCommandAction Command="{Binding Source={StaticResource CommandLocator},Path=ToPinCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>
+                            <Core:InvokeCommandAction
+                                Command="{Binding Source={StaticResource CommandLocator},Path=ToPinCommand}"
+                                CommandParameter="{Binding ElementName=gridView}"/>
                         </Core:EventTriggerBehavior>
                     </Interactivity:Interaction.Behaviors>
                 </Image>
