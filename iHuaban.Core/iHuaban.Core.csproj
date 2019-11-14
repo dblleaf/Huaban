@@ -113,6 +113,7 @@
     <Compile Include="Extentions\ControlExtension.cs" />
     <Compile Include="Extentions\KeyValuePairExtension.cs" />
     <Compile Include="Extentions\StorageExtention.cs" />
+    <Compile Include="Extentions\StringExtension.cs" />
     <Compile Include="Helpers\HttpHelper.cs" />
     <Compile Include="Helpers\IHttpHelper.cs" />
     <Compile Include="IPage.cs" />
