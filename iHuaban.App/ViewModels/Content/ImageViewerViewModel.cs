@@ -5,7 +5,6 @@ using iHuaban.Core.Commands;
 using iHuaban.Core.Models;
 using System;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,7 +17,6 @@ namespace iHuaban.App.ViewModels
         private IApiHttpHelper httpHelper;
         public Context Context { get; set; }
         private IThemeService themeService;
-        private IAccountService accountService;
         private IList List;
         private ListViewBase listView;
         public ImageViewerViewModel(IApiHttpHelper httpHelper,
@@ -28,7 +26,6 @@ namespace iHuaban.App.ViewModels
         {
             this.httpHelper = httpHelper;
             this.themeService = themeService;
-            this.accountService = accountService;
             this.Context = context;
         }
 
@@ -46,11 +43,11 @@ namespace iHuaban.App.ViewModels
             private set { SetValue(ref _PreviousVisibility, value); }
         }
 
-        private Visibility _NextVisibilty;
-        public Visibility NextVisibilty
+        private Visibility _NextVisibility;
+        public Visibility NextVisibility
         {
-            get { return _NextVisibilty; }
-            private set { SetValue(ref _NextVisibilty, value); }
+            get { return _NextVisibility; }
+            private set { SetValue(ref _NextVisibility, value); }
         }
 
         public ElementTheme GetRequestTheme()
@@ -71,11 +68,12 @@ namespace iHuaban.App.ViewModels
         public async Task OnSelect(int index)
         {
             this.PreviousVisibility = index > 0 ? Visibility.Visible : Visibility.Collapsed;
-            this.NextVisibilty = index < this.List.Count - 1 ? Visibility.Visible : Visibility.Collapsed;
+            this.NextVisibility = index < this.List.Count - 1 ? Visibility.Visible : Visibility.Collapsed;
 
             if (index >= 0 && index < this.List.Count)
             {
                 this.listView.SelectedIndex = index;
+                this.listView.ScrollIntoView(this.listView.Items[index]);
                 var pin = this.List[index] as Pin;
                 this.Pin = pin;
 
@@ -93,6 +91,7 @@ namespace iHuaban.App.ViewModels
                         });
                     });
                 }
+
             }
         }
 

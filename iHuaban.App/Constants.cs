@@ -76,5 +76,9 @@ namespace iHuaban.App
         #endregion
 
         public const string SavePath = "SavePath";
+
+        public const string ClientId = "73888294ea802d347399";
+
+        public const string ClientKey = "ce723ee3d6f8c0eb9f24fb0e148ebc11";
     }
 }
