@@ -3,6 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace Huaban.UWP.Models
 {
+    using Newtonsoft.Json;
     using UWP;
     public class AuthToken
     {
@@ -37,7 +38,7 @@ namespace Huaban.UWP.Models
             }
             else
             {
-                token = SerializeExtension.JsonDeserlialize<AuthToken>(text);
+                token = JsonConvert.DeserializeObject<AuthToken>(text);
             }
             token.ExpiresIn = DateTime.Now.AddSeconds(token.expires_in);
             return token;

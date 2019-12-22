@@ -10,7 +10,7 @@ namespace Huaban.UWP.ViewModels
     using Commands;
     using Huaban.UWP.Services;
     using Models;
-    using Unity.Attributes;
+    using Unity;
 
     public class HomeViewModel : HBViewModel
     {

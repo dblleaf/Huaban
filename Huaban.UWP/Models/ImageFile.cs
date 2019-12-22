@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Huaban.UWP.Models
@@ -62,7 +63,7 @@ namespace Huaban.UWP.Models
         }
         public static ImageFile Parse(string text)
         {
-            return SerializeExtension.JsonDeserlialize<ImageFile>(text);
+            return JsonConvert.DeserializeObject<ImageFile>(text);
         }
 
         public static ImageFile Parse(JObject obj)

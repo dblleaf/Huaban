@@ -32,5 +32,8 @@
         public const string SINCE = "since";
         public int SO_TIMEOUT = 0x4e20;
         public const string X_Client_ID = "X-Client-ID";
+
+        public const string ClentId = "73888294ea802d347399";
+        public const string ClientSecret = "ce723ee3d6f8c0eb9f24fb0e148ebc11";
     }
 }

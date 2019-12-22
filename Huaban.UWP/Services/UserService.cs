@@ -5,17 +5,16 @@ using System.Threading.Tasks;
 namespace Huaban.UWP.Services
 {
     using Models;
+    using Newtonsoft.Json;
 
     public class UserService : ServiceBase
     {
-        private const string API_SIGNUP = "http://api.huaban.com/signup/";
-
         public UserService(IClient client)
             : base(client) { }
 
         public async Task<User> GetSelf()
         {
-            return await Get(Constants.API_ME, o => SerializeExtension.JsonDeserlialize<User>(o));
+            return await Get(Constants.API_ME, o => JsonConvert.DeserializeObject<User>(o));
         }
         public async Task<User> GetUser(string userID)
         {

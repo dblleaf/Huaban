@@ -11,22 +11,23 @@
     <AssemblyName>Huaban.UWP</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.17134.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.18362.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.15063.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Huaban.UWP_StoreKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Huaban.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>97A32B141373660DB7490F70718A4D6AF9252C44</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>759C8B07264DB1FDD398BA400010A125C98BCA47</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
     <AppInstallerUpdateFrequency>1</AppInstallerUpdateFrequency>
     <AppInstallerCheckForUpdateFrequency>OnApplicationRun</AppInstallerCheckForUpdateFrequency>
+    <RuntimeIdentifiers>win10-arm;win10-arm-aot;win10-x86;win10-x86-aot;win10-x64;win10-x64-aot</RuntimeIdentifiers>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -104,15 +105,8 @@
     </Content>
     <None Include="Huaban.UWP_StoreKey.pfx" />
     <None Include="Huaban.UWP_TemporaryKey.pfx" />
-    <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\APIBase.cs" />
-    <Compile Include="Api\BoardAPI.cs" />
-    <Compile Include="Api\CategoryAPI.cs" />
-    <Compile Include="Api\OAuthorAPI.cs" />
-    <Compile Include="Api\PinAPI.cs" />
-    <Compile Include="Api\UserAPI.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
@@ -128,6 +122,7 @@
     <Compile Include="Commands\ToUserCommand.cs" />
     <Compile Include="Commands\ToBoardDetailCommand.cs" />
     <Compile Include="Commands\ToBoardPinsCommand.cs" />
+    <Compile Include="Constants.cs" />
     <Compile Include="Controls\FixedHead.xaml.cs">
       <DependentUpon>FixedHead.xaml</DependentUpon>
     </Compile>
@@ -191,7 +186,6 @@
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="Helper\HtmlHelper.cs" />
     <Compile Include="Helper\HttpHelper.cs" />
-    <Compile Include="Helper\SerializeHelper.cs" />
     <Compile Include="Helper\StorageHelper.cs" />
     <Compile Include="Models\Pin.cs" />
     <Compile Include="Models\Profile.cs" />
@@ -441,6 +435,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.9</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
+    </PackageReference>
+    <PackageReference Include="Unity">
+      <Version>5.11.2</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Api\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

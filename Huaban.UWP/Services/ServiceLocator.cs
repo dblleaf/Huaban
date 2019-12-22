@@ -23,8 +23,6 @@ namespace Huaban.UWP.Services
             {
                 ClientID = "1d912cae47144fa09d88",
                 ClientSecret = "f94fcc09b59b4349a148a203ab2f20c7",
-                OAuthCallback = "ms-appx-web:///Assets/Test.html",
-                MD = "com.huaban.android"
             };
             var context = new Context();
             context.NavigationService = new NavigationService(context);

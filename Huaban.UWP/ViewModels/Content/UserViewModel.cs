@@ -8,7 +8,7 @@ namespace Huaban.UWP.ViewModels
     using Controls;
     using Huaban.UWP.Services;
     using Models;
-    using Unity.Attributes;
+    using Unity;
 
     public class UserViewModel : HBViewModel
     {

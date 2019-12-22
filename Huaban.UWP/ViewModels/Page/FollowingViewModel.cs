@@ -7,7 +7,7 @@ namespace Huaban.UWP.ViewModels
     using Base;
     using Huaban.UWP.Services;
     using Models;
-    using Unity.Attributes;
+    using Unity;
 
     public class FollowingViewModel : HBViewModel
     {

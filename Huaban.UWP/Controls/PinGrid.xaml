@@ -59,7 +59,7 @@
                             Background="{Binding Converter={StaticResource ColorConverter}}"></Grid>
                         <Grid HorizontalAlignment="Stretch" Background="Transparent">
 
-                            <Image Source="{Binding file.FW236}">
+                            <Image Source="{Binding file.Sq235}">
                                 <Interactivity:Interaction.Behaviors>
                                     <Core:EventTriggerBehavior EventName="ImageOpened">
                                         <Core:InvokeCommandAction Command="{StaticResource PinSImageLoadCommand}" CommandParameter="{Binding}"></Core:InvokeCommandAction>

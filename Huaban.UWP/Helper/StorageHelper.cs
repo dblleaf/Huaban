@@ -7,6 +7,7 @@ using Windows.Foundation;
 using Windows.Storage;
 using Windows.Storage.Streams;
 using Windows.Storage.FileProperties;
+using Newtonsoft.Json;
 
 namespace Huaban.UWP
 {
@@ -22,7 +23,7 @@ namespace Huaban.UWP
             if (string.IsNullOrEmpty(filename))
                 filename = $"{typeof(T).Name}.json";
             var folder = ApplicationData.Current.TemporaryFolder;
-            await LocalFolder.SaveStorageData(filename, model, SerializeExtension.JsonDeserlialize);
+            await LocalFolder.SaveStorageData(filename, model, o => JsonConvert.SerializeObject(o));
         }
 
         public static async Task<T> ReadLocal<T>(Func<string, T> func, string filename = "")
@@ -44,7 +45,7 @@ namespace Huaban.UWP
             if (string.IsNullOrEmpty(filename))
                 filename = $"{typeof(T).Name}.json";
 
-            await RoamingFolder.SaveStorageData(filename, model, SerializeExtension.JsonDeserlialize);
+            await RoamingFolder.SaveStorageData(filename, model, o => JsonConvert.SerializeObject(o));
         }
 
         public static async Task<T> ReadRoaming<T>(Func<string, T> func, string filename = "")
@@ -102,7 +103,7 @@ namespace Huaban.UWP
                 await FileIO.WriteBytesAsync(file, bytes);
             }
             catch { }
-            
+
         }
 
         public static async Task<bool> SaveAsync(string filename, IRandomAccessStream cacheStream)
@@ -133,9 +134,7 @@ namespace Huaban.UWP
                 }
             }
             return false;
-
         }
-
 
         public static async Task<double> GetCacheFolderSize()
         {

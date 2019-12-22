@@ -14,7 +14,7 @@ namespace Huaban.UWP.ViewModels
     using Controls;
     using Models;
     using Services;
-    using Unity.Attributes;
+    using Unity;
 
     public class ImageViewModel : HBViewModel
     {
