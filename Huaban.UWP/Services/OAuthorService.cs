@@ -17,8 +17,6 @@ namespace Huaban.UWP.Services
 
         public override HttpRequestMessage CreateRequest(HttpMethod method, Uri uri, params KeyValuePair<string, string>[] valueNameConnection)
         {
-            var aa = "";
-            aa.Reverse().ToString();
             var request = base.CreateRequest(method, uri, valueNameConnection);
 
             if (!request.Headers.Contains(Constants.Authorization))
@@ -44,6 +42,7 @@ namespace Huaban.UWP.Services
             var resphonse = await
                 Post(
                     Constants.API_TOKEN,
+                    new KeyValuePair<string, string>("grant_type", "password"),
                     new KeyValuePair<string, string>("username", userName),
                     new KeyValuePair<string, string>("password", password)
                 );
@@ -58,7 +57,7 @@ namespace Huaban.UWP.Services
                     Post(
                         Constants.API_TOKEN,
                         new KeyValuePair<string, string>("grant_type", "refresh_token"),
-                        new KeyValuePair<string, string>("refresh_token", token.access_token)
+                        new KeyValuePair<string, string>("refresh_token", token.refresh_token)
                 );
                 return AuthToken.Parse(resphonse);
             }
@@ -71,7 +70,7 @@ namespace Huaban.UWP.Services
 
         private string GetTimeStamp()
         {
-            TimeSpan ts = DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0);
+            TimeSpan ts = DateTime.UtcNow.AddSeconds(30) - new DateTime(1970, 1, 1, 0, 0, 0, 0);
             return Convert.ToInt64(ts.TotalSeconds).ToString();
         }
     }

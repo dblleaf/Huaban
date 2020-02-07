@@ -16,12 +16,12 @@
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PackageCertificateKeyFile>Huaban.UWP_TemporaryKey.pfx</PackageCertificateKeyFile>
+    <PackageCertificateKeyFile>Huaban.UWP_StoreKey.pfx</PackageCertificateKeyFile>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
     <AppxPackageDir>D:\AppPackages\huaban\</AppxPackageDir>
     <AppxBundle>Always</AppxBundle>
     <AppxBundlePlatforms>x86|x64|arm</AppxBundlePlatforms>
-    <PackageCertificateThumbprint>759C8B07264DB1FDD398BA400010A125C98BCA47</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>A1F429A4CBFBD2404CF5A9BB7D1F6C91C11D9A0B</PackageCertificateThumbprint>
     <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
     <AppxSymbolPackageEnabled>True</AppxSymbolPackageEnabled>
     <GenerateAppInstallerFile>False</GenerateAppInstallerFile>
@@ -447,7 +447,7 @@
       <Version>12.0.3</Version>
     </PackageReference>
     <PackageReference Include="Unity">
-      <Version>5.11.2</Version>
+      <Version>5.11.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

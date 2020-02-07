@@ -45,6 +45,13 @@ namespace Huaban.UWP.Models
             set { SetValue(ref _SavePath, value); }
         }
 
+        private string _Sid;
+        public string Sid
+        {
+            get { return _Sid; }
+            set { SetValue(ref _Sid, value); }
+        }
+
         private Setting()
         {
             Task.Factory.StartNew(async () =>
@@ -88,6 +95,8 @@ namespace Huaban.UWP.Models
             DirectExit = StorageHelper.GetSetting("DirectExit") == "1";
             RawTextVisible = StorageHelper.GetSetting("RawTextVisible") == "1";
             Tail = StorageHelper.GetSetting("Tail");
+            Sid = StorageHelper.GetSetting("Sid");
+
             if (string.IsNullOrEmpty(Tail))
                 Tail = "From 花瓣UWP";
 

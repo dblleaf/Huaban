@@ -7,6 +7,8 @@ namespace Huaban.UWP
 {
     public class HttpHelper
     {
+        public Action<HttpResponseMessage> AfterRequest { get; set; }
+
         public static HttpHelper Factory
         {
             get
@@ -80,7 +82,10 @@ namespace Huaban.UWP
         {
 
             var response = await GetResponse(requestMessage);
-
+            if (this.AfterRequest != null)
+            {
+                this.AfterRequest.Invoke(response);
+            }
             var result = await response.Content.ReadAsStringAsync();
             return result;
         }
